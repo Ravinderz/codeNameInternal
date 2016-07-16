@@ -1,5 +1,7 @@
 package com.congun.web.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId")
-	public int userId;
+	public long userId;
 	
 	@Column(name = "username")
 	public String username;
@@ -34,11 +36,20 @@ public class User {
 	@Column(name = "company_individual_profile")
 	public String company_individual_profile;
 	
+	@Column(name = "role")
+	public String role;
 	
-	public int getUserId() {
+	@Column(name = "createdTime")
+	public Timestamp createdTime;
+	
+	@Column(name = "LastupdatedTime")
+	public Timestamp updatedTime;
+	
+	
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {
