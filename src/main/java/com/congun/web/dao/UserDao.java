@@ -2,6 +2,7 @@ package com.congun.web.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -11,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.User;
 import com.congun.web.util.GenerateHash;
+import com.congun.web.util.ResponseConstants;
 
 @Repository
-public class UserDaoImpl {
+public class UserDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -31,11 +33,22 @@ public class UserDaoImpl {
 		if(userList.size() == 0){
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		getSession().saveOrUpdate(user);
-			return "US01";
+			return ResponseConstants.SUCCESS_CODE;
 		}else
-			return "UE01";
+			return ResponseConstants.FAILURE_CODE;
 		}catch(Exception e){
-			return "UE02";
+			return ResponseConstants.EXCEPTION_CODE;
+		}
+	}
+	
+	@Transactional
+	public String updateUser(User user){
+		try{
+		user.setPassword(GenerateHash.getHash(user.getPassword()));
+		getSession().saveOrUpdate(user);
+			return ResponseConstants.SUCCESS_CODE;
+		}catch(Exception e){
+			return ResponseConstants.EXCEPTION_CODE;
 		}
 	}
 	
@@ -54,5 +67,20 @@ public class UserDaoImpl {
 		return false;
 	}
 	
+
+	public User getUserDetails(String username){
+		try{
+			System.out.println("Getting details from DAOImpl :"+username+":");
+			Criteria criteria = getSession().createCriteria(User.class);
+			criteria.setMaxResults(1);
+		User user= (User) criteria.add(Restrictions.eq("username",username)).uniqueResult();
+		System.out.println("Got user with "+user.getUsername()+" from database");
+		return user;
+		}catch(Exception e){
+			System.out.println("Entered Exception Block : ");
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }
