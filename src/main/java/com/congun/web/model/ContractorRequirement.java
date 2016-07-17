@@ -10,12 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ContractorRequirment")
+@Table(name = "ContractorRequirement")
 public class ContractorRequirement {
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
- public long requirmentId;
+ public long requirementId;
  public long contractorId;
  public String contractorName;
  public String equipmentCategory;
@@ -36,11 +36,11 @@ public class ContractorRequirement {
  public Timestamp createdTime;
  public Timestamp updatedTime;
  public int activeFlag;
-public long getRequirmentId() {
-	return requirmentId;
+public long getRequirementId() {
+	return requirementId;
 }
-public void setRequirmentId(long requirmentId) {
-	this.requirmentId = requirmentId;
+public void setRequirementId(long requirementId) {
+	this.requirementId = requirementId;
 }
 public long getContractorId() {
 	return contractorId;

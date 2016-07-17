@@ -29,5 +29,11 @@ public class RequirementQuoteService{
 		
 		dao.updateRequirement(requirement);
 	}
+	
+	public String getAllRequirementsByContractorId(long id) {
+		
+		return ApplicationUtil.getJsonResponse(dao.getAllRequirementsByConctractorId(id));
+		
+	}
 
 }

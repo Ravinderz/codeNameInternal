@@ -31,8 +31,13 @@ public class ContractorRequirementController {
 	
 	@RequestMapping(value = "/updateContractorRequirement" , method = RequestMethod.PUT)
 	public void contractorRequirementUpdateById(@RequestBody ContractorRequirement requirement){
-		System.out.println("ENTERED INTO CONTRACTOR REQUIRMENT");
+		System.out.println("ENTERED INTO UPDATE CONTRACTOR REQUIRMENT");
 		service.updateRequirement(requirement);
 		}
+	
+	@RequestMapping(value = "/getAllRequirements/{id}" , method = RequestMethod.GET)
+	public String getAllRequirementsByContractorId(@PathVariable Long id){
+		return service.getAllRequirementsByContractorId(id);
+	}
 
 }
