@@ -1,7 +1,5 @@
 package com.congun.web.model;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +14,14 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId")
-	public long userId;
+	public int userId;
 	
+    @Column(name = "firstname")
+	public String firstname;
+    
+    @Column(name = "lastname")
+	public String lastname;
+		
 	@Column(name = "username")
 	public String username;
 	
@@ -39,17 +43,13 @@ public class User {
 	@Column(name = "role")
 	public String role;
 	
-	@Column(name = "createdTime")
-	public Timestamp createdTime;
+	@Column(name = "activeFlag")
+	public int activeFlag;
 	
-	@Column(name = "LastupdatedTime")
-	public Timestamp updatedTime;
-	
-	
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {
@@ -88,6 +88,20 @@ public class User {
 	public void setCompany_individual_profile(String company_individual_profile) {
 		this.company_individual_profile = company_individual_profile;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
 	
 
 }

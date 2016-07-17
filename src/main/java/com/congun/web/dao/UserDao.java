@@ -53,18 +53,19 @@ public class UserDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean authenticateUser(User user){
+	public User authenticateUser(User user){
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		List<User> userList = getSession().createQuery("from User where username = :username and password = :password").setParameter("username", user.getUsername()).setParameter("password",user.getPassword()).list();
 		//user = (User)getSession().createCriteria(User.class).add(Restrictions.eq("user.username", username)).add(Restrictions.eq("user.password", password)).uniqueResult();
 		if(userList.size() > 0){//getting null pointer exception
 			user = userList.get(0);
+			System.out.println("User Exists!!");
 			System.out.println("username :: "+user.getUsername());
 			System.out.println("password :: "+user.getPassword());
 			System.out.println("userID :: "+user.getUserId());
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 	}
 	
 

@@ -1,7 +1,9 @@
 package com.congun.web.dao;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +28,6 @@ protected Session getSession(){
 }
 
 @Transactional
-@SuppressWarnings("unchecked")
 public String saveQuote(SupplierQuote supplierQuote){
 	try{
 		
@@ -34,46 +35,90 @@ public String saveQuote(SupplierQuote supplierQuote){
 		Timestamp currTime = new Timestamp(date.getTime());
 		supplierQuote.setCreatedTime(currTime);
 		supplierQuote.setUpdatedTime(currTime);
+		supplierQuote.setActiveFlag(0);
 		getSession().saveOrUpdate(supplierQuote);
 		
 		return ResponseConstants.SUCCESS_CODE;
 	}catch(Exception e){
-		
-		return ResponseConstants.EXCEPTION_CODE;
+		e.printStackTrace();
+			return ResponseConstants.EXCEPTION_CODE;
 	}
 }
 
 @Transactional
-@SuppressWarnings("unchecked")
-public String updateQuote(SupplierQuote supplierQuote,int Id)
+public String updateQuote(SupplierQuote supplierQuote)
 {
-	
 	try{
-		if(getQuoteDetails(Id) != null){
 		Date date = new Date();
 		Timestamp currTime = new Timestamp(date.getTime());
+		supplierQuote.setUpdatedTime(currTime);
+		getSession().saveOrUpdate(supplierQuote);
 		
 		return ResponseConstants.SUCCESS_CODE;
-		}else
-			return ResponseConstants.FAILURE_CODE;
 		}catch(Exception e){
+			e.printStackTrace();
 			return ResponseConstants.EXCEPTION_CODE;
 	}	
 }
 
 @Transactional
 @SuppressWarnings("unchecked")
-public SupplierQuote getQuoteDetails(int Id)
+public List<SupplierQuote> getQuotesbySupplier(long supplierId)
 {
-	
+	System.out.println("Getting Quotes by Supplier Id from DB : "+supplierId);
 	try{
-		SupplierQuote supplierQuotation = (SupplierQuote)getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quoteId", Id)).list().get(0);		
+		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quotePostedById", supplierId)).list();
+		System.out.println("No of Quotes Returned : "+supplierQuotationList.size());
+		return supplierQuotationList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+	}
+}
+
+@Transactional
+@SuppressWarnings("unchecked")
+public List<SupplierQuote> getQuotesbyRequirement(long requirementId)
+{
+	try{
+		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("submittedforReq", requirementId)).list();		
+		return supplierQuotationList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+	}
+}
+
+@Transactional
+@SuppressWarnings("unchecked")
+public int getNoOfQuotesbyRequirement(long requirementId)
+{
+	try{
+		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("submittedforReq", requirementId)).list();		
+		return supplierQuotationList.size();
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+	}
+}
+
+@Transactional
+public SupplierQuote getQuotesbyId(long Id)
+{
+	System.out.println("Getting Quotation from DB :" + Id);
+	try{
+		SupplierQuote supplierQuotation = (SupplierQuote)getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quoteId",Id)).list().get(0);
+		
+		if(supplierQuotation != null){
+			System.out.println("Got a record");
+		}else
+			System.out.println("Supplier quote is null");
 		return supplierQuotation;
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 	}
 }
 
 
-	
 }

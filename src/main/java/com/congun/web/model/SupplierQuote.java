@@ -36,7 +36,7 @@ public class SupplierQuote {
 	public String queries;
 	
 	@Column(name = "quotePostedById")
-	public int quotePostedById;
+	public long quotePostedById;
 	
 	@Column(name = "quotePostedByName")
 	public String quotePostedByName;
@@ -48,9 +48,12 @@ public class SupplierQuote {
 	public Timestamp updatedTime;
 	
 	@Column(name = "submittedforReq")
-	public int submittedforReq;
+	public long submittedforReq;
 	
-		public long getQuoteId() {
+	@Column(name = "activeFlag")
+	public int activeFlag;
+	
+	public long getQuoteId() {
 		return quoteId;
 	}
 	public void setQuoteId(long quoteId) {
@@ -62,10 +65,10 @@ public class SupplierQuote {
 	public void setRentalCharge(long rentalCharge) {
 		this.rentalCharge = rentalCharge;
 	}
-	public int getQuotePostedById() {
+	public long getQuotePostedById() {
 		return quotePostedById;
 	}
-	public void setQuotePostedById(int quotePostedById) {
+	public void setQuotePostedById(long quotePostedById) {
 		this.quotePostedById = quotePostedById;
 	}
 	public String getQuotePostedByName() {
@@ -86,10 +89,10 @@ public class SupplierQuote {
 	public void setUpdatedTime(Timestamp updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public int getSubmittedforReq() {
+	public long getSubmittedforReq() {
 		return submittedforReq;
 	}
-	public void setSubmittedforReq(int submittedforReq) {
+	public void setSubmittedforReq(long submittedforReq) {
 		this.submittedforReq = submittedforReq;
 	}
 	
@@ -126,6 +129,13 @@ public class SupplierQuote {
 		this.helperNeeded = helperNeeded;
 	}
 	
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
 	
 	public long calculateQuotation(){
 	

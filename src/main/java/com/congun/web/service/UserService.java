@@ -21,22 +21,24 @@ public class UserService {
 		// TODO Auto-generated method stub
 		String status= userdao.saveUser(user);
 		if(status.equals(ResponseConstants.SUCCESS_CODE))
-			return "User "+user.getUsername()+" has been successfully created!!!";
-		else if(status.equals(ResponseConstants.FAILURE_CODE)) {
-			return "User "+user.getUsername()+" Already Exists!!!";
-		} else
-		return "Error while creating user "+user.getUsername();
+			return ApplicationUtil.getJsonResponse(user);
+		else
+			return status;
 		
+	}
+	
+	public String authLogin(User user){
+		user = userdao.authenticateUser(user);
+		if(user != null){
+			return ApplicationUtil.getJsonResponse(user);
+		}else
+			return ResponseConstants.FAILURE_CODE;
 	}
 	
 	public String updateUser(User user) {
 		// TODO Auto-generated method stub
 		String status= userdao.updateUser(user);
-		if(status.equals(ResponseConstants.SUCCESS_CODE))
-			return "User "+user.getUsername()+" details has been successfully updated!!!";
-		else
-		return "Error while creating user "+user.getUsername();
-		
+		return status;				
 	}
 	
 
@@ -54,8 +56,13 @@ public class UserService {
 	
 	public String getUserDetails(String username) {
 		System.out.println("Getting details fromr ServiceImpl : "+username);
+		User user = userdao.getUserDetails(username);
+		if(user != null){
+			return ApplicationUtil.getJsonResponse(user);	
+		}else
+			return ResponseConstants.FAILURE_CODE;
 		
-		return ApplicationUtil.getJsonResponse(userdao.getUserDetails(username));
+		
 	}
 	
 	
