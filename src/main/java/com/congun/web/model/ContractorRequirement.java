@@ -20,9 +20,9 @@ public class ContractorRequirement {
  public String contractorName;
  public String equipmentCategory;
  public String equipmentName;
- public String specifications;
- public String manufacturer;
- public String model;
+ public String specificationCapacity;
+ public String[] manufacturer;
+ public String specificationModel;
  public int quantity;
  public int duration;
  public Date startDate;
@@ -30,12 +30,15 @@ public class ContractorRequirement {
  public String hiringChargesType;
  public String workLocation;
  public String transportation;
+ public String driverNeeded;
+ public String helperNeeded;
  public String dieselCharges;
  public String workDescription;
  public String workAreaImages;
  public Timestamp createdTime;
  public Timestamp updatedTime;
  public int activeFlag;
+ 
 public long getRequirementId() {
 	return requirementId;
 }
@@ -66,23 +69,23 @@ public String getEquipmentName() {
 public void setEquipmentName(String equipmentName) {
 	this.equipmentName = equipmentName;
 }
-public String getSpecifications() {
-	return specifications;
+public String getSpecificationCapacity() {
+	return specificationCapacity;
 }
-public void setSpecifications(String specifications) {
-	this.specifications = specifications;
+public void setSpecificationCapacity(String specificationCapacity) {
+	this.specificationCapacity = specificationCapacity;
 }
-public String getManufacturer() {
+public String[] getManufacturer() {
 	return manufacturer;
 }
-public void setManufacturer(String manufacturer) {
+public void setManufacturer(String[] manufacturer) {
 	this.manufacturer = manufacturer;
 }
-public String getModel() {
-	return model;
+public String getSpecificationModel() {
+	return specificationModel;
 }
-public void setModel(String model) {
-	this.model = model;
+public void setSpecificationModel(String specificationModel) {
+	this.specificationModel = specificationModel;
 }
 public int getQuantity() {
 	return quantity;
@@ -126,6 +129,18 @@ public String getTransportation() {
 public void setTransportation(String transportation) {
 	this.transportation = transportation;
 }
+public String getDriverNeeded() {
+	return driverNeeded;
+}
+public void setDriverNeeded(String driverNeeded) {
+	this.driverNeeded = driverNeeded;
+}
+public String getHelperNeeded() {
+	return helperNeeded;
+}
+public void setHelperNeeded(String helperNeeded) {
+	this.helperNeeded = helperNeeded;
+}
 public String getDieselCharges() {
 	return dieselCharges;
 }
@@ -162,6 +177,6 @@ public int getActiveFlag() {
 public void setActiveFlag(int activeFlag) {
 	this.activeFlag = activeFlag;
 }
- 
+
 
 }
