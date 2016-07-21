@@ -1,0 +1,395 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <title>ConGun</title>         
+        <meta name="description" content="Heavy Machinery Rentals"> 
+        <meta name="author" content="Congun"> 
+        <link href="css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="css/home.css" rel="stylesheet"> 
+        <script src="js/jquery.min.js"></script>         
+        <script type="text/javascript">
+$(document).ready(function(){
+	$("#register").click(function(){
+		var success = "successfully created";
+		var successUrl = "#modal-container-login";
+		var data = JSON.stringify($("#register-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url:"user/register",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 if(data.search(success) != -1){
+		    		 console.log("inside if"); 
+		    		 $('#modal-container-register').modal('hide');
+		    		 console.log("register modal closed");
+		    		 console.log("opening login modal");
+		    		 $('#modal-container-login').modal('show');
+		    		$(location).attr('href',successUrl);	 
+		    	 }
+		    	 console.log(data);
+		      }
+		});
+	});
+});
+</script>         
+        <script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+</script>         
+    </head>     
+    <body> 
+        <div class="container-fluid"> 
+            <div class="row"> 
+                <div class="col-md-12"> 
+                    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"> 
+                        <div class="navbar-header"> 
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> 
+                            </button>                             
+                            <a class="navbar-brand" href="#">
+                                <img id="nav-logo" src="images\logo.png" height="45px" width="100px" />
+                            </a>                             
+                        </div>                         
+                        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1"> 
+                            <ul class="nav navbar-nav"> 
+                                <li class="active">
+                                    <a href="#">About Us</a>
+                                </li>                                 
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>                                 
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<strong class="caret"></strong></a> 
+                                    <ul class="dropdown-menu"> 
+                                        <li>
+                                            <a href="#">Rentals</a>
+                                        </li>                                         
+                                        <li>
+                                            <a href="#">Sales</a>
+                                        </li>                                         
+                                        <li>
+                                            <a href="#">Machinary Services</a>
+                                        </li>                                         
+                                        <li class="divider"></li>                                         
+                                        <li>
+                                            <a href="#">Get a Quote</a>
+                                        </li>                                         
+                                        <li class="divider"></li>                                         
+                                        <li>
+                                            <a href="#">Misc</a>
+                                        </li>                                         
+                                    </ul>
+                                </li>                                 
+                            </ul>                             
+                            <div class="navbar-login"> 
+                                <ul class="nav navbar-nav navbar-right"> 
+                                    <li>
+                                        <a id="modal-login" href="#modal-container-login" role="button" class="btn" data-toggle="modal">Login</a>
+                                    </li>                                     
+                                    <li>
+                                        <a id="modal-register" href="#modal-container-register" role="button" class="btn" data-toggle="modal">Register</a>
+                                    </li>                                     
+                                </ul>                                 
+                            </div>                             
+                        </div>                         
+                    </nav>                     
+                    <!-- ********************* This is for the login model *********************************** -->                     
+                    <div class="modal fade" id="modal-container-login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+                        <div class="modal-dialog"> 
+                            <div class="modal-content"> 
+                                <div class="modal-header"> 
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>                                     
+                                    <h4 class="modal-title" id="myModalLabel">Login</h4> 
+                                </div>                                 
+                                <div class="modal-body"> 
+                                    <div class="login-container"> 
+                                        <form class="form-horizontal" role="form"> 
+                                            <div class="form-group"> 
+                                                <label for="inputEmail3" class="col-sm-2 control-label"> 
+                                                    Email 
+</label>                                                 
+                                                <div class="col-sm-10"> 
+                                                    <input type="email" class="form-control" id="inputEmail3"> 
+                                                </div>                                                 
+                                            </div>                                             
+                                            <div class="form-group"> 
+                                                <label for="inputPassword3" class="col-sm-2 control-label"> 
+                                                    Password 
+</label>                                                 
+                                                <div class="col-sm-10"> 
+                                                    <input type="password" class="form-control" id="inputPassword3"> 
+                                                </div>                                                 
+                                            </div>                                             
+                                            <div class="form-group"> 
+                                                <div class="col-sm-offset-2 col-sm-10"> 
+                                                    <div class="checkbox"> 
+                                                        <label> 
+                                                            <input type="checkbox"> Remember me
+                                                        </label>                                                         
+                                                    </div>                                                     
+                                                </div>                                                 
+                                            </div>                                             
+                                            <div class="form-group"> 
+                                                <div class="col-sm-offset-2 col-sm-10"> 
+                                                    <button type="submit" class="btn btn-default"> 
+                                                        Login
+</button>                                                     
+                                                </div>                                                 
+                                            </div>                                             
+                                        </form>                                         
+                                    </div>                                     
+                                </div>                                 
+                            </div>                             
+                        </div>                         
+                    </div>                     
+                </div>                 
+                <!-- ************************************* This is for the login model *************************************  -->                 
+                <!-- ********************* This is for the register model *********************************** -->                 
+                <div class="modal fade" id="modal-container-register" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+                    <div class="modal-dialog"> 
+                        <div class="modal-content"> 
+                            <div class="modal-header"> 
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>                                 
+                                <h4 class="modal-title" id="myModalLabel">Register</h4> 
+                            </div>                             
+                            <div class="modal-body"> 
+                                <div class="login-container"> 
+                                    <form class="form-horizontal" role="form" id="register-form"> 
+                                        <div class="form-group"> 
+                                            <label class="radio-inline">
+                                                <input type="radio" id="role" name="role" value="supplier">Supplier
+                                            </label>                                             
+                                            <label class="radio-inline">
+                                                <input type="radio" id="role" name="role" value="contractor">Contractor
+                                            </label>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="inputFirstName" class="col-sm-2 control-label"> 
+                                                FirstName 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="text" class="form-control" name="firstName" id="firstName"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="inputLastName" class="col-sm-2 control-label"> 
+                                                LastName 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="text" class="form-control" name="lastName" id="lastName"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="username" class="col-sm-2 control-label"> 
+                                                Email 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="email" class="form-control" id="username" name="username"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="password" class="col-sm-2 control-label"> 
+                                                Password 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="password" class="form-control" id="password" name="password"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="mobile" class="col-sm-2 control-label"> 
+                                                Mobile 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="number" class="form-control" id="mobile" name="mobile"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="constitution" class="col-sm-2 control-label"> 
+                                                Constitution 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="text" class="form-control" id="constitution" name="constitution"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="website" class="col-sm-2 control-label"> 
+                                                Website 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="text" class="form-control" id="website" name="website"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <label for="company_individual_profile" class="col-sm-2 control-label"> 
+                                                Company Profile 
+</label>                                             
+                                            <div class="col-sm-10"> 
+                                                <input type="textbox" class="form-control" id="company_individual_profile" name="company_individual_profile"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="form-group"> 
+                                            <div class="col-sm-offset-2 col-sm-10"> 
+                                                <button type="button" class="btn btn-warning" id="register"> 
+                                                    Register
+</button>                                                 
+                                            </div>                                             
+                                        </div>                                         
+                                    </form>                                     
+                                </div>                                 
+                            </div>                             
+                        </div>                         
+                    </div>                     
+                </div>                 
+            </div>             
+            <!-- *************************************** This is for the Register model ***************************************  -->             
+            <div class="progress progress-striped active"> 
+                <div class="progress-bar progress-success"></div>                 
+            </div>             
+        </div>         
+    </div>     
+    <div class="row carousel-bg"> 
+        <div class="col-md-12"> 
+            <div class="carousel slide" id="carousel-283615"> 
+                <ol class="carousel-indicators"> 
+                    <li class="active" data-slide-to="0" data-target="#carousel-283615"> 
+</li>                     
+                    <li data-slide-to="1" data-target="#carousel-283615"></li>                     
+                    <li data-slide-to="2" data-target="#carousel-283615"></li>                     
+                </ol>                 
+                <div class="carousel-inner"> 
+                    <div class="item active"> 
+                        <img alt="Carousel Bootstrap First" src="images/abstract1.jpg" height="250" width="1366" /> 
+                        <div class="carousel-caption"> 
+                            <h4>This is first carousel</h4> 
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget
+								quam. Donec id elit non mi porta gravida at eget metus. Nullam
+								id dolor id nibh ultricies vehicula ut id elit.</p> 
+                        </div>                         
+                    </div>                     
+                    <div class="item"> 
+                        <img alt="Carousel Bootstrap Second" src="images/abstract2.jpg" height="250" width="1366" /> 
+                        <div class="carousel-caption"> 
+                            <h4>This is Second carousel</h4> 
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget
+								quam. Donec id elit non mi porta gravida at eget metus. Nullam
+								id dolor id nibh ultricies vehicula ut id elit.</p> 
+                        </div>                         
+                    </div>                     
+                    <div class="item"> 
+                        <img alt="Carousel Bootstrap Third" src="images/abstract3.jpg" height="250" width="1366" /> 
+                        <div class="carousel-caption"> 
+                            <h4>This is third carousel</h4> 
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget
+								quam. Donec id elit non mi porta gravida at eget metus. Nullam
+								id dolor id nibh ultricies vehicula ut id elit.</p> 
+                        </div>                         
+                    </div>                     
+                </div>                 
+                <a class="left carousel-control" href="#carousel-283615" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+                <a class="right carousel-control" href="#carousel-283615" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+            </div>             
+        </div>         
+    </div>     
+    <div class="row row-how-to"> 
+        <div class="col-md-3 col-sm-12 info-one"> 
+            <div class="row-how-to-content"> 
+                <h2>Select</h2> 
+                <p>Select the required machinary</p> 
+            </div>             
+        </div>         
+        <div class="col-md-3 col-sm-12 info-center"> 
+            <div class="row-how-to-content"> 
+                <h2>Get a Quote</h2> 
+                <p>Request for a quote for the machinary</p> 
+            </div>             
+        </div>         
+        <div class="col-md-3 col-sm-12 info-center"> 
+            <div class="row-how-to-content"> 
+                <h2>Confirm Order</h2> 
+                <p>your order gets confirmed.</p> 
+            </div>             
+        </div>         
+        <div class="col-md-3 col-sm-12 info-last"> 
+            <div class="row-how-to-content"> 
+                <h2>Get Machinary Delivered</h2> 
+                <p>Get your requested Machinary delivered</p> 
+            </div>             
+        </div>         
+    </div>     
+    <div class="row"> 
+        <hr> 
+        <div class="col-md-4"> 
+            <div class="footer-info-col-1"> 
+                <h2> <img id="footer-img" src="images\logo.png" height="100px" /> </h2> 
+                <p>CONGUN provides one stop online- solution for all
+					construction equipment needs of construction Contractors,at their
+					desired location, in specified time and at a low price.</p> 
+            </div>             
+        </div>         
+        <div class="col-md-4"> 
+            <div class="footer-info-col-2"> 
+                <address> <strong>Congun PVT LTD.</strong><br> 3rd floor T hub
+					Gachibowli,IIIT Campus,<br> Hyderabad, Telangana 500032<br> <abbr title="Phone">P:</abbr> ((998) 993-3636 <br> Email :
+					info@congun.com<br> <br>Monday-Friday: 9am to 5pm<br>Saturday: 10am to 3pm<br>Sunday:
+					Closed</address> 
+            </div>             
+        </div>         
+        <div class="col-md-4"> 
+            <div class="footer-info-col-3"> 
+                <img class="img-circle" src="images/office-img.jpg" height="200px" /> 
+            </div>             
+        </div>         
+    </div>     
+    <hr> 
+    <div class="row"> 
+        <div class="col-md-12"> 
+            <div class="footer"> 
+                <p>Copyright &copy; 2016 Congun</p> 
+                <div class="social-icons-set"> 
+                    <ul class="social-icons"> 
+                        <li>
+                            <img src="images/fb.png" height="35px" width="35px">
+                        </li>                         
+                        <li>
+                            <img src="images/g+.png" height="35px" width="35px">
+                        </li>                         
+                        <li>
+                            <img src="images/twitter.png" height="35px" width="35px">
+                        </li>                         
+                        <li>
+                            <img src="images/instagram.png" height="35px" width="35px">
+                        </li>                         
+                    </ul>                     
+                </div>                 
+                <div class="clear"></div>                 
+                <p> <a href="http://congun.com/terms" target="_blank"> Terms &
+						conditions</a> &nbsp; <a href="http://congun.com/privacy" target="_blank"> Privacy policy </a> </p> 
+            </div>             
+        </div>         
+    </div>     
+    <script src="js/bootstrap.min.js"></script>     
+    <script src="js/scripts.js"></script>     
+</body> 
