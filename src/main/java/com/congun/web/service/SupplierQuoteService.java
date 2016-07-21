@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.SupplierQuoteDao;
+import com.congun.web.model.AddEquipment;
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
@@ -20,7 +21,6 @@ public class SupplierQuoteService {
 	
 	
 	public String submitQuote(SupplierQuote supplierQuote){
-		
 		String status = supplierDao.saveQuote(supplierQuote);
 		return status;
 	}
@@ -71,5 +71,15 @@ public class SupplierQuoteService {
 	}
 
 	
+	public String getAllEquipments(Long supplierId) {
+		
+		return ApplicationUtil.getJsonResponse(supplierDao.getAllEquipments(supplierId));
+	}
+
+	public String deleteEquipmentById(int equipmentId) {
+		
+		return supplierDao.deleteEquipmentById(equipmentId);
+	}
+
 		
 }

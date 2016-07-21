@@ -9,22 +9,26 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.util.ApplicationUtil;
+import com.congun.web.util.ResponseConstants;
 
 @Repository
-public class RequirementQuoteDAO{
+public class ContractorRequirementQuoteDAO{
 	
 	@Autowired
 	SessionFactory sessionFactory;
 
 	/*To store contractor requirements into contractorrequirement table*/
 	@SuppressWarnings("deprecation")
-	public void saveRequirement(ContractorRequirement requirement) {
+	public String saveRequirement(ContractorRequirement requirement) {
 		try {
 		java.util.Date date= new java.util.Date();
 		Timestamp time = new Timestamp(date.getTime());
@@ -32,45 +36,95 @@ public class RequirementQuoteDAO{
 		requirement.setCreatedTime(time);
 		requirement.setUpdatedTime(time);
 		requirement.setStartDate(ApplicationUtil.formatDate(requirement.getStartDate()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
 		
+		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return ResponseConstants.CONTRACTOR_EXCEPTION_CODE;
+		}
 	}
 
 	/*To get requirement details by requirement Id  */
 	public ContractorRequirement getRequirementById(long id) {
+		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		criteria.add(Restrictions.eq("requirementId", id));
 		ContractorRequirement reqObject = (ContractorRequirement) criteria.uniqueResult();
 		return reqObject;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
     
 	/*To update contractor requirements into contractorrequirement table*/
-	public void updateRequirement(ContractorRequirement requirement) {
+	public String updateRequirement(ContractorRequirement requirement) {
+		try{
 		java.util.Date date= new java.util.Date();
 		Timestamp time = new Timestamp(date.getTime());
 		requirement.setUpdatedTime(time);
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
+		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.CONTRACTOR_EXCEPTION_CODE;
+		}
 	}
 	
 	/*To get the list of requirments by contractorid */
 	public List<ContractorRequirement> getAllRequirementsByConctractorId(long id){
+		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		criteria.add(Restrictions.eq("contractorId", id)).add( Restrictions.eq("activeFlag", 1));
 		List<ContractorRequirement> reqList = criteria.list();	
 		return reqList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
-	public void updateNoOfQuotes(long requirementId){
-		
+	public String updateNoOfQuotes(long requirementId){
+		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		ContractorRequirement contractorRequirement = (ContractorRequirement)criteria.add(Restrictions.eq("requirementId",requirementId)).add( Restrictions.eq("activeFlag", 1)).list().get(0);
 		contractorRequirement.setNoofquotes(contractorRequirement.getNoofquotes()+1);
 		sessionFactory.getCurrentSession().saveOrUpdate(contractorRequirement);
+		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.CONTRACTOR_EXCEPTION_CODE;
+		}
+	}
+
+	public List<AddEquipment> getDistinctCategory() {
+		try{
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AddEquipment.class);
+			criteria.setProjection(Projections.distinct(Projections.property("equipmentCategory")));
+			List<AddEquipment> list= criteria.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;	
+		}
+	}
+
+	public List<AddEquipment> getEquipmentByCategory(String category) {
+		try{
+			System.out.println("Category :"+category);
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AddEquipment.class);
+			criteria.setProjection(Projections.property("equipment"));
+			criteria.add(Restrictions.eq("equipmentCategory", category));
+			List<AddEquipment> list= criteria.list();
+			
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;	
+		}
 	}
 	
 

@@ -63,6 +63,17 @@ public class SupplierController {
 		return supplierService.addEquipment(equipment);
 	}
 	
+	@RequestMapping(value="/getallequipments/{supplierId}" , method=RequestMethod.GET)
+	public String getAllEquipments(@PathVariable Long supplierId){
+		System.out.println("Getting equipment Details");
+		return supplierService.getAllEquipments(supplierId);
+	}
 	
+	@RequestMapping(value="/deleteEquipmentById/{equipmentId}" ,method=RequestMethod.DELETE)
+	public String deleteEquipmentById(@PathVariable int equipmentId){
+		System.out.println("Delete equipment By Id");
+		return supplierService.deleteEquipmentById(equipmentId);
+	}
 	
+
 }

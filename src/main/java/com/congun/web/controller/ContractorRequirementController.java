@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.ContractorRequirement;
-import com.congun.web.service.RequirementQuoteService;
+import com.congun.web.service.ContractorRequirementQuoteService;
 
 @RestController
 @RequestMapping("contractor")
 public class ContractorRequirementController {
 	
 	@Autowired
-	RequirementQuoteService service;
+	ContractorRequirementQuoteService service;
 	
 	@RequestMapping(value = "/contractorRequirement" , method = RequestMethod.POST)
-	public void contractorRequirement(@RequestBody ContractorRequirement requirement ){
+	public String contractorRequirement(@RequestBody ContractorRequirement requirement ){
 		System.out.println("ENTERED INTO CONTRACTOR REQUIRMENT");
-		service.saveRequirement(requirement);	
+		return service.saveRequirement(requirement);	
 		}
 	
 	@RequestMapping(value = "/contractorRequirement/{id}" , method = RequestMethod.GET)
@@ -30,14 +30,23 @@ public class ContractorRequirementController {
 		}
 	
 	@RequestMapping(value = "/updateContractorRequirement" , method = RequestMethod.PUT)
-	public void contractorRequirementUpdateById(@RequestBody ContractorRequirement requirement){
+	public String updateContractorRequirementById(@RequestBody ContractorRequirement requirement){
 		System.out.println("ENTERED INTO UPDATE CONTRACTOR REQUIRMENT");
-		service.updateRequirement(requirement);
+		return service.updateRequirement(requirement);
 		}
 	
 	@RequestMapping(value = "/getAllRequirements/{id}" , method = RequestMethod.GET)
 	public String getAllRequirementsByContractorId(@PathVariable Long id){
 		return service.getAllRequirementsByContractorId(id);
 	}
+	
+	@RequestMapping(value = "/getDistinctCategory" , method = RequestMethod.GET)
+	public String getDistinctCategory(){
+		return service.getDistinctCategory();
+	}
 
+	@RequestMapping(value = "/getEquipmentByCategory/{category}" , method = RequestMethod.GET)
+	public String getEquipmentByCategory(@PathVariable String category){
+		return service.getEquipmentByCategory(category);
+	}
 }
