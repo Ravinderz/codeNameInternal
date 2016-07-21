@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.congun.web.model.AddEquipment;
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.service.SupplierQuoteService;
 
@@ -54,6 +55,13 @@ public class SupplierController {
 		return supplierService.getNoOfQuotationsbyRequirement(requirementId);	
 	}
 	
+	@RequestMapping(value="/addequipment" , method=RequestMethod.POST)
+	public String addEquipment(@RequestBody AddEquipment equipment){
+		System.out.println("Adding equipment Details");
+		System.out.println(equipment.getEquipment());
+		System.out.println(equipment.getEquipmentCategory());
+		return supplierService.addEquipment(equipment);
+	}
 	
 	
 	

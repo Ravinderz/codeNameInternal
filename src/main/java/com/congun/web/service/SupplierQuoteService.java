@@ -64,6 +64,11 @@ public class SupplierQuoteService {
 		else
 			return 0;
 	}
+	
+	public String addEquipment(AddEquipment equipment) {
+		
+		return supplierDao.addEquipment(equipment);
+	}
 
 	
 		

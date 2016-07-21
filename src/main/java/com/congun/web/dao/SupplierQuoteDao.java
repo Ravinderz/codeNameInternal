@@ -122,5 +122,17 @@ public SupplierQuote getQuotesbyId(long Id)
 	}
 }
 
+	public String addEquipment(AddEquipment equipment) {
+		try {
+			getSession().saveOrUpdate(equipment);
+			return ResponseConstants.SUCCESS_CODE;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseConstants.EXCEPTION_CODE;
+		}
+		
+	}
+
+
 
 }
