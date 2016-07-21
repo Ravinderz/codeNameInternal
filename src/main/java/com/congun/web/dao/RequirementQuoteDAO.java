@@ -53,5 +53,13 @@ public class RequirementQuoteDAO{
 		return reqList;
 	}
 	
+	public void updateNoOfQuotes(long requirementId){
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
+		ContractorRequirement contractorRequirement = (ContractorRequirement)criteria.add(Restrictions.eq("requirementId",requirementId)).add( Restrictions.eq("activeFlag", 1)).list().get(0);
+		contractorRequirement.setNoofquotes(contractorRequirement.getNoofquotes()+1);
+		sessionFactory.getCurrentSession().saveOrUpdate(contractorRequirement);
+	}
+	
 
 }

@@ -47,8 +47,8 @@ public class SupplierQuote {
 	@Column(name = "LastupdatedTime")
 	public Timestamp updatedTime;
 	
-	@Column(name = "submittedforReq")
-	public long submittedforReq;
+	@Column(name = "requirementId")
+	public long requirementId;
 	
 	@Column(name = "activeFlag")
 	public int activeFlag;
@@ -89,11 +89,11 @@ public class SupplierQuote {
 	public void setUpdatedTime(Timestamp updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	public long getSubmittedforReq() {
-		return submittedforReq;
+	public long getRequirementId() {
+		return requirementId;
 	}
-	public void setSubmittedforReq(long submittedforReq) {
-		this.submittedforReq = submittedforReq;
+	public void setRequirementId(long requirementId) {
+		this.requirementId = requirementId;
 	}
 	
 	

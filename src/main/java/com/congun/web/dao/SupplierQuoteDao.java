@@ -11,7 +11,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.util.ResponseConstants;
 
@@ -21,6 +20,7 @@ public class SupplierQuoteDao {
 	
 @Autowired
 private SessionFactory sessionFactory;
+public RequirementQuoteDAO requirementDAO;
 
 @Transactional
 protected Session getSession(){
@@ -36,7 +36,9 @@ public String saveQuote(SupplierQuote supplierQuote){
 		supplierQuote.setCreatedTime(currTime);
 		supplierQuote.setUpdatedTime(currTime);
 		supplierQuote.setActiveFlag(0);
+		requirementDAO.updateNoOfQuotes(supplierQuote.getRequirementId());
 		getSession().saveOrUpdate(supplierQuote);
+		
 		
 		return ResponseConstants.SUCCESS_CODE;
 	}catch(Exception e){
@@ -81,7 +83,7 @@ public List<SupplierQuote> getQuotesbySupplier(long supplierId)
 public List<SupplierQuote> getQuotesbyRequirement(long requirementId)
 {
 	try{
-		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("submittedforReq", requirementId)).list();		
+		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("requirementId", requirementId)).list();		
 		return supplierQuotationList;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -94,7 +96,7 @@ public List<SupplierQuote> getQuotesbyRequirement(long requirementId)
 public int getNoOfQuotesbyRequirement(long requirementId)
 {
 	try{
-		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("submittedforReq", requirementId)).list();		
+		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("requirementId", requirementId)).list();		
 		return supplierQuotationList.size();
 		}catch(Exception e){
 			e.printStackTrace();

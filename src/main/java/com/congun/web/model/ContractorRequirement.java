@@ -17,6 +17,7 @@ public class ContractorRequirement {
 @GeneratedValue(strategy = GenerationType.AUTO)
  public long requirementId;
  public long contractorId;
+ public String title;
  public String contractorName;
  public String equipmentCategory;
  public String equipmentName;
@@ -36,6 +37,14 @@ public class ContractorRequirement {
  public Timestamp createdTime;
  public Timestamp updatedTime;
  public int activeFlag;
+ public int noofquotes;
+ 
+public int getNoofquotes() {
+	return noofquotes;
+}
+public void setNoofquotes(int noofquotes) {
+	this.noofquotes = noofquotes;
+}
 public long getRequirementId() {
 	return requirementId;
 }
