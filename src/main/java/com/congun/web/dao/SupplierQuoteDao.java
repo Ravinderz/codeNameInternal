@@ -40,7 +40,7 @@ public String saveQuote(SupplierQuote supplierQuote){
 		Timestamp currTime = new Timestamp(date.getTime());
 		supplierQuote.setCreatedTime(currTime);
 		supplierQuote.setUpdatedTime(currTime);
-		supplierQuote.setActiveFlag(0);
+		supplierQuote.setActiveFlag(1);
 		requirementDAO.updateNoOfQuotes(supplierQuote.getRequirementId());
 		getSession().saveOrUpdate(supplierQuote);
 		

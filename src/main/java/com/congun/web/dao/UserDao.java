@@ -1,5 +1,7 @@
 package com.congun.web.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -32,6 +34,12 @@ public class UserDao {
 		List<User> userList = getSession().createCriteria(User.class).add(Restrictions.eq("username", user.getUsername())).list()	;
 		if(userList.size() == 0){
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
+
+		Date date = new Date();
+		Timestamp currTime = new Timestamp(date.getTime());
+		user.setCreatedtime(currTime);
+		user.setUpdatedtime(currTime);
+		user.setActiveFlag(1);
 		getSession().saveOrUpdate(user);
 			return ResponseConstants.SUCCESS_CODE;
 		}else
@@ -45,6 +53,9 @@ public class UserDao {
 	public String updateUser(User user){
 		try{
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
+		Date date = new Date();
+		Timestamp currTime = new Timestamp(date.getTime());
+		user.setUpdatedtime(currTime);
 		getSession().saveOrUpdate(user);
 			return ResponseConstants.SUCCESS_CODE;
 		}catch(Exception e){
