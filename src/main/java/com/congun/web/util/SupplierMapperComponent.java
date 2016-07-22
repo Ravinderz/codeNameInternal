@@ -74,11 +74,11 @@ public class SupplierMapperComponent {
 						break;
 					}
 				}
-			}
 			
 			getSupplierDetails(requirement);
 			quit();
 
+		 }
 		}
 
 	}

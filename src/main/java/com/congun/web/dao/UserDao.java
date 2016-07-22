@@ -45,6 +45,7 @@ public class UserDao {
 		}else
 			return ResponseConstants.FAILURE_CODE;
 		}catch(Exception e){
+			e.printStackTrace();
 			return ResponseConstants.EXCEPTION_CODE;
 		}
 	}
@@ -52,13 +53,16 @@ public class UserDao {
 	@Transactional
 	public String updateUser(User user){
 		try{
+		//User existingUser = (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId", user.getUserId())).list().get(0);
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		Date date = new Date();
 		Timestamp currTime = new Timestamp(date.getTime());
+		//user.setCreatedtime(existingUser.getCreatedtime());
 		user.setUpdatedtime(currTime);
 		getSession().saveOrUpdate(user);
 			return ResponseConstants.SUCCESS_CODE;
 		}catch(Exception e){
+			e.printStackTrace();
 			return ResponseConstants.EXCEPTION_CODE;
 		}
 	}
