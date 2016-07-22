@@ -25,6 +25,8 @@ public class SupplierQuoteDao {
 	
 @Autowired
 private SessionFactory sessionFactory;
+
+@Autowired
 public ContractorRequirementQuoteDAO requirementDAO;
 
 @Transactional
@@ -56,8 +58,10 @@ public String saveQuote(SupplierQuote supplierQuote){
 public String updateQuote(SupplierQuote supplierQuote)
 {
 	try{
+		//SupplierQuote existingQuote = (SupplierQuote) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quoteId", supplierQuote.getQuoteId())).list().get(0);
 		Date date = new Date();
 		Timestamp currTime = new Timestamp(date.getTime());
+		//supplierQuote.setCreatedTime(existingQuote.getCreatedTime());
 		supplierQuote.setUpdatedTime(currTime);
 		getSession().saveOrUpdate(supplierQuote);
 		
@@ -127,6 +131,7 @@ public SupplierQuote getQuotesbyId(long Id)
 	}
 }
 
+@Transactional
 	public String addEquipment(AddEquipment equipment) {
 		try {
 			getSession().saveOrUpdate(equipment);
@@ -138,6 +143,7 @@ public SupplierQuote getQuotesbyId(long Id)
 		
 	}
 
+@Transactional
 	public String getEquipmentDetails(long supplierId) {
 		System.out.println("Getting Equipment details from DB :" + supplierId);
 		try{
@@ -154,6 +160,7 @@ public SupplierQuote getQuotesbyId(long Id)
 		}
 	}
 
+@Transactional
 	public List<AddEquipment> getAllEquipments(Long supplierId) {
 		System.out.println("Getting Equipment details from DB :" + supplierId);
 		try{
@@ -168,6 +175,7 @@ public SupplierQuote getQuotesbyId(long Id)
 		
 	}
 
+@Transactional
 	public String deleteEquipmentById(int equipmentId) {
 	System.out.println("Deleting Equipment by ID");
 	try{
@@ -182,6 +190,25 @@ public SupplierQuote getQuotesbyId(long Id)
 	}
 	
 		
+	}
+
+@Transactional
+	public List<AddEquipment> getEquipmentByCategory(ContractorRequirement requirement){
+		System.out.println("Entered Get Equipments by Category");
+		try{
+			Criteria criteria = getSession().createCriteria(AddEquipment.class);
+			
+			List<AddEquipment> machinesList = (ArrayList<AddEquipment>) criteria
+					.add(Restrictions.eq("equipmentCategory",
+							requirement.getEquipmentCategory()))
+					.add(Restrictions.eq("equipment",
+							requirement.getEquipmentName())).list();
+			
+			return machinesList;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.congun.web.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +48,13 @@ public class User {
 	@Column(name = "activeFlag")
 	public int activeFlag;
 	
+	@Column(name = "createdtime")
+	public Timestamp createdtime;
+	
+	@Column(name = "updatedtime")
+	public Timestamp updatedtime;
+
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -54,6 +63,18 @@ public class User {
 	}
 	public String getUsername() {
 		return username;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public void setUsername(String username) {
 		this.username = username;
@@ -100,6 +121,18 @@ public class User {
 	}
 	public void setActiveFlag(int activeFlag) {
 		this.activeFlag = activeFlag;
+	}
+	public Timestamp getCreatedtime() {
+		return createdtime;
+	}
+	public void setCreatedtime(Timestamp createdtime) {
+		this.createdtime = createdtime;
+	}
+	public Timestamp getUpdatedtime() {
+		return updatedtime;
+	}
+	public void setUpdatedtime(Timestamp updatedtime) {
+		this.updatedtime = updatedtime;
 	}
 
 	

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.dao.SupplierQuoteDao;
+import com.congun.web.dao.UserDao;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.SupplierQuote;
@@ -21,14 +23,17 @@ import com.congun.web.model.User;
 
 @Repository
 public class SupplierMapperComponent {
+	
 
-	@Autowired
-	SessionFactory sessionFactory;
+@Autowired
+private SessionFactory sessionFactory;
 
-	@Transactional
-	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+@Autowired
+private SupplierQuoteDao quoteDAO;
+
+@Autowired
+private UserDao userDAO;
+
 
 	public boolean SupplierMapperPreprocessor(ContractorRequirement requirement) {
 
@@ -47,9 +52,13 @@ public class SupplierMapperComponent {
 	}
 
 	class MapSupplier extends Thread {
+		
 		private boolean running = true;
 		private boolean quit = false;
 		
+		public MapSupplier() {
+			// TODO Auto-generated constructor stub
+		}
 
 		ContractorRequirement requirement;
 
@@ -89,13 +98,7 @@ public class SupplierMapperComponent {
 		int supplierScore;
 
 		System.out.println("Entered Requirements Mapper");
-		Criteria criteria = getSession().createCriteria(AddEquipment.class);
-		@SuppressWarnings("unchecked")
-		List<AddEquipment> machinesList = (ArrayList<AddEquipment>) criteria
-				.add(Restrictions.eq("equipmentCategory",
-						requirement.getEquipmentCategory()))
-				.add(Restrictions.eq("equipment",
-						requirement.getEquipmentName())).list();
+		List<AddEquipment> machinesList = quoteDAO.getEquipmentByCategory(requirement);
 
 		for (AddEquipment equipment : machinesList) {
 			supplierScore = 0;
@@ -158,7 +161,7 @@ public class SupplierMapperComponent {
 		Iterator itr = mappedSupplierIds.iterator();
 		while(itr.hasNext()){
 			Long supplierId =  (Long)itr.next();
-			User user = (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId", supplierId.longValue())).list().get(0);
+			User user = userDAO.getUserbyId(supplierId.intValue());
 			System.out.println("User Details: ");
 			System.out.println("UserId: "+user.getUserId());
 			System.out.println("Name: "+user.getFirstname() + " "+user.getLastname());

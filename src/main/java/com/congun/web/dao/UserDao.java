@@ -84,12 +84,29 @@ public class UserDao {
 	}
 	
 
+	@Transactional
 	public User getUserDetails(String username){
 		try{
 			System.out.println("Getting details from DAOImpl :"+username+":");
 			Criteria criteria = getSession().createCriteria(User.class);
 			criteria.setMaxResults(1);
 		User user= (User) criteria.add(Restrictions.eq("username",username)).uniqueResult();
+		System.out.println("Got user with "+user.getUsername()+" from database");
+		return user;
+		}catch(Exception e){
+			System.out.println("Entered Exception Block : ");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Transactional
+	public User getUserbyId(int id){
+		try{
+			System.out.println("Getting details from DAOImpl for Id :"+id+":");
+			Criteria criteria = getSession().createCriteria(User.class);
+			criteria.setMaxResults(1);
+		User user= (User) criteria.add(Restrictions.eq("userId",id)).uniqueResult();
 		System.out.println("Got user with "+user.getUsername()+" from database");
 		return user;
 		}catch(Exception e){
