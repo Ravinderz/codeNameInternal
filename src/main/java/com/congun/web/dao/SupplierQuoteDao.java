@@ -3,7 +3,9 @@ package com.congun.web.dao;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
+import com.congun.web.model.MappingObject;
 import com.congun.web.model.SupplierQuote;
+import com.congun.web.model.User;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 
@@ -28,6 +32,9 @@ private SessionFactory sessionFactory;
 
 @Autowired
 public ContractorRequirementQuoteDAO requirementDAO;
+
+@Autowired
+public MappingObject mappingobject;
 
 @Transactional
 protected Session getSession(){
@@ -210,5 +217,43 @@ public SupplierQuote getQuotesbyId(long Id)
 		}
 		return null;
 	}
+
+@Transactional
+public List filterSupplierIds(Set mappedSuppliers,long requirementId){
+	System.out.println("Entere the filter Mappers method");
+	try{
+		List existingMappedIds = (ArrayList<Long>)getSession().createQuery("distinct (supplierId) from MappingObject where requirementId = :requirementId").setParameter("requirementId", requirementId).list();
+		
+		return existingMappedIds;
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return null;
+}
+
+@Transactional
+public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
+	
+	String suppId="";
+	try{
+	if(mapperSuppliers.size() > 0){
+	for(Long Id:mapperSuppliers){
+		suppId = suppId+Id.longValue();
+		suppId = suppId+",";
+		
+	}
+	System.out.println("List of Mapped Ids for: "+requirementId+" List: "+suppId);
+	//MappingObject mappingobject = new MappingObject();
+	mappingobject.setRequirementId(requirementId);
+	mappingobject.setSupplierList(suppId);
+	getSession().saveOrUpdate(mappingobject);
+	}else
+		System.out.println("Received Empty Mapped Suppliers for Requirement :"+requirementId);
+	}catch(Exception e){
+		e.printStackTrace();
+		System.out.println("Ëxception Occured while updating the Mapped Objects for Requirement Id: "+requirementId );
+	}
+}
 
 }

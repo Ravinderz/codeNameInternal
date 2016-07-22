@@ -149,14 +149,16 @@ private UserDao userDAO;
 		}
 		
 		if(mappedSupplierIds.size() > 0){
-		sendNotifications(mappedSupplierIds);
+		sendNotifications(mappedSupplierIds,requirement.getRequirementId());
 		}else
 		{
 			System.out.println("We don't have the Suppliers as per customer Requirement");
 		}
 	}
 	
-	public void sendNotifications(Set mappedSupplierIds){
+	public void sendNotifications(Set mappedSupplierIds,long requirementId){
+		
+		mappedSupplierIds = filterMappedSupplierids(mappedSupplierIds,requirementId);
 		
 		Iterator itr = mappedSupplierIds.iterator();
 		while(itr.hasNext()){
@@ -170,5 +172,24 @@ private UserDao userDAO;
 			System.out.println("\n");
 		}
 		
+	}
+	
+	public Set filterMappedSupplierids(Set mappedSuppliers,long requirementId){
+		if(mappedSuppliers.size() > 0){
+			
+			List<Long> existingIds = (ArrayList<Long>)quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
+			if(existingIds != null){
+			for(Long Id: existingIds){
+				mappedSuppliers.remove(Id);
+			}
+			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
+			return mappedSuppliers;
+			}else{
+			System.out.println("Received no already Mapped Ids for RequirementId :"+requirementId+" Mapping Ids for first time");
+			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
+			return mappedSuppliers;
+			}
+		}
+		return null;
 	}
 }
