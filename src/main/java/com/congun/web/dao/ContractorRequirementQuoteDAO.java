@@ -19,12 +19,16 @@ import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
+import com.congun.web.util.SupplierMapperComponent;
 
 @Repository
 public class ContractorRequirementQuoteDAO{
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	SupplierMapperComponent mapperComponent;
 
 	/*To store contractor requirements into contractorrequirement table*/
 	@SuppressWarnings("deprecation")
@@ -37,6 +41,15 @@ public class ContractorRequirementQuoteDAO{
 		requirement.setUpdatedTime(time);
 		requirement.setStartDate(ApplicationUtil.formatDate(requirement.getStartDate()));
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
+		
+		if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
+			System.out
+					.println("Mapping the Suppliers for submitted Requirement :"
+							+ requirement.getRequirementId());
+		} else {
+			System.out.println("Could Not start Mapping for requirement: "
+					+ requirement.getRequirementId());
+		}
 		
 		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
 		} catch (ParseException e) {

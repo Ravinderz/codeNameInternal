@@ -17,20 +17,38 @@ public class SupplierQuote {
 	@Column(name="quoteId")
 	public long quoteId;
 	
-	@Column(name = "rentalCharge")
-	public long rentalCharge;
+	@Column(name = "machineRental")
+	public long machineRental;
 	
-	@Column(name = "noOfWorkingHours")
-	public long noOfWorkingHours;
+	@Column(name = "perBasis")
+	public String perBasis;
 	
-	@Column(name = "driverNeeded")
-	public boolean driverNeeded;
+	@Column(name = "make")
+	public String make;
 	
-	@Column(name = "helperNeeded")
-	public boolean helperNeeded;
+	@Column(name = "model")
+	public String model;
 	
-	@Column(name = "repairCharges")
-	public long repairCharges;
+	@Column(name = "manufacturedyear")
+	public String manufacturedyear;
+	
+	@Column(name = "manufacturer")
+	public String manufacturer;
+	
+	@Column(name = "capacity")
+	public int capacity;
+	
+	@Column(name = "driverfare")
+	public long driverfare;
+	
+	@Column(name = "driverAvailabile")
+	public boolean driverAvailable;
+	
+	@Column(name = "helperAvailable")
+	public boolean helperAvailable;
+	
+	@Column(name = "maintenance")
+	public long maintenance;
 	
 	@Column(name = "queries")
 	public String queries;
@@ -58,12 +76,6 @@ public class SupplierQuote {
 	}
 	public void setQuoteId(long quoteId) {
 		this.quoteId = quoteId;
-	}
-	public long getRentalCharge() {
-		return rentalCharge;
-	}
-	public void setRentalCharge(long rentalCharge) {
-		this.rentalCharge = rentalCharge;
 	}
 	public long getQuotePostedById() {
 		return quotePostedById;
@@ -95,38 +107,18 @@ public class SupplierQuote {
 	public void setRequirementId(long requirementId) {
 		this.requirementId = requirementId;
 	}
-	
-	
-	public long getNoOfWorkingHours() {
-		return noOfWorkingHours;
-	}
-	public void setNoOfWorkingHours(long noOfWorkingHours) {
-		this.noOfWorkingHours = noOfWorkingHours;
-	}
 
-	public long getRepairCharges() {
-		return repairCharges;
+	public long getMaintenance() {
+		return maintenance;
 	}
-	public void setRepairCharges(long repairCharges) {
-		this.repairCharges = repairCharges;
+	public void setMaintenance(long maintenance) {
+		this.maintenance = maintenance;
 	}
 	public String getQueries() {
 		return queries;
 	}
 	public void setQueries(String queries) {
 		this.queries = queries;
-	}
-	public boolean isDriverNeeded() {
-		return driverNeeded;
-	}
-	public void setDriverNeeded(boolean driverNeeded) {
-		this.driverNeeded = driverNeeded;
-	}
-	public boolean isHelperNeeded() {
-		return helperNeeded;
-	}
-	public void setHelperNeeded(boolean helperNeeded) {
-		this.helperNeeded = helperNeeded;
 	}
 	
 	public int getActiveFlag() {
@@ -135,36 +127,63 @@ public class SupplierQuote {
 	public void setActiveFlag(int activeFlag) {
 		this.activeFlag = activeFlag;
 	}
-
 	
-	public long calculateQuotation(){
-	
-		return noOfWorkingHours*rentalCharge;
+	public long getMachineRental() {
+		return machineRental;
 	}
-	
-	public SupplierQuote compareObjects(SupplierQuote dBObj)
-	{
-		if(this.getRentalCharge()!=0){
-			dBObj.setRentalCharge(this.getRentalCharge());
-		}
-		
-		if(this.getNoOfWorkingHours() !=0){
-			dBObj.setNoOfWorkingHours(this.getNoOfWorkingHours());
-		}
-		
-		//if(this.isDriverNeeded())
-		
-		if(this.getNoOfWorkingHours()!=0)
-		{
-			dBObj.setNoOfWorkingHours(this.getNoOfWorkingHours());
-		}
-		
-		
-		
-		
-		return dBObj;
-		
-		
+	public void setMachineRental(long machineRental) {
+		this.machineRental = machineRental;
+	}
+	public String getPerBasis() {
+		return perBasis;
+	}
+	public void setPerBasis(String perBasis) {
+		this.perBasis = perBasis;
+	}
+	public String getMake() {
+		return make;
+	}
+	public void setMake(String make) {
+		this.make = make;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getManufacturedyear() {
+		return manufacturedyear;
+	}
+	public void setManufacturedyear(String manufacturedyear) {
+		this.manufacturedyear = manufacturedyear;
+	}
+	public String getManufacturer() {
+		return manufacturer;
+	}
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public long getDriverfare() {
+		return driverfare;
+	}
+	public void setDriverfare(long driverfare) {
+		this.driverfare = driverfare;
+	}
+	public boolean isHelperAvailable() {
+		return helperAvailable;
+	}
+	public void setHelperAvailable(boolean helperAvailable) {
+		this.helperAvailable = helperAvailable;
+	}
+	public void setDriverAvailable(boolean driverAvailable) {
+		this.driverAvailable = driverAvailable;
 	}
 	
 
