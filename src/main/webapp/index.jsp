@@ -10,6 +10,10 @@
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/form-elements-style.css">
+        <link rel="stylesheet" href="css/form-style.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
 
@@ -70,8 +74,6 @@
 					</ul>
 				</div>
 			</nav>
-			<div class="progress progress-striped active">
-				<div class="progress-bar progress-success">
 				</div>
 			</div>
 		</div>

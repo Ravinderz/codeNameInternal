@@ -15,6 +15,12 @@
 	margin-top: 10px;
 }
 
+#requirement-list button{
+	height:60px;
+	line-height: 20px;
+	font-weight: 100; 
+}
+
 .carousel-bg{
     margin-top: 25px;
     margin-bottom: 25px;
@@ -99,3 +105,27 @@
 .clear{
     clear: both;
 }
+
+.modal-content{
+	width: 550px;
+}
+
+.register-container
+{
+	width : 500px;
+	height : auto;
+	margin: 0 auto;
+	padding-left:65px;
+	position: relative;	
+}
+
+
+.f1-buttons{
+	padding-right:90px;
+	padding-top: 15px;
+}
+
+input[type="radio"]{
+	padding-right:50px;
+}
+

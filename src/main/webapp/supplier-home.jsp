@@ -20,18 +20,17 @@
         <link rel="stylesheet" href="css/form-style.css">
         <link rel="stylesheet" href="css/home.css">
 
-
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <!-- <script src="http://code.jquery.com/jquery-1.10.0.min.js" type="text/javascript"></script> -->
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	var contractorDetails = localStorage.getItem("user_details");
-	contractorDetails = $.parseJSON(contractorDetails);
-	console.log(contractorDetails);
-	$("#user-name").text(contractorDetails.firstname+" "+contractorDetails.lastname);
-	
-	
 	var quotes = [];
 	var requirements = [];
 	var obj = $.parseJSON('[{"quoteId":"1","mfg":"CAT","model":"2016","rate":"5000"},{"quoteId":"2","mfg":"JCB","model":"2011","rate":"3000"},{"quoteId":"3","mfg":"terrex","model":"2013","rate":"7000"}]');
@@ -39,7 +38,8 @@ $(document).ready(function(){
 	  $.each(obj,function(index,value){
 		  quotes[value.quoteId] = value; 
 	  });
-	
+
+	  
 $.ajax({
 	url:"user/reqtest",
 	type:"get",
@@ -61,44 +61,46 @@ $.ajax({
 	}
 });
 
+$(document).on("click", "#btn-quote", function(){
+	 var reqId = $(this).val();
+	  console.log($(this).val());
+	  $(location).attr('href','quote-form.html?reqId='+reqId);
+	});
 
 $("#addReq").click(function(){
-	$(location).attr('href','requirement-form.html')
-});
-
-
-$(document).delegate( "#panelReq button[type='button']", "click",
-		function(e){
 	$(location).attr('href','contractorRequirement.html')
 });
+
+$("#quote-form-container").hide();
+
+/* $(document).delegate( "#panelReq button[type='button']", "click",
+		function(e){
+	$(location).attr('href','contractorRequirement.html');
+}); */
 
 
  $(document).delegate( "#requirement-list button[type='button']", "click",
 	    function(e){
-	 	var quotePanelContent="";
+	 	var quotePanelContent;
 	    var inputId = this.id;
 	    console.log( inputId );
 	    $('#content').html("");
-	    $.each(obj,function(index,value){
-	    var panelId = "panel"+value.quoteId;
-	    var panelCollapseId = "collapse"+value.quoteId;
-	    quotePanelContent += '<div class="panel-group" id='+panelId+'><div class="panel panel-default"><div class="panel-heading">'+
-	    			'<a data-toggle="collapse" data-parent="#'+panelId+'" href="#'+panelCollapseId+'""><div class = "panel-heading-content">'+
-	                '<h4 class="panel-title"> Quote'+value.quoteId+'</h4></div></a></div><div id='+panelCollapseId+' class="panel-collapse collapse in">'+
-	                '<div class="panel-body">'+value.mfg+','+value.model+','+value.rate+'</div>'+
-	                '</div></div></div>';
-	    });            
 	    			
 	    var reqPanelContent = '<div class="panel-group" id=panelReq><div class="panel panel-default"><div class="panel-heading">'+
 	    			'<a data-toggle="collapse" data-parent="#panelReq" href="#reqPanelCollapseId"><div class = "panel-heading-content">'+
 	                '<h4 class="panel-title">requirement '+requirements[this.id].id+'</h4></div></a></div><div id="reqPanelCollapseId" class="panel-collapse collapse in">'+
-	                '<div class="panel-body">'+requirements[this.id].description+'<button type="button" id="editReq" class="btn btn-warning pull-right">edit</button> </div>'+
+	                '<div class="panel-body">'+requirements[this.id].description+'<button class="btn btn-warning pull-right" id="btn-quote" value='+requirements[this.id].id+'>Quote</button></div>'+
 	                '</div></div></div>';			
 	    
-	    var html = reqPanelContent + quotePanelContent;
+	    var html = reqPanelContent;
 	    $('#content').append(html);
+	    
+	    $("#quote-form-container").show("slow");
+	    
 	    }
 	);
+
+
 
 });
 </script>
@@ -128,16 +130,18 @@ $(document).delegate( "#panelReq button[type='button']", "click",
                 <div class="col-md-8">
                     <div id="content">
                     <!-- For the quotations collapse feature -->
+                    </div>
+                    <div id="quote-form-container">
+                    <%@include file="quote-form.html" %>
                     </div>	
                 </div>
               </div>
          </div>   
 <%@include file="footer.html" %>
 </div>
-<script src="js/bootstrap.min.js"></script>
- <script src="js/jquery.backstretch.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.backstretch.min.js"></script>
         <script src="js/retina-1.1.0.min.js"></script>
         <script src="js/quote-scripts.js"></script>
-<script src="js/scripts.js"></script>
 </body>
 </html>
