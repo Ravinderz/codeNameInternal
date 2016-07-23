@@ -18,6 +18,7 @@ import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.dao.UserDao;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
+import com.congun.web.model.MappingObject;
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.model.User;
 
@@ -103,13 +104,14 @@ private UserDao userDAO;
 		for (AddEquipment equipment : machinesList) {
 			supplierScore = 0;
 
-			if (requirement.getManufacturer() != null
+			/*if (requirement.getManufacturer() != null
 					|| requirement.getManufacturer().length > 0) {
 				for (String manufacturer : requirement.getManufacturer()) {
 					if (equipment.getManufacturer().equals(manufacturer)) {
 						// supplierScore ++;
 						mappedSupplierIds.add(equipment.getSupplierId());
-					}
+					}else
+						mappedSupplierIds.remove(equipment.getSupplierId());
 				}
 			}
 
@@ -118,34 +120,37 @@ private UserDao userDAO;
 						requirement.getSpecificationModel())) {
 					// supplierScore ++;
 					mappedSupplierIds.add(equipment.getSupplierId());
-				}
+				}else
+					mappedSupplierIds.remove(equipment.getSupplierId());
 			}
 
 			if (requirement.getEquipmentManufactureYear() != 0) {
 
 				if (equipment.getYearOfManufacturing() == requirement
 						.getEquipmentManufactureYear())
-
+				{
 					mappedSupplierIds.add(equipment.supplierId);
-
+				}else
+					mappedSupplierIds.remove(equipment.getSupplierId());
 			}
 
 			if (requirement.getSpecificationCapacity() != null) {
 				if (equipment.getCapacity().equals(
 						requirement.getSpecificationCapacity())) {
 					mappedSupplierIds.add(equipment.supplierId);
-				}
-			}
+				}else
+					mappedSupplierIds.remove(equipment.getSupplierId());
+			}*/
 
-			if ((requirement.getManufacturer() == null || requirement
+			/*if ((requirement.getManufacturer() == null || requirement
 					.getManufacturer().length == 0)
 					&& requirement.getSpecificationModel() == null
 					&& requirement.getEquipmentManufactureYear() == 0
 					&& requirement.getSpecificationCapacity() == null) {
-				
+				*/
 				mappedSupplierIds.add(equipment.getSupplierId());
 
-			}
+			//}
 		}
 		
 		if(mappedSupplierIds.size() > 0){
@@ -177,10 +182,10 @@ private UserDao userDAO;
 	public Set filterMappedSupplierids(Set mappedSuppliers,long requirementId){
 		if(mappedSuppliers.size() > 0){
 		
-			String existingIds = quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
-			if(existingIds != null){
-			for(String Id: existingIds.split(",")){
-				mappedSuppliers.remove(Long.parseLong(Id));
+			List existingIds = quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
+			if(existingIds != null || existingIds.size() > 0){
+			for(Object Id: existingIds){
+				mappedSuppliers.remove(((MappingObject)Id).getSupplierId());
 			}
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;

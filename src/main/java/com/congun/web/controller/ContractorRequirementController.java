@@ -49,4 +49,9 @@ public class ContractorRequirementController {
 	public String getEquipmentByCategory(@PathVariable String category){
 		return service.getEquipmentByCategory(category);
 	}
+	
+	@RequestMapping(value="/getmappedrequirements/{supplierId}", method =RequestMethod.GET )
+	public String getAllMappedRequirements(@PathVariable("supplierId") long suppId){
+		return service.getAllMappedRequirements(suppId);
+	}
 }

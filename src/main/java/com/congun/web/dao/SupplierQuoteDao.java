@@ -220,7 +220,7 @@ public SupplierQuote getQuotesbyId(long Id)
 	}
 
 @Transactional
-public String filterSupplierIds(Set mappedSuppliers,long requirementId){
+public List filterSupplierIds(Set mappedSuppliers,long requirementId){
 	System.out.println("Entere the filter Mappers method");
 	try{
 		String SupplierList=null;
@@ -230,10 +230,10 @@ public String filterSupplierIds(Set mappedSuppliers,long requirementId){
 		System.out.println("Length of SupplierIds :"+existingMappedIds.size());
 		if(existingMappedIds.size() > 0){
 			System.out.println("Found List of preMapped suppliers :"+requirementId);
-			SupplierList = ((MappingObject)existingMappedIds.get(0)).getSupplierList();
+			return existingMappedIds;
 		}else
 			System.out.println("No PreMapped Suppliers found for:"+requirementId);
-		return SupplierList;
+		return existingMappedIds;
 		//return existingMappedIds;
 		
 	}catch(Exception e){
@@ -248,26 +248,30 @@ public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
 	String suppId="";
 	try{
 	if(mapperSuppliers.size() > 0){
+		Criteria criteria = getSession().createCriteria(MappingObject.class);
 	for(Long Id:mapperSuppliers){
-		suppId = suppId+Id.longValue();
-		suppId = suppId+",";
-		
+		//suppId = suppId+Id.longValue();
+		//suppId = suppId+",";
+		MappingObject mappedobject = new MappingObject();
+		mappedobject.setRequirementId(requirementId);
+		mappedobject.setSupplierId(Id);
+	    getSession().save(mappedobject);
+	    System.out.println("List of new Mapped Ids being inserted for: "+requirementId+" Id: "+Id);
 	}
-	System.out.println("List of Mapped Ids for: "+requirementId+" List: "+suppId);
+	
 	//MappingObject mappingobject = new MappingObject();
-	Criteria criteria = getSession().createCriteria(MappingObject.class);
-	List existingObjList = criteria.add(Restrictions.eq("requirementId", requirementId)).list();
-	MappingObject existingObj=null;
+	//List existingObjList = criteria.add(Restrictions.eq("requirementId", requirementId)).list();
+	/*MappingObject existingObj=null;
 	if(existingObjList.size() > 0){
 	existingObj = (MappingObject)criteria.add(Restrictions.eq("requirementId", requirementId)).list().get(0);
 	existingObj.setSupplierList(existingObj.getSupplierList()+suppId);
 	getSession().saveOrUpdate(existingObj);
 	}else{
 	    mappingobject.setRequirementId(requirementId);
-	    mappingobject.setSupplierList(suppId);
+	    mappingobject.setSupplierId(suppId);
 		getSession().saveOrUpdate(mappingobject);	
 	}
-	}else
+	*/}else
 		System.out.println("Received Empty Mapped Suppliers for Requirement :"+requirementId);
 	}catch(Exception e){
 		e.printStackTrace();

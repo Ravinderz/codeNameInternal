@@ -5,11 +5,13 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
+import com.congun.web.model.MappingObject;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 import com.congun.web.util.SupplierMapperComponent;
@@ -112,6 +115,26 @@ public class ContractorRequirementQuoteDAO{
 		criteria.add(Restrictions.eq("contractorId", id)).add( Restrictions.eq("activeFlag", 1));
 		List<ContractorRequirement> reqList = criteria.list();	
 		return reqList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<ContractorRequirement> getAllMappedRequirements(long suppId){
+		try{
+			List reqList = new ArrayList<ContractorRequirement>();
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MappingObject.class);
+			List mappedRequirementsList = (ArrayList)(criteria.add(Restrictions.eq("supplierId", suppId)).add((Criterion) Projections.property("requirementId"))).list();
+			if(mappedRequirementsList.size() > 0){
+				System.out.println("There Are Mapper Requirements for SupplierID: "+suppId);
+				for(Object obj:mappedRequirementsList)
+				{
+					ContractorRequirement requirement = getRequirementById(((Long)obj).longValue());
+					reqList.add(requirement);
+				}
+			}
+			return reqList;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

@@ -1,6 +1,8 @@
 package com.congun.web.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,19 +13,14 @@ import org.springframework.stereotype.Component;
 @Table(name = "mappingobject")
 public class MappingObject {
 
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	public long Id;
 	public long requirementId;
 	public long supplierId;
 	public String requeststatus;
 	public int activeFlag;
-	public String supplierList;
 	
-	public String getSupplierList() {
-		return supplierList;
-	}
-	public void setSupplierList(String supplierList) {
-		this.supplierList = supplierList;
-	}
 	public long getRequirementId() {
 		return requirementId;
 	}

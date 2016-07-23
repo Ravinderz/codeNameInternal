@@ -42,6 +42,16 @@ public class ContractorRequirementQuoteService{
 			else
 				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
 		}
+	
+	public String getAllMappedRequirements(long suppId){
+		
+		List<ContractorRequirement> reqList = dao.getAllMappedRequirements(suppId);
+		if(reqList != null)
+			return ApplicationUtil.getJsonResponse(reqList);
+			else
+				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
+		
+	}
 
 	public String getDistinctCategory() {
 		List<AddEquipment> reqList = dao.getDistinctCategory();
