@@ -76,18 +76,18 @@ private UserDao userDAO;
 		@Override
 		public void run() {
 			
-			while (true) {
+			/*while (true) {
 				synchronized (this) {
 					if (this.quit) {
 						this.running = false;
 						break;
 					}
 				}
-			
+			*/
 			getSupplierDetails(requirement);
 			quit();
 
-		 }
+		 //}
 		}
 
 	}
@@ -176,11 +176,11 @@ private UserDao userDAO;
 	
 	public Set filterMappedSupplierids(Set mappedSuppliers,long requirementId){
 		if(mappedSuppliers.size() > 0){
-			
-			List<Long> existingIds = (ArrayList<Long>)quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
+		
+			String existingIds = quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
 			if(existingIds != null){
-			for(Long Id: existingIds){
-				mappedSuppliers.remove(Id);
+			for(String Id: existingIds.split(",")){
+				mappedSuppliers.remove(Long.parseLong(Id));
 			}
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;

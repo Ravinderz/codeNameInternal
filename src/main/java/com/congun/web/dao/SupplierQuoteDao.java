@@ -10,6 +10,7 @@ import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -219,12 +220,21 @@ public SupplierQuote getQuotesbyId(long Id)
 	}
 
 @Transactional
-public List filterSupplierIds(Set mappedSuppliers,long requirementId){
+public String filterSupplierIds(Set mappedSuppliers,long requirementId){
 	System.out.println("Entere the filter Mappers method");
 	try{
-		List existingMappedIds = (ArrayList<Long>)getSession().createQuery("distinct (supplierId) from MappingObject where requirementId = :requirementId").setParameter("requirementId", requirementId).list();
-		
-		return existingMappedIds;
+		String SupplierList=null;
+		Criteria criteria = getSession().createCriteria(MappingObject.class);
+		//List existingMappedIds = (ArrayList<Long>)criteria.setProjection(Projections.distinct(Projections.property("supplierId"))).list();
+		List existingMappedIds= criteria.add(Restrictions.eq("requirementId", requirementId)).list();
+		System.out.println("Length of SupplierIds :"+existingMappedIds.size());
+		if(existingMappedIds.size() > 0){
+			System.out.println("Found List of preMapped suppliers :"+requirementId);
+			SupplierList = ((MappingObject)existingMappedIds.get(0)).getSupplierList();
+		}else
+			System.out.println("No PreMapped Suppliers found for:"+requirementId);
+		return SupplierList;
+		//return existingMappedIds;
 		
 	}catch(Exception e){
 		e.printStackTrace();
@@ -245,9 +255,18 @@ public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
 	}
 	System.out.println("List of Mapped Ids for: "+requirementId+" List: "+suppId);
 	//MappingObject mappingobject = new MappingObject();
-	mappingobject.setRequirementId(requirementId);
-	mappingobject.setSupplierList(suppId);
-	getSession().saveOrUpdate(mappingobject);
+	Criteria criteria = getSession().createCriteria(MappingObject.class);
+	List existingObjList = criteria.add(Restrictions.eq("requirementId", requirementId)).list();
+	MappingObject existingObj=null;
+	if(existingObjList.size() > 0){
+	existingObj = (MappingObject)criteria.add(Restrictions.eq("requirementId", requirementId)).list().get(0);
+	existingObj.setSupplierList(existingObj.getSupplierList()+suppId);
+	getSession().saveOrUpdate(existingObj);
+	}else{
+	    mappingobject.setRequirementId(requirementId);
+	    mappingobject.setSupplierList(suppId);
+		getSession().saveOrUpdate(mappingobject);	
+	}
 	}else
 		System.out.println("Received Empty Mapped Suppliers for Requirement :"+requirementId);
 	}catch(Exception e){

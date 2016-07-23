@@ -8,12 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
@@ -29,6 +31,11 @@ public class ContractorRequirementQuoteDAO{
 	
 	@Autowired
 	SupplierMapperComponent mapperComponent;
+	
+	@Transactional
+	protected Session getSession(){
+		return sessionFactory.getCurrentSession();
+	}
 
 	/*To store contractor requirements into contractorrequirement table*/
 	@SuppressWarnings("deprecation")
@@ -75,10 +82,22 @@ public class ContractorRequirementQuoteDAO{
 	/*To update contractor requirements into contractorrequirement table*/
 	public String updateRequirement(ContractorRequirement requirement) {
 		try{
+		//ContractorRequirement existingReq = (ContractorRequirement) getSession().createCriteria(ContractorRequirement.class).add(Restrictions.eq("requirementId", requirement.getRequirementId()));
 		java.util.Date date= new java.util.Date();
 		Timestamp time = new Timestamp(date.getTime());
+		//requirement.setCreatedTime(existingReq.getCreatedTime());
 		requirement.setUpdatedTime(time);
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
+		
+		if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
+			System.out
+					.println("Mapping the Suppliers for submitted Requirement :"
+							+ requirement.getRequirementId());
+		} else {
+			System.out.println("Could Not start Mapping for requirement: "
+					+ requirement.getRequirementId());
+		}
+		
 		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
 		}catch(Exception e){
 			e.printStackTrace();
