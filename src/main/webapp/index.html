@@ -10,53 +10,81 @@
 
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/form-elements-style.css">
 <link rel="stylesheet" href="css/form-style.css">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/home.css" rel="stylesheet">
+<link rel="stylesheet" href="css/home.css">
+
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#register").click(function() {
-			var success = "successfully created";
-			var successUrl = "#modal-container-login";
-			var data = JSON.stringify($("#register-form").serializeObject());
-			console.log(data);
+	$("#register").click(function() {
+	var success = "successfully created";
+	var successUrl = "#modal-container-login";
+	var data = JSON.stringify($("#register-form").serializeObject());
+	console.log(data);
 
-			$.ajax({
-				url : "user/register",
-				type : "post",
-				contentType : "application/json; charset=utf-8",
-				data : data,
-				success : function(data) {
-					if (data.search(success) != -1) {
-						console.log("inside if");
-						$('#modal-container-register').modal('hide');
-						console.log("register modal closed");
-						console.log("opening login modal");
-						$('#modal-container-login').modal('show');
-						$(location).attr('href', successUrl);
-					}
-					console.log(data);
-				}
-			});
-		});
-		
-		$("#login-btn").click(function(){
-			console.log("inside login function");
-			var obj = $.parseJSON('{"contractorId":"1","firstname":"Sindhu","lastname":"burri","constitution":"KNR","website":"www.congun.com","email":"sindhu@congun.com","mobile":"789456123","company_profile":"KNR"}');
-			if(typeof(Storage) !== "undefined"){
-				console.log("inside localStorage setting value")
-				console.log(obj.firstname);
-				localStorage.setItem("user_details", JSON.stringify(obj));
-			}else{
+$.ajax({												
+	url : "user/register",
+	type : "post",
+	contentType : "application/json; charset=utf-8",
+	data : data,
+	success : function(data) {
+	if (data.search("UF01") != -1) {
+	}else{
+		console.log("inside if");
+	$('#modal-container-register').modal('hide');
+	console.log("register modal closed");
+	console.log("opening login modal");
+	$('#modal-container-login').modal('show');
+	$(location).attr('href',successUrl);
+	}
+	}
+	});
+	});
+
+	$("#login-btn").click(function() {
+	console.log("inside login function");
+	
+	var data =JSON.stringify($("#login-form").serializeObject()); 
+	
+	$.ajax({
+		url:"user/login",
+		type:"post",
+		contentType : "application/json; charset=utf-8",
+		data : data,
+		/* datatype : "json",  */
+		success:function(response){
+			console.log(response);
+			response = $.parseJSON(response);
+			console.log("got user from userAPI",response.username)
+			if (typeof (Storage) !== "undefined") {
+				sessionStorage.setItem("user",JSON.stringify(response));
+				} else {
 				console.log(" no storage available");
+				}
+			if(response.role === "supplier"){
+				$(location).attr('href',"supplier-home.jsp");
+			}else if(response.role === "contractor"){
+				$(location).attr('href',"contractor-home.jsp");
 			}
-			$(location).attr('href','contractor-home.jsp');
-		});
+		}
 		
-		
+	});
+	
+	
+	
+	/* var obj = $.parseJSON('{"contractorId":"1","firstname":"Sindhu","lastname":"burri","constitution":"KNR","website":"www.congun.com","email":"sindhu@congun.com","mobile":"789456123","company_profile":"KNR"}');
+	if (typeof (Storage) !== "undefined") {
+	console.log("inside localStorage setting value");
+	console.log(obj.firstname);
+	localStorage.setItem("user_details",JSON.stringify(obj));
+	} else {
+	console.log(" no storage available");
+	}
+	$(location).attr('href','contractor-home.jsp'); */
+	});
 	});
 </script>
 <script type="text/javascript">
@@ -133,36 +161,36 @@
 							</div>
 							<div class="modal-body">
 								<div class="form-box">
-									<form class="form-horizontal f1" role="form">
+									<form class="form-horizontal f1 login-form" id="login-form" role="form">
 										<div class="form-group">
-											<!-- <label for="username" class="col-sm-2 control-label">
-												Email </label> -->
-											<div class="col-sm-10">
-												<input type="text" name="username" placeholder="username"
-													class="form-control" id="inputEmail3">
+											<label for="username" class="col-sm-2 control-label sr-only">
+												Email </label>
+											<div class="col-sm-12">
+												<input type="email" name="username" placeholder="username"
+													class="form-control" id="Email">
 											</div>
 										</div>
 										<div class="form-group">
-											<!-- <label for="password" class="col-sm-2 control-label">
-												Password </label> -->
-											<div class="col-sm-10">
+											<label for="password"  class="col-sm-2 control-label sr-only">
+												Password </label>
+											<div class="col-sm-12">
 												<input type="password" class="form-control" name="password"
-													placeholder="password" id="inputPassword3">
+													placeholder="password" id="Password">
 											</div>
 										</div>
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
+										
+											<div class="col-sm-4">
 												<div class="checkbox">
 													<label> <input type="checkbox"> Remember me
 													</label>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
+										
+										
 											<div class="f1-buttons">
 												<button type="button" id="login-btn" class="btn btn-next">Login</button>
 											</div>
-										</div>
+										
 									</form>
 								</div>
 							</div>
@@ -192,67 +220,62 @@
 										</label>
 									</div>
 									<div class="form-group">
-										<label for="firstName" class="sr-only">
-											FirstName </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="firstName" placeholder="Firstname"
-												id="firstName">
+										<label for="firstname" class="sr-only"> FirstName </label>
+										<div class="col-sm-12">
+											<input type="text" class="form-control" name="firstname"
+												placeholder="Firstname" id="firstName">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="lastName" class="sr-only">
-											LastName </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="lastName" placeholder="Lastname"
-												id="lastName">
+										<label for="lastname" class="sr-only"> LastName </label>
+										<div class="col-sm-12">
+											<input type="text" class="form-control" name="lastname"
+												placeholder="Lastname" id="lastName">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="username" class="sr-only">
-											Email </label>
-										<div class="col-sm-10">
-											<input type="email" class="form-control" id="username" placeholder="email"
-												name="username">
+										<label for="username" class="sr-only"> Email </label>
+										<div class="col-sm-12">
+											<input type="email" class="form-control" id="username"
+												placeholder="email" name="username">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="password" class="sr-only">
-											Password </label>
-										<div class="col-sm-10">
-											<input type="password" class="form-control" id="password" placeholder="password"
-												name="password">
+										<label for="password" class="sr-only"> Password </label>
+										<div class="col-sm-12">
+											<input type="password" class="form-control" id="password"
+												placeholder="password" name="password">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="mobile" class="sr-only">
-											Mobile </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="mobile" placeholder="mobile"
-												name="mobile">
+										<label for="mobile" class="sr-only"> Mobile </label>
+										<div class="col-sm-12">
+											<input type="text" class="form-control" id="mobile"
+												placeholder="mobile" name="mobileNumber">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="constitution" class="sr-only">
 											Constitution </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" placeholder="Constitution" id="constitution"
+										<div class="col-sm-12">
+											<input type="text" class="form-control"
+												placeholder="Constitution" id="constitution"
 												name="constitution">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="website" class="sr-only">
-											Website </label>
-										<div class="col-sm-10">
-											<input type="text" placeholder="website" class="form-control" id="website"
-												name="website">
+										<label for="website" class="sr-only"> Website </label>
+										<div class="col-sm-12">
+											<input type="text" placeholder="website" class="form-control"
+												id="website" name="website">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="company_individual_profile"
-											class="sr-only"> Company Profile </label>
-										<div class="col-sm-10">
-											<input type="text" placeholder="Company profile" class="form-control"
-												id="company_individual_profile"
+										<label for="company_individual_profile" class="sr-only">
+											Company Profile </label>
+										<div class="col-sm-12">
+											<input type="text" placeholder="Company profile"
+												class="form-control" id="company_individual_profile"
 												name="company_individual_profile">
 										</div>
 									</div>
@@ -402,7 +425,8 @@
 		</div>
 	</div>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.backstretch.min.js"></script>
+	<!-- <script src="js/jquery.backstretch.min.js"></script>
 	<script src="js/retina-1.1.0.min.js"></script>
-	<script src="js/scripts.js"></script>
+	 -->
+	<!-- <script src="js/scripts.js"></script> -->
 </body>

@@ -106,26 +106,64 @@
     clear: both;
 }
 
-.modal-content{
-	width: 550px;
-}
 
 .register-container
 {
-	width : 500px;
+	padding: 15px;
 	height : auto;
 	margin: 0 auto;
-	padding-left:65px;
 	position: relative;	
 }
 
-
-.f1-buttons{
-	padding-right:90px;
-	padding-top: 15px;
+.register-container .f1-buttons{
+	padding :0 17px;
 }
+
+.modal-header{
+	background : #2B2B2B;
+}
+.modal-header h4{
+color : #fff;
+}
+
+.landing-main-content{
+	margin-top : 50px;
+	padding-top : 25px;
+	height:500px;	
+}
+
 
 input[type="radio"]{
 	padding-right:50px;
 }
 
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('images/gears.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}

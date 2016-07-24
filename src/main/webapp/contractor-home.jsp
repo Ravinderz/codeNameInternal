@@ -13,7 +13,7 @@
 <meta name="author" content="Congun">
 
  <!-- CSS -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+       <!--  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/form-elements-style.css">
@@ -26,42 +26,56 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	var contractorDetails = localStorage.getItem("user_details");
-	contractorDetails = $.parseJSON(contractorDetails);
-	console.log(contractorDetails);
-	$("#user-name").text(contractorDetails.firstname+" "+contractorDetails.lastname);
+	$body = $("body");
+
+	$(document).on({
+	    ajaxStart: function() { $body.addClass("loading");    },
+	     ajaxStop: function() { $body.removeClass("loading"); }    
+	});
+	
+	$('body').hide();
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
+	console.log(user);
+	if(user.role === "contractor"){
+	$('body').show();	
+	$("#user-name").text(user.firstname+" "+user.lastname);
+	}else if(user.role === "supplier"){
+		$(location).attr('href','unauthorized.html');
+	}
 	
 	
 	var quotes = [];
 	var requirements = [];
-	var obj = $.parseJSON('[{"quoteId":"1","mfg":"CAT","model":"2016","rate":"5000"},{"quoteId":"2","mfg":"JCB","model":"2011","rate":"3000"},{"quoteId":"3","mfg":"terrex","model":"2013","rate":"7000"}]');
+	/* var obj = $.parseJSON('[{"quoteId":"5","mfg":"CAT","model":"2016","rate":"5000"},{"quoteId":"4","mfg":"CAT","model":"2016","rate":"5000"},{"quoteId":"1","mfg":"CAT","model":"2016","rate":"5000"},{"quoteId":"2","mfg":"JCB","model":"2011","rate":"3000"},{"quoteId":"3","mfg":"terrex","model":"2013","rate":"7000"}]');
 	 console.log(obj);
 	  $.each(obj,function(index,value){
 		  quotes[value.quoteId] = value; 
-	  });
+	  }); */
 	
-$.ajax({
-	url:"user/reqtest",
-	type:"get",
-	data:{},
-	dataType:"json",
-	success:function(response){
-		var reqList = "";
-		console.log(response);
-		$.each(response,function(index, value){
-			reqList += '<button type="button" class="btn btn-block btn-lg btn-warning" id='+value.id+'>'+value.description+'<br>No Of Quotes : <span class="badge">'+value.number+'</span></button>';
-			requirements[value.id] = value;
-			/* reqList += '<a href="#requirement-details" id='+value.id+' class="btn btn-lg btn-block btn-warning" type="button">'+value.description+'</a>'; */
-		});
-		console.log(response);
-		console.log(reqList);
-
-		$('#requirement-list').append(reqList);
-
-	}
-});
-
-
+	var reqList = "";  
+	
+	/* This is for getting all the requirements for a particular contractor */
+	
+				$.ajax({
+				url:"contractor/getAllRequirements/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						requirements[value.requirementId] = value;
+						reqList += '<button type="button" class="btn btn-block btn-lg btn-warning" id='+value.requirementId+'>'+value.title+'<br>No Of Quotes : <span class="badge">'+value.noofquotes+'</span></button>';
+					});
+					$('#requirement-list').append(reqList);
+				}
+				});
+	
+	
+					/* ********************************* */
+	  
+	
 $("#addReq").click(function(){
 	$(location).attr('href','requirement-form.html')
 });
@@ -69,7 +83,7 @@ $("#addReq").click(function(){
 
 $(document).delegate( "#panelReq button[type='button']", "click",
 		function(e){
-	$(location).attr('href','contractorRequirement.html')
+	$(location).attr('href','requirement-form.html')
 });
 
 
@@ -79,26 +93,43 @@ $(document).delegate( "#panelReq button[type='button']", "click",
 	    var inputId = this.id;
 	    console.log( inputId );
 	    $('#content').html("");
-	    $.each(obj,function(index,value){
-	    var panelId = "panel"+value.quoteId;
-	    var panelCollapseId = "collapse"+value.quoteId;
-	    quotePanelContent += '<div class="panel-group" id='+panelId+'><div class="panel panel-default"><div class="panel-heading">'+
-	    			'<a data-toggle="collapse" data-parent="#'+panelId+'" href="#'+panelCollapseId+'""><div class = "panel-heading-content">'+
-	                '<h4 class="panel-title"> Quote'+value.quoteId+'</h4></div></a></div><div id='+panelCollapseId+' class="panel-collapse collapse in">'+
-	                '<div class="panel-body">'+value.mfg+','+value.model+','+value.rate+'</div>'+
-	                '</div></div></div>';
-	    });            
+
+	    $.ajax({
+	    	url:"supplier/getquotesbyrequirement/"+requirements[this.id].requirementId,
+	    	type:"get",
+	    	data:{},
+	    	success:function(response){
+	    		response = $.parseJSON(response);
+	    		console.log("response ",response);
+	    		$.each(response,function(index,value){
 	    			
-	    var reqPanelContent = '<div class="panel-group" id=panelReq><div class="panel panel-default"><div class="panel-heading">'+
-	    			'<a data-toggle="collapse" data-parent="#panelReq" href="#reqPanelCollapseId"><div class = "panel-heading-content">'+
-	                '<h4 class="panel-title">requirement '+requirements[this.id].id+'</h4></div></a></div><div id="reqPanelCollapseId" class="panel-collapse collapse in">'+
-	                '<div class="panel-body">'+requirements[this.id].description+'<button type="button" id="editReq" class="btn btn-warning pull-right">edit</button> </div>'+
-	                '</div></div></div>';			
+	    			 var panelId = "panel"+value.quoteId;
+	    			    var panelCollapseId = "collapse"+value.quoteId;
+	    			    quotePanelContent += '<div class="panel-group" id='+panelId+'><div class="panel panel-default"><div class="panel-heading">'+
+	    			    			'<a data-toggle="collapse" data-parent="#'+panelId+'" href="#'+panelCollapseId+'""><div class = "panel-heading-content">'+
+	    			                '<h4 class="panel-title"> Quote'+value.quoteId+'</h4></div></a></div><div id='+panelCollapseId+' class="panel-collapse collapse in">'+
+	    			                '<div class="panel-body">'+value.capacity+','+value.model+','+value.machineRentalCharges+'<button type="button" id='+value.quoteId+' class="btn btn-warning pull-right">view quote</button> </div>'+
+	    			                '</div></div></div>';	
+	    		});	                
+	    			    var reqPanelContent = '<div class="panel-group" id=panelReq><div class="panel panel-default"><div class="panel-heading">'+
+		    			'<a data-toggle="collapse" data-parent="#panelReq" href="#reqPanelCollapseId"><div class = "panel-heading-content">'+
+		                '<h4 class="panel-title">requirement '+requirements[inputId].requirementId+'</h4></div></a></div><div id="reqPanelCollapseId" class="panel-collapse collapse in">'+
+		                '<div class="panel-body">'+requirements[inputId].title+'<button type="button" id="editReq" class="btn btn-warning pull-right">edit</button> </div>'+
+		                '</div></div></div>';			
+		    
+		    var html = reqPanelContent + quotePanelContent;
+		    $('#content').append(html);
 	    
-	    var html = reqPanelContent + quotePanelContent;
-	    $('#content').append(html);
+	    	}
+	    });
 	    }
 	);
+ 
+ 	$("#logout").click(function(){
+ 		console.log("inside logout function")
+ 		sessionStorage.removeItem("user_details");
+ 		$(location).attr('href',"index.html");
+ 	});
 
 });
 </script>
@@ -106,7 +137,7 @@ $(document).delegate( "#panelReq button[type='button']", "click",
 <body>
 <div class="container-fluid">
 <%@include file="header.html" %>
-		<div class="main-content"> 		
+		<div class="landing-main-content"> 		
 			<div class="row">
                 <div class="col-md-4"> 
                     <ul class="nav nav-tabs"> 
@@ -131,13 +162,14 @@ $(document).delegate( "#panelReq button[type='button']", "click",
                     </div>	
                 </div>
               </div>
-         </div>   
+         </div>
+         <div class="modal"><!-- Place at bottom of page --></div>   
 <%@include file="footer.html" %>
 </div>
 <script src="js/bootstrap.min.js"></script>
  <script src="js/jquery.backstretch.min.js"></script>
         <script src="js/retina-1.1.0.min.js"></script>
         <script src="js/quote-scripts.js"></script>
-<script src="js/scripts.js"></script>
+
 </body>
 </html>

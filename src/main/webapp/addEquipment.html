@@ -9,12 +9,32 @@
 	<meta name="description" content="Contractor Requirement">
     <meta name="author" content="congun">
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/quote-form-elements-style.css">
+        <link rel="stylesheet" href="css/quote-form-style.css">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/addEquip.css">
     <script src="js/jquery.min.js"></script>
 	
 	<script type="text/javascript">
 $(document).ready(function(){
+	
+
+	$('body').hide();
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
+	console.log(user);
+	if(user.role === "supplier"){
+	$('body').show();	
+	$("#user-name").text(user.firstname+" "+user.lastname);
+	}else if(user.role === "contractor"){
+		$(location).attr('href','unauthorized.html');
+	}
+	
+	$("#header").load("header.html");
+	$("#footer").load("footer.html");
+	
 	$("#addEquipment").click(function(){
 		var success = "successfully created";
 		var data = JSON.stringify($("#addEquipment-form").serializeObject());
@@ -57,63 +77,92 @@ $.fn.serializeObject = function()
 <body>
 
     <div class="container-fluid">
-			<h3 class="text-left">
+    	<div class=row>
+    	<div class=col-md-12>
+    	<div id="header">
+    	</div>
+    	</div>
+    	</div>
+    	<div class="row">
+    	<div class="main-content col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+			<form class="form-horizontal" role="form" id="addEquipment-form" class="f1">
+						<h3 class="text-center text-muted">
 				ADD EQUIPMENT FORM
 			</h3>
-					<form role="form" id="addEquipment-form">
-				<div class="form-group">
-				<label for="selectCategory">
+					<div class="form-group">
+					
+				<label for="selectCategory" class="sr-only">
 						Equipment Category
 					</label>
-                 <input type="text" id="equipmentCategory" name="equipmentCategory">	
+                 <input type="text" id="equipmentCategory" class="form-control" placeholder="Equipment Category" name="equipmentCategory">	
 				 </div>
-				 
 				<div class="form-group">
-				<label for="equipment">
+				<label for="equipment" class="sr-only">
 						Equipment Name
 					</label>
-                 <input type="text" id="equipment" name="equipment">	
+                 <input type="text" id="equipment" class="form-control" name="equipment" placeholder="Equipment Name">	
 				 </div>
 				 
 				<div class="form-group">
-				<label for="manufacturer">
+				<label for="manufacturer" class="sr-only">
 						Equipment Manufacturer
 					</label>
-                 <input type="text" id="manufacturer" name="manufacturer">	
+                 <input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer">	
 				 </div>
-				 
 				 <div class="form-group">
-				<label for="yearOfManufacturing">
+				<label for="yearOfManufacturing" class="sr-only">
 						Year Of Manufacturing
 					</label>
-                 <input type="text" id="yearOfManufacturing" name="yearOfManufacturing">	
+                 <input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing">	
 				 </div>
 				 
 				 <div class="form-group">
-				<label for="model">
+				<label for="model" class="sr-only">
 						Model Details
 					</label>
-                 <input type="text" id="model" name="model">	
+                 <input type="text" id="model" class="form-control" name="model" placeholder="Model">	
 				 </div>
-				 
 				 <div class="form-group">
-				<label for="capacity">
+				<label for="capacity" class="sr-only">
 						Capacity Details
 					</label>
-                 <input type="text" id="capacity" name="capacity">	
+                 <input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity">	
 				 </div>
-				 
+				 <div id="hidden-fields">
+                                <input type="hidden" name="supplierId" id="supplierId" value="">
+                                <input type="hidden" name="supplierName" id="supplierName" value="">
+                                </div>
 				 <div class="form-group">
-				<label for="quantity">
+				<label for="quantity" class="sr-only">
 						Equipment Quantity
 					</label>
-                 <input type="text" id="quantity" name="quantity">	
+                 <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment Quantity">	
 				 </div>
-				 
-				 <button type="button" class="btn btn-default" id="addEquipment">
-					Submit
-				</button>
-					</form>
+				
+					<div class="f1-buttons">
+						 
+						<button type="button" class="btn btn-warning" id="addEquipment">
+							Submit
+						</button>	
+					</div>
+			</form>
+								</div>
+					</div>
+		<div class=row>
+    	<div class=col-md-12>
+    	<div id="footer">
+    	</div>
+    	</div>
+    	</div>
+					
 		</div>
+		<script type="text/javascript">
+		$(document).ready(function(){
+		var user = sessionStorage.getItem("user");
+    	user = $.parseJSON(user);
+    	$('#supplierId').val(user.userId);
+    	$('#supplierName').val(user.firstname+" "+user.lastname);
+		});
+		</script>
 </body>
 </html>

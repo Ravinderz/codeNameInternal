@@ -125,7 +125,8 @@ public class ContractorRequirementQuoteDAO{
 		try{
 			List reqList = new ArrayList<ContractorRequirement>();
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MappingObject.class);
-			List mappedRequirementsList = (ArrayList)(criteria.add(Restrictions.eq("supplierId", suppId)).add((Criterion) Projections.property("requirementId"))).list();
+			criteria.setProjection(Projections.property("requirementId"));
+			List mappedRequirementsList = (ArrayList)(criteria.add(Restrictions.eq("supplierId", suppId))).list();
 			if(mappedRequirementsList.size() > 0){
 				System.out.println("There Are Mapper Requirements for SupplierID: "+suppId);
 				for(Object obj:mappedRequirementsList)
