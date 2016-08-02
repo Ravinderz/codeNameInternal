@@ -20,7 +20,7 @@ public class UserService {
 	public String saveUser(User user) {
 		// TODO Auto-generated method stub
 		String status= userdao.saveUser(user);
-		if(status.equals(ResponseConstants.SUCCESS_CODE))
+		if(status.equals(ResponseConstants.USER_SUCCESS_CODE))
 			return ApplicationUtil.getJsonResponse(user);
 		else
 			return status;
@@ -32,7 +32,7 @@ public class UserService {
 		if(user != null){
 			return ApplicationUtil.getJsonResponse(user);
 		}else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.USER_FAILURE_CODE;
 	}
 	
 	public String updateUser(User user) {
@@ -60,7 +60,7 @@ public class UserService {
 		if(user != null){
 			return ApplicationUtil.getJsonResponse(user);	
 		}else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.USER_FAILURE_CODE;
 		
 		
 	}

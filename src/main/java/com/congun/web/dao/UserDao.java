@@ -41,12 +41,12 @@ public class UserDao {
 		user.setUpdatedtime(currTime);
 		user.setActiveFlag(1);
 		getSession().saveOrUpdate(user);
-			return ResponseConstants.SUCCESS_CODE;
+			return ResponseConstants.USER_SUCCESS_CODE;
 		}else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.USER_FAILURE_CODE;
 		}catch(Exception e){
 			e.printStackTrace();
-			return ResponseConstants.EXCEPTION_CODE;
+			return ResponseConstants.USER_EXCEPTION_CODE;
 		}
 	}
 	
@@ -60,10 +60,10 @@ public class UserDao {
 		//user.setCreatedtime(existingUser.getCreatedtime());
 		user.setUpdatedtime(currTime);
 		getSession().saveOrUpdate(user);
-			return ResponseConstants.SUCCESS_CODE;
+			return ResponseConstants.USER_SUCCESS_CODE;
 		}catch(Exception e){
 			e.printStackTrace();
-			return ResponseConstants.EXCEPTION_CODE;
+			return ResponseConstants.USER_EXCEPTION_CODE;
 		}
 	}
 	

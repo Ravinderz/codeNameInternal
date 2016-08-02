@@ -55,10 +55,10 @@ public String saveQuote(SupplierQuote supplierQuote){
 		getSession().saveOrUpdate(supplierQuote);
 		
 		
-		return ResponseConstants.SUCCESS_CODE;
+		return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 	}catch(Exception e){
 		e.printStackTrace();
-			return ResponseConstants.EXCEPTION_CODE;
+			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
 	}
 }
 
@@ -73,10 +73,10 @@ public String updateQuote(SupplierQuote supplierQuote)
 		supplierQuote.setUpdatedTime(currTime);
 		getSession().saveOrUpdate(supplierQuote);
 		
-		return ResponseConstants.SUCCESS_CODE;
+		return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 		}catch(Exception e){
 			e.printStackTrace();
-			return ResponseConstants.EXCEPTION_CODE;
+			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
 	}	
 }
 
@@ -143,10 +143,10 @@ public SupplierQuote getQuotesbyId(long Id)
 	public String addEquipment(AddEquipment equipment) {
 		try {
 			getSession().saveOrUpdate(equipment);
-			return ResponseConstants.SUCCESS_CODE;
+			return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseConstants.EXCEPTION_CODE;
+			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
 		}
 		
 	}
@@ -191,10 +191,10 @@ public SupplierQuote getQuotesbyId(long Id)
 	criteria.add(Restrictions.eq("equipmentId", equipmentId));
 	AddEquipment equipment = (AddEquipment) criteria.uniqueResult();
 	getSession().delete(equipment);
-	return ResponseConstants.SUCCESS_CODE;
+	return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 	}catch(Exception e){
 		e.printStackTrace();
-		return ResponseConstants.EXCEPTION_CODE;
+		return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
 	}
 	
 		

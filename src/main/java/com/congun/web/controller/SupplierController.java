@@ -20,7 +20,7 @@ public class SupplierController {
 	
 	@RequestMapping(value="/submitquote" , method=RequestMethod.POST)
 	public 	String submitQuotation(@RequestBody SupplierQuote supplierQuotation){
-		System.out.println("Posting Requirement details from Supplier");
+		System.out.println("Posting Quotation details from Supplier");
 		return supplierService.submitQuote(supplierQuotation);
 		}
 	

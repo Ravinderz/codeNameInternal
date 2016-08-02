@@ -35,7 +35,7 @@ public class SupplierQuoteService {
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.SUPPLIER_FAILURE_CODE;
 	}
 
 	public String getQuotationsbyId(long quoteId){
@@ -46,7 +46,7 @@ public class SupplierQuoteService {
 		return ApplicationUtil.getJsonResponse(supplierQuote);
 		}
 		else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.SUPPLIER_FAILURE_CODE;
 	}
 	
 	public String getQuotationsbyRequirement(long requirementId){
@@ -54,7 +54,7 @@ public class SupplierQuoteService {
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.SUPPLIER_FAILURE_CODE;
 	} 
 	
 	public int getNoOfQuotationsbyRequirement(long requirementId){

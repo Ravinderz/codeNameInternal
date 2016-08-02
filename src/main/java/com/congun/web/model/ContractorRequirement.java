@@ -39,7 +39,7 @@ public class ContractorRequirement {
  public Timestamp createdTime;
  public Timestamp updatedTime;
  public int activeFlag;
-<<<<<<< HEAD
+
  public int noofquotes;
  
 public int getNoofquotes() {
@@ -48,9 +48,6 @@ public int getNoofquotes() {
 public void setNoofquotes(int noofquotes) {
 	this.noofquotes = noofquotes;
 }
-=======
- 
->>>>>>> 13be4ffffcdc717ea38863e2892bf95270b0db52
 public long getRequirementId() {
 	return requirementId;
 }
@@ -176,6 +173,14 @@ public Timestamp getCreatedTime() {
 }
 public void setCreatedTime(Timestamp createdTime) {
 	this.createdTime = createdTime;
+}
+
+
+public String getTitle() {
+	return title;
+}
+public void setTitle(String title) {
+	this.title = title;
 }
 public Timestamp getUpdatedTime() {
 	return updatedTime;
