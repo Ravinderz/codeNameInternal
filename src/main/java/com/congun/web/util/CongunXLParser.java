@@ -4,8 +4,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.congun.web.dao.ContractorRequirementQuoteDAO;
 import com.congun.web.dao.MachineDAO;
@@ -20,11 +22,11 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 
-
+@Repository
 public class CongunXLParser {
 
 	@Autowired
-	static MachineDAO machinedao;
+    MachineDAO machinedao;
 
 	@Autowired
 	static ContractorRequirementQuoteDAO requirementdao;
@@ -32,17 +34,18 @@ public class CongunXLParser {
 	@Autowired
 	static SupplierQuoteDao quotedao;
 
-	private static final String FILE_PATH = "E:\\ConGun\\testReadStudents.xlsx";
+/*	private static final String FILE_PATH = "C:\\Users\\Nishant\\Desktop\\congun\\SampleExcel.xlsx";
 
 	public static void main(String args[]) {
 
 		// List studentList =
-		// getMachinesListFromExcel(FILE_PATH);
+		 getMachinesList(FILE_PATH);
 
 		// System.out.println(studentList);
-	}
+	}*/
 
-	public static void getMachinesListFromExcel(String path) {
+	public void getMachinesList(String path) {
+		System.out.println(path);
 		// List machineList = new ArrayList();
 		FileInputStream fis = null;
 		try {
@@ -58,13 +61,14 @@ public class CongunXLParser {
 				Sheet sheet = workbook.getSheetAt(i);
 				Iterator rowIterator = sheet.iterator();
 				int rowcount = 0;
-				// iterating over each row
+				// iterating over each row  
+				System.out.println("Initial Row Count :"+rowcount);
 				while (rowIterator.hasNext()) {
-
 					Machines machine = new Machines();
 					Row row = (Row) rowIterator.next();
 					Iterator cellIterator = row.cellIterator();
-
+                    rowcount = row.getRowNum();
+                    if(rowcount >0){
 					// Iterating over each cell (column wise) in a particular
 					// row.
 					while (cellIterator.hasNext()) {
@@ -72,38 +76,44 @@ public class CongunXLParser {
 						Cell cell = (Cell) cellIterator.next();
 						// The Cell Containing String will is name.
 						if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
-							System.out.println(cell.getStringCellValue());
+							 //System.out.println(cell.getStringCellValue());
 
-							if (cell.getColumnIndex() == 1) {
+							if (cell.getColumnIndex() == 0) {
 								machine.setCategory(cell.getStringCellValue());
-								System.out.println(machine.getCategory());
+								System.out.println("Category :"+machine.getCategory());
 							}
 							// Cell with index 2 contains marks in Science
-							else if (cell.getColumnIndex() == 2) {
+							else if (cell.getColumnIndex() == 1) {
 
 								machine.setEquipment(cell.getStringCellValue());
-								System.out.println(machine.getEquipment());
+								System.out.println("Equipment :"+machine.getEquipment());
 							}
 							// Cell with index 3 contains marks in English
-							else if (cell.getColumnIndex() == 3) {
+							else if (cell.getColumnIndex() == 2) {
 								machine.setModel(cell.getStringCellValue());
-								System.out.println(machine.getModel());
-							} else if (cell.getColumnIndex() == 4) {
+								System.out.println("Model :"+machine.getModel());
+							} else if (cell.getColumnIndex() == 3) {
 								machine.setMake(cell.getStringCellValue());
-								System.out.println(machine.getMake());
+								System.out.println("Make :"+machine.getMake());
 							}
 						}
 					}
+					if(machinedao == null){
+						System.out.println("MachineDAO object is null");
+					}else
+						System.out.println("MachineDAO is not null");
+					
 					if (machinedao.insertMachineDetails(machine).equals(
 							ResponseConstants.MACHINE_SUCCESS_CODE)) {
-						System.out.println("Machine at Row Count:" + rowcount
-								+ 1 + " has been added successfully!!");
+						//rowcount = rowcount+1;
+						System.out.println("Machine at Row Count:" + rowcount + " has been added successfully!!");
 					} else {
 						System.out
 								.println("Exception Occured while adding Machine at row: "
-										+ rowcount + 1);
+										+ rowcount);
 					}
-					rowcount++;
+                    }
+					//rowcount++;
 				}
 			}
 
@@ -112,6 +122,8 @@ public class CongunXLParser {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		// return studentList;
