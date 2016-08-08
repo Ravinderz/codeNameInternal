@@ -190,6 +190,25 @@
     <script src="js/requirement-scripts.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
+    	
+    	/* to get parameters from a url */
+    	var getUrlParameter = function getUrlParameter(sParam) {
+    	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    	        sURLVariables = sPageURL.split('&'),
+    	        sParameterName,
+    	        i;
+
+    	    for (i = 0; i < sURLVariables.length; i++) {
+    	        sParameterName = sURLVariables[i].split('=');
+
+    	        if (sParameterName[0] === sParam) {
+    	            return sParameterName[1] === undefined ? true : sParameterName[1];
+    	        }
+    	    }
+    	};
+    	
+    	var category = getUrlParameter('category');
+    	var sub_category = getUrlParameter('sub_ctg');
        
     	var contractor_details = sessionStorage.getItem("user");
     	contractor_details = $.parseJSON(contractor_details);
@@ -273,7 +292,9 @@
                 });
     });
     	
-    	
+    $("#category").val(category);
+    $("#equipment").val(sub_category);
+    
     	
     });    
     </script>    
