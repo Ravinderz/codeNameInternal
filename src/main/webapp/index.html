@@ -71,6 +71,15 @@ $.ajax({
 
 	});
     });
+	
+	$('.category-img').click(function(){
+		console.log("inside img click function");
+		var category = this.id;
+		$(location).attr('href',"equipment.html?category="+category);
+	});
+	
+	
+	
 	});
     </script>
     <script type="text/javascript">
@@ -289,42 +298,53 @@ $.ajax({
 			</div>
 			<div class="category-row-one">
 				<div class="row">
-		 			<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img" id="earthMovingEquipment">
+		 					<img src="http://placehold.it/150x150" alt="" />
+		 					<button class="btn img-btn">Earth Moving</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="materialhandling">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Material Handling</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="boredriller">
+		 					<img src="http://placehold.it/150x150" alt="" />
+		 					<button class="btn img-btn">Bore Driller</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="cementmixertruck">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Cement Mixer Trucks</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="cranes">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Cranes</button>
 		 			</div>
 		 		</div>
 		 	</div>
 	 		<div class="category-row-two">
 		 		<div class="row">
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="aeriallifts">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Aerial Lifts</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="generator">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Generators</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="powerdrillers">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Power Drillers</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="roadroller"> 
+		 					<img src="http://placehold.it/150x150" alt="" />
+		 					<button class="btn img-btn">Road Rollers</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="miscellaneous">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Misc</button>
 		 			</div>
-		 			<div class="col-md-2 col-sm-6 col-xs-12 ">
-		 					<img src="http://placehold.it/150x150" alt="" class="category-img"/>
+		 			<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="others">
+		 					<img src="http://placehold.it/150x150" alt=""  />
+		 					<button class="btn img-btn">Others</button>
 		 			</div>
 		 		</div>
 	 		</div>

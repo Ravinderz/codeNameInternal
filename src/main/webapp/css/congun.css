@@ -460,6 +460,13 @@ border: 1px solid transparent;
 
 }
 
+.img-btn{
+	width : 150px;
+	border-radius : 0px;	
+	background:none;
+	border : 1px solid #202e31;
+}
+
 
 
 
