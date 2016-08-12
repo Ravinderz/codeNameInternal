@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/requirement-display.css">
+    <link rel="stylesheet" href="../css/requirement-view.css">
+    <link rel="stylesheet" href="../css/custom.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var user = sessionStorage.getItem("user");
+		user = $.parseJSON(user);
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+		
+		
+		$('.logout').click(function(){
+		       console.log("inside logout function")
+		       var user = sessionStorage.getItem("user");
+		        if(user !== null){
+		            sessionStorage.removeItem("user");
+		        }
+		        console.log("user logged out");
+		        $(location).attr('href',"../index.html");
+		 });	
+		
+		});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>    
+</head>
+<body>
+    <div class="nav-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="#"> <img id="nav-logo"
+								src="../images/logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="#"><span>Home</span></a></li>
+								<li><a href="#"><span>Dashboard</span></a></li>
+								<li><a href="#" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	    
+    <div class="content-main">
+    <div class="container">
+        <div class="row">
+            <h2>Requirement List</h2>
+            <div class="col-md-2 filter"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-8 view-item">
+                <div class="item-content">
+                    <div class="header">
+                        <h4>Title</h4>
+                        <h5>This is the place where the title of the requirement will be posted</h5>
+                        <img src="../images/earthMovingEquipment/backhoe.png" height="200px" width="200px" class="left"/>
+                        <div class="right">
+                            <ul>
+                                <li><h5>Machine Category</h5><p>Earth Moving</p></li>
+                                <li><h5>Machine Sub-Category</h5><p>Backhoe</p></li>
+                                <li><h5>Model</h5><p>JD-10TON</p></li>
+                                <li><h5>Manufacturer</h5><p>JCB</p></li>
+                                <li><h5>Manufacture year</h5><p>2015</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Description</h4>
+                        <p>This is the place holder for description... At present this will be filled with lorem ipsum text
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
+                    </div>
+                    <div class="requirement-meta">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>Created by</h5><p>some user</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>Created on</h5><p>10-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>Start date</h5><p>15-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>Duration</h5><p>3 Months</p></div>
+                                </div>
+                                <div class="col-md-3">
+                                   <div class="col-content"><h5>Contact</h5><p>+91-9988776655</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 ads"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+        </div>    
+    </div>
+    </div>
+    <div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+                    
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>	
+							<li><a href="#">Privacy Policy</a></li>	
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>		
+    </body>
+</html>

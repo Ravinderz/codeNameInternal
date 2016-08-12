@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
+<link rel="stylesheet" href="css/custom.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -24,7 +24,7 @@
 						console.log(user);
 						if (user !== null) {
 							console.log("inside if");
-							$(location).attr('href',"index-logged.html");
+							$(location).attr('href',"user/index.html");
 						} else {
 							console.log("nothing to do");
 							
@@ -51,7 +51,7 @@
 						console.log("register modal closed");
 						console.log("opening login modal");
 						$('#modal-container-login').modal('show');
-						$(location).attr('href',"index-logged.html");
+						$(location).attr('href',"user/index.html");
 						}
 						}
 						});
@@ -83,14 +83,14 @@
 						user = $.parseJSON(user);
 						console.log(user);
 						if (user !== null) {
-						$(location).attr('href',"index-logged.html");
+						$(location).attr('href',"user/index.html");
 						}
 						} else if (response.role === "contractor") {
 							var user = sessionStorage.getItem("user");
 							user = $.parseJSON(user);
 							console.log(user);
 							if (user !== null) {
-							$(location).attr('href',"index-logged.html");
+							$(location).attr('href',"user/index.html");
 							}																//$(location).attr('href',"index.html");
 						}
 						}
@@ -135,7 +135,7 @@
 </script>
 </head>
 <body>
-	<div class="nav-wrapper">
+	<div class="nav-wrapper-index">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 navigation">

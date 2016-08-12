@@ -34,16 +34,16 @@
 
 		var category = getUrlParameter('category');
 					
-						var user = sessionStorage.getItem("user");
+						/* var user = sessionStorage.getItem("user");
 						user = $.parseJSON(user);
 						console.log(user);
 						if (user !== null) {
 							console.log("inside if");
-							$(location).attr('href',"equipment-logged.html?category="+category);
+							$(location).attr('href',"user/equipment.html?category="+category);
 						} else {
 							console.log("nothing to do");
 							
-						}
+						} */
 					
 						
 						$("#register").click(
@@ -67,7 +67,7 @@
 								console.log("register modal closed");
 								console.log("opening login modal");
 								$('#modal-container-login').modal('show');
-								$(location).attr('href',"equipment-logged.html?category="+category);
+								$(location).attr('href',"user/equipment.html?category="+category);
 								}
 								}
 								});
@@ -99,14 +99,14 @@
 								user = $.parseJSON(user);
 								console.log(user);
 								if (user !== null) {
-								$(location).attr('href',"equipment-logged.html");
+								$(location).attr('href',"user/equipment.html?category="+category);
 								}
 								} else if (response.role === "contractor") {
 									var user = sessionStorage.getItem("user");
 									user = $.parseJSON(user);
 									console.log(user);
 									if (user !== null) {
-									$(location).attr('href',"equipment-logged.html");
+									$(location).attr('href',"user/equipment.html?category="+category);
 									}																//$(location).attr('href',"index.html");
 								}
 								}
@@ -114,7 +114,15 @@
 								});
 								});
 			
-						
+								$('.logout').click(function() {
+									console.log("inside logout function")
+									var user = sessionStorage.getItem("user");
+									if (user !== null) {
+										sessionStorage.removeItem("user");
+									}
+									console.log("user logged out");
+									$(location).attr('href', "index.html");
+								});
 		
 
 						

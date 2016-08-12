@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
 <link rel="stylesheet" href="css/requirement-display.css">
+<link rel="stylesheet" href="css/custom.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -75,7 +76,7 @@
 	console.log("register modal closed");
 	console.log("opening login modal");
 	$('#modal-container-login').modal('show');
-	$(location).attr('href',"requirement-display-logged.html?category="+category+"&sub-category="+sub_ctg);
+	$(location).attr('href',"user/requirement-display.html?category="+category+"&sub-category="+sub_ctg);
 	}
 	}
 	});
@@ -125,14 +126,25 @@
 				console.log(" no storage available");
 				}
 			if(response.role === "supplier"){
-				$(location).attr('href',"requirement-display-logged.html?category="+category+"&sub-category="+sub_ctg);
+				$(location).attr('href',"user/requirement-display.html?category="+category+"&sub-category="+sub_ctg);
 			}else if(response.role === "contractor"){
-				$(location).attr('href',"requirement-display-logged.html?category="+category+"&sub-category="+sub_ctg);
+				$(location).attr('href',"user/requirement-display.html?category="+category+"&sub-category="+sub_ctg);
 			}
 		}
 		
 	});
     });
+	
+	$('.logout').click(function() {
+		console.log("inside logout function")
+		var user = sessionStorage.getItem("user");
+		if (user !== null) {
+			sessionStorage.removeItem("user");
+		}
+		console.log("user logged out");
+		$(location).attr('href', "index.html");
+	});
+	
 	});
     </script>
 	<script type="text/javascript">
@@ -155,7 +167,6 @@
 </head>
 <body>
 	<div class="nav-wrapper">
-		<div class="header">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 navigation">
@@ -341,7 +352,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<div class="content-main">
 		<div class="container">
 			<div class="row">

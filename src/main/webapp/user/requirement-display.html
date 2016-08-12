@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/requirement-display.css">
+<link rel="stylesheet" href="../css/custom.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		var user = sessionStorage.getItem("user");
+		user = $.parseJSON(user);
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+
+	/* to get parameters from a url */
+	var getUrlParameter = function getUrlParameter(sParam) {
+	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+	        sURLVariables = sPageURL.split('&'),
+	        sParameterName,
+	        i;
+
+	    for (i = 0; i < sURLVariables.length; i++) {
+	        sParameterName = sURLVariables[i].split('=');
+
+	        if (sParameterName[0] === sParam) {
+	            return sParameterName[1] === undefined ? true : sParameterName[1];
+	        }
+	    }
+	};
+	
+	var category = getUrlParameter('category');
+	var sub_ctg = getUrlParameter('sub-category');
+	
+	$('.post-req-btn').click(function(e){
+		e.preventDefault();
+		console.log("inside click function");
+		console.log("category",category);
+		console.log("sub",sub_ctg);
+		$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
+	});
+	
+	
+	$('.view-btn').click(function(e){
+		e.preventDefault();
+		console.log("inside click function");
+		console.log("category",category);
+		console.log("sub",sub_ctg);
+		$(location).attr('href',"requirement-view.html?category="+category+"&sub-category="+sub_ctg);
+	});
+
+	$('.logout').click(function(){
+	       console.log("inside logout function")
+	       var user = sessionStorage.getItem("user");
+	        if(user !== null){
+	            sessionStorage.removeItem("user");
+	        }
+	        console.log("user logged out");
+	        $(location).attr('href',"../index.html");
+	    });	
+	
+	});    
+    </script>
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>
+</head>
+<body>
+	<div class="nav-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="#"> <img id="nav-logo"
+								src="../images/logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="#"><span>Home</span></a></li>
+								<li><a href="#"><span>Dashboard</span></a></li>
+								<li><a href="#" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-main">
+		<div class="container">
+			<div class="row">
+				<a href="#" class="btn btn-warning post-req-btn">Post
+					Requirement</a>
+				<h2>Requirement List</h2>
+				<div class="col-md-2 filter">
+					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum</p>
+				</div>
+				<div class="col-md-8 list">
+					<ul class="ul-item">
+						<li class="item">
+							<div class="item-content">
+								<div class="item-content-header">
+									<img src="../images/boredriller/boredriller.png" height="100px"
+										width="100px" />
+									<div class="item-content-header-meta">
+										<h3>Title</h3>
+										<p>This is for work at my new shopping mall This is for
+											work at my new shopping mall This is foThis is for work at my
+											new shopping mall This is for work at my new shopping mall</p>
+									</div>
+								</div>
+								<div class="clear-fix"></div>
+								<div class="item-content-main">
+									<ul>
+										<li>
+											<h5>Machine Type</h5>
+											<p>EarthMovingEquipment/Excavator</p>
+										</li>
+										<li>
+											<h5>Model</h5>
+											<p>JCB-DS2TON</p>
+										</li>
+
+										<li>
+											<h5>Start date</h5>
+											<p>25-Aug-2016</p>
+										</li>
+										<li>
+											<h5>Price</h5>
+											<p>10000</p>
+
+										</li>
+										<li>
+											<h5>Quantity</h5>
+											<p>1</p>
+										</li>
+										<li>
+											<h5>Duration</h5>
+											<p>1 month</p>
+										</li>
+									</ul>
+									<a href="#" class="btn btn-warning view-btn">View</a>
+									<div class="clear-fix"></div>
+								</div>
+							</div>
+
+						</li>
+						<li class="item">
+							<div class="item-content">
+								<div class="item-content-header">
+									<img src="../images/boredriller/piledriving.png" height="100px"
+										width="100px" />
+									<div class="item-content-header-meta">
+										<h3>Title</h3>
+										<p>Taking the cement mixer for work at home</p>
+									</div>
+								</div>
+								<div class="clear-fix"></div>
+								<div class="item-content-main">
+									<ul>
+										<li>
+											<h5>Machine Type</h5>
+											<p>CementMixer/Cement mixer</p>
+										</li>
+										<li>
+											<h5>Start date</h5>
+											<p>10-Aug-2016</p>
+										</li>
+										<li>
+											<h5>Price</h5>
+											<p>10000000</p>
+										</li>
+										<li>
+											<h5>Quantity</h5>
+											<p>1</p>
+										</li>
+										<li>
+											<h5>Duration</h5>
+											<p>3 months</p>
+										</li>
+
+									</ul>
+									<a href="#" class="btn btn-warning">View</a>
+									<div class="clear-fix"></div>
+								</div>
+							</div>
+
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-2 ads">
+					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">About
+									Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Contact
+									Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
+								class="img-circle fa fa-twitter" href="#"></a> <a
+								class="img-circle fa fa-google-plus" href="#"></a> <a
+								class="img-circle fa fa-linkedin" href="#"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="collapse navbar-collapse" id="navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Copyright Congun</a></li>
+						<li><a href="#">Terms and Conditions</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
