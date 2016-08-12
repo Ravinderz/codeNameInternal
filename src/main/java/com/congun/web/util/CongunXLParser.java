@@ -95,6 +95,9 @@ public class CongunXLParser {
 							} else if (cell.getColumnIndex() == 3) {
 								machine.setMake(cell.getStringCellValue());
 								System.out.println("Make :"+machine.getMake());
+							} else if (cell.getColumnIndex() == 4) {
+								machine.setCapacity(cell.getStringCellValue());
+								System.out.println("Capacity :"+machine.getCapacity());
 							}
 						}
 					}

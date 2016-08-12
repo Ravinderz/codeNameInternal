@@ -29,4 +29,12 @@ public class MachineService {
 		
 	}
 
+	public String getMachineDetailsByModel(String model) {
+		Machines machine = machineDao.getMachineDetailsByModel(model);
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
 }

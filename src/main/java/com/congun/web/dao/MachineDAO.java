@@ -49,5 +49,19 @@ public class MachineDAO {
 			return ResponseConstants.MACHINE_EXCEPTION_CODE;
 		}
 	}
+	
+	@Transactional
+	public Machines getMachineDetailsByModel(String model) {
+		try{
+			Criteria criteria = getSession().createCriteria(Machines.class);
+			Machines machine= (Machines) criteria.add(Restrictions.eq("model",model)).list().get(0);
+			System.out.println("Got machine with "+model+" from database");
+			return machine;
+			}catch(Exception e){
+				System.out.println("Entered Exception Block : ");
+				e.printStackTrace();
+				return null;
+			}
+	}
 
 }

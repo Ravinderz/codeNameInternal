@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
+import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.MappingObject;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
@@ -155,11 +156,11 @@ public class ContractorRequirementQuoteDAO{
 		}
 	}
 
-	public List<AddEquipment> getDistinctCategory() {
+	public List<DropDownMaster> getDistinctCategory() {
 		try{
-			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AddEquipment.class);
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DropDownMaster.class);
 			criteria.setProjection(Projections.distinct(Projections.property("equipmentCategory")));
-			List<AddEquipment> list= criteria.list();
+			List<DropDownMaster> list= criteria.list();
 			
 			return list;
 		}catch(Exception e){
@@ -168,13 +169,13 @@ public class ContractorRequirementQuoteDAO{
 		}
 	}
 
-	public List<AddEquipment> getEquipmentByCategory(String category) {
+	public List<DropDownMaster> getEquipmentByCategory(String category) {
 		try{
 			System.out.println("Category :"+category);
-			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AddEquipment.class);
-			criteria.setProjection(Projections.property("equipment"));
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DropDownMaster.class);
+			criteria.setProjection(Projections.property("equipmentName"));
 			criteria.add(Restrictions.eq("equipmentCategory", category));
-			List<AddEquipment> list= criteria.list();
+			List<DropDownMaster> list= criteria.list();
 			
 			return list;
 		}catch(Exception e){

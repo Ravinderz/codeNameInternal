@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.congun.web.dao.ContractorRequirementQuoteDAO;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
+import com.congun.web.model.DropDownMaster;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 
@@ -54,7 +55,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getDistinctCategory() {
-		List<AddEquipment> reqList = dao.getDistinctCategory();
+		List<DropDownMaster> reqList = dao.getDistinctCategory();
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
 			else
@@ -62,7 +63,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getEquipmentByCategory(String category) {
-		List<AddEquipment> reqList = dao.getEquipmentByCategory(category);
+		List<DropDownMaster> reqList = dao.getEquipmentByCategory(category);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
 			else

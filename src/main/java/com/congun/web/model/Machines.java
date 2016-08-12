@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "machines")
@@ -21,11 +22,14 @@ public class Machines {
 	@Column(name="equipment")
 	public String equipment;
 	
-	@Column(name="model")
+	@Column(name="model",unique=true)
 	public String model;
 	
 	@Column(name="make")
 	public String make;
+	
+	@Column(name="capacity")
+	public String capacity;
 
 	public long getId() {
 		return id;
@@ -66,7 +70,13 @@ public class Machines {
 	public void setMake(String make) {
 		this.make = make;
 	}
-	
-	
 
+	public String getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
+	
 }

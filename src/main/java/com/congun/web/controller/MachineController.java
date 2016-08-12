@@ -28,7 +28,13 @@ public class MachineController {
 	
 	@RequestMapping(value="/getMachinesListFromExcel" , method=RequestMethod.GET)
 	public void getMachinesListFromExcel(){
-		String path="C:\\Users\\Nishant\\Desktop\\congun\\SampleExcel.xlsx";
+		String path="F:\\congunfiles\\SampleExcel.xlsx";
 		parser.getMachinesList(path);
+	}
+	
+	@RequestMapping(value="/getMachineDetailsByModel/{model}" , method=RequestMethod.GET)
+	public String getMachineDetailsByModel(@PathVariable("model") String model){
+		return machineService.getMachineDetailsByModel(model);
+		
 	}
 }
