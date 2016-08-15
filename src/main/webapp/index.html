@@ -27,8 +27,8 @@
 							$(location).attr('href',"user/index.html");
 						} else {
 							console.log("nothing to do");
-							
 						}
+						
 
 						$("#register").click(
 						function() {
@@ -48,10 +48,20 @@
 						} else {
 						console.log("inside if");
 						$('#modal-container-register').modal('hide');
+						$('#modal-success-dialog').modal('show')
+						$('#modal-success-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-success-dialog').modal('hide');},2000
+							);
+							$('#modal-success-dialog').on('hidden.bs.modal', function() {
+			    			 $('#modal-container-login').modal('show');
+			    			 //history.back();	    
+							});
+			    		}); 
 						console.log("register modal closed");
 						console.log("opening login modal");
-						$('#modal-container-login').modal('show');
-						$(location).attr('href',"user/index.html");
+						
+						//$(location).attr('href',"user/index.html");
 						}
 						}
 						});
@@ -223,6 +233,20 @@
 							</div>
 						</div>
 					</div>
+					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Registration successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- ************************************* This is for the login model *************************************  -->
 				<!-- ********************* This is for the register model *********************************** -->
@@ -305,6 +329,7 @@
 													name="company_individual_profile">
 											</div>
 										</div>
+										
 										<div class="form-group">
 											<div class="f1-buttons">
 												<button type="button" id="register" class="btn btn-next">Register</button>
@@ -343,26 +368,26 @@
 					<div
 						class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img"
 						id="EarthMoving">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/EarthMoving/excavator.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Earth Moving</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="MaterialHandling">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/MaterialHandling/reachforklift.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Material Handling</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="BoreDrillers">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/BoreDrillers/boredriller.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn">Bore Driller</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="CementMixerTrucks">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/CementMixerTrucks/cementmixer.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn">Cement Mixer Trucks</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="Cranes">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/Cranes/mobilecrane.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn">Cranes</button>
 					</div>
 				</div>
@@ -371,27 +396,27 @@
 				<div class="row">
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="AerialLifts">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/AerialLifts/articulatingboomlift.png" alt="" height="150px" width = "150px"  />
 						<button class="btn img-btn">Aerial Lifts</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="Generators">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/Generators/mobilegenerator.png" alt="" height="150px" width = "150px"  />
 						<button class="btn img-btn">Generators</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="PowerDrillers">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/PowerDrillers/anglegrinder.png" alt="" height="150px" width = "150px"  />
 						<button class="btn img-btn">Power Drillers</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="RoadRollers">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/RoadRollers/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Road Rollers</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="Miscellaneous">
-						<img src="http://placehold.it/150x150" alt="" />
+						<img src="images/Miscellaneous/compressor.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn">Misc</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="others">

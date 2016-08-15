@@ -177,73 +177,111 @@
                                 <button type="button" id="btn-submit" class="btn btn-submit">Submit</button>
                             </div>
                         </fieldset>
+                        <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Requirement posted successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
+				
+    
     <!-- Javascript -->
     <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.backstretch.min.js"></script>
     <script src="js/retina-1.1.0.min.js"></script>
     <script src="js/requirement-scripts.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
     	
-    	/* to get parameters from a url */
-    	var getUrlParameter = function getUrlParameter(sParam) {
-    	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-    	        sURLVariables = sPageURL.split('&'),
-    	        sParameterName,
-    	        i;
+    		
+    		/* to get parameters from a url */
+    		var getUrlParameter = function getUrlParameter(sParam) {
+    			var sPageURL = decodeURIComponent(window.location.search
+    					.substring(1)), sURLVariables = sPageURL
+    					.split('&'), sParameterName, i;
 
-    	    for (i = 0; i < sURLVariables.length; i++) {
-    	        sParameterName = sURLVariables[i].split('=');
+    			for (i = 0; i < sURLVariables.length; i++) {
+    				sParameterName = sURLVariables[i].split('=');
 
-    	        if (sParameterName[0] === sParam) {
-    	            return sParameterName[1] === undefined ? true : sParameterName[1];
-    	        }
-    	    }
-    	};
-    	
-    	var category = getUrlParameter('category');
-    	var sub_category = getUrlParameter('sub_ctg');
+    				if (sParameterName[0] === sParam) {
+    					return sParameterName[1] === undefined ? true
+    							: sParameterName[1];
+    				}
+    			}
+    		}; //end of getUrlParameter
        
     	var contractor_details = sessionStorage.getItem("user");
     	contractor_details = $.parseJSON(contractor_details);
     	$('#contractorId').val(contractor_details.userId);
     	$('#contractorName').val(contractor_details.firstname+" "+contractor_details.lastname);
     	
+    	var categoryParam = getUrlParameter("category");
+    	var sub_category = getUrlParameter("sub-category"); 
     	
     	/* This ajax call is made to populate the category and equipment machinary dropdowns */
     	
     	var category = []
     	$.ajax({
-    		url :"contractor/getDistinctCategory",
+    		url :"http://localhost:8070/congun/contractor/getDistinctCategory",
     		type:"get",
     		data:{},
     		success:function(response){
     			response = $.parseJSON(response);
     			var i = 0;
-    			
+    			console.log(response);
     			$.each(response,function(index,value){
     				$("#category").append($("<option />").val(value).text(value));
     					category[i] = value;
     					i++
     			});
+    			$("#category").val(categoryParam);
+    			if(sub_category !== null ){
+    				$.ajax({
+    					
+    					url : "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				$("#equipment").val(sub_category);
+    	    			}
+    	    			});
+    			}else{
     			$.ajax({
-    				url : "contractor/getEquipmentByCategory/"+category[0],
+    			url : "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+category[0],
     			type:"get",
     			data:{},
     			success:function(equipments){
     				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
     				$.each(equipments,function(index,value){
     				$("#equipment").append($("<option />").val(value).text(value));
     				
     				});
     			}
     			});
+    			}
     		}
     	});
     	
@@ -252,7 +290,7 @@
     	$("#category").on('change',function(){
     		var selectedOption = $("#category option:selected").text();
     		console.log("selected option ",selectedOption);
-    		var url = "contractor/getEquipmentByCategory/"+selectedOption; 
+    		var url = "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+selectedOption; 
     		console.log("url ",url);
     		$.ajax({
     			url:url,
@@ -281,20 +319,26 @@
 		console.log(data);
             
             $.ajax({
-			url:"contractor/contractorRequirement",
+			url:"http://localhost:8070/congun/contractor/contractorRequirement",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
 		     success:function(data){
 		    	 console.log(data);
+		    	 if(data === "CS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(10000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',"user/requirement-display.html?category="+categoryParam+"&sub-category="+sub_category)
+		    			 //history.back();	    
+		    			});
+		    	 }
 		      }
 
                 });
     });
     	
-    $("#category").val(category);
-    $("#equipment").val(sub_category);
-    
+    	
     	
     });    
     </script>    

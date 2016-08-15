@@ -467,10 +467,24 @@ border: 1px solid transparent;
 	border : 1px solid #202e31;
 }
 
+.nav-wrapper {
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #f9f9f9;
+}
 
-
-
-
+.success-display{
+	display:block;
+	transition:all 0.5s ease;
+	-webkit-transition:all 0.5s ease;
+	-ms-transition:all 0.5s ease;
+	-o-transition:all 0.5s ease;
+	-moz-transition:all 0.5s ease;
+}
 
 
 
