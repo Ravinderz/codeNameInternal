@@ -151,6 +151,21 @@ public SupplierQuote getQuotesbyId(long Id)
 		
 	}
 
+
+@Transactional
+public String updateEquipment(AddEquipment equipment)
+{
+	try{ System.out.println("Entered DAO to update Equipment :"+equipment.getEquipmentId());
+		getSession().saveOrUpdate(equipment);
+		
+		return ResponseConstants.EQUIPMENT_SUCCESS_CODE;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.EQUIPMENT_EXCEPTION_CODE;
+	}	
+}
+
+
 @Transactional
 	public String getEquipmentDetails(long supplierId) {
 		System.out.println("Getting Equipment details from DB :" + supplierId);
@@ -167,6 +182,25 @@ public SupplierQuote getQuotesbyId(long Id)
 				return null;
 		}
 	}
+
+@Transactional
+     public String getEquipmentById(int equipmentId){
+	System.out.println("Getting Equipment Details from DB :"+equipmentId);
+	try{
+		
+		AddEquipment equipment = (AddEquipment) getSession().createCriteria(AddEquipment.class).add(Restrictions.eq("equipmentId", equipmentId)).list().get(0);
+		
+		if(equipment != null){
+			System.out.println("Got equipment with Id:"+equipmentId);
+			return ApplicationUtil.getJsonResponse(equipment);
+		} else
+			return null;
+	}catch(Exception e){
+		System.out.println("Entered Exception while getting equiment for :"+equipmentId);
+		e.printStackTrace();
+		return null;
+	}
+}
 
 @Transactional
 	public List<AddEquipment> getAllEquipments(Long supplierId) {

@@ -63,6 +63,18 @@ public class SupplierController {
 		return supplierService.addEquipment(equipment);
 	}
 	
+	@RequestMapping(value="/updateequipment" , method=RequestMethod.PUT)
+	public String updateEquipment(@RequestBody AddEquipment equipment){
+		System.out.println("Updating equipment Details with Id:"+equipment.getEquipmentId());
+		return supplierService.updateEquipment(equipment);
+	}
+	
+	@RequestMapping(value="/getequipmentbyid/{equipmentId}" ,method=RequestMethod.GET)
+	public String getEquipmentById(@PathVariable int equipmentId){
+		System.out.println("Get equipment By Id");
+		return supplierService.getEquipmentById(equipmentId);
+	}
+	
 	@RequestMapping(value="/getallequipments/{supplierId}" , method=RequestMethod.GET)
 	public String getAllEquipments(@PathVariable Long supplierId){
 		System.out.println("Getting equipment Details");
@@ -74,6 +86,8 @@ public class SupplierController {
 		System.out.println("Delete equipment By Id");
 		return supplierService.deleteEquipmentById(equipmentId);
 	}
+	
+	
 	
 
 }
