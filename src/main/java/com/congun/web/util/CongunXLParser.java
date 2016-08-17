@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 @Repository
 public class CongunXLParser {
@@ -45,12 +46,13 @@ public class CongunXLParser {
 	}*/
 
 	public void getMachinesList(String path) {
+		boolean duplicate = false;
 		System.out.println(path);
 		// List machineList = new ArrayList();
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(path);
-
+            List<Machines> list = machinedao.getDistinctModels();
 			// Using XSSF for xlsx format, for xls use HSSF
 			Workbook workbook = new XSSFWorkbook(fis);
 
@@ -90,6 +92,12 @@ public class CongunXLParser {
 							}
 							// Cell with index 3 contains marks in English
 							else if (cell.getColumnIndex() == 2) {
+								if(list.contains(cell.getStringCellValue())){
+									duplicate = true;
+								}
+								else{
+									duplicate = false;
+								}
 								machine.setModel(cell.getStringCellValue());
 								System.out.println("Model :"+machine.getModel());
 							} else if (cell.getColumnIndex() == 3) {
@@ -105,16 +113,18 @@ public class CongunXLParser {
 						System.out.println("MachineDAO object is null");
 					}else
 						System.out.println("MachineDAO is not null");
-					
-					if (machinedao.insertMachineDetails(machine).equals(
-							ResponseConstants.MACHINE_SUCCESS_CODE)) {
-						//rowcount = rowcount+1;
-						System.out.println("Machine at Row Count:" + rowcount + " has been added successfully!!");
-					} else {
-						System.out
-								.println("Exception Occured while adding Machine at row: "
-										+ rowcount);
+					if(duplicate==false){
+						if (machinedao.insertMachineDetails(machine).equals(
+								ResponseConstants.MACHINE_SUCCESS_CODE)) {
+							//rowcount = rowcount+1;
+							System.out.println("Machine at Row Count:" + rowcount + " has been added successfully!!");
+						} else {
+							System.out
+									.println("Exception Occured while adding Machine at row: "
+											+ rowcount);
+						}
 					}
+
                     }
 					//rowcount++;
 				}

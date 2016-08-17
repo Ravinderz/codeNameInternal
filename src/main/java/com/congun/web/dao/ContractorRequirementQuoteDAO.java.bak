@@ -197,19 +197,6 @@ public class ContractorRequirementQuoteDAO{
 			return null;
 		}
 	}
-
-	public List<ContractorRequirement> getRequirementsByequipment(
-			String equipment) {
-		try{
-			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
-			criteria.add(Restrictions.eq("equipmentName", equipment));
-			List<ContractorRequirement> list= criteria.list();
-			return list;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
 
 }

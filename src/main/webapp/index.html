@@ -48,7 +48,7 @@
 						} else {
 						console.log("inside if");
 						$('#modal-container-register').modal('hide');
-						$('#modal-success-dialog').modal('show')
+						$('#modal-success-dialog').modal('show');
 						$('#modal-success-dialog').on('shown.bs.modal', function() {
 							setTimeout(function(){
 								$('#modal-success-dialog').modal('hide');},2000
@@ -188,7 +188,7 @@
 					<div class="modal fade" id="modal-container-login" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
-							<div class="modal-content">
+							<div class="modal-content login-modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
@@ -223,10 +223,10 @@
 											</div>
 
 
-											<div class="f1-buttons">
-												<button type="button" id="login-btn" class="btn btn-next">Login</button>
+											<div class="login-btn">
+												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
 											</div>
-
+											<div class="clear-fix"></div>
 										</form>
 									</div>
 								</div>
@@ -253,16 +253,16 @@
 				<div class="modal fade" id="modal-container-register" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
-						<div class="modal-content">
+						<div class="modal-content register-modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">×</button>
 								<h4 class="modal-title" id="myModalLabel">Register</h4>
 							</div>
 							<div class="modal-body">
-								<div class="register-container">
+								
 									<form class="form-horizontal" role="form" id="register-form">
-										<div class="form-group">
+										<div class="form-group radio">
 											<label class="radio-inline"> <input type="radio"
 												id="role" name="role" value="supplier">Supplier
 											</label> <label class="radio-inline"> <input type="radio"
@@ -332,11 +332,12 @@
 										
 										<div class="form-group">
 											<div class="f1-buttons">
-												<button type="button" id="register" class="btn btn-next">Register</button>
+												<button type="button" id="register" class="btn btn-next modal-btn">Register</button>
 											</div>
 										</div>
+										<div class="clear-fix"></div>
 									</form>
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -371,7 +372,8 @@
 						<img src="images/EarthMoving/excavator.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Earth Moving</button>
 					</div>
-					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+					<div
+						class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="MaterialHandling">
 						<img src="images/MaterialHandling/reachforklift.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Material Handling</button>

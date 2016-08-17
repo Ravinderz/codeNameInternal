@@ -50,18 +50,8 @@ public class ContractorRequirementController {
 		return service.getEquipmentByCategory(category);
 	}
 	
-	@RequestMapping(value="/getmappedrequirements/{supplierId}", method = RequestMethod.GET )
+	@RequestMapping(value="/getmappedrequirements/{supplierId}", method =RequestMethod.GET )
 	public String getAllMappedRequirements(@PathVariable("supplierId") long suppId){
 		return service.getAllMappedRequirements(suppId);
-	}
-	
-	@RequestMapping(value="/getAllRequirements" , method = RequestMethod.GET)
-	public String getAllRequirements(){
-		return service.getAllRequirements();
-	}
-	
-	@RequestMapping(value="/getRequirementsByequipment/{equipment}", method = RequestMethod.GET )
-	public String getRequirementsByequipment(@PathVariable("equipment") String equipment){
-		return service.getRequirementsByequipment(equipment);
 	}
 }

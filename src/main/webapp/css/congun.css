@@ -486,10 +486,45 @@ border: 1px solid transparent;
 	-moz-transition:all 0.5s ease;
 }
 
+/*  modal style here */
+
+.login-modal-content{
+	width:500px;
+	margin: auto auto;
+}
+
+.modal-btn{
+	float:right;
+	border-radius:0px;
+	padding-right:10px;
+	background-color:#ffc13b;
+	color:#fff;
+}
+
+.modal-btn:hover{
+	background-color:#FAB216; 
+}
+
+.clear-fix{
+	clear:both;
+}
+
+/* changes for register modal */
+
+.register-modal-container{
+	width:600px;
+	margin: 0 auto;
+}
 
 
+.radio{
+	width:180px;
+	margin:10px auto !important;
+}
 
-
+#register{
+	margin-right:30px;
+}
 
 
 

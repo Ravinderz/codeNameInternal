@@ -5,6 +5,7 @@
 
 .content-main {
     padding-bottom: 50px;
+    height:auto;
 }
 
 .content-main h2{
@@ -183,7 +184,7 @@ border: 1px;
 }
 
 .content-main li a:hover,
-li a:focus:not(.active) {
+.content-main li a:focus:not(.active) {
     background-color: #ffc13b;
     color: white;
 	text-decoration: none;
@@ -207,10 +208,40 @@ border-bottom:2px solid grey;
 display:none;
 }
 
-.contractor-viewable li:nth-child(2){
-display:none;
-}
-
 .contractor-viewable li:nth-child(4){
 display:none;
 }
+
+.header .left{
+float:left;
+}
+
+.header .right ul li{
+list-style:none;
+display:inline-block;
+}
+
+.header ul li span{
+padding-right:20px;
+padding-left:20px;
+}
+
+/*::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  /* color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   /*color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}*/
+
+
+
+

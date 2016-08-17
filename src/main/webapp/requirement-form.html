@@ -238,7 +238,7 @@
     	
     	var category = []
     	$.ajax({
-    		url :"http://localhost:8070/congun/contractor/getDistinctCategory",
+    		url :"http://localhost:8080/congun/contractor/getDistinctCategory",
     		type:"get",
     		data:{},
     		success:function(response){
@@ -254,7 +254,7 @@
     			if(sub_category !== null ){
     				$.ajax({
     					
-    					url : "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+categoryParam,
+    					url : "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+categoryParam,
     	    			type:"get",
     	    			data:{},
     	    			success:function(equipments){
@@ -269,7 +269,7 @@
     	    			});
     			}else{
     			$.ajax({
-    			url : "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+category[0],
+    			url : "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+category[0],
     			type:"get",
     			data:{},
     			success:function(equipments){
@@ -290,7 +290,7 @@
     	$("#category").on('change',function(){
     		var selectedOption = $("#category option:selected").text();
     		console.log("selected option ",selectedOption);
-    		var url = "http://localhost:8070/congun/contractor/getEquipmentByCategory/"+selectedOption; 
+    		var url = "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+selectedOption; 
     		console.log("url ",url);
     		$.ajax({
     			url:url,
@@ -319,7 +319,7 @@
 		console.log(data);
             
             $.ajax({
-			url:"http://localhost:8070/congun/contractor/contractorRequirement",
+			url:"http://localhost:8080/congun/contractor/contractorRequirement",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,

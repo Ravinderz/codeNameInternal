@@ -1,8 +1,12 @@
 package com.congun.web.dao;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -62,6 +66,32 @@ public class MachineDAO {
 				e.printStackTrace();
 				return null;
 			}
+	}
+
+	public List<Machines> getSearchResults(String value) {
+		String input = "%"+value+"%";
+		System.out.println(" input value :"+input);
+		try{
+			Criteria criteria = getSession().createCriteria(Machines.class);
+			Criterion model = Restrictions.like("model", input);
+			Criterion make = Restrictions.like("make",input);
+			Criterion category = Restrictions.like("category",input);
+			Criterion equipment = Restrictions.like("equipment",input);
+			
+			LogicalExpression orExp1 = Restrictions.or(model,make);
+			LogicalExpression orExp2 = Restrictions.or(category,equipment);
+			//criteria.add(orExp1);
+			//criteria.add(orExp2);
+			LogicalExpression finExp = Restrictions.or(orExp1, orExp2);
+			criteria.add(finExp);
+			List<Machines> list = criteria.list();
+			return list;
+			
+		}catch(Exception e){
+			System.out.println("Entered Exception Block : ");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

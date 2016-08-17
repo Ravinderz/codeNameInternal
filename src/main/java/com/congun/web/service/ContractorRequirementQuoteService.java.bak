@@ -70,20 +70,4 @@ public class ContractorRequirementQuoteService{
 				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
 	}
 
-	public String getAllRequirements() {
-		List<ContractorRequirement> reqList = dao.getAllRequirements();
-		if(reqList != null)
-			return ApplicationUtil.getJsonResponse(reqList);
-			else
-				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
-		
-	}
-
-	public String getRequirementsByequipment(String equipment) {
-		List<ContractorRequirement> reqList = dao.getRequirementsByequipment(equipment);
-		if(reqList != null)
-			return ApplicationUtil.getJsonResponse(reqList);
-			else
-				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
-	}
 }

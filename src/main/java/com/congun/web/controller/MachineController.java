@@ -35,6 +35,11 @@ public class MachineController {
 	@RequestMapping(value="/getMachineDetailsByModel/{model}" , method=RequestMethod.GET)
 	public String getMachineDetailsByModel(@PathVariable("model") String model){
 		return machineService.getMachineDetailsByModel(model);
-		
 	}
+	
+	@RequestMapping(value="/search/{value}" , method=RequestMethod.GET)
+	public String getSearchResults(@PathVariable("value") String value){
+		return machineService.getSearchResults(value);
+	}
+	
 }
