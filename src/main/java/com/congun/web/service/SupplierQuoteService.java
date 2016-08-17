@@ -70,6 +70,10 @@ public class SupplierQuoteService {
 		return supplierDao.addEquipment(equipment);
 	}
 
+	public String updateEquipment(AddEquipment equipment){
+		String status = supplierDao.updateEquipment(equipment);
+		return status;
+	}
 	
 	public String getAllEquipments(Long supplierId) {
 		
@@ -79,6 +83,14 @@ public class SupplierQuoteService {
 	public String deleteEquipmentById(int equipmentId) {
 		
 		return supplierDao.deleteEquipmentById(equipmentId);
+	}
+	
+	public String getEquipmentById(int equipmentId){
+		String response = supplierDao.getEquipmentById(equipmentId);
+		if(response != null)
+		return supplierDao.getEquipmentById(equipmentId);
+		else
+			return ResponseConstants.EQUIPMENT_FAILURE_CODE;
 	}
 
 		
