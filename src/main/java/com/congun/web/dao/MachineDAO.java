@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.Machines;
 import com.congun.web.model.User;
 import com.congun.web.util.ResponseConstants;
@@ -92,6 +94,19 @@ public class MachineDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	@Transactional
+	public List<Machines> getDistinctModels() {
+		try{
+			Criteria criteria = getSession().createCriteria(Machines.class);
+			criteria.setProjection(Projections.distinct(Projections.property("model")));
+			List<Machines> list= criteria.list();
+			return list;
+			}catch(Exception e){
+				System.out.println("Entered Exception Block : ");
+				e.printStackTrace();
+				return null;
+			}
 	}
 
 }
