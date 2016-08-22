@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,7 +28,7 @@ import com.congun.web.util.ResponseConstants;
 @Repository
 public class SupplierQuoteDao {
 
-	
+private static Logger logger = Logger.getLogger(SupplierQuoteDao.class);
 @Autowired
 private SessionFactory sessionFactory;
 
@@ -44,6 +45,7 @@ protected Session getSession(){
 
 @Transactional
 public String saveQuote(SupplierQuote supplierQuote){
+	logger.info("Entered into SupplierQuoteDao.saveQuote method ");
 	try{
 		
 		Date date = new Date();
@@ -65,6 +67,7 @@ public String saveQuote(SupplierQuote supplierQuote){
 @Transactional
 public String updateQuote(SupplierQuote supplierQuote)
 {
+	logger.info("Entered into SupplierQuoteDao.updateQuote method ");
 	try{
 		//SupplierQuote existingQuote = (SupplierQuote) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quoteId", supplierQuote.getQuoteId())).list().get(0);
 		Date date = new Date();
@@ -84,10 +87,9 @@ public String updateQuote(SupplierQuote supplierQuote)
 @SuppressWarnings("unchecked")
 public List<SupplierQuote> getQuotesbySupplier(long supplierId)
 {
-	System.out.println("Getting Quotes by Supplier Id from DB : "+supplierId);
+	logger.info("Entered into SupplierQuoteDao.getQuotesbySupplier method supplierId:"+supplierId);
 	try{
 		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quotePostedById", supplierId)).list();
-		System.out.println("No of Quotes Returned : "+supplierQuotationList.size());
 		return supplierQuotationList;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -99,6 +101,7 @@ public List<SupplierQuote> getQuotesbySupplier(long supplierId)
 @SuppressWarnings("unchecked")
 public List<SupplierQuote> getQuotesbyRequirement(long requirementId)
 {
+	logger.info("Entered into SupplierQuoteDao.getQuotesbyRequirement method requirementId:"+requirementId);
 	try{
 		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("requirementId", requirementId)).list();		
 		return supplierQuotationList;
@@ -112,6 +115,7 @@ public List<SupplierQuote> getQuotesbyRequirement(long requirementId)
 @SuppressWarnings("unchecked")
 public int getNoOfQuotesbyRequirement(long requirementId)
 {
+	logger.info("Entered into SupplierQuoteDao.getNoOfQuotesbyRequirement method requirementId:"+requirementId);
 	try{
 		List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("requirementId", requirementId)).list();		
 		return supplierQuotationList.size();
@@ -124,14 +128,14 @@ public int getNoOfQuotesbyRequirement(long requirementId)
 @Transactional
 public SupplierQuote getQuotesbyId(long Id)
 {
-	System.out.println("Getting Quotation from DB :" + Id);
+	logger.info("Entered into SupplierQuoteDao.getNoOfQuotesbyRequirement method Id:"+Id);
 	try{
 		SupplierQuote supplierQuotation = (SupplierQuote)getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("quoteId",Id)).list().get(0);
 		
 		if(supplierQuotation != null){
-			System.out.println("Got a record");
+			logger.info("Got a record");
 		}else
-			System.out.println("Supplier quote is null");
+			logger.info("Supplier quote is null");
 		return supplierQuotation;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -141,6 +145,7 @@ public SupplierQuote getQuotesbyId(long Id)
 
 @Transactional
 	public String addEquipment(AddEquipment equipment) {
+	logger.info("Entered into SupplierQuoteDao.addEquipment method");
 		try {
 			getSession().saveOrUpdate(equipment);
 			return ResponseConstants.SUPPLIER_SUCCESS_CODE;
@@ -155,7 +160,9 @@ public SupplierQuote getQuotesbyId(long Id)
 @Transactional
 public String updateEquipment(AddEquipment equipment)
 {
-	try{ System.out.println("Entered DAO to update Equipment :"+equipment.getEquipmentId());
+	logger.info("Entered into SupplierQuoteDao.updateEquipment method");
+	try{ 
+		logger.info("Entered DAO to update Equipment :"+equipment.getEquipmentId());
 		getSession().saveOrUpdate(equipment);
 		
 		return ResponseConstants.EQUIPMENT_SUCCESS_CODE;
@@ -168,14 +175,10 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
 	public String getEquipmentDetails(long supplierId) {
-		System.out.println("Getting Equipment details from DB :" + supplierId);
+	logger.info("Entered into SupplierQuoteDao.getEquipmentDetails method  supplierId:"+supplierId);
+		logger.info("Getting Equipment details from DB :" + supplierId);
 		try{
 			List<AddEquipment> addEquipment = getSession().createCriteria(AddEquipment.class).add(Restrictions.eq("supplierId",supplierId)).list();
-			
-			if(addEquipment != null){
-				System.out.println("Got a record");
-			}else
-				System.out.println("Supplier quote is null");
 			return ApplicationUtil.getJsonResponse(addEquipment);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -185,18 +188,17 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
      public String getEquipmentById(int equipmentId){
-	System.out.println("Getting Equipment Details from DB :"+equipmentId);
+	logger.info("Entered into SupplierQuoteDao.getEquipmentById method  equipmentId:"+equipmentId);
+	logger.info("Getting Equipment Details from DB :"+equipmentId);
 	try{
 		
 		AddEquipment equipment = (AddEquipment) getSession().createCriteria(AddEquipment.class).add(Restrictions.eq("equipmentId", equipmentId)).list().get(0);
 		
 		if(equipment != null){
-			System.out.println("Got equipment with Id:"+equipmentId);
 			return ApplicationUtil.getJsonResponse(equipment);
 		} else
 			return null;
 	}catch(Exception e){
-		System.out.println("Entered Exception while getting equiment for :"+equipmentId);
 		e.printStackTrace();
 		return null;
 	}
@@ -204,7 +206,7 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
 	public List<AddEquipment> getAllEquipments(Long supplierId) {
-		System.out.println("Getting Equipment details from DB :" + supplierId);
+	logger.info("Entered into SupplierQuoteDao.getAllEquipments method  supplierId:"+supplierId);
 		try{
 			Criteria criteria = getSession().createCriteria(AddEquipment.class);
 			criteria.add(Restrictions.eq("supplierId", supplierId));
@@ -219,7 +221,7 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
 	public String deleteEquipmentById(int equipmentId) {
-	System.out.println("Deleting Equipment by ID");
+	logger.info("Entered into SupplierQuoteDao.deleteEquipmentById method  equipmentId:"+equipmentId);
 	try{
 	Criteria criteria = getSession().createCriteria(AddEquipment.class);
 	criteria.add(Restrictions.eq("equipmentId", equipmentId));
@@ -236,7 +238,7 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
 	public List<AddEquipment> getEquipmentByCategory(ContractorRequirement requirement){
-		System.out.println("Entered Get Equipments by Category");
+	logger.info("Entered into SupplierQuoteDao.getEquipmentByCategory method");
 		try{
 			Criteria criteria = getSession().createCriteria(AddEquipment.class);
 			
@@ -255,18 +257,15 @@ public String updateEquipment(AddEquipment equipment)
 
 @Transactional
 public List filterSupplierIds(Set mappedSuppliers,long requirementId){
-	System.out.println("Entere the filter Mappers method");
+	logger.info("Entere the filter Mappers method");
 	try{
 		String SupplierList=null;
 		Criteria criteria = getSession().createCriteria(MappingObject.class);
 		//List existingMappedIds = (ArrayList<Long>)criteria.setProjection(Projections.distinct(Projections.property("supplierId"))).list();
 		List existingMappedIds= criteria.add(Restrictions.eq("requirementId", requirementId)).list();
-		System.out.println("Length of SupplierIds :"+existingMappedIds.size());
 		if(existingMappedIds.size() > 0){
-			System.out.println("Found List of preMapped suppliers :"+requirementId);
 			return existingMappedIds;
-		}else
-			System.out.println("No PreMapped Suppliers found for:"+requirementId);
+		}
 		return existingMappedIds;
 		//return existingMappedIds;
 		
@@ -278,7 +277,7 @@ public List filterSupplierIds(Set mappedSuppliers,long requirementId){
 
 @Transactional
 public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
-	
+	logger.info("Entered into SupplierQuoteDao.updateMappingObjects method");
 	String suppId="";
 	try{
 	if(mapperSuppliers.size() > 0){
@@ -290,7 +289,6 @@ public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
 		mappedobject.setRequirementId(requirementId);
 		mappedobject.setSupplierId(Id);
 	    getSession().save(mappedobject);
-	    System.out.println("List of new Mapped Ids being inserted for: "+requirementId+" Id: "+Id);
 	}
 	
 	//MappingObject mappingobject = new MappingObject();
@@ -306,10 +304,10 @@ public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
 		getSession().saveOrUpdate(mappingobject);	
 	}
 	*/}else
-		System.out.println("Received Empty Mapped Suppliers for Requirement :"+requirementId);
+		logger.info("Received Empty Mapped Suppliers for Requirement :"+requirementId);
 	}catch(Exception e){
 		e.printStackTrace();
-		System.out.println("Ëxception Occured while updating the Mapped Objects for Requirement Id: "+requirementId );
+		logger.info("Ëxception Occured while updating the Mapped Objects for Requirement Id: "+requirementId );
 	}
 }
 

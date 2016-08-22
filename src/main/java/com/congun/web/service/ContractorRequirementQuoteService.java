@@ -22,26 +22,28 @@ public class ContractorRequirementQuoteService{
 	@Autowired
 	ContractorRequirementQuoteDAO dao;
 	
-	private static Logger logger = Logger.getLogger(ContractorRequirementController.class);
+	private static Logger logger = Logger.getLogger(ContractorRequirementQuoteService.class);
 
 	public String saveRequirement(ContractorRequirement requirement) {
-		logger.info("service : In saveRequirement method");
+		logger.info("Entered into ContractorRequirementQuoteService.saveRequirement method");
 		String status = dao.saveRequirement(requirement);
 		return status;
 	}
 
 	public String getRequirementById(long id) {
+		logger.info("Entered into ContractorRequirementQuoteService.getRequirementById method ID:"+id);
 		String status = ApplicationUtil.getJsonResponse(dao.getRequirementById(id));
 		return status;
 	}
 
 	public String updateRequirement(ContractorRequirement requirement) {
+		logger.info("Entered into ContractorRequirementQuoteService.updateRequirement method");
 		String status = dao.updateRequirement(requirement);
 		return status;
 	}
 	
 	public String getAllRequirementsByContractorId(long id) {
-		
+		logger.info("Entered into ContractorRequirementQuoteService.getAllRequirementsByContractorId method ID:"+id);
 		List<ContractorRequirement> reqList = dao.getAllRequirementsByConctractorId(id);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
@@ -50,7 +52,7 @@ public class ContractorRequirementQuoteService{
 		}
 	
 	public String getAllMappedRequirements(long suppId){
-		
+		logger.info("Entered into ContractorRequirementQuoteService.getAllMappedRequirements method SupplierID:"+suppId);
 		List<ContractorRequirement> reqList = dao.getAllMappedRequirements(suppId);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
@@ -60,6 +62,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getDistinctCategory() {
+		logger.info("Entered into ContractorRequirementQuoteService.getDistinctCategory method ");
 		List<DropDownMaster> reqList = dao.getDistinctCategory();
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
@@ -68,6 +71,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getEquipmentByCategory(String category) {
+		logger.info("Entered into ContractorRequirementQuoteService.getEquipmentByCategory method Category"+category);
 		List<DropDownMaster> reqList = dao.getEquipmentByCategory(category);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
@@ -76,6 +80,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getAllRequirements() {
+		logger.info("Entered into ContractorRequirementQuoteService.getAllRequirements method");
 		List<ContractorRequirement> reqList = dao.getAllRequirements();
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
@@ -85,6 +90,7 @@ public class ContractorRequirementQuoteService{
 	}
 
 	public String getRequirementsByequipment(String equipment) {
+		logger.info("Entered into ContractorRequirementQuoteService.getRequirementsByequipment method Equipment:"+equipment);
 		List<ContractorRequirement> reqList = dao.getRequirementsByequipment(equipment);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);

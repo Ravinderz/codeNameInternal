@@ -5,7 +5,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.log4j.Logger;
+
 public class GenerateHash {
+	private static Logger logger = Logger.getLogger(GenerateHash.class);
 	
 	public static String getHash(String convert){
 		
@@ -13,6 +16,7 @@ public class GenerateHash {
 	}
 
 		public static String MD5(String convert){
+			logger.info("Entered into GenerateHash.MD5 method");
 		
 		String md5 = null;
 		String salt="Thisi$Congun#SaltMD5";

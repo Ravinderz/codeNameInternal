@@ -1,5 +1,6 @@
 package com.congun.web.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,76 +15,74 @@ import com.congun.web.service.SupplierQuoteService;
 @RestController
 @RequestMapping("supplier")
 public class SupplierController {
-
+	private static Logger logger = Logger.getLogger(SupplierController.class);
 	@Autowired
 	SupplierQuoteService supplierService;
 	
 	@RequestMapping(value="/submitquote" , method=RequestMethod.POST)
 	public 	String submitQuotation(@RequestBody SupplierQuote supplierQuotation){
-		System.out.println("Posting Quotation details from Supplier");
+		logger.info("Entered into SupplierController.submitQuotation method");
 		return supplierService.submitQuote(supplierQuotation);
 		}
 	
 
 	@RequestMapping(value="/updatequote" , method=RequestMethod.PUT)
 	public 	String updateQuotation(@RequestBody SupplierQuote supplierQuotation){
-		System.out.println("Posting Requirement details from Supplier");
+		logger.info("Entered into SupplierController.updateQuotation method");
 		return supplierService.updateQuote(supplierQuotation);	
 	}
 	
 	@RequestMapping(value="/getquotesbysupplier/{supplierId}" , method=RequestMethod.GET)
 	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId){
-		System.out.println("Getting Quotation details from Supplier with Id : "+suppId);
+		logger.info("Entered into SupplierController.getQuotationsBySupplier method  SupplierId:"+suppId);
 		return supplierService.getQuotationsbySupplier(suppId);	
 	}
 	
 	@RequestMapping(value="/getquotes/{quoteId}" , method=RequestMethod.GET)
 	public 	String getQuotationsById(@PathVariable("quoteId") long quoteId){
-		System.out.println("Getting Quotation details by Quotation Id's : "+quoteId);
+		logger.info("Entered into SupplierController.getQuotationsById method  QuoteId:"+quoteId);
 		return supplierService.getQuotationsbyId(quoteId);	
 	}
 	
 	@RequestMapping(value="/getquotesbyrequirement/{requirementId}" , method=RequestMethod.GET)
 	public 	String getQuotationsByRequirement(@PathVariable("requirementId") long requirementId){
-		System.out.println("Getting Quotation details for Requirement with Id : "+requirementId);
+		logger.info("Entered into SupplierController.getQuotationsByRequirement method  RequirementId:"+requirementId);
 		return supplierService.getQuotationsbyRequirement(requirementId);	
 	}
 	
 	@RequestMapping(value="/getnoofquotes/{requirementId}" , method=RequestMethod.GET)
 	public 	int getnoOfQuotationsByRequirement(@PathVariable("requirementId") long requirementId){
-		System.out.println("Getting Quotation details for Requirement with Id : "+requirementId);
+		logger.info("Entered into SupplierController.getnoOfQuotationsByRequirement method  RequirementId:"+requirementId);
 		return supplierService.getNoOfQuotationsbyRequirement(requirementId);	
 	}
 	
 	@RequestMapping(value="/addequipment" , method=RequestMethod.POST)
 	public String addEquipment(@RequestBody AddEquipment equipment){
-		System.out.println("Adding equipment Details");
-		System.out.println(equipment.getEquipment());
-		System.out.println(equipment.getEquipmentCategory());
+		logger.info("Entered into SupplierController.addEquipment method");
 		return supplierService.addEquipment(equipment);
 	}
 	
 	@RequestMapping(value="/updateequipment" , method=RequestMethod.PUT)
 	public String updateEquipment(@RequestBody AddEquipment equipment){
-		System.out.println("Updating equipment Details with Id:"+equipment.getEquipmentId());
+		logger.info("Entered into SupplierController.updateEquipment method");
 		return supplierService.updateEquipment(equipment);
 	}
 	
 	@RequestMapping(value="/getequipmentbyid/{equipmentId}" ,method=RequestMethod.GET)
 	public String getEquipmentById(@PathVariable int equipmentId){
-		System.out.println("Get equipment By Id");
+		logger.info("Entered into SupplierController.getEquipmentById method  EquipmentId:"+equipmentId);
 		return supplierService.getEquipmentById(equipmentId);
 	}
 	
 	@RequestMapping(value="/getallequipments/{supplierId}" , method=RequestMethod.GET)
 	public String getAllEquipments(@PathVariable Long supplierId){
-		System.out.println("Getting equipment Details");
+		logger.info("Entered into SupplierController.getAllEquipments method  SupplierId:"+supplierId);
 		return supplierService.getAllEquipments(supplierId);
 	}
 	
 	@RequestMapping(value="/deleteEquipmentById/{equipmentId}" ,method=RequestMethod.DELETE)
 	public String deleteEquipmentById(@PathVariable int equipmentId){
-		System.out.println("Delete equipment By Id");
+		logger.info("Entered into SupplierController.deleteEquipmentById method  EquipmentId:"+equipmentId);
 		return supplierService.deleteEquipmentById(equipmentId);
 	}
 	

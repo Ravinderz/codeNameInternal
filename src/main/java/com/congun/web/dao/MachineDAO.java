@@ -2,6 +2,7 @@ package com.congun.web.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.Machines;
 import com.congun.web.model.User;
 import com.congun.web.util.ResponseConstants;
 
 @Repository
 public class MachineDAO {
+	
+	private static Logger logger = Logger.getLogger(MachineDAO.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -30,14 +34,12 @@ public class MachineDAO {
 	
 	@Transactional
 	public Machines getMachineDetails(String category){
+		logger.info("Entered into MachineDAO.getMachineDetails method  Category:"+category);
 		try{
-			System.out.println("Getting details from DAOImpl :"+category+":");
 			Criteria criteria = getSession().createCriteria(Machines.class);
 		Machines machine= (Machines) criteria.add(Restrictions.eq("category",category)).list().get(0);
-		System.out.println("Got machine with "+category+" from database");
 		return machine;
 		}catch(Exception e){
-			System.out.println("Entered Exception Block : ");
 			e.printStackTrace();
 			return null;
 		}
@@ -45,8 +47,9 @@ public class MachineDAO {
 	
 	@Transactional
 	public String insertMachineDetails(Machines machine){
+		logger.info("Entered into MachineDAO.insertMachineDetails method");
 		try{
-			System.out.println("Inserting Machine to DB : "+machine.getCategory()+" :"+machine.model+" :"+machine.getMake());
+			logger.info("Inserting Machine to DB : "+machine.getCategory()+" :"+machine.model+" :"+machine.getMake());
 			getSession().saveOrUpdate(machine);
 			return ResponseConstants.MACHINE_SUCCESS_CODE;
 		}catch(Exception e){
@@ -57,21 +60,20 @@ public class MachineDAO {
 	
 	@Transactional
 	public Machines getMachineDetailsByModel(String model) {
+		logger.info("Entered into MachineDAO.getMachineDetailsByModel method  model:"+model);
 		try{
 			Criteria criteria = getSession().createCriteria(Machines.class);
 			Machines machine= (Machines) criteria.add(Restrictions.eq("model",model)).list().get(0);
-			System.out.println("Got machine with "+model+" from database");
 			return machine;
 			}catch(Exception e){
-				System.out.println("Entered Exception Block : ");
 				e.printStackTrace();
 				return null;
 			}
 	}
 
 	public List<Machines> getSearchResults(String value) {
+		logger.info("Entered into MachineDAO.getSearchResults method  Search value:"+value);
 		String input = "%"+value+"%";
-		System.out.println(" input value :"+input);
 		try{
 			Criteria criteria = getSession().createCriteria(Machines.class);
 			Criterion model = Restrictions.like("model", input);
@@ -89,20 +91,19 @@ public class MachineDAO {
 			return list;
 			
 		}catch(Exception e){
-			System.out.println("Entered Exception Block : ");
 			e.printStackTrace();
 			return null;
 		}
 	}
 	@Transactional
 	public List<Machines> getDistinctModels() {
+		logger.info("Entered into MachineDAO.getDistinctModels method");
 		try{
 			Criteria criteria = getSession().createCriteria(Machines.class);
 			criteria.setProjection(Projections.distinct(Projections.property("model")));
 			List<Machines> list= criteria.list();
 			return list;
 			}catch(Exception e){
-				System.out.println("Entered Exception Block : ");
 				e.printStackTrace();
 				return null;
 			}

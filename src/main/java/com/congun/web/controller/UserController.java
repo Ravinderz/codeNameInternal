@@ -26,27 +26,25 @@ public class UserController {
 	
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	public String login(@RequestBody User user){
-		logger.info("Controller : In login method INFO");
-		logger.debug("Controller : In login method DEBUG");
-		System.out.println("Check login of User :: "+user.getUsername());
+		logger.info("Entered into UserController.login method  User:"+user);
 		return userService.authLogin(user);
 	}
 	
 	@RequestMapping(value="/register" , method=RequestMethod.POST)
 	public String registration(@RequestBody User user){
-		System.out.println(user.getUsername());
+		logger.info("Entered into UserController.registration method  User:"+user);
 		return userService.saveUser(user);		
 	}
 	
 	@RequestMapping(value="/updateuser" , method=RequestMethod.PUT)
 	public 	String updateUser(@RequestBody User user){
-		System.out.println("Starting Update User :"+user.getUsername());
+		logger.info("Entered into UserController.updateUser method  User:"+user);
 		return userService.updateUser(user);
 	}
 		
 	@RequestMapping(value="/getuser/{username}/" , method=RequestMethod.GET)
 	public 	String getUser(@PathVariable("username") String username){
-		System.out.println("Getting details from Controller : "+username);
+		logger.info("Entered into UserController.getUser method  Username:"+username);
 		return userService.getUserDetails(username);	
 	}
 	

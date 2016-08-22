@@ -1,5 +1,6 @@
 package com.congun.web.util;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Repository
 public class CongunXLParser {
+	private static Logger logger = Logger.getLogger(CongunXLParser.class);
 
 	@Autowired
     MachineDAO machinedao;
@@ -46,8 +48,8 @@ public class CongunXLParser {
 	}*/
 
 	public void getMachinesList(String path) {
+		logger.info("Entered into CongunXLParser.getMachinesList method path:"+path);
 		boolean duplicate = false;
-		System.out.println(path);
 		// List machineList = new ArrayList();
 		FileInputStream fis = null;
 		try {
@@ -64,7 +66,6 @@ public class CongunXLParser {
 				Iterator rowIterator = sheet.iterator();
 				int rowcount = 0;
 				// iterating over each row  
-				System.out.println("Initial Row Count :"+rowcount);
 				while (rowIterator.hasNext()) {
 					Machines machine = new Machines();
 					Row row = (Row) rowIterator.next();
@@ -82,13 +83,11 @@ public class CongunXLParser {
 
 							if (cell.getColumnIndex() == 0) {
 								machine.setCategory(cell.getStringCellValue());
-								System.out.println("Category :"+machine.getCategory());
 							}
 							// Cell with index 2 contains marks in Science
 							else if (cell.getColumnIndex() == 1) {
 
 								machine.setEquipment(cell.getStringCellValue());
-								System.out.println("Equipment :"+machine.getEquipment());
 							}
 							// Cell with index 3 contains marks in English
 							else if (cell.getColumnIndex() == 2) {
@@ -99,29 +98,18 @@ public class CongunXLParser {
 									duplicate = false;
 								}
 								machine.setModel(cell.getStringCellValue());
-								System.out.println("Model :"+machine.getModel());
 							} else if (cell.getColumnIndex() == 3) {
 								machine.setMake(cell.getStringCellValue());
-								System.out.println("Make :"+machine.getMake());
 							} else if (cell.getColumnIndex() == 4) {
 								machine.setCapacity(cell.getStringCellValue());
-								System.out.println("Capacity :"+machine.getCapacity());
 							}
 						}
 					}
-					if(machinedao == null){
-						System.out.println("MachineDAO object is null");
-					}else
-						System.out.println("MachineDAO is not null");
+
 					if(duplicate==false){
 						if (machinedao.insertMachineDetails(machine).equals(
 								ResponseConstants.MACHINE_SUCCESS_CODE)) {
 							//rowcount = rowcount+1;
-							System.out.println("Machine at Row Count:" + rowcount + " has been added successfully!!");
-						} else {
-							System.out
-									.println("Exception Occured while adding Machine at row: "
-											+ rowcount);
 						}
 					}
 
@@ -143,6 +131,7 @@ public class CongunXLParser {
 	}
 
 	public static void updateRequirementsFromExcel(String path) {
+		logger.info("Entered into CongunXLParser.updateRequirementsFromExcel method");
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(path);
@@ -171,8 +160,7 @@ public class CongunXLParser {
 						Cell cell = (Cell) cellIterator.next();
 
 						if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
-							System.out.println(cell.getStringCellValue());
-
+							
 							if (cell.getColumnIndex() == 2) {
 								requirement.setTitle(cell.getStringCellValue());
 
@@ -255,17 +243,6 @@ public class CongunXLParser {
 						}
 					}
 
-					if (requirementdao.saveRequirement(requirement).equals(
-							ResponseConstants.CONTRACTOR_SUCCESS_CODE)) {
-						System.out.println("Requirement at Row Count:"
-								+ rowcount + 1
-								+ " has been added successfully!!");
-						// System.out.println("Requirement for Id:"+requirement.getContractorId()+" Category: "+requirement.getEquipmentCategory()+" Equipment: "+requirement.getEquipmentName());
-					} else {
-						System.out
-								.println("Exception Occured while adding requirement at row:"
-										+ rowcount + 1);
-					}
 					rowcount++;
 				}
 
@@ -280,6 +257,7 @@ public class CongunXLParser {
 	}
 
 	public static void updateEquipmentsFromExcel(String path) {
+		logger.info("Entered into CongunXLParser.updateEquipmentsFromExcel method");
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(path);
@@ -308,7 +286,7 @@ public class CongunXLParser {
 						Cell cell = (Cell) cellIterator.next();
 
 						if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
-							System.out.println(cell.getStringCellValue());
+							
 
 							if (cell.getColumnIndex() == 2) {
 								equipment.setSupplierName(cell
@@ -355,22 +333,7 @@ public class CongunXLParser {
 
 						}
 					}
-					if (quotedao.addEquipment(equipment).equals(
-							ResponseConstants.SUPPLIER_SUCCESS_CODE)) {
-						System.out.println("Equipment at Row Count:" + rowcount
-								+ 1 + " has been added successfully!!");
-						/*
-						 * System.out.println("Equpimemt with SupplierId :" +
-						 * equipment.getSupplierId() + " : Make - " +
-						 * equipment.getManufacturer() + " Model - " +
-						 * equipment.getModel() +
-						 * " has been added Successfully");
-						 */
-					} else {
-						System.out
-								.println("Exception Occured while adding Equipment at row:"
-										+ rowcount + 1);
-					}
+					
 					rowcount++;
 				}
 

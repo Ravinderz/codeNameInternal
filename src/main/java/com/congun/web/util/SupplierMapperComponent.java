@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +26,7 @@ import com.congun.web.model.User;
 @Repository
 public class SupplierMapperComponent {
 	
-
+private static Logger logger = Logger.getLogger(SupplierMapperComponent.class);
 @Autowired
 private SessionFactory sessionFactory;
 
@@ -37,11 +38,10 @@ private UserDao userDAO;
 
 
 	public boolean SupplierMapperPreprocessor(ContractorRequirement requirement) {
+		logger.info("Entered into SupplierMapperComponent.SupplierMapperPreprocessor method");
 
 		if (requirement.getEquipmentCategory() != null
 				&& requirement.getEquipmentName() != null) {
-			System.out
-					.println("Equipment Prime categories Exists!! Hence continue for mapping");
 
 			MapSupplier supplierMapper = new MapSupplier(requirement);
 			supplierMapper.setDaemon(true);
@@ -94,11 +94,10 @@ private UserDao userDAO;
 	}
 
 	public void getSupplierDetails(ContractorRequirement requirement) {
-
+		logger.info("Entered into SupplierMapperComponent.getSupplierDetails method  requirement:"+requirement);
 		Set<Long> mappedSupplierIds = new HashSet<Long>();
 		int supplierScore;
 
-		System.out.println("Entered Requirements Mapper");
 		List<AddEquipment> machinesList = quoteDAO.getEquipmentByCategory(requirement);
 
 		for (AddEquipment equipment : machinesList) {
@@ -155,31 +154,23 @@ private UserDao userDAO;
 		
 		if(mappedSupplierIds.size() > 0){
 		sendNotifications(mappedSupplierIds,requirement.getRequirementId());
-		}else
-		{
-			System.out.println("We don't have the Suppliers as per customer Requirement");
 		}
 	}
 	
 	public void sendNotifications(Set mappedSupplierIds,long requirementId){
-		
+		logger.info("Entered into SupplierMapperComponent.sendNotifications method  ");
 		mappedSupplierIds = filterMappedSupplierids(mappedSupplierIds,requirementId);
 		
 		Iterator itr = mappedSupplierIds.iterator();
 		while(itr.hasNext()){
 			Long supplierId =  (Long)itr.next();
 			User user = userDAO.getUserbyId(supplierId.intValue());
-			System.out.println("User Details: ");
-			System.out.println("UserId: "+user.getUserId());
-			System.out.println("Name: "+user.getFirstname() + " "+user.getLastname());
-			System.out.println("EmailId: "+user.getUsername());
-			System.out.println("Mobile: "+user.getMobileNumber());
-			System.out.println("\n");
 		}
 		
 	}
 	
 	public Set filterMappedSupplierids(Set mappedSuppliers,long requirementId){
+		logger.info("Entered into SupplierMapperComponent.filterMappedSupplierids method requirementId: "+requirementId);
 		if(mappedSuppliers.size() > 0){
 		
 			List existingIds = quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
@@ -190,7 +181,7 @@ private UserDao userDAO;
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;
 			}else{
-			System.out.println("Received no already Mapped Ids for RequirementId :"+requirementId+" Mapping Ids for first time");
+			
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;
 			}

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,7 @@ import com.congun.web.util.ResponseConstants;
 
 @Repository
 public class UserDao {
+	private static Logger logger = Logger.getLogger(UserDao.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -30,6 +32,7 @@ public class UserDao {
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public String saveUser(User user){
+		logger.info("Entered into UserDao.saveUser method ");
 		try{
 		List<User> userList = getSession().createCriteria(User.class).add(Restrictions.eq("username", user.getUsername())).list()	;
 		if(userList.size() == 0){
@@ -52,6 +55,7 @@ public class UserDao {
 	
 	@Transactional
 	public String updateUser(User user){
+		logger.info("Entered into UserDao.updateUser method ");
 		try{
 		//User existingUser = (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId", user.getUserId())).list().get(0);
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
@@ -69,15 +73,12 @@ public class UserDao {
 	
 	@SuppressWarnings("unchecked")
 	public User authenticateUser(User user){
+		logger.info("Entered into UserDao.authenticateUser method ");
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		List<User> userList = getSession().createQuery("from User where username = :username and password = :password").setParameter("username", user.getUsername()).setParameter("password",user.getPassword()).list();
 		//user = (User)getSession().createCriteria(User.class).add(Restrictions.eq("user.username", username)).add(Restrictions.eq("user.password", password)).uniqueResult();
 		if(userList.size() > 0){//getting null pointer exception
 			user = userList.get(0);
-			System.out.println("User Exists!!");
-			System.out.println("username :: "+user.getUsername());
-			System.out.println("password :: "+user.getPassword());
-			System.out.println("userID :: "+user.getUserId());
 			return user;
 		}
 		return null;
@@ -86,15 +87,13 @@ public class UserDao {
 
 	@Transactional
 	public User getUserDetails(String username){
+		logger.info("Entered into UserDao.getUserDetails method username: "+username);
 		try{
-			System.out.println("Getting details from DAOImpl :"+username+":");
 			Criteria criteria = getSession().createCriteria(User.class);
 			criteria.setMaxResults(1);
 		User user= (User) criteria.add(Restrictions.eq("username",username)).uniqueResult();
-		System.out.println("Got user with "+user.getUsername()+" from database");
 		return user;
 		}catch(Exception e){
-			System.out.println("Entered Exception Block : ");
 			e.printStackTrace();
 			return null;
 		}
@@ -102,15 +101,13 @@ public class UserDao {
 	
 	@Transactional
 	public User getUserbyId(int id){
+		logger.info("Entered into UserDao.getUserbyId method id: "+id);
 		try{
-			System.out.println("Getting details from DAOImpl for Id :"+id+":");
 			Criteria criteria = getSession().createCriteria(User.class);
 			criteria.setMaxResults(1);
 		User user= (User) criteria.add(Restrictions.eq("userId",id)).uniqueResult();
-		System.out.println("Got user with "+user.getUsername()+" from database");
 		return user;
 		}catch(Exception e){
-			System.out.println("Entered Exception Block : ");
 			e.printStackTrace();
 			return null;
 		}

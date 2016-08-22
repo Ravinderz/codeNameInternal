@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.controller.ContractorRequirementController;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.DropDownMaster;
@@ -30,7 +32,7 @@ import com.congun.web.util.SupplierMapperComponent;
 
 @Repository
 public class ContractorRequirementQuoteDAO{
-	
+	private static Logger logger = Logger.getLogger(ContractorRequirementQuoteDAO.class);
 	@Autowired
 	SessionFactory sessionFactory;
 	
@@ -45,6 +47,7 @@ public class ContractorRequirementQuoteDAO{
 	/*To store contractor requirements into contractorrequirement table*/
 	@SuppressWarnings("deprecation")
 	public String saveRequirement(ContractorRequirement requirement) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.saveRequirement method");
 		try {
 		java.util.Date date= new java.util.Date();
 		Timestamp time = new Timestamp(date.getTime());
@@ -55,11 +58,10 @@ public class ContractorRequirementQuoteDAO{
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
 		
 		if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
-			System.out
-					.println("Mapping the Suppliers for submitted Requirement :"
+			logger.info("Mapping the Suppliers for submitted Requirement :"
 							+ requirement.getRequirementId());
 		} else {
-			System.out.println("Could Not start Mapping for requirement: "
+			logger.info("Could Not start Mapping for requirement: "
 					+ requirement.getRequirementId());
 		}
 		
@@ -72,6 +74,7 @@ public class ContractorRequirementQuoteDAO{
 
 	/*To get requirement details by requirement Id  */
 	public ContractorRequirement getRequirementById(long id) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.getRequirementById method  ID:"+id);
 		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		criteria.add(Restrictions.eq("requirementId", id));
@@ -86,6 +89,7 @@ public class ContractorRequirementQuoteDAO{
     
 	/*To update contractor requirements into contractorrequirement table*/
 	public String updateRequirement(ContractorRequirement requirement) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.updateRequirement method");
 		try{
 		//ContractorRequirement existingReq = (ContractorRequirement) getSession().createCriteria(ContractorRequirement.class).add(Restrictions.eq("requirementId", requirement.getRequirementId()));
 		java.util.Date date= new java.util.Date();
@@ -95,11 +99,10 @@ public class ContractorRequirementQuoteDAO{
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
 		
 		if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
-			System.out
-					.println("Mapping the Suppliers for submitted Requirement :"
+		logger.info("Mapping the Suppliers for submitted Requirement :"
 							+ requirement.getRequirementId());
 		} else {
-			System.out.println("Could Not start Mapping for requirement: "
+			logger.info("Could Not start Mapping for requirement: "
 					+ requirement.getRequirementId());
 		}
 		
@@ -112,6 +115,7 @@ public class ContractorRequirementQuoteDAO{
 	
 	/*To get the list of requirments by contractorid */
 	public List<ContractorRequirement> getAllRequirementsByConctractorId(long id){
+		logger.info("Entered into ContractorRequirementQuoteDAO.getAllRequirementsByConctractorId method");
 		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		criteria.add(Restrictions.eq("contractorId", id)).add( Restrictions.eq("activeFlag", 1));
@@ -124,13 +128,14 @@ public class ContractorRequirementQuoteDAO{
 	}
 	
 	public List<ContractorRequirement> getAllMappedRequirements(long suppId){
+		logger.info("Entered into ContractorRequirementQuoteDAO.getAllMappedRequirements method  SupplierID:"+suppId);
 		try{
 			List reqList = new ArrayList<ContractorRequirement>();
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MappingObject.class);
 			criteria.setProjection(Projections.property("requirementId"));
 			List mappedRequirementsList = (ArrayList)(criteria.add(Restrictions.eq("supplierId", suppId))).list();
 			if(mappedRequirementsList.size() > 0){
-				System.out.println("There Are Mapper Requirements for SupplierID: "+suppId);
+				logger.info("There Are Mapper Requirements for SupplierID: "+suppId);
 				for(Object obj:mappedRequirementsList)
 				{
 					ContractorRequirement requirement = getRequirementById(((Long)obj).longValue());
@@ -145,6 +150,7 @@ public class ContractorRequirementQuoteDAO{
 	}
 	
 	public String updateNoOfQuotes(long requirementId){
+		logger.info("Entered into ContractorRequirementQuoteDAO.updateNoOfQuotes method  requirementId:"+requirementId);
 		try{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 		ContractorRequirement contractorRequirement = (ContractorRequirement)criteria.add(Restrictions.eq("requirementId",requirementId)).add( Restrictions.eq("activeFlag", 1)).list().get(0);
@@ -158,6 +164,7 @@ public class ContractorRequirementQuoteDAO{
 	}
 
 	public List<DropDownMaster> getDistinctCategory() {
+		logger.info("Entered into ContractorRequirementQuoteDAO.getDistinctCategory method ");
 		try{
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DropDownMaster.class);
 			criteria.setProjection(Projections.distinct(Projections.property("equipmentCategory")));
@@ -171,8 +178,8 @@ public class ContractorRequirementQuoteDAO{
 	}
 
 	public List<DropDownMaster> getEquipmentByCategory(String category) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.getEquipmentByCategory method ");
 		try{
-			System.out.println("Category :"+category);
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DropDownMaster.class);
 			criteria.setProjection(Projections.property("equipmentName"));
 			criteria.add(Restrictions.eq("equipmentCategory", category));
@@ -186,6 +193,7 @@ public class ContractorRequirementQuoteDAO{
 	}
 	
 	public List<ContractorRequirement> getAllRequirements(){
+		logger.info("Entered into ContractorRequirementQuoteDAO.getAllRequirements method ");
 		try{
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 			criteria.addOrder(Order.desc("requirementId"));
@@ -200,6 +208,7 @@ public class ContractorRequirementQuoteDAO{
 
 	public List<ContractorRequirement> getRequirementsByequipment(
 			String equipment) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.getRequirementsByequipment method equipment:"+equipment);
 		try{
 			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
 			criteria.add(Restrictions.eq("equipmentName", equipment));
