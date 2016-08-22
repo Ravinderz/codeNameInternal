@@ -46,6 +46,16 @@
 						} */
 					
 						
+						$('#modal-container-login').on('hidden.bs.modal', function(){
+							console.log("clearing the fields");
+						    $(this).find('form')[0].reset();
+						});
+						
+						$('#modal-container-register').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						});
+						
+						
 						$("#register").click(
 								function() {
 								var success = "successfully created";

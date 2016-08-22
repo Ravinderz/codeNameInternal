@@ -526,9 +526,34 @@ border: 1px solid transparent;
 	margin-right:30px;
 }
 
+#login-form .error {
+  color: #ff0000;
+}
 
+label.error { width: 250px; display: block; float: left; color: red; padding-left: 10px; } 
 
+.search-bar{
+	position:absolute;
+	width : 330px;
+	top: 380px;
+	left:1100px;
+}
 
+#search-input {
+	border-radius : 0px;
+} 
+
+#search-btn{
+	border-radius : 0px;
+	height:34px;
+	color:#ffc13b;
+	font-size:15px;
+}
+
+#search-btn:hover{
+	background-color:#ffc13b;
+	color:#fff;
+}
 
 
 

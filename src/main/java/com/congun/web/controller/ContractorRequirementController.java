@@ -1,5 +1,6 @@
 package com.congun.web.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +14,14 @@ import com.congun.web.service.ContractorRequirementQuoteService;
 @RestController
 @RequestMapping("contractor")
 public class ContractorRequirementController {
-	
+	  private static Logger logger = Logger.getLogger(ContractorRequirementController.class);
+	  
 	@Autowired
 	ContractorRequirementQuoteService service;
 	
 	@RequestMapping(value = "/contractorRequirement" , method = RequestMethod.POST)
 	public String contractorRequirement(@RequestBody ContractorRequirement requirement ){
+		logger.info("Controller : In ContractorRequirementController method");
 		System.out.println("ENTERED INTO CONTRACTOR REQUIRMENT");
 		return service.saveRequirement(requirement);	
 		}

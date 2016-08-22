@@ -208,9 +208,14 @@ border-bottom:2px solid grey;
 display:none;
 }
 
+.contractor-viewable li:nth-child(2){
+display:none;
+}
+
 .contractor-viewable li:nth-child(4){
 display:none;
 }
+
 
 .header .left{
 float:left;

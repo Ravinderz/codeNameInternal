@@ -42,8 +42,35 @@
 	    }
 	};
 	
-	var category = getUrlParameter('category');
-	var sub_ctg = getUrlParameter('sub-category');
+	var category = getUrlParameter("category");
+	var sub_ctg = getUrlParameter("sub-category"); 
+	var reqList = "";
+	var requirements = [];
+	var imagePath = "../images/"+category+"/"+sub_ctg+".png";
+	console.log(imagePath)
+	$.ajax({
+		url : "http://localhost:8080/congun/contractor/getRequirementsByequipment/"+sub_ctg,
+		type : "get",
+		contentType : "application/json; charset=utf-8",
+		data : {},
+		success : function(response) {
+			response = $.parseJSON(response);
+			console.log(response);
+			$.each(response,function(index,value){
+				requirements[value.requirementId] = value;
+				reqList += "<li class='item'><div class='item-content'><div class='item-content-header'><img src='"+imagePath+"' height='100px' width='100px' alt='image here' />"
+				+"<div class='item-content-header-meta'><h3>Title</h3><p>"+value.title+"</p></div></div><div class='clear-fix'></div>"
+				+"<div class='item-content-main'><ul><li><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
+				+"<li><h5>Model</h5><p>"+value.specificationModel+"</p></li><li><h5>Start date</h5><p>"+value.startDate+"</p></li>"
+				+"<li><h5>Quantity</h5><p>"+value.quantity+"</p></li><li><h5>Duration</h5><p>"+value.duration+" months</p></li></ul>"
+				+"<a href='#' class='btn btn-warning view-btn' id="+value.requirementId+">View</a><div class='clear-fix'></div></div></div></li>";
+				//reqList += '<ul><li class="dynamic-content" id='+value.quoteId+'>Category: '+value.equipmentCategory+'<span style="padding-left:194px;float:centre;">Equipment : '+value.equipmentName+'</span><span style="padding-left:100px;float:right">Quantity: '+value.quantity+'</span><br><br><span>Model: '+value.model+'</span><span style="padding-left:250px">Manufacturer: '+value.manufacturer+'</span><span style="padding-left:100px;float:right">YearOfManufacture: '+value.manufacturedyear+'</span><br><br>Created Date: '+value.createdTime+'<span style="padding-left:70px">Final Price: <b>'+value.finalQuotePrice+'</b></span><a href="#" class="btn btn-warning">View</a></li></ul>';
+			});
+			
+			$('.ul-item').append(reqList);
+		}
+	});
+
 	
 	$('.post-req-btn').click(function(e){
 		e.preventDefault();
@@ -53,14 +80,20 @@
 		$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
 	});
 	
-	
-	$('.view-btn').click(function(e){
+	$('.ul-item').on('click','.view-btn',function(e){
+		console.log("Ëntered to view requirement");
 		e.preventDefault();
 		console.log("inside click function");
 		console.log("category",category);
 		console.log("sub",sub_ctg);
+		console.log(this.id);
+		console.log(requirements[this.id]);
+		var requirement = JSON.stringify(requirements[this.id]);
+		console.log(requirement);
+		sessionStorage.setItem("requirement",requirement);
 		$(location).attr('href',"requirement-view.html?category="+category+"&sub-category="+sub_ctg);
 	});
+	
 
 	$('.logout').click(function(){
 	       console.log("inside logout function")
@@ -136,95 +169,6 @@
 				</div>
 				<div class="col-md-8 list">
 					<ul class="ul-item">
-						<li class="item">
-							<div class="item-content">
-								<div class="item-content-header">
-									<img src="../images/BoreDrillers/boredriller.png" height="100px"
-										width="100px" />
-									<div class="item-content-header-meta">
-										<h3>Title</h3>
-										<p>This is for work at my new shopping mall This is for
-											work at my new shopping mall This is foThis is for work at my
-											new shopping mall This is for work at my new shopping mall</p>
-									</div>
-								</div>
-								<div class="clear-fix"></div>
-								<div class="item-content-main">
-									<ul>
-										<li>
-											<h5>Machine Type</h5>
-											<p>EarthMovingEquipment/Excavator</p>
-										</li>
-										<li>
-											<h5>Model</h5>
-											<p>JCB-DS2TON</p>
-										</li>
-
-										<li>
-											<h5>Start date</h5>
-											<p>25-Aug-2016</p>
-										</li>
-										<li>
-											<h5>Price</h5>
-											<p>10000</p>
-
-										</li>
-										<li>
-											<h5>Quantity</h5>
-											<p>1</p>
-										</li>
-										<li>
-											<h5>Duration</h5>
-											<p>1 month</p>
-										</li>
-									</ul>
-									<a href="#" class="btn btn-warning view-btn">View</a>
-									<div class="clear-fix"></div>
-								</div>
-							</div>
-
-						</li>
-						<li class="item">
-							<div class="item-content">
-								<div class="item-content-header">
-									<img src="../images/BoreDrillers/piledriving.png" height="100px"
-										width="100px" />
-									<div class="item-content-header-meta">
-										<h3>Title</h3>
-										<p>Taking the cement mixer for work at home</p>
-									</div>
-								</div>
-								<div class="clear-fix"></div>
-								<div class="item-content-main">
-									<ul>
-										<li>
-											<h5>Machine Type</h5>
-											<p>CementMixer/Cement mixer</p>
-										</li>
-										<li>
-											<h5>Start date</h5>
-											<p>10-Aug-2016</p>
-										</li>
-										<li>
-											<h5>Price</h5>
-											<p>10000000</p>
-										</li>
-										<li>
-											<h5>Quantity</h5>
-											<p>1</p>
-										</li>
-										<li>
-											<h5>Duration</h5>
-											<p>3 months</p>
-										</li>
-
-									</ul>
-									<a href="#" class="btn btn-warning">View</a>
-									<div class="clear-fix"></div>
-								</div>
-							</div>
-
-						</li>
 					</ul>
 				</div>
 				<div class="col-md-2 ads">

@@ -231,6 +231,8 @@
     	$('#contractorId').val(contractor_details.userId);
     	$('#contractorName').val(contractor_details.firstname+" "+contractor_details.lastname);
     	
+    	
+    	
     	var categoryParam = getUrlParameter("category");
     	var sub_category = getUrlParameter("sub-category"); 
     	
@@ -250,8 +252,11 @@
     					category[i] = value;
     					i++
     			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
     			$("#category").val(categoryParam);
-    			if(sub_category !== null ){
+    			}
+    			if(sub_category !== undefined ){
     				$.ajax({
     					
     					url : "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+categoryParam,
@@ -264,7 +269,9 @@
     	    				$("#equipment").append($("<option />").val(value).text(value));
     	    				
     	    				});
+    	    				if(sub_category !== undefined){
     	    				$("#equipment").val(sub_category);
+    	    				}
     	    			}
     	    			});
     			}else{

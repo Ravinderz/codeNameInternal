@@ -37,27 +37,53 @@
 		    }
 		};
 		
-		var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-	
+			
 		
 		var category = getUrlParameter("category");
 		var sub_ctg = getUrlParameter("sub-category"); 
+		var reqId = getUrlParameter("aaadd4eejryfjksss48855knkjdsf3akd839k");
 		
-		/* var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-		if (user !== null) {
-			console.log("inside if");
-			$(location).attr('href',"requirement-display-logged.html?category="+category+"&sub-category="+sub_ctg);
-		} else {
-			console.log("nothing to do");
+		
+		console.log("reqId ",reqId);
+		
+		$.ajax({
+			url:"http://localhost:8080/congun/contractor/contractorRequirement/"+reqId,
+			type:"get",
+			contentType : "application/json; charset=utf-8",
+			data : {},
+			/* datatype : "json",  */
+			success:function(response){
+				console.log(response);
+				var requirement = $.parseJSON(response);
+				console.log(requirement);
+				
+				$('#title').html(requirement.title);
+				$('#category').html(requirement.equipmentCategory);
+				$('#sub-category').html(requirement.equipmentName);
+				$('#model').html(requirement.specificationModel);
+				$('#mfg').html(requirement.manufacturer);
+				$('#mfg-year').html(requirement.equipmentManufactureYear);
+				$('#desc').html(requirement.workDescription);
+				$('#created-by').html(requirement.contractorName);
+				$('#created-on').html(requirement.createdTime);
+				$('#duration').html(requirement.duration+" months");
+				//$('#contact').html(user.mobileNumber);
+				$('#start-date').html(requirement.startDate);
+			}
 			
-		}  */
-	
+		});	
+		 
+		$('#modal-container-login').on('hidden.bs.modal', function(){
+			console.log("clearing the fields");
+		    $(this).find('form')[0].reset();
+		});
 		
+		$('#modal-container-register').on('hidden.bs.modal', function(){
+		    $(this).find('form')[0].reset();
+		});
+			
 		
+			
 	$("#register").click(function() {
 	var success = "successfully created";
 	var successUrl = "#modal-container-login";
@@ -343,40 +369,40 @@
                 <div class="item-content">
                     <div class="header">
                         <h4>Title</h4>
-                        <h5>This is the place where the title of the requirement will be posted</h5>
+                        <h5 id="title">This is the place where the title of the requirement will be posted</h5>
                         <img src="images/EarthMoving/backhoe.png" height="200px" width="200px" class="left"/>
                         <div class="right">
                             <ul>
-                                <li><h5>Machine Category</h5><p>Earth Moving</p></li>
-                                <li><h5>Machine Sub-Category</h5><p>Backhoe</p></li>
-                                <li><h5>Model</h5><p>JD-10TON</p></li>
-                                <li><h5>Manufacturer</h5><p>JCB</p></li>
-                                <li><h5>Manufacture year</h5><p>2015</p></li>
+                               <li><h5>Machine Category</h5><p id="category">Earth Moving</p></li>
+                                <li><h5>Machine Sub-Category</h5><p id="sub-category">Backhoe</p></li>
+                                <li><h5>Model</h5><p id="model">JD-10TON</p></li>
+                                <li><h5>Manufacturer</h5><p id="mfg">JCB</p></li>
+                                <li><h5>Manufacture year</h5><p id="mfg-year">2015</p></li>
                             </ul>
                         </div>
                     </div>
                     <div class="description">
                         <h4>Description</h4>
-                        <p>This is the place holder for description... At present this will be filled with lorem ipsum text
+                        <p id="desc">This is the place holder for description... At present this will be filled with lorem ipsum text
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
                     </div>
                     <div class="requirement-meta">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="col-content"><h5>Created by</h5><p>some user</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Created on</h5><p>10-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Start date</h5><p>15-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Duration</h5><p>3 Months</p></div>
+                                    <div class="col-content"><h5>Created by</h5><p id="created-by">some user</p></div>
                                 </div>
                                 <div class="col-md-3">
-                                   <div class="col-content"><h5>Contact</h5><p>+91-9988776655</p></div>
+                                    <div class="col-content"><h5>Created on</h5><p id="created-on">10-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-content"><h5>Start date</h5><p id="start-date">15-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                   <!-- <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div> -->
                                 </div>
                             </div>
                         </div>

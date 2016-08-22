@@ -49,8 +49,8 @@
 
 .content-main .item-content-main ul li{
     display: inline-block;
-    padding-left: 10px;
-    padding-right:10px;
+    padding-left: 20px;
+    padding-right:20px;
 }
 
 .content-main .item-content-main ul li:nth-child(1){

@@ -2,10 +2,12 @@ package com.congun.web.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.controller.ContractorRequirementController;
 import com.congun.web.dao.ContractorRequirementQuoteDAO;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
@@ -19,8 +21,11 @@ public class ContractorRequirementQuoteService{
 	
 	@Autowired
 	ContractorRequirementQuoteDAO dao;
+	
+	private static Logger logger = Logger.getLogger(ContractorRequirementController.class);
 
 	public String saveRequirement(ContractorRequirement requirement) {
+		logger.info("service : In saveRequirement method");
 		String status = dao.saveRequirement(requirement);
 		return status;
 	}

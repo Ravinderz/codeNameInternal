@@ -1,5 +1,6 @@
 package com.congun.web.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,7 @@ import com.congun.web.service.UserService;
 @RestController
 @RequestMapping("user")
 public class UserController {
-	
+	private static Logger logger = Logger.getLogger(UserController.class);
 	@Autowired
 	UserService userService;
 	
@@ -25,6 +26,8 @@ public class UserController {
 	
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	public String login(@RequestBody User user){
+		logger.info("Controller : In login method INFO");
+		logger.debug("Controller : In login method DEBUG");
 		System.out.println("Check login of User :: "+user.getUsername());
 		return userService.authLogin(user);
 	}
