@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/custom.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
 <script src="js/validation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -24,7 +25,6 @@
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
 		registerform_submit = validateOnFocusout($("#register-form"));
-						
 						var user = sessionStorage.getItem("user");
 						user = $.parseJSON(user);
 						console.log(user);
@@ -56,7 +56,7 @@
 						registerform_submit = validateOnClick($(this));
 						if(registerform_submit){
 						 $.ajax({
-						url : "user/register",
+						url : AppData.relativeUrl+"user/register",
 						type : "post",
 						contentType : "application/json; charset=utf-8",
 						data : data,
@@ -94,7 +94,7 @@
 						if(loginform_submit){
 						console.log("button submiittteed");
 						$.ajax({
-						url : "user/login",
+						url : AppData.relativeUrl+"user/login",
 						type : "post",
 						contentType : "application/json; charset=utf-8",
 						data : data,
@@ -142,7 +142,7 @@
 							if(!search_val == ""){
 							console.log("search bar value :: ",search_val);
 							$.ajax({
-								url : "machine/search/"+search_val,
+								url : AppData.relativeUrl+"machine/search/"+search_val,
 								type : "get",
 								contentType : "application/json; charset=utf-8",
 								data : {},
@@ -245,7 +245,7 @@
 													Email </label>
 												<div class="col-sm-12">
 													<input type="text" name="username" placeholder="username"
-														class="form-control" id="username" data-validation="required email">
+														class="form-control" id="username" >
 												</div>
 											</div>
 											<div class="form-group">
@@ -253,7 +253,7 @@
 													Password </label>
 												<div class="col-sm-12">
 													<input type="password" class="form-control" name="password"
-														placeholder="password" id="password" data-validation="required">
+														placeholder="password" id="password" >
 												</div>
 											</div>
 
@@ -384,6 +384,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- register modal ends -->
 			</div>
 		</div>
 	</div>
@@ -394,8 +395,7 @@
 					<h2>Congun</h2>
 					<p>Great rental machines</p>
 				</div>
-			</div>
-			<div class="search-bar">
+				<div class="search-bar">
 					<form>
 						 <div class="input-group">
       						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
@@ -405,6 +405,8 @@
     					</div>
 					</form>
 				</div>
+			</div>
+			
 		</div>
 	</div>
 	<div class="container">

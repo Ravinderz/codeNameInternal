@@ -156,6 +156,21 @@
                                 <button type="button"  id="btn-submit" class="btn btn-next">Submit</button>
                             </div>
                         </fieldset>
+                        <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Requirement posted successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
                     </form>
                 </div>
             </div>
@@ -167,6 +182,7 @@
     <script src="js/jquery.backstretch.min.js"></script>
     <script src="js/retina-1.1.0.min.js"></script>
     <script src="js/requirement-scripts.js"></script>
+    <script src="js/appProperties.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
     	
@@ -188,9 +204,11 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
+    	var categoryParam = getUrlParameter('category');
+    	var equipment = getUrlParameter('equipment');
     	console.log('reqid',reqid);
-    	//var user = sessionStorage.getItem("user");
-		var user = localStorage.getItem("user");
+    	var user = sessionStorage.getItem("user");
+		//var user = localStorage.getItem("user");
 		console.log(user);
     	user = $.parseJSON(user);
     	$('#supplierId').val(user.userId);
@@ -201,39 +219,64 @@
     	
     	var category = []
     	$.ajax({
-    		url :"http://localhost:8080/congun/contractor/getDistinctCategory",
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
     		type:"get",
     		data:{},
     		success:function(response){
     			response = $.parseJSON(response);
     			var i = 0;
-    			
+    			console.log(response);
     			$.each(response,function(index,value){
     				$("#category").append($("<option />").val(value).text(value));
     					category[i] = value;
     					i++
     			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
     			$.ajax({
-    				url : "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+category[0],
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
     			type:"get",
     			data:{},
     			success:function(equipments){
     				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
     				$.each(equipments,function(index,value){
     				$("#equipment").append($("<option />").val(value).text(value));
     				
     				});
     			}
     			});
+    			}
     		}
     	});
     	
-/* This function will be called when there is change in the category dropdown */
+    	/* This function will be called when there is change in the category dropdown */
     	
     	$("#category").on('change',function(){
     		var selectedOption = $("#category option:selected").text();
     		console.log("selected option ",selectedOption);
-    		var url = "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+selectedOption; 
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
     		console.log("url ",url);
     		$.ajax({
     			url:url,
@@ -251,6 +294,7 @@
     		});
     	});
     	
+    	
        
 /* This action will be called when a contractor will submit the form  */
     	
@@ -260,12 +304,20 @@
 		console.log(data);
             
             $.ajax({
-			url:"http://localhost:8080/congun/supplier/submitquote",
+			url:AppData.relativeUrl+"supplier/submitquote",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
 		     success:function(data){
 		    	 console.log(data);
+		    	 if(data === "SS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',AppData.relativeUrl+"user/dashboard.html");
+		    			 //history.back();	    
+		    			});
+		    	 }
 		      }
 
                 });

@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/equipment.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script src="js/appProperties.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -65,7 +65,7 @@
 
 							
 								$.ajax({
-								url : "user/register",
+								url : AppData.relativeUrl+"user/register",
 								type : "post",
 								contentType : "application/json; charset=utf-8",
 								data : data,
@@ -89,7 +89,7 @@
 								var data = JSON.stringify($("#login-form").serializeObject());
 
 								$.ajax({
-								url : "user/login",
+								url : AppData.relativeUrl+"user/login",
 								type : "post",
 								contentType : "application/json; charset=utf-8",
 								data : data,
@@ -311,7 +311,7 @@
 					<div class="modal fade" id="modal-container-login" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
-							<div class="modal-content">
+							<div class="modal-content login-modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
@@ -319,14 +319,14 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-box">
-										<form class="form-horizontal f1 login-form" id="login-form"
-											role="form">
+										<form class="form-horizontal login-form" id="login-form"
+											role="form" name="login-form">
 											<div class="form-group">
 												<label for="username" class="col-sm-2 control-label sr-only">
 													Email </label>
 												<div class="col-sm-12">
-													<input type="email" name="username" placeholder="username"
-														class="form-control" id="Email">
+													<input type="text" name="username" placeholder="username"
+														class="form-control" id="username" >
 												</div>
 											</div>
 											<div class="form-group">
@@ -334,7 +334,7 @@
 													Password </label>
 												<div class="col-sm-12">
 													<input type="password" class="form-control" name="password"
-														placeholder="password" id="Password">
+														placeholder="password" id="password" >
 												</div>
 											</div>
 
@@ -346,12 +346,26 @@
 											</div>
 
 
-											<div class="f1-buttons">
-												<button type="button" id="login-btn" class="btn btn-next">Login</button>
+											<div class="login-btn">
+												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
 											</div>
-
+											<div class="clear-fix"></div>
 										</form>
 									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Registration successful ...</div>
 								</div>
 							</div>
 						</div>
@@ -362,16 +376,16 @@
 				<div class="modal fade" id="modal-container-register" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
-						<div class="modal-content">
+						<div class="modal-content register-modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">×</button>
 								<h4 class="modal-title" id="myModalLabel">Register</h4>
 							</div>
 							<div class="modal-body">
-								<div class="register-container">
+								
 									<form class="form-horizontal" role="form" id="register-form">
-										<div class="form-group">
+										<div class="form-group radio">
 											<label class="radio-inline"> <input type="radio"
 												id="role" name="role" value="supplier">Supplier
 											</label> <label class="radio-inline"> <input type="radio"
@@ -395,14 +409,14 @@
 										<div class="form-group">
 											<label for="username" class="sr-only"> Email </label>
 											<div class="col-sm-12">
-												<input type="email" class="form-control" id="username"
+												<input type="text" class="form-control" id="register-username"
 													placeholder="email" name="username">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="password" class="sr-only"> Password </label>
 											<div class="col-sm-12">
-												<input type="password" class="form-control" id="password"
+												<input type="password" class="form-control" id="register-password"
 													placeholder="password" name="password">
 											</div>
 										</div>
@@ -438,17 +452,20 @@
 													name="company_individual_profile">
 											</div>
 										</div>
+										
 										<div class="form-group">
 											<div class="f1-buttons">
-												<button type="button" id="register" class="btn btn-next">Register</button>
+												<button type="button" id="register" class="btn btn-next modal-btn">Register</button>
 											</div>
 										</div>
+										<div class="clear-fix"></div>
 									</form>
-								</div>
+								
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- register modal ends -->
 			</div>
 		</div>
 	</div>

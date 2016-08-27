@@ -15,11 +15,9 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/dashboard.css">
-<link rel="stylesheet" href="../css/theme-default.min.css">
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/form-validator/jquery.form-validator.min.js"></script>
-<!-- <script src="http://code.jquery.com/jquery-1.8.3.js"></script> -->
+<script src="../js/appProperties.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -55,7 +53,7 @@
 	$('#requirement').addClass("active");
 	$('#contents-list').html("");
 	$.ajax({
-		url:"http://localhost:8080/congun/contractor/getAllRequirements/"+user.userId,
+		url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
 		/*+user.userId,*/
 		type:"get",
 		data:{},
@@ -86,7 +84,7 @@
 	/* This is for getting all mapped requirements for a particular contractor */
 	
 				$.ajax({
-				url:"http://localhost:8080/congun/contractor/getmappedrequirements/"+user.userId,
+				url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId,
 				/*+user.userId,*/
 				type:"get",
 				data:{},
@@ -112,7 +110,7 @@
 	/* This is for getting all the equipments for a particular user */
 	
 				$.ajax({
-				url:"http://localhost:8080/congun/supplier/getallequipments/"+user.userId,
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
 				type:"get",
 				data:{},
 				success:function(response){
@@ -135,7 +133,7 @@
 	/* This is for getting all the requirements for a particular user*/
 	
 				$.ajax({
-				url:"http://localhost:8080/congun/contractor/getAllRequirements/"+user.userId,
+				url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
 				/*+user.userId,*/
 				type:"get",
 				data:{},
@@ -160,7 +158,7 @@
 	/* This is for getting all the quotations for a particular user */
 	
 				$.ajax({
-				url:"http://localhost:8080/congun/supplier/getquotesbysupplier/"+user.userId,
+				url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+user.userId,
 				/*+user.userId,*/
 				type:"get",
 				data:{},
@@ -182,7 +180,7 @@
 		$('#requirement').removeClass("active");
 	$('#contents-list').html("");
 	console.log("Entered Add Equipement Form");
-	reqList = '<h3 style="padding-left:50px">Fill in Details below to add your Equipment..</h3><form id="addequipment-form" align="left" style="padding-left:50px;margin-top:20px"><table><tr><td><p>Equipment Category <span style="padding-left:13px;font-weight:bold;padding-right:20px;">:</span></p></td><td></span><select id="category" class="f1-category form-control" name="equipmentCategory"></select></td><td></td></tr><tr><td><p>EquipmentName <span style="padding-left:38px;font-weight:bold;padding-right:20px;">:</span></td><td><select id="equip-subCategory" name="equipmentName" class="f1-equipment form-control"></select></td><td></td></tr><tr><td><p>Manufacturer<span style="padding-left:63px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="manufacturer"></input></td><td></td></tr><tr><td><p>Manufactured Year <span style="padding-left:23px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" name="yearOfManufacturing" data-validation="required"></input></td><td><span id="manufacturedyear" style="padding-left:10px;">(format- YYYY Eg: 2016)</span></td></tr><tr><td><p>Model<span style="padding-left:105px;font-weight:bold;padding-right:20px;"> :</span></td><td><input type="text" class="form-control" value="" data-validation="required" name="model"></input></td><td></td></tr><tr><td><p>Capacity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="capacity"></input></td><td></td></tr><tr><td><p>Quantity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td> <input type="text" class="form-control" value="" data-validation="required" name="quantity"></input></td><td></td></tr><tr><td>&nbsp</td></tr><tr align="right"><td></td><td><button type="button" id="equipment-submit-form" >Submit</button><span style="padding-left:20px"></span><input type="reset" value="Reset"></input></td></tr><tr><td></td><input type="hidden" name="supplierId" value='+user.userId+'><td><input type="hidden" name="supplierName" value='+user.firstname+'&nbsp;'+user.lastname+'></td></tr></table></form>';
+	reqList = '<h3 style="padding-left:50px">Fill in Details below to add your Equipment..</h3><form id="addequipment-form" align="left" style="padding-left:50px;margin-top:20px"><table><tr><td><p>Equipment Category <span style="padding-left:13px;font-weight:bold;padding-right:20px;">:</span></p></td><td></span><select id="category" class="f1-category form-control" name="equipmentCategory"></select></td><td></td></tr><tr><td><p>EquipmentName <span style="padding-left:38px;font-weight:bold;padding-right:20px;">:</span></td><td><select id="equip-subCategory" name="equipment" class="f1-equipment form-control"></select></td><td></td></tr><tr><td><p>Manufacturer<span style="padding-left:63px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="manufacturer"></input></td><td></td></tr><tr><td><p>Manufactured Year <span style="padding-left:23px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" name="yearOfManufacturing" data-validation="required"></input></td><td><span id="manufacturedyear" style="padding-left:10px;">(format- YYYY Eg: 2016)</span></td></tr><tr><td><p>Model<span style="padding-left:105px;font-weight:bold;padding-right:20px;"> :</span></td><td><input type="text" class="form-control" value="" data-validation="required" name="model"></input></td><td></td></tr><tr><td><p>Capacity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="capacity"></input></td><td></td></tr><tr><td><p>Quantity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td> <input type="text" class="form-control" value="" data-validation="required" name="quantity"></input></td><td></td></tr><tr><td>&nbsp</td></tr><tr align="right"><td></td><td><button type="button" id="equipment-submit-form" >Submit</button><span style="padding-left:20px"></span><input type="reset" value="Reset"></input></td></tr><tr><td></td><input type="hidden" name="supplierId" value='+user.userId+'><td><input type="hidden" name="supplierName" value='+user.firstname+'&nbsp;'+user.lastname+'></td></tr></table></form>';
 	  $('#contents-list').append(reqList);
 	  
 	  
@@ -190,7 +188,7 @@
   	
   	var category = []
   	$.ajax({
-  		url :"http://localhost:8080/congun/contractor/getDistinctCategory",
+  		url :AppData.relativeUrl+"contractor/getDistinctCategory",
   		type:"get",
   		data:{},
   		success:function(response){
@@ -203,7 +201,7 @@
   					i++
   			});
   			$.ajax({
-  				url : "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+category[0],
+  				url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
   			type:"get",
   			data:{},
   			success:function(equipments){
@@ -231,7 +229,7 @@
 	$("#contents-list").on('change','#category',function(){
   		var selectedOption = $("#category option:selected").text();
   		console.log("selected option ",selectedOption);
-  		var url = "http://localhost:8080/congun/contractor/getEquipmentByCategory/"+selectedOption; 
+  		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
   		console.log("url ",url);
   		$.ajax({
   			url:url,
@@ -259,7 +257,7 @@
         reqList = "";
 		
             $.ajax({
-			url:"http://localhost:8080/congun/supplier/addequipment",
+			url:AppData.relativeUrl+"supplier/addequipment",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -286,7 +284,7 @@
 						console.log("opening equipment modal");
 						$('#contents-list').html("");
 						$.ajax({
-				url:"http://localhost:8080/congun/supplier/getallequipments/"+user.userId,
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
 				type:"get",
 				data:{},
 				success:function(response){
@@ -317,7 +315,7 @@
 		var data = "";
             
             $.ajax({
-			url:"http://localhost:8080/congun/supplier/deleteEquipmentById/"+id,
+			url:AppData.relativeUrl+"supplier/deleteEquipmentById/"+id,
 		     type:"delete",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -345,7 +343,7 @@
 						console.log("opening equipment modal");
 						$('#contents-list').html("");
 						$.ajax({
-				url:"http://localhost:8080/congun/supplier/getallequipments/"+user.userId,
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
 				type:"get",
 				data:{},
 				success:function(response){
@@ -390,7 +388,7 @@
 		console.log(data);
             
             $.ajax({
-			url:"http://localhost:8080/congun/supplier/updateequipment",
+			url:AppData.relativeUrl+"supplier/updateequipment",
 		     type:"put",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -418,7 +416,7 @@
 						console.log("opening equipment modal");
 						$('#contents-list').html("");
 						$.ajax({
-				url:"http://localhost:8080/congun/supplier/getallequipments/"+user.userId,
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
 				type:"get",
 				data:{},
 				success:function(response){
