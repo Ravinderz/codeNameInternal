@@ -32,6 +32,16 @@
 			$(location).attr('href',"equipment.html?category="+category);
 		});
 		
+		$('#dashboard').click(function(){
+			console.log("inside dashboard click")
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+			
+		});
+		
 		$('.logout').click(function(){
 		       console.log("inside logout function")
 		       var user = sessionStorage.getItem("user");
@@ -82,7 +92,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
+								<li><a href="#"><span id="dashboard">Dashboard</span></a></li>
 								<li><a href="#" role="button"><span id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>

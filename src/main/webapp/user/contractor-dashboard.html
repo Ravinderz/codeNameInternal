@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+    <div class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 navigation">
+			<nav class="navbar navbar-defaut navbar-top" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"> <img id="nav-logo" src="..\images\logo_new.png" height="75px" width="200px" />
+						</a>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar-collapse">
+														<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="userprofile.html" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+					</div>
+				</nav>
+   		</div>
+			</div>
+		</div>
+	</div>
+    </div>
+   
+    <div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-12">
+					<ul class="sub-menu">
+						<li><a href="#">Dashboard</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Used machines</a></li>
+						<li><a href="#">Feedback</a></li>
+					</ul>
+				</div>
+		   </div>
+		  </div>
+		  <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+		   <div class="panel panel-default my-req">
+			  <div class="panel-heading">My Requirements</div>
+			  <div class="requirement-table">
+				 <table class="table table-striped">
+					  <thead>
+						<tr>
+						  <th>Date</th>
+						  <th>Requirement</th>
+						  <th>Quotes</th>
+						  <th>Requirement deadline</th>
+						  <th>Status</th>
+						  <th>Clone</th>
+						  <th>Share</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+						  <td>22-Aug-16</td>
+						  <td>Work at kukatpally<a href="#">(view)</a></td>
+						  <td>2<a href="#">(view)</a></td>
+						  <td>20-sept-16</td>
+						  <td>Open</td>
+						  <td>Clone</td>
+						  <td><div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-whatsapp" href="#"></a>
+                        </div></td>
+						</tr>
+						<tr>
+						 <td>23-Sept-16</td>
+						  <td>personal work<a href="#">(view)</a></td>
+						  <td>2<a href="#">(view)</a></td>
+						  <td>30-sept-16</td>
+						  <td>open</td>
+						  <td>Clone</td>
+						  <td><div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-whatsapp" href="#"></a>
+                        </div></td>
+						</tr>
+						<tr>
+						  <td>12-june-16</td>
+						  <td>JNTU work<a href="#">(view)</a></td>
+						  <td>10<a href="#">(view)</a></td>
+						  <td>12-Aug-16</td>
+						  <td>Closed</td>
+						  <td>Clone</td>
+						  <td><div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-whatsapp" href="#"></a>
+                        </div></td>
+						</tr>
+					  </tbody>
+				</table>
+				</div>
+		</div>
+		<div class="req-pagination">
+			<nav aria-label="Page navigation">
+				<ul class="pagination ">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+				</div>
+			</div>
+				
+	</div>
+	<div class="quote-wrapper initial">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4>Quotes</h4>
+					<ul class="filter">
+						<li><a href="#">All</a></li>
+						<li><a href="#">Shortlisted</a></li>
+						<li><a href="#">Rejected</a></li>
+						<li><a href="#">hired</a></li>
+					</ul>
+					<div class="quote-card-container">
+					<div class="media">
+						<div class="media-left">
+							<h4 class="media-heading">Supplier 1</h4>
+							<a href="#">
+							  <img class="media-object" src="http://placehold.it/130x130" alt="...">
+							</a>
+						</div>
+						  <div class="media-body">
+							<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button><span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button><span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button><span>Reject</span></div>
+							<div class="clear-fix"></div>
+								<table class="table">
+									 <thead>
+										<tr>
+										  <th>Price Quoted</th>
+										  <th>Equipment Quantity</th>
+										  <th>Avg price</th>
+										  <th>Hours</th>
+										  <th>Driver provided</th>
+										  <th>Advance</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										<tr>
+										  <td>100000</td>
+										  <td>2</td>
+										  <td>250</td>
+										  <td>567</td>
+										  <td>Yes</td>
+										  <td>40000</td>
+										</tr>
+									</tbody>	
+								</table>
+								<div class="date"><span>Applied on : 17th july,2016</span></div>
+							<div class="clear-fix"></div>
+							<h4 id="equipment-heading">equipment details</h4>	
+								<table class="table">
+									 <thead>
+										<tr>
+										  <th>Category</th>
+										  <th>Equipment</th>
+										  <th>Manufacturer</th>
+										  <th>Year of Manufacture</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										<tr>
+										  <td>EarthMoving</td>
+										  <td>Dozer</td>
+										  <td>JCB</td>
+										  <td>2015</td>
+										</tr>
+									</tbody>	
+								</table>
+						  </div>
+					</div><!-- end of media -->
+					<div class="media">
+						<div class="media-left">
+							<h4 class="media-heading">Supplier 1</h4>
+							<a href="#">
+							  <img class="media-object" src="http://placehold.it/130x130" alt="...">
+							</a>
+						</div>
+						  <div class="media-body">
+							<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button><span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button><span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button><span>Reject</span></div>
+							<div class="clear-fix"></div>
+								<table class="table">
+									 <thead>
+										<tr>
+										  <th>Price Quoted</th>
+										  <th>Equipment Quantity</th>
+										  <th>Avg price</th>
+										  <th>Hours</th>
+										  <th>Driver provided</th>
+										  <th>Advance</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										<tr>
+										  <td>100000</td>
+										  <td>2</td>
+										  <td>250</td>
+										  <td>567</td>
+										  <td>Yes</td>
+										  <td>40000</td>
+										</tr>
+									</tbody>	
+								</table>
+								<div class="date"><span>Applied on : 17th july,2016</span></div>
+							<div class="clear-fix"></div>
+							<h4 id="equipment-heading">equipment details</h4>	
+								<table class="table">
+									 <thead>
+										<tr>
+										  <th>Category</th>
+										  <th>Equipment</th>
+										  <th>Manufacturer</th>
+										  <th>Year of Manufacture</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										<tr>
+										  <td>EarthMoving</td>
+										  <td>Dozer</td>
+										  <td>JCB</td>
+										  <td>2015</td>
+										</tr>
+									</tbody>	
+								</table>
+						  </div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+    <div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+                    
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>	
+							<li><a href="#">Privacy Policy</a></li>	
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 		<script type="text/javascript">
+ 			$(document).ready(function(){
+ 				var requirements = [];
+ 				var quotes = [];
+ 				var user = sessionStorage.getItem("user");
+ 				user = $.parseJSON(user);
+ 				console.log(user);
+ 				var username = user.firstname+" "+user.lastname;
+ 				$('#user').text(username);
+ 				
+ 				
+ 				$('.quote-wrapper').hide();
+ 				
+ 				var flag = false;
+ 				var reqList = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quotes</th><th>Requirement deadline</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
+ 						var tableEndTags = '</tbody></table>';
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime);
+ 							console.log("created time :: ",$.date(createdTime));
+ 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+ 						});
+ 						var tableContent = tableHeader+reqList+tableEndTags;
+ 						$('.requirement-table').html("");
+ 						$('.requirement-table').append(tableContent);
+ 					}
+ 					});
+				
+ 					$('.requirement-table').on('click','.quote-link',function(){
+ 						var reqId = this.id;
+ 						console.log("rq id ::",reqId);
+ 						var quoteList = "";
+ 						$.ajax({
+ 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
+ 							/*+user.userId,*/
+ 							type:"get",
+ 							data:{},
+ 							success:function(response){
+ 								response = $.parseJSON(response);
+ 								console.log(response);
+ 								var temp = "<div class='container-fluid'>"
+ 								$.each(response,function(index,value){
+ 									quotes[value.quoteId] = value;
+ 									
+ 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+ 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+ 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+ 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button>'+
+ 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button>'+
+ 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+ 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+ 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+ 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">equipment details</h4>'+
+ 									'<table class="table"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+ 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+ 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+ 									
+ 								});
+ 								$('.quote-wrapper').show();
+ 								$('.quote-wrapper').removeClass("initial");
+ 								$('.quote-card-container').html("");
+ 								$('.quote-card-container').append(quoteList);
+ 								
+ 							}
+ 							});
+ 						
+ 						
+ 					});
+ 				
+ 			});
+ 		</script>
+ 		<script type="text/javascript">
+ 		$.date = function(dateObject) {
+ 		    var d = new Date(dateObject);
+ 		    var date = d.toDateString();
+ 		    var dateArr = date.split(" ");
+ 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    return date;
+ 		};
+ 		</script>		
+    </body>
+</html>
