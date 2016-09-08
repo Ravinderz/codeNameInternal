@@ -42,10 +42,17 @@ public class UserController {
 		return userService.updateUser(user);
 	}
 		
-	@RequestMapping(value="/getuser/{username}/" , method=RequestMethod.GET)
+	@RequestMapping(value="/getuser/{username}" , method=RequestMethod.GET)
 	public 	String getUser(@PathVariable("username") String username){
 		logger.info("Entered into UserController.getUser method  Username:"+username);
 		return userService.getUserDetails(username);	
 	}
+	
+	@RequestMapping(value="/getuserById/{id}" , method=RequestMethod.GET)
+	public 	String getUserById(@PathVariable("id") long id){
+		logger.info("Entered into UserController.getUserById method  UserId:"+id);
+		return userService.getUserById(id);	
+	}
+	
 	
 }

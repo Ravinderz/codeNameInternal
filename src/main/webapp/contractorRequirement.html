@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Contractor Requirement</title>
+
+    <meta name="description" content="Contractor Requirement">
+    <meta name="author" content="congun">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <script src="js/jquery.min.js"></script>
+        
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#contractorReq").click(function(){
+		var success = "successfully created";
+		var data = JSON.stringify($("#contractorRequirement-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url:"contractor/contractorRequirement",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		      }
+		});
+	});
+});
+</script>
+<script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+</script>
+
+    <script type="text/javascript">
+     function configureDropDownLists(category,equipment) {
+    var earthMovingEquipment = ['Backhoe & Loader', 'Dozer', 'Excavator', 'Motor Grader', 'Loader', 'Mini Excavator', 'Skid Steer Loader', 'Track Loader'];
+    var materialHandling = ['Reach Forklift', 'Telehandler', 'Straight Mast'];
+    var cranes = ['Mobile Crane', 'Tower Crane', 'Crawler Crane'];
+	var aerialEquipment = ['Agriculture Boom Lift', 'Straight/Telescopic Lift', 'Scissor Lift'];
+	var cementMixtureTrucks = ['Cement Mixture', 'Truck-Mounted Con'];
+	var generatorsAndLighting = ['Portable Generator', 'Mobile Generator'];
+	var roadCampactors_Rollers = ['Single Drum/Vibrator Roller', 'Double Ton Roller'];
+	var boreDrillingEquipment = ['Pile Driving Equipment', 'Bore Driller(4&1/2,6&1/2)'];
+	var powerTools = ['Driller/Hammer Drill', 'Break Hammer', 'Floor Striper', 'Surface Grinder'];
+	var miscellaneous = ['AIR Tool', 'Compressor', 'Water Pump', 'Dumper'];
+
+    switch (category.value) {
+        case 'earthMovingEquipment':
+            equipment.options.length = 0;
+            for (i = 0; i < earthMovingEquipment.length; i++) {
+                createOption(equipment, earthMovingEquipment[i], earthMovingEquipment[i]);
+            }
+            break;
+        case 'materialHandling':
+            equipment.options.length = 0; 
+        for (i = 0; i < materialHandling.length; i++) {
+            createOption(equipment, materialHandling[i], materialHandling[i]);
+            }
+            break;
+        case 'cranes':
+            equipment.options.length = 0;
+            for (i = 0; i < cranes.length; i++) {
+                createOption(equipment, cranes[i], cranes[i]);
+            }
+            break;
+		case 'aerialEquipment':
+            equipment.options.length = 0;
+            for (i = 0; i < aerialEquipment.length; i++) {
+                createOption(equipment, aerialEquipment[i], aerialEquipment[i]);
+            }
+            break;
+		case 'cementMixtureTrucks':
+            equipment.options.length = 0;
+            for (i = 0; i < cementMixtureTrucks.length; i++) {
+                createOption(equipment, cementMixtureTrucks[i], cementMixtureTrucks[i]);
+            }
+            break;
+		case 'generatorsAndLighting':
+            equipment.options.length = 0;
+            for (i = 0; i < generatorsAndLighting.length; i++) {
+                createOption(equipment, generatorsAndLighting[i], generatorsAndLighting[i]);
+            }
+            break;
+		case 'roadCampactors_Rollers':
+            equipment.options.length = 0;
+            for (i = 0; i < roadCampactors_Rollers.length; i++) {
+                createOption(equipment, roadCampactors_Rollers[i], roadCampactors_Rollers[i]);
+            }
+            break;
+		case 'boreDrillingEquipment':
+            equipment.options.length = 0;
+            for (i = 0; i < boreDrillingEquipment.length; i++) {
+                createOption(equipment, boreDrillingEquipment[i], boreDrillingEquipment[i]);
+            }
+            break;
+		case 'powerTools':
+            equipment.options.length = 0;
+            for (i = 0; i < powerTools.length; i++) {
+                createOption(equipment, powerTools[i], powerTools[i]);
+            }
+            break;
+		case 'miscellanous':
+            equipment.options.length = 0;
+            for (i = 0; i < miscellaneous.length; i++) {
+                createOption(equipment, miscellaneous[i], miscellaneous[i]);
+            }
+            break;
+			
+            default:
+                equipment.options.length = 0;
+            break;
+    }
+
+}
+
+    function createOption(ddl, text, value) {
+        var opt = document.createElement('option');
+        opt.value = value;
+        opt.text = text;
+        ddl.options.add(opt);
+    }
+</script>
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-left">
+				CONTRACTOR REQUIREMENT FORM
+			</h3>
+			<form role="form" id="contractorRequirement-form">
+				<div class="form-group">
+				<label for="selectCategory">
+						Select Category
+					</label>
+				<select id="category" name="equipmentCategory" onchange="configureDropDownLists(this,document.getElementById('equipment'))">
+					<option value="">select...</option>			
+					<option value="earthMovingEquipment">Earth Moving Equipment</option>
+					<option value="materialHandling">Material Handling</option>
+					<option value="cranes">Cranes</option>
+					<option value="aerialEquipment">Aerial Equipment</option>
+					<option value="cementMixtureTrucks">Cement Mixture Trucks</option>
+					<option value="generatorsAndLighting">Generators and Lighting</option>
+					<option value="roadCampactors_Rollers">Road Compactors/Rollers</option>
+					<option value="boreDrillingEquipment">Bore Drilling Equipment</option>
+					<option value="powerTools">Power Tools</option>
+					<option value="miscellaneous">Miscellaneous</option>
+				</select>
+					<label for="selectEquipment">
+						Select Equipment
+					</label>
+				<select id="equipment" name="equipmentName">
+				</select>			
+				</div>
+				
+				<div class="form-group">
+					<label for="specificationCapacity">
+						Equipment Capacity
+					</label>
+					<input type="text" id="specificationCapacity" name="specificationCapacity">
+				</div>
+				
+				<div class="form-group">
+					<label for="specificationModel">
+						Equipment Model
+					</label>
+					<input type="text" id="specificationModel" name="specificationModel">
+				</div>
+				
+				<div class="form-group">
+					<label for="manufacturer">
+						Manufacturer
+					</label>
+					 <input type="checkbox" name="manufacturer" id="manufacturer" value="JCB" checked> JCB<br>
+  					 <input type="checkbox" name="manufacturer" id="manufacturer" value="Bharat" checked>Bharat Earth Movers <br>
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="TRF" checked>TRF <br>
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Cat" checked>Caterpillar <br>
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Komatsu " checked>Komatsu  <br>
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Volvo " checked>Volvo  <br>
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Hitachi " checked>Hitachi  <br>
+					 
+				</div>
+				
+				<div class="form-group">
+					<label for="quantity">
+						Equipment Quantity
+					</label>
+					<input type="text" id="quantity" name="quantity" >
+				</div>
+				
+				<div class="form-group">
+					<label for="duration">
+						Work Duration
+					</label>
+					<input type="text" id="duration" name="duration">
+				</div>
+				
+				<div class="form-group">
+					<label for="startDate">
+						Start Date
+					</label>
+					<input type="date" id="startDate" name="startDate">
+				</div>
+				
+				<div class="form-group">
+					<label for="manufacturingYear">
+						Year Of Manufacturing
+					</label>
+					<input type="text" id="manufacturingYear" name="equipmentManufactureYear">
+				</div>
+				
+				<div class="form-group">
+					<label for="hiringChargersType">
+						Hiring Charges Type
+					</label>
+					<input type="radio" name="hiringChargersType" value="hour"  id="hiringChargersType" > Hourly<br>
+					<input type="radio" name="hiringChargersType" value="day" id="hiringChargersType" > Daily<br>
+					<input type="radio" name="hiringChargersType" value="week"  id="hiringChargersType" > Weekly<br>
+					<input type="radio" name="hiringChargersType" value="month" id="hiringChargersType" > Monthly
+				</div>
+				
+				<div class="form-group">
+					<label for="workLocation">
+						Work Location
+					</label>
+					<input type="text" id="workLocation" name="workLocation">
+				</div>
+				
+				<div class="form-group">   
+					<label for="transportation">
+						Transportation
+					</label>
+					<input type="radio" name="transportation" value="to"  id="transportation" > TO 
+					<input type="radio" name="transportation" value="tofro"  id="transportation" > To&Fro
+					
+				</div>
+				
+				<div class="form-group">
+					<label for="driverNeeded">
+						Driver Needed
+					</label>
+						<input type="radio" name="driverNeeded" value="yes"  id="driverNeeded" > Yes
+						<input type="radio" name="driverNeeded" value="no" id="driverNeeded" checked> No
+				</div>
+				
+				<div class="form-group">
+					<label for="helperNeeded">
+						Helper Needed
+					</label>
+						<input type="radio" name="helperNeeded" value="yes" id="helperNeeded"> Yes
+						<input type="radio" name="helperNeeded" value="no" id="helperNeeded" checked> No
+				</div>
+				
+				<div class="form-group">
+					<label for="dieselChargers">
+						Diesel Charges
+					</label>
+					<input type="radio" name="dieselCharges" value="yes" id="dieselChargers" > Yes
+					<input type="radio" name="dieselCharges" value="no" id="dieselChargers" checked> No
+				</div>
+				
+				<div class="form-group">
+					<label for="workDescription">
+						Work Description
+					</label>
+					<input type="text" id="workDescription" name="workDescription">
+				</div>
+				<div class="form-group">
+					<label for="workAreaImages">
+						Work Area Images
+					</label>
+					<input type="text" id="workAreaImages" name="workAreaImages">
+				</div>
+								
+				<button type="button" class="btn btn-default" id="contractorReq">
+					GET QUOTE
+				</button>
+			</form> 
+			</div>
+	</div>
+</div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

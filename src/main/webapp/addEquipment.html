@@ -12,8 +12,6 @@
  <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/quote-form-elements-style.css">
-        <!--<link rel="stylesheet" href="css/quote-form-style.css">-->
-        <!--<link rel="stylesheet" href="css/home.css">-->
         <link rel="stylesheet" href="css/addEquip.css">
       <link rel="stylesheet" href="css/congun.css">
     <script src="js/jquery.min.js"></script>
@@ -34,18 +32,6 @@
         
 $(document).ready(function(){
 	
-
-	/*$('body').hide();
-	var user = sessionStorage.getItem("user");
-	user = $.parseJSON(user);
-	console.log(user);
-	if(user.role === "supplier"){
-	$('body').show();	
-	$("#user-name").text(user.firstname+" "+user.lastname);
-	}else if(user.role === "contractor"){
-		$(location).attr('href','unauthorized.html');
-	}
-	*/
 	
 	$("#addEquipment").click(function(){
 		var success = "successfully created";
@@ -59,6 +45,9 @@ $(document).ready(function(){
 		     data: data,
 		     success:function(data){
 		    	console.log(data);
+		    	if(data === "SS01"){
+		    		$(location).attr('href',"user/supplier-profile.html");
+		    	}
 		      }
 		});
 	});
@@ -175,7 +164,6 @@ $.fn.serializeObject = function()
 				 </div>
 				
 					<div class="f1-buttons">
-						 
 						<button type="button" class="btn btn-warning" id="addEquipment">
 							Submit
 						</button>	

@@ -1,26 +1,21 @@
 package com.congun.web.util;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.dao.UserDao;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.MappingObject;
-import com.congun.web.model.SupplierQuote;
 import com.congun.web.model.User;
 
 @Repository
@@ -39,20 +34,23 @@ private UserDao userDAO;
 
 	public boolean SupplierMapperPreprocessor(ContractorRequirement requirement) {
 		logger.info("Entered into SupplierMapperComponent.SupplierMapperPreprocessor method");
+		System.out.println("ReqID:"+requirement.getRequirementId());
 
 		if (requirement.getEquipmentCategory() != null
 				&& requirement.getEquipmentName() != null) {
+			
+			getSupplierDetails(requirement);
 
-			MapSupplier supplierMapper = new MapSupplier(requirement);
+			/*MapSupplier supplierMapper = new MapSupplier(requirement);
 			supplierMapper.setDaemon(true);
-			supplierMapper.start();
+			supplierMapper.start();*/
 			return true;
 		}
 
 		return false;
 	}
 
-	class MapSupplier extends Thread {
+/*	class MapSupplier extends Thread {
 		
 		private boolean running = true;
 		private boolean quit = false;
@@ -77,24 +75,25 @@ private UserDao userDAO;
 		@Override
 		public void run() {
 			
-			/*while (true) {
+			while (true) {
 				synchronized (this) {
 					if (this.quit) {
 						this.running = false;
 						break;
 					}
 				}
-			*/
+			
 			getSupplierDetails(requirement);
 			quit();
 
 		 //}
 		}
 
-	}
+	}*/
 
 	public void getSupplierDetails(ContractorRequirement requirement) {
 		logger.info("Entered into SupplierMapperComponent.getSupplierDetails method  requirement:"+requirement);
+		System.out.println("Entered into SupplierMapperComponent.getSupplierDetails method  requirement:"+requirement.getRequirementId());
 		Set<Long> mappedSupplierIds = new HashSet<Long>();
 		int supplierScore;
 
@@ -147,7 +146,22 @@ private UserDao userDAO;
 					&& requirement.getEquipmentManufactureYear() == 0
 					&& requirement.getSpecificationCapacity() == null) {
 				*/
+			mappedSupplierIds.add(equipment.getSupplierId());
+/*			List<Long> supplierIds = quoteDAO.checkRequirementMapping(requirement.getRequirementId());
+			for(long resultId : supplierIds){
+			if(resultId != equipment.getSupplierId()){
+				logger.info("SUPPLIER ID FROM MAPPING OBJECT TABLE : "+resultId);
+				System.out.println("SUPPLIER ID FROM MAPPING OBJECT TABLE : "+resultId);
+				logger.info("SUPPLIER ID FROM EQUIPMENT TABLE : "+equipment.getSupplierId());
+				System.out.println("SUPPLIER ID FROM EQUIPMENT TABLE : "+equipment.getSupplierId());
 				mappedSupplierIds.add(equipment.getSupplierId());
+				logger.info("REQUIREMENT HAS BEEN MAPPED");	
+				System.out.println("REQUIREMENT HAS BEEN MAPPED");
+			}else{
+				logger.info("REQUIREMENT HAS BEEN ALREADY MAPPED FOR "+resultId);
+			}
+			}*/
+				
 
 			//}
 		}
@@ -164,7 +178,8 @@ private UserDao userDAO;
 		Iterator itr = mappedSupplierIds.iterator();
 		while(itr.hasNext()){
 			Long supplierId =  (Long)itr.next();
-			User user = userDAO.getUserbyId(supplierId.intValue());
+			User user = userDAO.getUserById(supplierId.intValue());
+			
 		}
 		
 	}
@@ -188,4 +203,5 @@ private UserDao userDAO;
 		}
 		return null;
 	}
+	
 }

@@ -15,9 +15,6 @@
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/profile.css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/appProperties.js"></script>
 <!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 </head>
 <body>
@@ -56,7 +53,7 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="#">Dashboard</a></li>
+						<li><a href="supplier-dashboard.html">Dashboard</a></li>
 						<li><a class="active" href="#">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
@@ -72,7 +69,7 @@
 		  				<i class="fa fa-user"></i>
 		  				<ul>
 		  					<li>Welcome back</li>
-		  					<li><h2>User</h2></li>
+		  					<li><h2 id="user-name">User</h2></li>
 		  				</ul>
 		  				<div class="clear-fix"></div>
 		  				<div class="profile-progress-bar">
@@ -90,7 +87,7 @@
 		  		<div class="col-md-7"> 
 		  		<div class="col-md-6 col-first">This will be place for quotes</div>
 		  		<div class="col-md-6 col-second">
-  						<a href="#">
+  						<a href="../addEquipment.html">
   							<span class="fa-stack fa-5x">
   								<i class="fa fa-circle-thin fa-stack-2x"></i>
   								<i class="fa fa-plus fa-stack-1x"></i>
@@ -124,78 +121,6 @@
 		  				<h3>NewsFeed</h3>
 		  				<div class="newsfeed">
 		  				<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
 							<div class="media-left">
 								<a href="#">
 								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
@@ -274,6 +199,55 @@
 					</div>
  				</div>
  			</div>
- 		</div>		
+ 		</div>
+ 		<!-- starting the js here -->
+ 		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/appProperties.js"></script>
+ 		<script type="text/javascript">
+ 			$(document).ready(function(){
+ 				var user = sessionStorage.getItem("user");
+ 				user = $.parseJSON(user);
+ 				console.log(user);
+ 				var username = user.firstname+" "+user.lastname;
+ 				$('#user').text(username);
+ 				$('#user-name').text(username);
+ 				
+ 				var requirements = [];
+ 				
+ 				var newsfeed = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements",
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime);
+ 							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
+ 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
+ 							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
+ 						});
+ 						$('.newsfeed').html("");
+ 						$('.newsfeed').append(newsfeed);
+ 					}
+ 					});
+ 			});
+ 		
+ 		</script>
+ 		<script type="text/javascript">
+ 		$.date = function(dateObject) {
+ 		    var d = new Date(dateObject);
+ 		    var date = d.toDateString();
+ 		    var dateArr = date.split(" ");
+ 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    return date;
+ 		};
+ 		</script>	
+ 				
     </body>
 </html>

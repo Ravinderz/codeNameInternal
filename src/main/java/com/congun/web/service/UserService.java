@@ -69,5 +69,15 @@ public class UserService {
 	}
 	
 	
+	public String getUserById(long id) {
+		logger.info("Entered into SupplierQuoteService.getUserById method UserID:"+id);
+		User user = userdao.getUserById(id);
+		if(user != null){
+			return ApplicationUtil.getJsonResponse(user);	
+		}else
+			return ResponseConstants.USER_FAILURE_CODE;
+		
+		
+	}
 
 }

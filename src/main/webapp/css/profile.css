@@ -54,17 +54,17 @@
 	align-items:center;
 	justify-content:center;
 	height:250px;
-	background-color: grey;
+	background-color: #E5E5E5;
 	margin-right:15px;
 	margin-bottom : 15px;
 }
 
 .first-row .col-md-7 span{
-	color:#fff;
+	color:#202e31;
 }
 .first-row .col-md-4{
 	height:270px;
-	background-color: grey;
+	background-color: #E5E5E5;
 }
 
  .second-row{
@@ -76,7 +76,7 @@
 	align-items:center;
 	justify-content:center;
 	height : 400px;
-	background-color : grey;
+	background-color : #E5E5E5;
 	margin-right : 15px;
 	margin-top: -20px;
 }
@@ -96,17 +96,17 @@
 	justify-content:center;
 	height : 360px;
 	background-color:white;
-	color:black;
+	color:#202e31;
 	margin-left:15px;
 }
 
 
 .second-row .col-second .fa-plus, .second-row .col-second .fa-circle-thin{
-	color:black;
+	color:#202e31;
 }
 
 .second-row .col-second > a > p{
-	color:black;
+	color:#202e31;
 	font-size : 20px;
 }
 
@@ -116,7 +116,7 @@
 
 .second-row .col-md-3{
 	height : 400px;
-	background-color : grey;
+	background-color : #E5E5E5;
 	margin-right : 15px;
 	margin-top: -20px;
 }
@@ -126,33 +126,34 @@
 }
 
 .second-row .col-md-7 p{
-	color:#fff;
+	color:#202e31;
 	font-size : 20px;
 }
 
 .second-row .right-col{
 	height : 150px;
-	background-color : grey;
+	background-color : #E5E5E5;
 	margin-bottom : 15px;
 }
 
 
 .third-row .col-md-7{
 	height: 600px;
-	background-color : grey;
+	background-color : #E5E5E5;
 	margin-right : 15px;
 	margin-bottom : 15px;
 }
 
 .third-row .col-md-4{
 	height : 300px;
-	background-color : grey;
+	background-color : #E5E5E5;
 	margin-bottom : 15px;
 	margin-top : -65px;
 } 
 
 .fa-user{
 	font-size:100px;
+	color : #202e31;
 	margin-top:50px;
 	margin-left:20px;
 }
@@ -178,7 +179,7 @@
 }
 
 .fa-circle-thin,.fa-plus{
-	color:#fff;
+	color:#202e31;
 }
 
 .occupation,.website{

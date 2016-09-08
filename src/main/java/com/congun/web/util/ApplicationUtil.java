@@ -6,15 +6,34 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.congun.web.dao.ContractorRequirementQuoteDAO;
+import com.congun.common.EmailClient;
+import com.congun.common.EmailModel;
+import com.congun.web.dao.SupplierQuoteDao;
+import com.congun.web.dao.UserDao;
+import com.congun.web.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
+@Component
 public class ApplicationUtil {
 	private static Logger logger = Logger.getLogger(ApplicationUtil.class);
 
+	@Autowired
+	public UserDao userdao;
+	
+	@Autowired
+	public SupplierQuoteDao supplierDao;
+	
+	public ApplicationUtil(){}
+	
+	
+	public ApplicationUtil(UserDao userdao){
+		this.userdao = userdao;
+	}
+	
 	public static String getJsonResponse(Object obj){
 		logger.info("Entered into ApplicationUtil.getJsonResponse method");
 		
@@ -33,4 +52,45 @@ public class ApplicationUtil {
 		return formatter.parse(myDate);
 		
 	}
+	
+	public void sendReqEmailToSupp(long suppId,long reqId)
+	{
+		//int supplierId = 6;
+		// get email of supplier from supplier table . Need to add API for this
+		//String emailId = "nishant.vengala@gmail.com";
+		logger.info("Entered into sendReqEmailToSupp method  suppID:"+suppId+"reqId:"+reqId);
+		if(userdao ==null)
+			System.out.println("NULLLLLLLLLLLLLLL");
+		else
+			System.out.println("NOT NULLLL");
+		User user = userdao.getUserById(suppId);
+		String emailId = user.getUsername();
+		EmailModel eModel = new EmailModel();
+		//eModel.setFrom("nishant.vengala@gmail.com");
+		eModel.setFrom("admin@congun.com");
+		eModel.setTo(emailId);
+		eModel.setSubject("New Requirement Mapped");
+		eModel.setMsg("Hi you have receved new requirement !!!");
+		EmailClient eClient = new EmailClient();
+		
+		eClient.sendEmail(eModel);
+		
+	
+	}
+	
+	public void sendQuoteEmailToContractor(String contractorEmail,String Name,String mobileNo,String title){
+		logger.info("Sending mail to contractor");
+		String emailId = contractorEmail;
+		EmailModel eModel = new EmailModel();
+		//eModel.setFrom("nishant.vengala@gmail.com");
+		eModel.setFrom("admin@congun.com");
+		eModel.setTo(emailId);
+		eModel.setSubject("Quotation for your '"+title+ "' requirement");
+		eModel.setMsg("Hi you have receved new Quotation !!!\n"+"Supplier Name:"+Name+"\n\n"+"MobileNo:"+mobileNo);
+		EmailClient eClient = new EmailClient();
+		
+		eClient.sendEmail(eModel);
+		
+	}
+	
 }

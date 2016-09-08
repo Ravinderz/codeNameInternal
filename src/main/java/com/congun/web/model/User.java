@@ -16,7 +16,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId")
-	public int userId;
+	public long userId;
 	
     @Column(name = "firstname")
 	public String firstname;
@@ -55,10 +55,10 @@ public class User {
 	public Timestamp updatedtime;
 
 	
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {

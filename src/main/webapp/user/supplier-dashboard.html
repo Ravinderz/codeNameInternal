@@ -57,8 +57,8 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="#">Dashboard</a></li>
-						<li><a href="#">Profile</a></li>
+						<li><a href="supplier-dashboard.html">Dashboard</a></li>
+						<li><a href="supplier-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
@@ -138,17 +138,12 @@
 			</div>
 				
 	</div>
-	<div class="quote-wrapper">
+	<div class="requirement-wrapper">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h4>Mapped Requirements</h4>
-					<ul class="filter">
-						<li><a href="#">All</a></li>
-						<li><a href="#">Shortlisted</a></li>
-						<li><a href="#">Rejected</a></li>
-						<li><a href="#">hired</a></li>
-					</ul>
+					<div class="requirement-card-wrapper">
 					<div class="media">
 						<div class="media-left">
 							<h4 class="media-heading">requirement 1</h4>
@@ -219,7 +214,7 @@
 								</table>
 						  </div>
 					</div><!-- end of media -->
-					
+					</div>
 				</div>
 			</div>
 		</div>
@@ -285,7 +280,7 @@
  				$('#user').text(username);
  				
  				var flag = false;
- 				var reqList = "";
+ 				var quoteList = "";
  				$.ajax({
  					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+user.userId,
  					/*+user.userId,*/
@@ -303,58 +298,42 @@
  						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quantity</th><th>Company/Individual</th><th>Duration</th><th>Status</th><th>Location</th></tr></thead><tbody>';
  						var tableEndTags = '</tbody></table>';
  						$.each(response,function(index,value){
- 							requirements[value.requirementId] = value;
+ 							quotes[value.quoteId] = value;
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime);
  							console.log("created time :: ",$.date(createdTime));
- 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.quantity+'</td><td>'+value.quotePostedByName+'</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+ 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.quantity+'</td><td>'+value.quotePostedByName+'</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
- 						var tableContent = tableHeader+reqList+tableEndTags;
+ 						var tableContent = tableHeader+quoteList+tableEndTags;
  						$('.quote-table').html("");
  						$('.quote-table').append(tableContent);
  					}
  					}
  					});
 				
- 					$('.requirement-table').on('click','.quote-link',function(){
- 						var reqId = this.id;
- 						console.log("rq id ::",reqId);
- 						var quoteList = "";
- 						$.ajax({
- 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
- 							/*+user.userId,*/
- 							type:"get",
- 							data:{},
- 							success:function(response){
- 								response = $.parseJSON(response);
- 								console.log(response);
- 								var temp = "<div class='container-fluid'>"
- 								$.each(response,function(index,value){
- 									quotes[value.quoteId] = value;
- 									
- 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
- 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
- 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>'+
- 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button>'+
- 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button>'+
- 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
- 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
- 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
- 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">equipment details</h4>'+
- 									'<table class="table"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
- 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
- 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
- 									
- 								});
- 								$('.quote-wrapper').show();
- 								$('.quote-wrapper').removeClass("initial");
- 								$('.quote-card-container').html("");
- 								$('.quote-card-container').append(quoteList);
- 								
- 							}
- 							});
- 						
- 						
+ 				var reqList = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime);
+ 							reqList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.title+'</h4><a href="#">'
+ 							+'<img class="media-object" src="http://placehold.it/130x130" alt="..."></a></div><div class="media-body">'
+ 							+'<div class="client-name"><h3>'+value.contractorName+'</h3></div><div class="applied-date"><span>Applied on : '+createdTime+'</span></div>'
+ 							+'<h4 id="equipment-heading">equipment details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
+ 							+'<th>Year of Manufacture</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
+ 							+'<td>'+value.manufacturer+'</td><td>'+value.equipmentManufactureYear+'</td><td>'+value.duration+' month</td><td>Hyderabad</td></tr></tbody></table></div></div>';
+ 						});
+ 						$('.requirement-card-wrapper').html("");
+ 						$('.requirement-card-wrapper').append(reqList);
+ 					}
  					});
  				
  			});

@@ -30,7 +30,7 @@ import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 import com.congun.web.util.SupplierMapperComponent;
 
-@Repository
+@Repository	@Transactional
 public class ContractorRequirementQuoteDAO{
 	private static Logger logger = Logger.getLogger(ContractorRequirementQuoteDAO.class);
 	@Autowired
@@ -57,13 +57,13 @@ public class ContractorRequirementQuoteDAO{
 		requirement.setStartDate(ApplicationUtil.formatDate(requirement.getStartDate()));
 		sessionFactory.getCurrentSession().saveOrUpdate(requirement);
 		
-		if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
+		/*if (mapperComponent.SupplierMapperPreprocessor(requirement)) {
 			logger.info("Mapping the Suppliers for submitted Requirement :"
 							+ requirement.getRequirementId());
 		} else {
 			logger.info("Could Not start Mapping for requirement: "
 					+ requirement.getRequirementId());
-		}
+		}*/
 		
 		return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
 		} catch (ParseException e) {

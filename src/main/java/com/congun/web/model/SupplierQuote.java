@@ -63,6 +63,9 @@ public class SupplierQuote {
 	@Column(name = "quotePostedById")
 	public long quotePostedById;
 	
+	@Column(name = "quoteStatus")
+	public String quoteStatus;
+	
 	@Column(name = "quotePostedByName")
 	public String quotePostedByName;
 		
@@ -86,6 +89,16 @@ public class SupplierQuote {
 	
 	@Column(name = "hiringChargesType")
 	public String hiringChargesType;
+
+	
+
+	public String getQuoteStatus() {
+		return quoteStatus;
+	}
+
+	public void setQuoteStatus(String quoteStatus) {
+		this.quoteStatus = quoteStatus;
+	}
 
 	public long getQuoteId() {
 		return quoteId;

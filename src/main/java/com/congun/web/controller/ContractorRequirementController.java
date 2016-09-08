@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.service.ContractorRequirementQuoteService;
+import com.congun.web.util.ApplicationUtil;
 
 @RestController
 @RequestMapping("contractor")
@@ -19,10 +20,20 @@ public class ContractorRequirementController {
 	@Autowired
 	ContractorRequirementQuoteService service;
 	
+	@Autowired
+	ApplicationUtil appUtil;
+	
+	
 	@RequestMapping(value = "/contractorRequirement" , method = RequestMethod.POST)
 	public String contractorRequirement(@RequestBody ContractorRequirement requirement ){
 		logger.info("Entered into ContractorRequirementController.contractorRequirement method");
 		return service.saveRequirement(requirement);	
+		}
+	
+	@RequestMapping(value = "/testemail" , method = RequestMethod.GET)
+	public void testEmail(){
+		System.out.println("Entered test email");	
+		appUtil.sendReqEmailToSupp(1,1);
 		}
 	
 	@RequestMapping(value = "/contractorRequirement/{id}" , method = RequestMethod.GET)

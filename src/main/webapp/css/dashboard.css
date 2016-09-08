@@ -257,7 +257,7 @@ padding-left:20px;
 	margin : 0 auto;
 }
 
-.quote-wrapper .container{
+.quote-wrapper .container, .requirement-wrapper .container{
 	background-color: #E5E5E5;
 	padding-bottom:20px;
 }
@@ -283,10 +283,10 @@ padding-left:20px;
   	color:#fff;
 }
 
-.quote-wrapper .media{
+.quote-wrapper .media,.requirement-wrapper .media{
 	background-color:#fff;
 }
-.quote-wrapper .media th,.quote-wrapper .media td{
+.quote-wrapper .media th,.quote-wrapper .media td , .requirement-wrapper .media th, .requirement-wrapper .media td{
 	border:0px;
 }
 
@@ -294,7 +294,11 @@ padding-left:20px;
 	padding:10px;
 }
 
-.quote-wrapper .media img{
+ .requirement-wrapper .media .media-heading{
+ 	padding :10px 10px 0px 10px;
+ }
+
+.quote-wrapper .media img , .requirement-wrapper .media img{
 padding-left : 15px;
 }
 
@@ -304,11 +308,13 @@ padding-left : 15px;
 
 .applied-date{
 	font-size:10px;
+	padding-left:5px;
 	color:#BBBBBB;
 }
 
 #equipment-heading ,.client-name h3{
 	margin-bottom:5px;
+	margin-left:5px;
 }
 
 .table{
@@ -342,8 +348,8 @@ padding-left : 15px;
     font-size:10px;
 }
 
-.table{
-	width:700px;
+.quote-wrapper .table{
+	width:650px;
 }
 
 .table-left{
@@ -353,7 +359,7 @@ padding-left : 15px;
 
 .date{
 	float:right;
-	padding-right:60px;
+	padding-right:45px;
 }
 
 .media-object{

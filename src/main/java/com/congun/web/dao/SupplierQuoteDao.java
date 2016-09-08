@@ -3,7 +3,6 @@ package com.congun.web.dao;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +37,12 @@ public ContractorRequirementQuoteDAO requirementDAO;
 @Autowired
 public MappingObject mappingobject;
 
+@Autowired
+public UserDao userdao;
+
+@Autowired
+public ApplicationUtil appUtil;
+
 @Transactional
 protected Session getSession(){
 	return sessionFactory.getCurrentSession();
@@ -47,7 +52,7 @@ protected Session getSession(){
 public String saveQuote(SupplierQuote supplierQuote){
 	logger.info("Entered into SupplierQuoteDao.saveQuote method ");
 	try{
-		
+		long reqId = supplierQuote.getRequirementId();
 		Date date = new Date();
 		Timestamp currTime = new Timestamp(date.getTime());
 		supplierQuote.setCreatedTime(currTime);
@@ -56,12 +61,43 @@ public String saveQuote(SupplierQuote supplierQuote){
 		requirementDAO.updateNoOfQuotes(supplierQuote.getRequirementId());
 		getSession().saveOrUpdate(supplierQuote);
 		
-		
+		User user = getEmailIdByReqId(reqId);
+		ContractorRequirement contractorReq = requirementDAO.getRequirementById(reqId);
+		String title = contractorReq.getTitle();
+		String email = user.getUsername();
+		String name = supplierQuote.getQuotePostedByName();
+		String phoneNo = supplierQuote.getMobileNumber();
+		appUtil.sendQuoteEmailToContractor(email,name,phoneNo,title);
 		return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 	}catch(Exception e){
 		e.printStackTrace();
 			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
 	}
+}
+
+private User getEmailIdByReqId(long reqId) {
+	//String emailId = "" ;
+	User userDeatils = null;
+	try{
+	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
+	criteria.setProjection(Projections.property("contractorId"));
+	List<Long> CotractId = (ArrayList)(criteria.add(Restrictions.eq("requirementId", reqId))).list();
+	if(CotractId.size() > 0){
+		logger.info("Contractor Id for the requirement ID: "+reqId);
+		for(Long contractorReq:CotractId)
+		{
+		//long contractorId = contractorReq.getContractorId();
+		userDeatils = userdao.getUserById(contractorReq);
+		//emailId = userDeatils.getUsername();
+		//logger.info("User Email Id"+emailId);
+		}
+	}
+	return userDeatils;
+	}catch(Exception e){
+		e.printStackTrace();
+		return null;
+	}
+	
 }
 
 @Transactional
@@ -289,26 +325,26 @@ public void updateMappingObjects(Set<Long> mapperSuppliers,long requirementId){
 		mappedobject.setRequirementId(requirementId);
 		mappedobject.setSupplierId(Id);
 	    getSession().save(mappedobject);
+	    //send email
+	appUtil.sendReqEmailToSupp(mappedobject.getSupplierId(),requirementId);
+	    
 	}
 	
-	//MappingObject mappingobject = new MappingObject();
-	//List existingObjList = criteria.add(Restrictions.eq("requirementId", requirementId)).list();
-	/*MappingObject existingObj=null;
-	if(existingObjList.size() > 0){
-	existingObj = (MappingObject)criteria.add(Restrictions.eq("requirementId", requirementId)).list().get(0);
-	existingObj.setSupplierList(existingObj.getSupplierList()+suppId);
-	getSession().saveOrUpdate(existingObj);
-	}else{
-	    mappingobject.setRequirementId(requirementId);
-	    mappingobject.setSupplierId(suppId);
-		getSession().saveOrUpdate(mappingobject);	
-	}
-	*/}else
+	}else
 		logger.info("Received Empty Mapped Suppliers for Requirement :"+requirementId);
 	}catch(Exception e){
 		e.printStackTrace();
 		logger.info("Ëxception Occured while updating the Mapped Objects for Requirement Id: "+requirementId );
 	}
+}
+
+@Transactional
+public List<Long> checkRequirementMapping(long reqId){
+	Criteria criteria = getSession().createCriteria(MappingObject.class);
+	criteria.setProjection(Projections.property("supplierId"));
+	List<Long> result = criteria.add(Restrictions.eq("requirementId", reqId)).list();
+	return result;
+	
 }
 
 }

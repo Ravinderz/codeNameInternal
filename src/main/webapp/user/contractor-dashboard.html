@@ -15,9 +15,11 @@
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/appProperties.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
 <!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 </head>
 <body>
@@ -54,8 +56,8 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="#">Dashboard</a></li>
-						<li><a href="#">Profile</a></li>
+						<li><a href="contractor-dashboard.html">Dashboard</a></li>
+						<li><a href="contractor-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
@@ -169,7 +171,7 @@
 						  <div class="media-body">
 							<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button><span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button><span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button><span>Reject</span></div>
 							<div class="clear-fix"></div>
-								<table class="table">
+								<table class="table table-condensed table-left">
 									 <thead>
 										<tr>
 										  <th>Price Quoted</th>
@@ -194,7 +196,7 @@
 								<div class="date"><span>Applied on : 17th july,2016</span></div>
 							<div class="clear-fix"></div>
 							<h4 id="equipment-heading">equipment details</h4>	
-								<table class="table">
+								<table class="table table-condensed">
 									 <thead>
 										<tr>
 										  <th>Category</th>
@@ -352,8 +354,8 @@
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;
  							var createdTime = value.createdTime;
- 							createdTime = $.date(createdTime);
- 							console.log("created time :: ",$.date(createdTime));
+ 							createdTime = $.date(createdTime,1);
+ 							console.log("created time :: ",$.date(createdTime,1));
  							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
  						var tableContent = tableHeader+reqList+tableEndTags;
@@ -380,14 +382,14 @@
  									
  									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
  									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
- 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>'+
- 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button>'+
- 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button>'+
- 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+ 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+ 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
+ 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
+ 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
  									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
  									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
- 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">equipment details</h4>'+
- 									'<table class="table"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+ 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+ 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
  									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
  									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
  									
@@ -402,17 +404,132 @@
  						
  						
  					});
- 				
+ 					
+ 					$('.quote-card-container').on('click','.btn-circle',function(){
+ 						var id = this.id.split("#");
+ 						var quote = quotes[id[0]];
+ 						var status = id[1];
+ 						var reqId = quote.requirementId;
+ 						quote.quoteStatus = status;
+ 						quote.createdTime = $.date(quote.createdTime,2);
+ 						quote.updatedTime = $.date(quote.updatedTime,2);
+ 						quote = JSON.stringify(quote);
+ 						console.log(quote);
+ 						var quoteList = "";
+ 						 $.ajax({
+ 		 					url:AppData.relativeUrl+"supplier/updatequote",
+ 		 					type:"put",
+ 		 					contentType:"application/json; charset=utf-8",
+ 		 					data:quote,
+ 		 					success:function(response){
+ 		 						console.log(response);
+ 		 						$.ajax({
+ 		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
+ 		 							/*+user.userId,*/
+ 		 							type:"get",
+ 		 							data:{},
+ 		 							success:function(response){
+ 		 								response = $.parseJSON(response);
+ 		 								console.log(response);
+ 		 								var temp = "<div class='container-fluid'>"
+ 		 								$.each(response,function(index,value){
+ 		 									quotes[value.quoteId] = value;
+ 		 									
+ 		 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+ 		 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+ 		 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+ 		 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
+ 		 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
+ 		 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+ 		 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+ 		 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+ 		 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+ 		 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+ 		 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+ 		 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+ 		 									
+ 		 								});
+ 		 								$('.quote-wrapper').show();
+ 		 								$('.quote-wrapper').removeClass("initial");
+ 		 								$('.quote-card-container').html("");
+ 		 								$('.quote-card-container').append(quoteList);
+ 		 								
+ 		 							}
+ 		 							});
+ 		 					}
+ 		 					});  
+ 					});
  			});
  		</script>
  		<script type="text/javascript">
- 		$.date = function(dateObject) {
+ 		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
+ 		   //var d = $.format.date(new Date(dateObject), 'yyyy-mm-ddT hh:mm:ssZ'); 
  		    var date = d.toDateString();
+ 		    console.log(d);
+ 		    console.log(date);
+ 		    if(pattern === 1){
  		    var dateArr = date.split(" ");
  		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    }
+ 		    else if(pattern === 2){
+ 		    	console.log("date" +dateObject);
+ 		    	var dateArr = dateObject.split(' ');
+ 		    	var time = dateArr[3].split(':');
+ 		    	var HH = parseInt(time[0])+6;
+ 		    	var mm = parseInt(time[1])+30;
+ 		    	var ss = time[2];
+ 		    	if(dateArr[1].length === 3)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		    	else if(dateArr[1].length === 2)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		    }
  		    return date;
  		};
+ 		
+ 		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			console.log(month)
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
+ 		}
  		</script>		
     </body>
 </html>

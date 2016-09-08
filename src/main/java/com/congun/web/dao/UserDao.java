@@ -100,7 +100,7 @@ public class UserDao {
 	}
 	
 	@Transactional
-	public User getUserbyId(int id){
+	public User getUserById(long id){
 		logger.info("Entered into UserDao.getUserbyId method id: "+id);
 		try{
 			Criteria criteria = getSession().createCriteria(User.class);
