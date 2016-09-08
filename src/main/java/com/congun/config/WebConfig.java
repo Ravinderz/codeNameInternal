@@ -27,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		resolver.setSuffix(".jsp");
 		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
-	}//jfjhfgg
+	}
 	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
