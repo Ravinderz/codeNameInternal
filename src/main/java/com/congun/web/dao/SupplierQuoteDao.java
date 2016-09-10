@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -345,6 +346,37 @@ public List<Long> checkRequirementMapping(long reqId){
 	List<Long> result = criteria.add(Restrictions.eq("requirementId", reqId)).list();
 	return result;
 	
+}
+@Transactional
+public List<SupplierQuote> getQuotationsByStatus(long requirementId,
+		String quoteStatus) {
+	logger.info("Entered into SupplierQuoteDao.getQuotationsByStatus method requirementId:"+requirementId);
+	try{
+		//List<SupplierQuote>  supplierQuotationList = (ArrayList<SupplierQuote>) getSession().createCriteria(SupplierQuote.class).add(Restrictions.eq("requirementId", requirementId)).list();
+		Criteria criteria = getSession().createCriteria(SupplierQuote.class);
+		criteria.add(Restrictions.eq("requirementId", requirementId));
+		criteria.add(Restrictions.eq("quoteStatus", quoteStatus));
+		List<SupplierQuote>  supplierQuotationList = criteria.list();
+		return supplierQuotationList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+	}
+}
+
+public List<SupplierQuote> getTopFiveRequirementsBysupId(Long id) {
+	logger.info("Entered into SupplierQuoteDao.getTopFiveRequirementsBysupId method ");
+	try{
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(SupplierQuote.class);
+		criteria.addOrder(Order.desc("createdTime"));
+		criteria.add(Restrictions.eq("quotePostedById", id));
+		criteria.setMaxResults(5);
+		List<SupplierQuote> list= criteria.list();
+		return list;
+	}catch(Exception e){
+		e.printStackTrace();
+		return null;
+	}
 }
 
 }

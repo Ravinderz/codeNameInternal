@@ -83,4 +83,10 @@ public class ContractorRequirementController {
 		logger.info("Entered into ContractorRequirementController.getRequirementsByequipment method  Equipment:"+equipment);
 		return service.getRequirementsByequipment(equipment);
 	}
+	@RequestMapping(value = "/getLatestRequirements/{id}" , method = RequestMethod.GET)
+	public String getTopFiveRequirementsByContId(@PathVariable Long id){
+		logger.info("Entered into ContractorRequirementController.getTopFiveRequirementsById method  ID:"+id);
+		return service.getTopFiveRequirementsByContId(id);
+	}
+	
 }

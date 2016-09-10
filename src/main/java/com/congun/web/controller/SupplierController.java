@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.AddEquipment;
@@ -86,7 +87,17 @@ public class SupplierController {
 		return supplierService.deleteEquipmentById(equipmentId);
 	}
 	
+	@RequestMapping(value="/getquotesbystatus/{requirementId}" , method=RequestMethod.GET)
+	public 	String getQuotationsByStatus(@PathVariable("requirementId") long requirementId,@RequestParam String quoteStatus){
+		logger.info("Entered into SupplierController.getQuotationsByStatus method  requirementId:"+requirementId+"  quoteStatus:"+quoteStatus);
+		return supplierService.getQuotationsByStatus(requirementId,quoteStatus);	
+	}
 	
+	@RequestMapping(value = "/getLatestRequirements/{id}" , method = RequestMethod.GET)
+	public String getTopFiveRequirementsBysupId(@PathVariable Long id){
+		logger.info("Entered into ContractorRequirementController.getTopFiveRequirementsById method  ID:"+id);
+		return supplierService.getTopFiveRequirementsBysupId(id);
+	}
 	
 
 }

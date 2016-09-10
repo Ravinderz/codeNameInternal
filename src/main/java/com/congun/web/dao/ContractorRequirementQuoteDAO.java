@@ -219,6 +219,21 @@ public class ContractorRequirementQuoteDAO{
 			return null;
 		}
 	}
+
+	public List<ContractorRequirement> getTopFiveRequirementsByContId(Long id) {
+		logger.info("Entered into ContractorRequirementQuoteDAO.getTopFiveRequirementsByContId method ");
+		try{
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ContractorRequirement.class);
+			criteria.addOrder(Order.desc("createdTime"));
+			criteria.add(Restrictions.eq("contractorId", id));
+			criteria.setMaxResults(5);
+			List<ContractorRequirement> list= criteria.list();
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 
 }

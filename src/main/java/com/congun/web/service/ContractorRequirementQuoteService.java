@@ -97,4 +97,13 @@ public class ContractorRequirementQuoteService{
 			else
 				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
 	}
+
+	public String getTopFiveRequirementsByContId(Long id) {
+		logger.info("Entered into ContractorRequirementQuoteService.getTopFiveRequirementsByContId method ID:"+id);
+		List<ContractorRequirement> reqList = dao.getTopFiveRequirementsByContId(id);
+		if(reqList != null)
+			return ApplicationUtil.getJsonResponse(reqList);
+			else
+				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
+		}
 }

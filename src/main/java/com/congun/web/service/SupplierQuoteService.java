@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.model.AddEquipment;
+import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
@@ -100,5 +101,24 @@ public class SupplierQuoteService {
 			return ResponseConstants.EQUIPMENT_FAILURE_CODE;
 	}
 
-		
+	public String getQuotationsByStatus(long requirementId, String quoteStatus) {
+		logger.info("Entered into SupplierController.getQuotationsbySupplier method  requirementId:"+requirementId+"  quoteStatus:"+quoteStatus);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotationsByStatus(requirementId,quoteStatus);
+		if(suppQuotesList != null)
+		return ApplicationUtil.getJsonResponse(suppQuotesList);
+		else
+			return ResponseConstants.SUPPLIER_FAILURE_CODE;
+	}
+
+	public String getTopFiveRequirementsBysupId(Long id) {
+		logger.info("Entered into SupplierController.getTopFiveRequirementsByContId method ID:"+id);
+		List<SupplierQuote> reqList = supplierDao.getTopFiveRequirementsBysupId(id);
+		if(reqList != null)
+			return ApplicationUtil.getJsonResponse(reqList);
+			else
+				return ResponseConstants.SUPPLIER_FAILURE_CODE;
+		}
 }
+
+		
+
