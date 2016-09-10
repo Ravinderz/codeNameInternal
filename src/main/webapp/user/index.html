@@ -14,63 +14,6 @@
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/custom.css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/appProperties.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-	
-		var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-		var username = user.firstname+" "+user.lastname;
-		$('#user').text(username);
-		
-		$('.category-img').click(function(){
-			console.log("inside img click function");
-			var category = this.id;
-			$(location).attr('href',"equipment.html?category="+category);
-		});
-		
-		$('#dashboard').click(function(){
-			console.log("inside dashboard click")
-			if(user.role === "contractor"){
-				$(location).attr('href',"contractor-dashboard.html");
-			}else if(user.role === "supplier"){
-				$(location).attr('href',"supplier-dashboard.html");
-			}
-			
-		});
-		
-		$('.logout').click(function(){
-		       console.log("inside logout function")
-		       var user = sessionStorage.getItem("user");
-		        if(user !== null){
-		            sessionStorage.removeItem("user");
-		        }
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
-		    });	
-		
-	});	
-</script>
-    <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>
 </head>
 <body>
 	<div class="nav-wrapper-index">
@@ -298,5 +241,63 @@
  				</div>
  			</div>
  		</div>
+ <script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		var user = sessionStorage.getItem("user");
+		user = $.parseJSON(user);
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+		
+		$('.category-img').click(function(){
+			console.log("inside img click function");
+			var category = this.id;
+			$(location).attr('href',"equipment.html?category="+category);
+		});
+		
+		$('#dashboard').click(function(){
+			console.log("inside dashboard click")
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+			
+		});
+		
+		$('.logout').click(function(){
+		       console.log("inside logout function")
+		       var user = sessionStorage.getItem("user");
+		        if(user !== null){
+		            sessionStorage.removeItem("user");
+		        }
+		        console.log("user logged out");
+		        $(location).attr('href',"../index.html");
+		    });	
+		
+	});	
+</script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>		
+ 		
 </body>
 </html>

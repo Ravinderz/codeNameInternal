@@ -37,7 +37,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="userprofile.html" role="button"><span
+								<li><a href="supplier-profile.html" role="button"><span
 										id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
@@ -49,15 +49,27 @@
 	</div>
 
 	<div class="content-main">
-		<div class="container-fluid">
+			<div class="container-fluid">
 		   <div class="row sub-nav-bar">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<ul class="sub-menu">
 						<li><a href="supplier-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="#">Profile</a></li>
+						<li><a class="active" href="supplier-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
+					</div>
+				<div class="col-md-6">	
+					<div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div>
 				</div>
 		   </div>
 		  </div>
@@ -85,7 +97,18 @@
 		  	</div>
 		  	<div class="row second-row">
 		  		<div class="col-md-7"> 
-		  		<div class="col-md-6 col-first">This will be place for quotes</div>
+		  		<div class="col-md-6 col-first">
+		  			<div class="recent-quotes">
+		  				<h4>Recent Quotes</h4>
+		  				<ul class="recent-quote-list">
+		  					<li>Quote 1</li>
+		  					<li>Quote 2</li>
+		  					<li>Quote 3</li>
+		  					<li>Quote 4</li>
+		  					<li>Quote 5</li>
+		  				</ul>
+		  			</div>
+		  		</div>
 		  		<div class="col-md-6 col-second">
   						<a href="../addEquipment.html">
   							<span class="fa-stack fa-5x">
@@ -212,6 +235,16 @@
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
  				$('#user-name').text(username);
+ 				
+ 				$('.logout').click(function() {
+					console.log("inside logout function")
+					var user = sessionStorage.getItem("user");
+					if (user !== null) {
+						sessionStorage.removeItem("user");
+					}
+					console.log("user logged out");
+					$(location).attr('href', "../index.html");
+				});
  				
  				var requirements = [];
  				

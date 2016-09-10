@@ -39,7 +39,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="userprofile.html" role="button"><span
+								<li><a href="contractor-profile.html" role="button"><span
 										id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
@@ -51,15 +51,27 @@
 	</div>
 
 	<div class="content-main">
-		<div class="container-fluid">
+			<div class="container-fluid">
 		   <div class="row sub-nav-bar">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<ul class="sub-menu">
 						<li><a href="contractor-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="#">Profile</a></li>
+						<li><a class="active" href="contractor-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
+					</div>
+				<div class="col-md-6">	
+					<div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div>
 				</div>
 		   </div>
 		  </div>
@@ -87,7 +99,7 @@
 		  	</div>
 		  	<div class="row second-row">
 		  		<div class="col-md-7">
-  						<a href="#">
+  						<a href="../requirement-form.html">
   							<span class="fa-stack fa-5x">
   								<i class="fa fa-circle-thin fa-stack-2x"></i>
   								<i class="fa fa-plus fa-stack-1x"></i>
@@ -120,78 +132,6 @@
 		  				<h3>NewsFeed</h3>
 		  				<div class="newsfeed">
 		  				<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-						  		<h3>Client 1</h3>
-						  		<p class="posted-date">posted on : 1 week ago</p>
-						  		<p>This is the description/title of the requirement to be displayed</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
 							<div class="media-left">
 								<a href="#">
 								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
@@ -284,9 +224,52 @@
  				$('#user').text(username);
  				$('#user-name').text(username);
  				
+ 				$('.logout').click(function() {
+					console.log("inside logout function")
+					var user = sessionStorage.getItem("user");
+					if (user !== null) {
+						sessionStorage.removeItem("user");
+					}
+					console.log("user logged out");
+					$(location).attr('href', "../index.html");
+				});
+ 				
+				var requirements = [];
+ 				
+ 				var newsfeed = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements",
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime);
+ 							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
+ 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
+ 							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
+ 						});
+ 						$('.newsfeed').html("");
+ 						$('.newsfeed').append(newsfeed);
+ 					}
+ 					});
+ 				
  			});
  		
  		</script>
+ 		<script type="text/javascript">
+ 		$.date = function(dateObject) {
+ 		    var d = new Date(dateObject);
+ 		    var date = d.toDateString();
+ 		    var dateArr = date.split(" ");
+ 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    return date;
+ 		};
+ 		</script>	
  				
     </body>
 </html>

@@ -15,6 +15,151 @@
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/requirement-display.css">
 <link rel="stylesheet" href="../css/custom.css">
+
+</head>
+<body>
+	<div class="nav-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="../images/logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="#" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" id="sub-nav-dashboard">Dashboard</a></li>
+						<li><a href="#" id="sub-nav-profile">Profile</a></li>
+						<li><a href="#">Used machines</a></li>
+						<li><a href="#">Feedback</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div>
+				</div>
+		   </div>
+		  </div>
+		<div class="container">
+			<div class="row">
+				<h2>Requirement List</h2>
+				<div class="col-md-2 filter">
+					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum</p>
+				</div>
+				<div class="col-md-8 list">
+					<ul class="ul-item">
+					</ul>
+				</div>
+				<div class="col-md-2 ads">
+					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+						lorem ipsum</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">About
+									Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Contact
+									Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
+								class="img-circle fa fa-twitter" href="#"></a> <a
+								class="img-circle fa fa-google-plus" href="#"></a> <a
+								class="img-circle fa fa-linkedin" href="#"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="collapse navbar-collapse" id="navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Copyright Congun</a></li>
+						<li><a href="#">Terms and Conditions</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/appProperties.js"></script>
@@ -106,6 +251,34 @@
 	        $(location).attr('href',"../index.html");
 	    });	
 	
+	$('#user').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-profile.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-profile.html");
+		}
+	});
+	
+	$('#sub-nav-profile').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-profile.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-profile.html");
+		}
+	});
+	
+	$('#sub-nav-dashboard').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-dashboard.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-dashboard.html");
+		}
+	});
+	
+	
 	});    
     </script>
 <script type="text/javascript">
@@ -125,127 +298,6 @@
 		return o;
 	};
 </script>
-</head>
-<body>
-	<div class="nav-wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 navigation">
-					<nav class="navbar navbar-defaut navbar-top" role="navigation">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle"
-								data-toggle="collapse" data-target="#navbar-collapse">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
-								src="../images/logo.png" height="75px" width="200px" />
-							</a>
-						</div>
-						<div class="collapse navbar-collapse" id="navbar-collapse">
-							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
-								<li><a href="#" role="button"><span id="user">User</span></a></li>
-								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="content-main">
-		<div class="container">
-			<div class="row">
-				<a href="#" class="btn btn-warning post-req-btn">Post
-					Requirement</a>
-				<h2>Requirement List</h2>
-				<div class="col-md-2 filter">
-					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum</p>
-				</div>
-				<div class="col-md-8 list">
-					<ul class="ul-item">
-					</ul>
-				</div>
-				<div class="col-md-2 ads">
-					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="sub-footer">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4">
-					<p class="first">
-						<img src="../images/logo_new.png" /><br>CONGUN provides one
-						stop online- solution for all construction equipment needs of
-						construction Contractors, at their desired location, in specified
-						time and at a low price.
-					</p>
-				</div>
-				<div class="col-md-4">
-					<div class="middle">
-						<h3>Quick Links</h3>
-						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">About
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Contact
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-
-					<div class="address-content last">
-						<h3>Address</h3>
-						<ul class="info">
-							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
-								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
-							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
-							<li><span class="fa fa-envelope"></span> &ensp; <a
-								href="mailto:info@congun.com">info@congun.com</a></li>
-						</ul>
-						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="collapse navbar-collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Copyright Congun</a></li>
-						<li><a href="#">Terms and Conditions</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 </body>
 </html>

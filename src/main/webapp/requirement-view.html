@@ -16,163 +16,7 @@
 <link rel="stylesheet" href="css/requirement-display.css">
     <link rel="stylesheet" href="css/requirement-view.css">
     <link rel="stylesheet" href="css/custom.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/appProperties.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		/* to get parameters from a url */
-		var getUrlParameter = function getUrlParameter(sParam) {
-		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-		        sURLVariables = sPageURL.split('&'),
-		        sParameterName,
-		        i;
-
-		    for (i = 0; i < sURLVariables.length; i++) {
-		        sParameterName = sURLVariables[i].split('=');
-
-		        if (sParameterName[0] === sParam) {
-		            return sParameterName[1] === undefined ? true : sParameterName[1];
-		        }
-		    }
-		};
-		
-			
-		
-		var category = getUrlParameter("category");
-		var sub_ctg = getUrlParameter("sub-category"); 
-		var reqId = getUrlParameter("aaadd4eejryfjksss48855knkjdsf3akd839k");
-		
-		
-		console.log("reqId ",reqId);
-		
-		$.ajax({
-			url:AppData.relativeUrl+"contractor/contractorRequirement/"+reqId,
-			type:"get",
-			contentType : "application/json; charset=utf-8",
-			data : {},
-			/* datatype : "json",  */
-			success:function(response){
-				console.log(response);
-				var requirement = $.parseJSON(response);
-				console.log(requirement);
-				
-				$('#title').html(requirement.title);
-				$('#category').html(requirement.equipmentCategory);
-				$('#sub-category').html(requirement.equipmentName);
-				$('#model').html(requirement.specificationModel);
-				$('#mfg').html(requirement.manufacturer);
-				$('#mfg-year').html(requirement.equipmentManufactureYear);
-				$('#desc').html(requirement.workDescription);
-				$('#created-by').html(requirement.contractorName);
-				$('#created-on').html(requirement.createdTime);
-				$('#duration').html(requirement.duration+" months");
-				//$('#contact').html(user.mobileNumber);
-				$('#start-date').html(requirement.startDate);
-			}
-			
-		});	
-		 
-		$('#modal-container-login').on('hidden.bs.modal', function(){
-			console.log("clearing the fields");
-		    $(this).find('form')[0].reset();
-		});
-		
-		$('#modal-container-register').on('hidden.bs.modal', function(){
-		    $(this).find('form')[0].reset();
-		});
-			
-		
-			
-	$("#register").click(function() {
-	var success = "successfully created";
-	var successUrl = "#modal-container-login";
-	var data = JSON.stringify($("#register-form").serializeObject());
-	console.log(data);
-
-	$.ajax({												
-	url : AppData.relativeUrl+"user/register",
-	type : "post",
-	contentType : "application/json; charset=utf-8",
-	data : data,
-	success : function(data) {
-	if (data.search("UF01") != -1) {
-	}else{
-		console.log("inside if");
-	$('#modal-container-register').modal('hide');
-	console.log("register modal closed");
-	console.log("opening login modal");
-	$('#modal-container-login').modal('show');
-	$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-	}
-	}
-	});
-	});
-	
-	
-	$("#login-btn").click(function() {
-	console.log("inside login function");
-	
-	var data =JSON.stringify($("#login-form").serializeObject()); 
-	console.log(data);
-	    
-	$.ajax({
-		url:AppData.relativeUrl+"user/login",
-		type:"post",
-		contentType : "application/json; charset=utf-8",
-		data : data,
-		/* datatype : "json",  */
-		success:function(response){
-			console.log(response);
-			response = $.parseJSON(response);
-			console.log("got user from userAPI",response.username)
-			if (typeof (Storage) !== "undefined") {
-				sessionStorage.setItem("user",JSON.stringify(response));
-				} else {
-				console.log(" no storage available");
-				}
-			if(response.role === "supplier"){
-				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-			}else if(response.role === "contractor"){
-				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-			}
-		}
-		
-	});
-    });
-	
-		
-		
-		$('.logout').click(function(){
-		       console.log("inside logout function")
-		       var user = sessionStorage.getItem("user");
-		        if(user !== null){
-		            sessionStorage.removeItem("user");
-		        }
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
-		 });	
-		
-		});    
-    </script>
-    <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>    
+    
 </head>
 <body>
     <div class="nav-wrapper">
@@ -478,6 +322,164 @@
 					</div>
  				</div>
  			</div>
- 		</div>		
+ 		</div>	
+
+<script src="js/jquery.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+			
+		
+		var category = getUrlParameter("category");
+		var sub_ctg = getUrlParameter("sub-category"); 
+		var reqId = getUrlParameter("aaadd4eejryfjksss48855knkjdsf3akd839k");
+		
+		
+		console.log("reqId ",reqId);
+		
+		$.ajax({
+			url:AppData.relativeUrl+"contractor/contractorRequirement/"+reqId,
+			type:"get",
+			contentType : "application/json; charset=utf-8",
+			data : {},
+			/* datatype : "json",  */
+			success:function(response){
+				console.log(response);
+				var requirement = $.parseJSON(response);
+				console.log(requirement);
+				
+				$('#title').html(requirement.title);
+				$('#category').html(requirement.equipmentCategory);
+				$('#sub-category').html(requirement.equipmentName);
+				$('#model').html(requirement.specificationModel);
+				$('#mfg').html(requirement.manufacturer);
+				$('#mfg-year').html(requirement.equipmentManufactureYear);
+				$('#desc').html(requirement.workDescription);
+				$('#created-by').html(requirement.contractorName);
+				$('#created-on').html(requirement.createdTime);
+				$('#duration').html(requirement.duration+" months");
+				//$('#contact').html(user.mobileNumber);
+				$('#start-date').html(requirement.startDate);
+			}
+			
+		});	
+		 
+		$('#modal-container-login').on('hidden.bs.modal', function(){
+			console.log("clearing the fields");
+		    $(this).find('form')[0].reset();
+		});
+		
+		$('#modal-container-register').on('hidden.bs.modal', function(){
+		    $(this).find('form')[0].reset();
+		});
+			
+		
+			
+	$("#register").click(function() {
+	var success = "successfully created";
+	var successUrl = "#modal-container-login";
+	var data = JSON.stringify($("#register-form").serializeObject());
+	console.log(data);
+
+	$.ajax({												
+	url : AppData.relativeUrl+"user/register",
+	type : "post",
+	contentType : "application/json; charset=utf-8",
+	data : data,
+	success : function(data) {
+	if (data.search("UF01") != -1) {
+	}else{
+		console.log("inside if");
+	$('#modal-container-register').modal('hide');
+	console.log("register modal closed");
+	console.log("opening login modal");
+	$('#modal-container-login').modal('show');
+	$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
+	}
+	}
+	});
+	});
+	
+	
+	$("#login-btn").click(function() {
+	console.log("inside login function");
+	
+	var data =JSON.stringify($("#login-form").serializeObject()); 
+	console.log(data);
+	    
+	$.ajax({
+		url:AppData.relativeUrl+"user/login",
+		type:"post",
+		contentType : "application/json; charset=utf-8",
+		data : data,
+		/* datatype : "json",  */
+		success:function(response){
+			console.log(response);
+			response = $.parseJSON(response);
+			console.log("got user from userAPI",response.username)
+			if (typeof (Storage) !== "undefined") {
+				sessionStorage.setItem("user",JSON.stringify(response));
+				} else {
+				console.log(" no storage available");
+				}
+			if(response.role === "supplier"){
+				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
+			}else if(response.role === "contractor"){
+				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
+			}
+		}
+		
+	});
+    });
+	
+		
+		
+		$('.logout').click(function(){
+		       console.log("inside logout function")
+		       var user = sessionStorage.getItem("user");
+		        if(user !== null){
+		            sessionStorage.removeItem("user");
+		        }
+		        console.log("user logged out");
+		        $(location).attr('href',"../index.html");
+		 });	
+		
+		});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
     </body>
 </html>

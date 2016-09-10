@@ -90,7 +90,11 @@ public class SupplierQuote {
 	@Column(name = "hiringChargesType")
 	public String hiringChargesType;
 
+	@Column(name = "requirementtitle")
+	public String reqtitle;
 	
+	@Column(name = "reqduration")
+	public String reqduration;
 
 	public String getQuoteStatus() {
 		return quoteStatus;
@@ -290,6 +294,22 @@ public class SupplierQuote {
 
 	public void setTransportation(String transportation) {
 		this.transportation = transportation;
+	}
+
+	public String getReqtitle() {
+		return reqtitle;
+	}
+
+	public void setReqtitle(String reqtitle) {
+		this.reqtitle = reqtitle;
+	}
+
+	public String getReqduration() {
+		return reqduration;
+	}
+
+	public void setReqduration(String reqduration) {
+		this.reqduration = reqduration;
 	}
 
 	

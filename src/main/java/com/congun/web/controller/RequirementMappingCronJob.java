@@ -26,7 +26,7 @@ public class RequirementMappingCronJob {
 		JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 	}
 	*/
-	@Scheduled(fixedDelay = 20000)
+	@Scheduled(fixedDelay = 86400000)
 	public void requirementMapping() throws InterruptedException{
 		System.out.println("Entered Crone Job : "+System.currentTimeMillis());
 		

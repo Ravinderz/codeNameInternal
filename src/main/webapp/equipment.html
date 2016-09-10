@@ -13,259 +13,7 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
 <link rel="stylesheet" href="css/equipment.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/appProperties.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		/* to get parameters from a url */
-		var getUrlParameter = function getUrlParameter(sParam) {
-		var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
-
-			for (i = 0; i < sURLVariables.length; i++) {
-			sParameterName = sURLVariables[i].split('=');
-
-			if (sParameterName[0] === sParam) {
-			return sParameterName[1] === undefined ? true : sParameterName[1];
-			}
-			}
-			};					
-
-		var category = getUrlParameter('category');
-					
-						/* var user = sessionStorage.getItem("user");
-						user = $.parseJSON(user);
-						console.log(user);
-						if (user !== null) {
-							console.log("inside if");
-							$(location).attr('href',"user/equipment.html?category="+category);
-						} else {
-							console.log("nothing to do");
-							
-						} */
-					
-						
-						$('#modal-container-login').on('hidden.bs.modal', function(){
-							console.log("clearing the fields");
-						    $(this).find('form')[0].reset();
-						});
-						
-						$('#modal-container-register').on('hidden.bs.modal', function(){
-						    $(this).find('form')[0].reset();
-						});
-						
-						
-						$("#register").click(
-								function() {
-								var success = "successfully created";
-								var successUrl = "#modal-container-login";
-								var data = JSON.stringify($("#register-form").serializeObject());
-								console.log(data);
-
-							
-								$.ajax({
-								url : AppData.relativeUrl+"user/register",
-								type : "post",
-								contentType : "application/json; charset=utf-8",
-								data : data,
-								success : function(data) {
-								if (data.search("UF01") != -1) {
-								} else {
-								console.log("inside if");
-								$('#modal-container-register').modal('hide');
-								console.log("register modal closed");
-								console.log("opening login modal");
-								$('#modal-container-login').modal('show');
-								$(location).attr('href',"user/equipment.html?category="+category);
-								}
-								}
-								});
-								});
-
-								$("#login-btn").click(function() {
-								console.log("inside login function");
-
-								var data = JSON.stringify($("#login-form").serializeObject());
-
-								$.ajax({
-								url : AppData.relativeUrl+"user/login",
-								type : "post",
-								contentType : "application/json; charset=utf-8",
-								data : data,
-																/* datatype : "json",  */
-								success : function(response) {
-								console.log(response);
-								response = $.parseJSON(response);
-								console.log("got user from userAPI",response.username);
-								$('#modal-container-login').modal('hide');
-								if (typeof (Storage) !== "undefined") {
-								sessionStorage.setItem("user",JSON.stringify(response));
-								} else {
-								console.log(" no storage available");
-								}
-								if (response.role === "supplier") {
-								var user = sessionStorage.getItem("user");
-								user = $.parseJSON(user);
-								console.log(user);
-								if (user !== null) {
-								$(location).attr('href',"user/equipment.html?category="+category);
-								}
-								} else if (response.role === "contractor") {
-									var user = sessionStorage.getItem("user");
-									user = $.parseJSON(user);
-									console.log(user);
-									if (user !== null) {
-									$(location).attr('href',"user/equipment.html?category="+category);
-									}																//$(location).attr('href',"index.html");
-								}
-								}
-
-								});
-								});
-			
-								$('.logout').click(function() {
-									console.log("inside logout function")
-									var user = sessionStorage.getItem("user");
-									if (user !== null) {
-										sessionStorage.removeItem("user");
-									}
-									console.log("user logged out");
-									$(location).attr('href', "index.html");
-								});
-		
-
-						
-						var equipment = '';
-						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
-								'miniexcavator', 'loader', 'motorgrader',
-								'skidsteer' ];
-						var Cranes = [ 'crawlercrane', 'mobilecrane',
-								'towercrane' ];
-						var Generators = [ 'mobilegenerator',
-								'portablegenerator' ];
-						var AerialLifts = [ 'articulatingboomlift',
-								'scissorlift', 'straighttelescoping' ];
-						var PowerDrillers = [ 'anglegrinder', 'breakhammer',
-								'metalcutter', 'stonedriller',
-								'surfacegrinder', 'horizontaldriller' ];
-						var CementMixerTrucks = [ 'cementmixer', 'trailerpump',
-								'truckmountedconcretepump' ];
-						var RoadRollers = [ 'doubledrumroller1', 'hotmixer',
-								'sensorpaver1', 'singledrum' ];
-						var MaterialHandling = [ 'industriallift',
-								'reachforklift', 'telehandlerfork' ];
-						var Miscellaneous = [ 'airtools', 'compressor',
-								'tractor', 'waterpump' ];
-						var BoreDrillers = [ 'boredriller', 'piledriving' ];
-
-						/*if(category === 'earthMovingEquipment'){
-							equipment = earthMovingEquipment;
-						}
-						else 
-						if(category === 'cranes'){
-						equipment = cranes;
-						}*/
-						switch (category) {
-						case 'EarthMoving':
-							equipment = EarthMoving;
-							break;
-						case 'Cranes':
-							equipment = Cranes;
-							break;
-						case 'Generators':
-							equipment = Generators;
-							break;
-						case 'AerialLifts':
-							equipment = AerialLifts;
-							break;
-						case 'PowerDrillers':
-							equipment = PowerDrillers;
-							break;
-						case 'CementMixerTrucks':
-							equipment = CementMixerTrucks;
-							break;
-						case 'RoadRollers':
-							equipment = RoadRollers;
-							break;
-						case 'MaterialHandling':
-							equipment = MaterialHandling;
-							break;
-						case 'Miscellaneous':
-							equipment = Miscellaneous;
-							break;
-						case 'BoreDrillers':
-							equipment = BoreDrillers;
-							break;
-
-						}
-						//category = $.parseJSON(earthMovingEquipment);
-						console.log("category", category);
-						console.log("equipment", equipment);
-						var count = 1;
-						var html = "";
-						$
-								.each(
-										equipment,
-										function(index, value) {
-											var imagePath = 'images/'
-													+ category + '/' + value
-													+ '.png';
-											console.log(imagePath);
-											var firstDiv = "<div class='row'>";
-											var firstDivClose = "</div>";
-											if (count === 1) {
-												html += firstDiv;
-											}
-											var col = "<div class='col-md-3 col-sm-12'>"
-													+ "<img src='"+imagePath+"' class='category-img' id='"+value+"' height='170px' width='200px'/><button class='btn img-btn'>"
-													+ value + "</button></div>";
-											html += col;
-											if (equipment.length <= 4) {
-												if (count === equipment.length) {
-													html += firstDivClose;
-													count = 0;
-												}
-											} else {
-												if (count === 4) {
-													html += firstDivClose;
-													count = 0;
-												}
-											}
-											count++;
-										});
-						console.log(html);
-
-						$(".category-row-one").append(html);
-
-						$('.category-img').click(
-								function() {
-									var sub_ctg = this.id;
-									$(location).attr('href',"requirement-display.html?category="
-													+ category
-													+ "&sub-category="
-													+ sub_ctg);
-								});
-
-					});
-</script>
-<script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>
 </head>
 <body>
 	<div class="nav-wrapper">
@@ -549,5 +297,258 @@
 		</div>
 	</div>
 	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
+
+			for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+			}
+			}
+			};					
+
+		var category = getUrlParameter('category');
+					
+						/* var user = sessionStorage.getItem("user");
+						user = $.parseJSON(user);
+						console.log(user);
+						if (user !== null) {
+							console.log("inside if");
+							$(location).attr('href',"user/equipment.html?category="+category);
+						} else {
+							console.log("nothing to do");
+							
+						} */
+					
+						
+						$('#modal-container-login').on('hidden.bs.modal', function(){
+							console.log("clearing the fields");
+						    $(this).find('form')[0].reset();
+						});
+						
+						$('#modal-container-register').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						});
+						
+						
+						$("#register").click(
+								function() {
+								var success = "successfully created";
+								var successUrl = "#modal-container-login";
+								var data = JSON.stringify($("#register-form").serializeObject());
+								console.log(data);
+
+							
+								$.ajax({
+								url : AppData.relativeUrl+"user/register",
+								type : "post",
+								contentType : "application/json; charset=utf-8",
+								data : data,
+								success : function(data) {
+								if (data.search("UF01") != -1) {
+								} else {
+								console.log("inside if");
+								$('#modal-container-register').modal('hide');
+								console.log("register modal closed");
+								console.log("opening login modal");
+								$('#modal-container-login').modal('show');
+								$(location).attr('href',"user/equipment.html?category="+category);
+								}
+								}
+								});
+								});
+
+								$("#login-btn").click(function() {
+								console.log("inside login function");
+
+								var data = JSON.stringify($("#login-form").serializeObject());
+
+								$.ajax({
+								url : AppData.relativeUrl+"user/login",
+								type : "post",
+								contentType : "application/json; charset=utf-8",
+								data : data,
+																/* datatype : "json",  */
+								success : function(response) {
+								console.log(response);
+								response = $.parseJSON(response);
+								console.log("got user from userAPI",response.username);
+								$('#modal-container-login').modal('hide');
+								if (typeof (Storage) !== "undefined") {
+								sessionStorage.setItem("user",JSON.stringify(response));
+								} else {
+								console.log(" no storage available");
+								}
+								if (response.role === "supplier") {
+								var user = sessionStorage.getItem("user");
+								user = $.parseJSON(user);
+								console.log(user);
+								if (user !== null) {
+								$(location).attr('href',"user/equipment.html?category="+category);
+								}
+								} else if (response.role === "contractor") {
+									var user = sessionStorage.getItem("user");
+									user = $.parseJSON(user);
+									console.log(user);
+									if (user !== null) {
+									$(location).attr('href',"user/equipment.html?category="+category);
+									}																//$(location).attr('href',"index.html");
+								}
+								}
+
+								});
+								});
+			
+								$('.logout').click(function() {
+									console.log("inside logout function")
+									var user = sessionStorage.getItem("user");
+									if (user !== null) {
+										sessionStorage.removeItem("user");
+									}
+									console.log("user logged out");
+									$(location).attr('href', "index.html");
+								});
+		
+
+						
+						var equipment = '';
+						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
+								'miniexcavator', 'loader', 'motorgrader',
+								'skidsteer' ];
+						var Cranes = [ 'crawlercrane', 'mobilecrane',
+								'towercrane' ];
+						var Generators = [ 'mobilegenerator',
+								'portablegenerator' ];
+						var AerialLifts = [ 'articulatingboomlift',
+								'scissorlift', 'straighttelescoping' ];
+						var PowerDrillers = [ 'anglegrinder', 'breakhammer',
+								'metalcutter', 'stonedriller',
+								'surfacegrinder', 'horizontaldriller' ];
+						var CementMixerTrucks = [ 'cementmixer', 'trailerpump',
+								'truckmountedconcretepump' ];
+						var RoadRollers = [ 'doubledrumroller1', 'hotmixer',
+								'sensorpaver1', 'singledrum' ];
+						var MaterialHandling = [ 'industriallift',
+								'reachforklift', 'telehandlerfork' ];
+						var Miscellaneous = [ 'airtools', 'compressor',
+								'tractor', 'waterpump' ];
+						var BoreDrillers = [ 'boredriller', 'piledriving' ];
+
+						/*if(category === 'earthMovingEquipment'){
+							equipment = earthMovingEquipment;
+						}
+						else 
+						if(category === 'cranes'){
+						equipment = cranes;
+						}*/
+						switch (category) {
+						case 'EarthMoving':
+							equipment = EarthMoving;
+							break;
+						case 'Cranes':
+							equipment = Cranes;
+							break;
+						case 'Generators':
+							equipment = Generators;
+							break;
+						case 'AerialLifts':
+							equipment = AerialLifts;
+							break;
+						case 'PowerDrillers':
+							equipment = PowerDrillers;
+							break;
+						case 'CementMixerTrucks':
+							equipment = CementMixerTrucks;
+							break;
+						case 'RoadRollers':
+							equipment = RoadRollers;
+							break;
+						case 'MaterialHandling':
+							equipment = MaterialHandling;
+							break;
+						case 'Miscellaneous':
+							equipment = Miscellaneous;
+							break;
+						case 'BoreDrillers':
+							equipment = BoreDrillers;
+							break;
+
+						}
+						//category = $.parseJSON(earthMovingEquipment);
+						console.log("category", category);
+						console.log("equipment", equipment);
+						var count = 1;
+						var html = "";
+						$
+								.each(
+										equipment,
+										function(index, value) {
+											var imagePath = 'images/'
+													+ category + '/' + value
+													+ '.png';
+											console.log(imagePath);
+											var firstDiv = "<div class='row'>";
+											var firstDivClose = "</div>";
+											if (count === 1) {
+												html += firstDiv;
+											}
+											var col = "<div class='col-md-3 col-sm-12'>"
+													+ "<img src='"+imagePath+"' class='category-img' id='"+value+"' height='170px' width='200px'/><button class='btn img-btn'>"
+													+ value + "</button></div>";
+											html += col;
+											if (equipment.length <= 4) {
+												if (count === equipment.length) {
+													html += firstDivClose;
+													count = 0;
+												}
+											} else {
+												if (count === 4) {
+													html += firstDivClose;
+													count = 0;
+												}
+											}
+											count++;
+										});
+						console.log(html);
+
+						$(".category-row-one").append(html);
+
+						$('.category-img').click(
+								function() {
+									var sub_ctg = this.id;
+									$(location).attr('href',"requirement-display.html?category="
+													+ category
+													+ "&sub-category="
+													+ sub_ctg);
+								});
+
+					});
+</script>
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
 </body>
 </html>

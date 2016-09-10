@@ -16,110 +16,7 @@
 <link rel="stylesheet" href="../css/requirement-display.css">
     <link rel="stylesheet" href="../css/requirement-view.css">
     <link rel="stylesheet" href="../css/custom.css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/appProperties.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-		var username = user.firstname+" "+user.lastname;
-		$('#user').text(username);
-		
-		var requirement = sessionStorage.getItem("requirement");
-		requirement = $.parseJSON(requirement);
-		console.log(requirement);
-		
-		$('#title').html(requirement.title);
-		$('#category').html(requirement.equipmentCategory);
-		$('#sub-category').html(requirement.equipmentName);
-		$('#model').html(requirement.specificationModel);
-		$('#mfg').html(requirement.manufacturer);
-		$('#mfg-year').html(requirement.equipmentManufactureYear);
-		$('#desc').html(requirement.workDescription);
-		$('#created-by').html(requirement.contractorName);
-		$('#created-on').html(requirement.createdTime);
-		$('#duration').html(requirement.duration+" months");
-		$('#contact').html(user.mobileNumber);
-		$('#start-date').html(requirement.startDate);
-		
-		var quotes = [];
-		var quoteList = "";
-		
-		$.ajax({
-			url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+requirement.requirementId,
-			/*+user.userId,*/
-			type:"get",
-			data:{},
-			success:function(response){
-				response = $.parseJSON(response);
-				console.log(response);
-				var temp = "<div class='container-fluid'>"
-				$.each(response,function(index,value){
-					quotes[value.quoteId] = value;
-					if(index%2 === 1){
-					quoteList += "<div class='row quote-item striped-row'><div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>Manufacturer</h5><p>"+value.manufacturer+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>Model</h5><p>"+value.model+"</p></div></div>"
-								  +"<div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>manufacturedyear</h5><p>"+value.manufacturedyear+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>capacity</h5><p>"+value.capacity+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-8'><div class='col-content'><h5>finalQuotePrice</h5><p>"+value.finalQuotePrice+"</p></div></div>"
-								  +"<div class='col-md-12'><div class='col-content'><a href='#' class='btn btn-warning view-btn' id="+value.quoteId+">View</a></div></div></div>"
-					}else{
-						quoteList += "<div class='row quote-item'><div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>Manufacturer</h5><p>"+value.manufacturer+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>Model</h5><p>"+value.model+"</p></div></div>"
-						  +"<div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>manufacturedyear</h5><p>"+value.manufacturedyear+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>capacity</h5><p>"+value.capacity+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-8'><div class='col-content'><h5>finalQuotePrice</h5><p>"+value.finalQuotePrice+"</p></div></div>"
-						  +"<div class='col-md-12'><div class='col-content'><a href='#' class='btn btn-warning view-btn' id="+value.quoteId+">View</a></div></div></div>"	
-					}
-					
-				});	
-				$('.quotes-list').append(temp+quoteList+"</div>");
-			}
-			});
-		
-		$('.logout').click(function(){
-		       console.log("inside logout function")
-		       var user = sessionStorage.getItem("user");
-		        if(user !== null){
-		            sessionStorage.removeItem("user");
-		        }
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
-		 });
-		
-		$('.quotes-list').on('click','.view-btn',function(e){
-			e.preventDefault();
-			console.log("Entered requiremnt  view click function");
-		        var quoteid = this.id;
-		        console.log("quote id :: ",quoteid);
-				console.log("quote :: ",quotes[quoteid]);
-				sessionStorage.setItem("quote",JSON.stringify(quotes[quoteid]));
-				$('#modal-quote-display').modal('show');
-				//$(location).attr('href','requirement-view-dynamic.html');
-		});
-		
-				
-		});    
-    </script>
-    <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>    
+
 </head>
 <body>
     <div class="nav-wrapper">
@@ -141,7 +38,6 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
 								<li><a href="#" role="button"><span id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
@@ -153,6 +49,30 @@
 	</div>
 	    
     <div class="content-main">
+    	<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" id="sub-nav-dashboard">Dashboard</a></li>
+						<li><a href="#" id="sub-nav-profile">Profile</a></li>
+						<li><a href="#">Used machines</a></li>
+						<li><a href="#">Feedback</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div>
+				</div>
+		   </div>
+		  </div>
     <div class="container">
         <div class="row">
             <h2>Requirement List</h2>
@@ -199,43 +119,6 @@
                             </div>
                         </div>
                     </div>
-                	<div class="quotes-section">
-                		<h4>Quotes</h4>
-                		<div class="quotes-list">
-                		</div>
-                		<div class="modal fade" id="modal-quote-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="myModalLabel">Quote details</h4>
-								</div>
-								<div class="modal-body">
-									<div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Created by</h5><p id="created-by">some user</p></div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-content"><h5>Created on</h5><p id="created-on">10-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-content"><h5>Start date</h5><p id="start-date">15-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                   <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div>
-                                </div>
-                            </div>
-                        </div>
-								</div>
-							</div>
-						</div>
-					</div>
-                	</div>
                 </div>
             </div>
             <div class="col-md-2 ads"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
@@ -290,6 +173,97 @@
 					</div>
  				</div>
  			</div>
- 		</div>		
+ 		</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var user = sessionStorage.getItem("user");
+		user = $.parseJSON(user);
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+		
+		var requirement = sessionStorage.getItem("requirement");
+		requirement = $.parseJSON(requirement);
+		console.log(requirement);
+		
+		$('#title').html(requirement.title);
+		$('#category').html(requirement.equipmentCategory);
+		$('#sub-category').html(requirement.equipmentName);
+		$('#model').html(requirement.specificationModel);
+		$('#mfg').html(requirement.manufacturer);
+		$('#mfg-year').html(requirement.equipmentManufactureYear);
+		$('#desc').html(requirement.workDescription);
+		$('#created-by').html(requirement.contractorName);
+		$('#created-on').html(requirement.createdTime);
+		$('#duration').html(requirement.duration+" months");
+		$('#contact').html(user.mobileNumber);
+		$('#start-date').html(requirement.startDate);
+		
+		
+		$('#user').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('#sub-nav-profile').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('#sub-nav-dashboard').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+		});
+		
+		
+		$('.logout').click(function(){
+		       console.log("inside logout function")
+		       var user = sessionStorage.getItem("user");
+		        if(user !== null){
+		            sessionStorage.removeItem("user");
+		        }
+		        console.log("user logged out");
+		        $(location).attr('href',"../index.html");
+		 });
+		
+		
+		
+		});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>    
+ 		
+ 				
     </body>
 </html>

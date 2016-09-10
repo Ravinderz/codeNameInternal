@@ -29,7 +29,7 @@
 						user = $.parseJSON(user);
 						console.log(user);
 						if (user !== null) {
-							console.log("inside if");
+							console.log("user is available");
 							$(location).attr('href',"user/index.html");
 						} else {
 							console.log("nothing to do");
@@ -114,14 +114,14 @@
 						user = $.parseJSON(user);
 						console.log(user);
 						if (user !== null) {
-						$(location).attr('href',"user/index.html");
+						$(location).attr('href',"user/supplier-profile.html");
 						}
 						} else if (response.role === "contractor") {
 							var user = sessionStorage.getItem("user");
 							user = $.parseJSON(user);
 							console.log(user);
 							if (user !== null) {
-							$(location).attr('href',"user/index.html");
+							$(location).attr('href',"user/contractor-profile.html");
 							}																//$(location).attr('href',"index.html");
 						}
 						}
