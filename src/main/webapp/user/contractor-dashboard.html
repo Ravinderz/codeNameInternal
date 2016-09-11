@@ -342,6 +342,7 @@
  			$(document).ready(function(){
  				var requirements = [];
  				var quotes = [];
+ 				var reqId = "";
  				var user = sessionStorage.getItem("user");
  				user = $.parseJSON(user);
  				console.log(user);
@@ -388,7 +389,7 @@
 				
  					$('.requirement-table').on('click','.quote-link',function(e){
  						e.preventDefault();
- 						var reqId = this.id;
+ 						reqId = this.id;
  						console.log("rq id ::",reqId);
  						var quoteList = "";
  						$.ajax({
@@ -482,6 +483,80 @@
  		 					}
  		 					});  
  					});
+ 					
+ 					$('.btn-filter').click(function(e){
+ 						e.preventDefault();
+ 						var status = $(this).text().toLowerCase();
+ 						var quoteList = "";
+ 						console.log("status" , status);
+ 						console.log("reqId" , reqId);
+ 						if(status === "all"){
+ 							$.ajax({
+		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
+		 							/*+user.userId,*/
+		 							type:"get",
+		 							data:{},
+		 							success:function(response){
+		 								response = $.parseJSON(response);
+		 								console.log(response);
+		 								var temp = "<div class='container-fluid'>"
+		 								$.each(response,function(index,value){
+		 									quotes[value.quoteId] = value;
+		 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+		 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+		 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+		 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
+		 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
+		 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+		 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+		 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+		 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+		 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+		 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+		 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+		 									
+		 								});
+		 								$('.quote-card-container').html("");
+		 								$('.quote-card-container').append(quoteList);
+		 							}
+		 							});
+ 						}else{
+ 						$.ajax({
+ 							url:AppData.relativeUrl+"supplier/getquotesbystatus/"+reqId+"?quoteStatus="+status,
+ 							type:"get",
+ 							data:{},	
+ 							success:function(response){
+ 								response = $.parseJSON(response);
+ 								console.log(response);
+ 								var temp = "<div class='container-fluid'>"
+ 								
+ 								$.each(response,function(index,value){
+ 									quotes[value.quoteId] = value;
+ 									
+ 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+ 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+ 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+ 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
+ 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
+ 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+ 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+ 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+ 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+ 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+ 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+ 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+ 									
+ 								});
+ 								$('.quote-card-container').html("");
+ 								$('.quote-card-container').append(quoteList);
+ 								
+ 							}
+ 						});
+ 						}
+ 					});
+ 					
+ 					
+ 					
  			});
  		</script>
  		<script type="text/javascript">

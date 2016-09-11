@@ -269,6 +269,26 @@
  						$('.newsfeed').append(newsfeed);
  					}
  					});
+ 			
+ 				var recentQuotes = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"supplier/getLatestRequirements/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							recentQuotes += '<li>'+value.quotePostedByName+'</li>';
+ 						});
+ 						$('.recent-quote-list').html("");
+ 						$('.recent-quote-list').append(recentQuotes);
+ 					}
+ 					});
+ 				
+ 				
+ 				
  			});
  		
  		</script>

@@ -250,7 +250,8 @@ padding-left : 15px;
 }
 
 .client-name{
-	margin-top:40px;
+	float:left;
+	margin-top:20px;
 }
 
 .applied-date{
@@ -311,4 +312,18 @@ padding-left : 15px;
 
 .media-object{
 	padding-top:8px;
+}
+
+.give-quote{
+	float:right;
+	margin-top: 40px; 
+	margin-right:20px;
+}
+
+.give-quote .btn{
+	border-radius : 0px;
+}
+
+.clear-fix{
+	clear:both;
 }

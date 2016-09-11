@@ -97,35 +97,8 @@
 		  			</div>
 		  		</div>
 		  	</div>
-		  	<div class="row second-row">
-		  		<div class="col-md-7">
-  						<a href="../requirement-form.html">
-  							<span class="fa-stack fa-5x">
-  								<i class="fa fa-circle-thin fa-stack-2x"></i>
-  								<i class="fa fa-plus fa-stack-1x"></i>
-  							</span>
-  								<p>Post a new Requirement</p>
-  						</a>
-				</div>	
-		  		<div class="col-md-4 right-col">
-		  			<form class="occupation ">
-  						<div class="form-group">
-    						<label for="occupation">Tell us about your occupation</label>
-    						<input type="text" class="form-control input-sm" id="occupation" placeholder="occupation">
-    						<button type="submit" class="btn btn-default btn-sm">Submit</button>
-  						</div>
-  					</form>	
-  				</div>
-		  		<div class="col-md-4 right-col">
-			  		<form class="website">
-	  						<div class="form-group">
-	    						<label for="website">Have a website ? <br> Update your/company's web address</label>
-	    						<input type="url" class="form-control input-sm" id="website" placeholder="enter your/company website">
-	    						<button type="submit" class="btn btn-default btn-sm">Submit</button>
-	  						</div>
-	  				</form>	
-  				</div>
-		  		
+		  	<div class="row second-row col-dynamic">
+		  	
 		  	</div>
 		  	<div class="row third-row">
 		  		<div class="col-md-7">
@@ -257,6 +230,57 @@
  						$('.newsfeed').append(newsfeed);
  					}
  					});
+ 				
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						var block = "";
+ 						if(response === null || response === "undefined"){
+ 							block = '<div class="col-md-7"><a href="../requirement-form.html"><span class="fa-stack fa-5x"><i class="fa fa-circle-thin fa-stack-2x"></i>'
+ 							+'<i class="fa fa-plus fa-stack-1x"></i></span><p>Post a new Requirement</p></a></div>'
+ 							+'<div class="col-md-4 right-col"><form class="occupation "><div class="form-group"><label for="occupation">Tell us about your occupation</label>'
+ 							+'<input type="text" class="form-control input-sm" id="occupation" placeholder="occupation"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>'
+ 							+'<div class="col-md-4 right-col"><form class="website"><div class="form-group"><label for="website">Have a website ? <br> Update your/company web address</label>'
+ 							+'<input type="url" class="form-control input-sm" id="website" placeholder="enter your/company website"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>';
+ 						}
+ 						else{
+ 							
+ 							block = '<div class="col-md-7"><div class="col-md-6 col-first"><div class="recent-quotes"><h4>Recent Requirements</h4><ul class="recent-quote-list"></ul>'
+ 							+'</div></div><div class="col-md-6 col-second"><a href="../requirement-form.html">'
+ 							+'<span class="fa-stack fa-5x"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span><p>Post a new requirement</p></a></div></div></div>'
+ 							+'<div class="col-md-4 right-col"><form class="occupation "><div class="form-group"><label for="occupation">Tell us about your occupation</label>'
+ 							+'<input type="text" class="form-control input-sm" id="occupation" placeholder="occupation"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>'
+ 							+'<div class="col-md-4 right-col"><form class="website"><div class="form-group"><label for="website">Have a website ? <br> Update your/company web address</label>'
+ 							+'<input type="url" class="form-control input-sm" id="website" placeholder="enter your/company website"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>';
+ 						}
+ 						console.log(block);
+ 						
+			 				$.ajax({
+			 					url:AppData.relativeUrl+"contractor/getLatestRequirements/"+user.userId,
+			 					type:"get",
+			 					data:{},
+			 					success:function(response){
+			 						response = $.parseJSON(response);
+			 						console.log(response);
+			 						var recentReq = "";
+			 						$.each(response,function(index,value){
+			 							recentReq += '<li>'+value.title+'</li>';
+			 						});
+			 						console.log(recentReq);
+			 						$('.recent-quote-list').append(recentReq);
+			 					}
+			 					});
+ 						
+ 						$('.col-dynamic').html("");
+ 						$('.col-dynamic').append(block);
+ 					}
+ 					});
+ 				
  				
  			});
  		
