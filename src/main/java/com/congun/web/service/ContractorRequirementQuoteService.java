@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.congun.web.controller.ContractorRequirementController;
 import com.congun.web.dao.ContractorRequirementQuoteDAO;
-import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.DropDownMaster;
 import com.congun.web.util.ApplicationUtil;
@@ -42,18 +40,18 @@ public class ContractorRequirementQuoteService{
 		return status;
 	}
 	
-	public String getAllRequirementsByContractorId(long id) {
+	public String getAllRequirementsByContractorId(long id,int page,int pSize) {
 		logger.info("Entered into ContractorRequirementQuoteService.getAllRequirementsByContractorId method ID:"+id);
-		List<ContractorRequirement> reqList = dao.getAllRequirementsByConctractorId(id);
+		List<ContractorRequirement> reqList = dao.getAllRequirementsByConctractorId(id,page,pSize);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
 			else
 				return ResponseConstants.CONTRACTOR_FAILURE_CODE;
 		}
 	
-	public String getAllMappedRequirements(long suppId){
+	public String getAllMappedRequirements(long suppId,int page,int pSize){
 		logger.info("Entered into ContractorRequirementQuoteService.getAllMappedRequirements method SupplierID:"+suppId);
-		List<ContractorRequirement> reqList = dao.getAllMappedRequirements(suppId);
+		List<ContractorRequirement> reqList = dao.getAllMappedRequirements(suppId,page,pSize);
 		if(reqList != null)
 			return ApplicationUtil.getJsonResponse(reqList);
 			else

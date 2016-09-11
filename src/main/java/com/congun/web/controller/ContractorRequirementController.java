@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.ContractorRequirement;
@@ -49,9 +50,11 @@ public class ContractorRequirementController {
 		}
 	
 	@RequestMapping(value = "/getAllRequirements/{id}" , method = RequestMethod.GET)
-	public String getAllRequirementsByContractorId(@PathVariable Long id){
+	public String getAllRequirementsByContractorId(@PathVariable Long id,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pSize", defaultValue = "10") int pSize){
 		logger.info("Entered into ContractorRequirementController.getAllRequirementsByContractorId method  ID:"+id);
-		return service.getAllRequirementsByContractorId(id);
+		return service.getAllRequirementsByContractorId(id,page,pSize);
 	}
 	
 	@RequestMapping(value = "/getDistinctCategory" , method = RequestMethod.GET)
@@ -67,9 +70,11 @@ public class ContractorRequirementController {
 	}
 	
 	@RequestMapping(value="/getmappedrequirements/{supplierId}", method = RequestMethod.GET )
-	public String getAllMappedRequirements(@PathVariable("supplierId") long suppId){
+	public String getAllMappedRequirements(@PathVariable("supplierId") long suppId,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into ContractorRequirementController.getAllMappedRequirements method  SupplierId:"+suppId);
-		return service.getAllMappedRequirements(suppId);
+		return service.getAllMappedRequirements(suppId,page,pSize);
 	}
 	
 	@RequestMapping(value="/getAllRequirements" , method = RequestMethod.GET)

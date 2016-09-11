@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.model.AddEquipment;
-import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.SupplierQuote;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
@@ -34,9 +33,9 @@ public class SupplierQuoteService {
 		return status;
 	}
 	
-	public String getQuotationsbySupplier(long supplierId){
+	public String getQuotationsbySupplier(long supplierId,int page,int pSize){
 		logger.info("Entered into SupplierQuoteService.getQuotationsbySupplier method SupplierId"+supplierId);
-		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbySupplier(supplierId);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbySupplier(supplierId,page,pSize);
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else
@@ -53,9 +52,9 @@ public class SupplierQuoteService {
 			return ResponseConstants.SUPPLIER_FAILURE_CODE;
 	}
 	
-	public String getQuotationsbyRequirement(long requirementId){
+	public String getQuotationsbyRequirement(long requirementId,int page,int pSize){
 		logger.info("Entered into SupplierQuoteService.getQuotationsbyRequirement method RequirementId:"+requirementId);
-		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbyRequirement(requirementId);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbyRequirement(requirementId,page,pSize);
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else

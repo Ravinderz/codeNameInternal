@@ -34,9 +34,11 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="/getquotesbysupplier/{supplierId}" , method=RequestMethod.GET)
-	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId){
+	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pSize", defaultValue = "10") int pSize){
 		logger.info("Entered into SupplierController.getQuotationsBySupplier method  SupplierId:"+suppId);
-		return supplierService.getQuotationsbySupplier(suppId);	
+		return supplierService.getQuotationsbySupplier(suppId,page,pSize);	
 	}
 	
 	@RequestMapping(value="/getquotes/{quoteId}" , method=RequestMethod.GET)
@@ -46,9 +48,11 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="/getquotesbyrequirement/{requirementId}" , method=RequestMethod.GET)
-	public 	String getQuotationsByRequirement(@PathVariable("requirementId") long requirementId){
+	public 	String getQuotationsByRequirement(@PathVariable("requirementId") long requirementId,
+	@RequestParam(value = "page", defaultValue = "1") int page,
+    @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into SupplierController.getQuotationsByRequirement method  RequirementId:"+requirementId);
-		return supplierService.getQuotationsbyRequirement(requirementId);	
+		return supplierService.getQuotationsbyRequirement(requirementId,page,pSize);	
 	}
 	
 	@RequestMapping(value="/getnoofquotes/{requirementId}" , method=RequestMethod.GET)

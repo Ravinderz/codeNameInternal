@@ -33,14 +33,14 @@ public class HibernateConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/congun");
 		dataSource.setUsername("root");
-		dataSource.setPassword("letmein");//Change this value to appropriate value when using at other system
+		dataSource.setPassword("mysql");//Change this value to appropriate value when using at other system
 		return dataSource;
 	}
 	
 	private Properties hibernateProperties(){
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.show_sql", "false");
 		properties.put("hibernate.format_sql", "true");
 		properties.put("hibernate.id.new_generator_mappings", "false");
 		properties.put("hibernate.hbm2ddl.auto","update");

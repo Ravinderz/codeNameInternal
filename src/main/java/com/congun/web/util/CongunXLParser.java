@@ -1,11 +1,17 @@
 package com.congun.web.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,13 +22,6 @@ import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.Machines;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 @Repository
 public class CongunXLParser {

@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.Machines;
-import com.congun.web.model.User;
 import com.congun.web.util.ResponseConstants;
 
 @Repository
