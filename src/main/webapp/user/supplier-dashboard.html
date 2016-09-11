@@ -348,7 +348,7 @@
  							createdTime = $.date(createdTime);
  							reqList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.title+'</h4><a href="#">'
  							+'<img class="media-object" src="http://placehold.it/130x130" alt="..."></a></div><div class="media-body">'
- 							+'<div class="client-name"><h3>'+value.contractorName+'</h3></div><div class="give-quote"><button type="button" class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>Applied on : '+createdTime+'</span></div>'
+ 							+'<div class="client-name"><h3>'+value.contractorName+'</h3></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>Applied on : '+createdTime+'</span></div>'
  							+'<h4 id="equipment-heading">equipment details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
  							+'<th>Year of Manufacture</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
  							+'<td>'+value.manufacturer+'</td><td>'+value.equipmentManufactureYear+'</td><td>'+value.duration+' month</td><td>Hyderabad</td></tr></tbody></table></div></div>';
@@ -357,6 +357,12 @@
  						$('.requirement-card-wrapper').append(reqList);
  					}
  					});
+ 				
+ 				$('.requirement-card-wrapper').on('click','#quote-btn',function(e){
+ 					e.preventDefault();
+ 					console.log($(this).val());
+ 					$(location).attr('href',"../quote-form.html?reqId="+$(this).val());
+ 				});
  				
  			});
  		</script>
