@@ -1,6 +1,6 @@
-language:                               
+language: java                              
 
-java:                                      
+jdk:                                      
   - oraclejdk7                   
 
 services:                                       
