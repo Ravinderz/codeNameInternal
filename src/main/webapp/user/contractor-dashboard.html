@@ -82,75 +82,22 @@
 		   <div class="panel panel-default my-req">
 			  <div class="panel-heading">My Requirements</div>
 			  <div class="requirement-table">
-				 <table class="table table-striped">
-					  <thead>
-						<tr>
-						  <th>Date</th>
-						  <th>Requirement</th>
-						  <th>Quotes</th>
-						  <th>Requirement deadline</th>
-						  <th>Status</th>
-						  <th>Clone</th>
-						  <th>Share</th>
-						</tr>
-					  </thead>
-					  <tbody>
-						<tr>
-						  <td>22-Aug-16</td>
-						  <td>Work at kukatpally<a href="#">(view)</a></td>
-						  <td>2<a href="#">(view)</a></td>
-						  <td>20-sept-16</td>
-						  <td>Open</td>
-						  <td>Clone</td>
-						  <td><div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-whatsapp" href="#"></a>
-                        </div></td>
-						</tr>
-						<tr>
-						 <td>23-Sept-16</td>
-						  <td>personal work<a href="#">(view)</a></td>
-						  <td>2<a href="#">(view)</a></td>
-						  <td>30-sept-16</td>
-						  <td>open</td>
-						  <td>Clone</td>
-						  <td><div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-whatsapp" href="#"></a>
-                        </div></td>
-						</tr>
-						<tr>
-						  <td>12-june-16</td>
-						  <td>JNTU work<a href="#">(view)</a></td>
-						  <td>10<a href="#">(view)</a></td>
-						  <td>12-Aug-16</td>
-						  <td>Closed</td>
-						  <td>Clone</td>
-						  <td><div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-whatsapp" href="#"></a>
-                        </div></td>
-						</tr>
-					  </tbody>
-				</table>
+				 
 				</div>
 		</div>
 		<div class="req-pagination">
 			<nav aria-label="Page navigation">
-				<ul class="pagination ">
+				<ul class="pagination">
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="#" aria-label="Previous" data-value="prev">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
+					<li class="active"><a href="#" id="first"  data-value="1">1</a></li>
+					<li><a href="#" id="middle" data-value="2">2</a></li>
+					<li><a href="#" id="last" data-value="3">3</a></li>
 					<li>
-						<a href="#" aria-label="Next">
+						<a href="#" aria-label="Next" data-value="next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
@@ -340,7 +287,7 @@
  		</div>
  		<script type="text/javascript">
  			$(document).ready(function(){
- 				var requirements = [];
+ 			/*	var requirements = [];
  				var quotes = [];
  				var reqId = "";
  				var user = sessionStorage.getItem("user");
@@ -366,7 +313,7 @@
  				var reqList = "";
  				$.ajax({
  					url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
- 					/*+user.userId,*/
+ 					
  					type:"get",
  					data:{},
  					success:function(response){
@@ -394,7 +341,7 @@
  						var quoteList = "";
  						$.ajax({
  							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
- 							/*+user.userId,*/
+ 							
  							type:"get",
  							data:{},
  							success:function(response){
@@ -449,7 +396,7 @@
  		 						console.log(response);
  		 						$.ajax({
  		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
- 		 							/*+user.userId,*/
+ 		 							
  		 							type:"get",
  		 							data:{},
  		 							success:function(response){
@@ -493,7 +440,7 @@
  						if(status === "all"){
  							$.ajax({
 		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
-		 							/*+user.userId,*/
+		 							
 		 							type:"get",
 		 							data:{},
 		 							success:function(response){
@@ -553,9 +500,76 @@
  							}
  						});
  						}
- 					});
+ 					});*/
  					
- 					
+ 				//jquery for pagination
+					var current_page=1;
+					var previous_page = current_page-1;
+					var next_page = current_page+1;
+					var $active_element = $('#first').parent();
+				$('.pagination li a').click(function(e){
+					e.preventDefault();
+					console.log(this);
+					var clicked_page = $(this).data("value");
+					console.log(clicked_page);
+					if(clicked_page === "prev"){
+						if(current_page === 1){
+						
+						}else if(current_page === $('#first').data("value")){
+						next_page = current_page;
+						current_page = previous_page;
+						previous_page = current_page-1;	
+						$('#first').data("value",current_page);
+						$('#first').text(current_page);
+						$('#middle').data("value",next_page);
+						$('#middle').text(next_page);
+						$('#last').data("value",next_page+1);
+						$('#last').text(next_page+1);
+						}else{
+						next_page = current_page;
+						current_page = previous_page;
+						previous_page = current_page-1;
+						$active_element.removeClass("active");
+						$active_element.prev().addClass("active");
+						$active_element = $active_element.prev();
+						}
+					}else if(clicked_page === "next"){
+						if(current_page === $('#last').data("value")){
+						previous_page = current_page;
+						current_page = next_page;
+						next_page = current_page+1;	
+						$('#first').data("value",previous_page-1);
+						$('#first').text(previous_page-1);
+						$('#middle').data("value",previous_page);
+						$('#middle').text(previous_page);
+						$('#last').data("value",current_page);
+						$('#last').text(current_page);
+						}else{
+						previous_page = current_page;
+						current_page = next_page;
+						next_page = current_page+1;	
+						$active_element.removeClass("active");
+						$active_element.next().addClass("active");
+						$active_element = $active_element.next();
+						}
+					}else{
+						$active_element = $(this).parent();
+						current_page = clicked_page;
+						previous_page = current_page-1;
+						next_page = current_page+1;
+						$(this).parent().addClass("active").siblings().removeClass("active");
+						
+					}
+					
+					console.log("current",current_page);
+					console.log("prev",previous_page);
+					console.log("next",next_page);
+					
+					
+					
+					
+				});
+					
  					
  			});
  		</script>

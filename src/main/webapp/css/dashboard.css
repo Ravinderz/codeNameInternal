@@ -327,3 +327,8 @@ padding-left : 15px;
 .clear-fix{
 	clear:both;
 }
+
+.pagination .active{
+	background-color: #004d99;
+	color:#fff;
+}
