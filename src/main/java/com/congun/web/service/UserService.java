@@ -1,5 +1,6 @@
 package com.congun.web.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,49 +14,58 @@ import com.congun.web.util.ResponseConstants;
 @Service
 @Transactional
 public class UserService {
-   
+	private static Logger logger = Logger.getLogger(UserService.class);
 	@Autowired
 	UserDao userdao;
 	
 	public String saveUser(User user) {
-		// TODO Auto-generated method stub
+		logger.info("Entered into SupplierQuoteService.UserService method ");
 		String status= userdao.saveUser(user);
-		if(status.equals(ResponseConstants.SUCCESS_CODE))
-			return "User "+user.getUsername()+" has been successfully created!!!";
-		else if(status.equals(ResponseConstants.FAILURE_CODE)) {
-			return "User "+user.getUsername()+" Already Exists!!!";
-		} else
-		return "Error while creating user "+user.getUsername();
+		if(status.equals(ResponseConstants.USER_SUCCESS_CODE))
+			return ApplicationUtil.getJsonResponse(user);
+		else
+			return status;
 		
 	}
 	
+	public String authLogin(User user){
+		logger.info("Entered into SupplierQuoteService.authLogin method");
+		user = userdao.authenticateUser(user);
+		if(user != null){
+			return ApplicationUtil.getJsonResponse(user);
+		}else
+			return ResponseConstants.USER_FAILURE_CODE;
+	}
+	
 	public String updateUser(User user) {
-		// TODO Auto-generated method stub
+		logger.info("Entered into SupplierQuoteService.updateUser method ");
 		String status= userdao.updateUser(user);
-		if(status.equals(ResponseConstants.SUCCESS_CODE))
-			return "User "+user.getUsername()+" details has been successfully updated!!!";
-		else
-		return "Error while creating user "+user.getUsername();
-		
+		return status;				
 	}
 	
 
 	
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+		logger.info("Entered into SupplierQuoteService.deleteUser method ");
 		
 	}
 
 	
 	public boolean authenticateUser(User user) {
+		logger.info("Entered into SupplierQuoteService.authenticateUser method ");
 		return false;
 	}
 
 	
 	public String getUserDetails(String username) {
-		System.out.println("Getting details fromr ServiceImpl : "+username);
+		logger.info("Entered into SupplierQuoteService.getUserDetails method Username:"+username);
+		User user = userdao.getUserDetails(username);
+		if(user != null){
+			return ApplicationUtil.getJsonResponse(user);	
+		}else
+			return ResponseConstants.USER_FAILURE_CODE;
 		
-		return ApplicationUtil.getJsonResponse(userdao.getUserDetails(username));
+		
 	}
 	
 	

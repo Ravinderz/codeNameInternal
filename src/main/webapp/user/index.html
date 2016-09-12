@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/custom.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		var user = sessionStorage.getItem("user");
+		user = $.parseJSON(user);
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+		
+		$('.category-img').click(function(){
+			console.log("inside img click function");
+			var category = this.id;
+			$(location).attr('href',"equipment.html?category="+category);
+		});
+		
+		$('.logout').click(function(){
+		       console.log("inside logout function")
+		       var user = sessionStorage.getItem("user");
+		        if(user !== null){
+		            sessionStorage.removeItem("user");
+		        }
+		        console.log("user logged out");
+		        $(location).attr('href',"../index.html");
+		    });	
+		
+	});	
+</script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>
+</head>
+<body>
+	<div class="nav-wrapper-index">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="../images/logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
+								<li><a href="#" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 banner">
+				<div class="banner-content">
+					<h2>Congun</h2>
+				    <p>Great rental machines</p>
+				</div>
+				<div class="search-bar">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="category">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Machines we <span class="heading">supply</span></h2>
+				</div>
+			</div>
+			<div class="category-row-one">
+			<div class="row">
+				<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img"
+						id="EarthMoving">
+						<img src="../images/EarthMoving/excavator.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Earth Moving</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="MaterialHandling">
+						<img src="../images/MaterialHandling/reachforklift.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Material Handling</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="BoreDrillers">
+						<img src="../images/BoreDrillers/boredriller.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Bore Driller</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="CementMixerTrucks">
+						<img src="../images/CementMixerTrucks/cementmixer.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Cement Mixer Trucks</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="Cranes">
+						<img src="../images/Cranes/mobilecrane.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Cranes</button>
+					</div>
+				</div>
+			</div>
+			<div class="category-row-two">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="AerialLifts">
+						<img src="../images/AerialLifts/articulatingboomlift.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Aerial Lifts</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Generators">
+						<img src="../images/Generators/mobilegenerator.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Generators</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="PowerDrillers">
+						<img src="../images/PowerDrillers/anglegrinder.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Power Drillers</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="RoadRollers">
+						<img src="../images/RoadRollers/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Road Rollers</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Miscellaneous">
+						<img src="../images/Miscellaneous/compressor.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Misc</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="others">
+						<img src="http://placehold.it/150x150" alt="" />
+						<button class="btn img-btn">Others</button>
+					</div>
+				</div>
+	 		</div>
+ 		</div>
+    </div>
+ 		<!-- start of about us -->
+    <div class="about-us">
+ 	<div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-12 about-us-text">
+	 				<h2>About<span class="heading"> US</span></h2>
+	 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium </p>
+ 				</div>
+ 			</div>
+ 		</div>
+    </div>
+    	<!-- start of how we work -->
+ 	<div class="how-we-work">
+    <div class="container">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<h2>How we<span class="heading"> Work</span></h2>
+ 				</div>
+ 			</div>
+	 		<div class="row">
+	 			<div class="col-md-3 steps"><div class="num img-circle">1</div><br>
+                                        <span class="step-text">Select Equipment </span></div>
+	 			<div class="col-md-3 steps"><div class="num img-circle">2</div><br>
+                                        <span class="step-text">Post Requirement</span></div>
+	 			<div class="col-md-3 steps"><div class="num img-circle">3</div><br>
+                                        <span class="step-text">Get Quote</span></div>
+	 			<div class="col-md-3 steps"><div class="num img-circle">4</div><br>
+                                        <span class="step-text">Finilize the deal</span></div>
+	 		</div>
+ 		</div>
+    </div>
+ 		<!-- start of our services -->
+ 		<div class="services">
+ 			<div class="container-fluid">
+            <div class="row">
+ 				<div class="col-md-12">
+ 					<h2>Our<span class="heading"> Services</span></h2>
+ 				</div>
+ 			</div>
+ 			<div class="row">
+ 				<div class="col-md-4"><div class="services-text first"><span><i class="fa fa-cogs fa-2x"></i></span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></div></div>
+ 				<div class="col-md-4"><div class="services-text middle"><span><i class="fa fa-exchange fa-2x"></i></span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></div></div>
+ 				<div class="col-md-4"><div class="services-text last"><span><i class="fa fa-rupee fa-2x"></i></span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></div></div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="partners">
+            <div class="container">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<h2>Our<span class="heading"> Partners</span></h2>
+ 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+<div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+</body>
+</html>

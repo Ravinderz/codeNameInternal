@@ -1,6 +1,7 @@
 package com.congun.web.model;
 
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,26 +18,50 @@ public class SupplierQuote {
 	@Column(name="quoteId")
 	public long quoteId;
 	
-	@Column(name = "rentalCharge")
-	public long rentalCharge;
+	@Column(name = "equipmentCategory")
+	public String equipmentCategory;
 	
-	@Column(name = "noOfWorkingHours")
-	public long noOfWorkingHours;
+	@Column(name = "equipmentName")
+	public String equipmentName;
 	
-	@Column(name = "driverNeeded")
-	public boolean driverNeeded;
+	@Column(name = "quantity")
+	public int quantity;
 	
-	@Column(name = "helperNeeded")
-	public boolean helperNeeded;
+	@Column(name = "machineRentalCharges")
+	public long machineRentalCharges;
 	
-	@Column(name = "repairCharges")
-	public long repairCharges;
+	@Column(name = "model")
+	public String model;
+	
+	@Column(name = "manufacturedyear")
+	public String manufacturedyear;
+	
+	@Column(name = "manufacturer")
+	public String[] manufacturer;
+	
+	@Column(name = "capacity")
+	public int capacity;
+	
+		@Column(name = "driverfare")
+	public long driverfare;
+	
+	@Column(name = "driverAvailabile")
+	public boolean driverAvailable;
+	
+	@Column(name = "helperAvailable")
+	public boolean helperAvailable;
+	
+	@Column(name = "maintenanceCharges")
+	public long maintenanceCharges;
 	
 	@Column(name = "queries")
 	public String queries;
 	
+	@Column(name = "transportation")
+	public String transportation;
+	
 	@Column(name = "quotePostedById")
-	public int quotePostedById;
+	public long quotePostedById;
 	
 	@Column(name = "quotePostedByName")
 	public String quotePostedByName;
@@ -47,115 +72,213 @@ public class SupplierQuote {
 	@Column(name = "LastupdatedTime")
 	public Timestamp updatedTime;
 	
-	@Column(name = "submittedforReq")
-	public int submittedforReq;
+	@Column(name = "requirementId")
+	public long requirementId;
 	
-		public long getQuoteId() {
+	@Column(name = "activeFlag")
+	public int activeFlag;
+	
+	@Column(name = "mobileNumber")
+	public String mobileNumber;
+	
+	@Column(name = "finalQuotePrice")
+	public double finalQuotePrice;
+	
+	@Column(name = "hiringChargesType")
+	public String hiringChargesType;
+
+	public long getQuoteId() {
 		return quoteId;
 	}
+
 	public void setQuoteId(long quoteId) {
 		this.quoteId = quoteId;
 	}
-	public long getRentalCharge() {
-		return rentalCharge;
-	}
-	public void setRentalCharge(long rentalCharge) {
-		this.rentalCharge = rentalCharge;
-	}
-	public int getQuotePostedById() {
-		return quotePostedById;
-	}
-	public void setQuotePostedById(int quotePostedById) {
-		this.quotePostedById = quotePostedById;
-	}
-	public String getQuotePostedByName() {
-		return quotePostedByName;
-	}
-	public void setQuotePostedByName(String quotePostedByName) {
-		this.quotePostedByName = quotePostedByName;
-	}
-	public Timestamp getCreatedTime() {
-		return createdTime;
-	}
-	public void setCreatedTime(Timestamp createdTime) {
-		this.createdTime = createdTime;
-	}
-	public Timestamp getUpdatedTime() {
-		return updatedTime;
-	}
-	public void setUpdatedTime(Timestamp updatedTime) {
-		this.updatedTime = updatedTime;
-	}
-	public int getSubmittedforReq() {
-		return submittedforReq;
-	}
-	public void setSubmittedforReq(int submittedforReq) {
-		this.submittedforReq = submittedforReq;
-	}
-	
-	
-	public long getNoOfWorkingHours() {
-		return noOfWorkingHours;
-	}
-	public void setNoOfWorkingHours(long noOfWorkingHours) {
-		this.noOfWorkingHours = noOfWorkingHours;
+
+	public String getEquipmentCategory() {
+		return equipmentCategory;
 	}
 
-	public long getRepairCharges() {
-		return repairCharges;
+	public void setEquipmentCategory(String equipmentCategory) {
+		this.equipmentCategory = equipmentCategory;
 	}
-	public void setRepairCharges(long repairCharges) {
-		this.repairCharges = repairCharges;
+
+	public String getEquipmentName() {
+		return equipmentName;
 	}
+
+	public void setEquipmentName(String equipmentName) {
+		this.equipmentName = equipmentName;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getManufacturedyear() {
+		return manufacturedyear;
+	}
+
+	public void setManufacturedyear(String manufacturedyear) {
+		this.manufacturedyear = manufacturedyear;
+	}
+
+	public String[] getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String[] manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public long getDriverfare() {
+		return driverfare;
+	}
+
+	public void setDriverfare(long driverfare) {
+		this.driverfare = driverfare;
+	}
+
+	public boolean isDriverAvailable() {
+		return driverAvailable;
+	}
+
+	public void setDriverAvailable(boolean driverAvailable) {
+		this.driverAvailable = driverAvailable;
+	}
+
+	public boolean isHelperAvailable() {
+		return helperAvailable;
+	}
+
+	public void setHelperAvailable(boolean helperAvailable) {
+		this.helperAvailable = helperAvailable;
+	}
+
 	public String getQueries() {
 		return queries;
 	}
+
 	public void setQueries(String queries) {
 		this.queries = queries;
 	}
-	public boolean isDriverNeeded() {
-		return driverNeeded;
+
+	public long getQuotePostedById() {
+		return quotePostedById;
 	}
-	public void setDriverNeeded(boolean driverNeeded) {
-		this.driverNeeded = driverNeeded;
+
+	public void setQuotePostedById(long quotePostedById) {
+		this.quotePostedById = quotePostedById;
 	}
-	public boolean isHelperNeeded() {
-		return helperNeeded;
+
+	public String getQuotePostedByName() {
+		return quotePostedByName;
 	}
-	public void setHelperNeeded(boolean helperNeeded) {
-		this.helperNeeded = helperNeeded;
+
+	public void setQuotePostedByName(String quotePostedByName) {
+		this.quotePostedByName = quotePostedByName;
+	}
+
+	public Timestamp getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Timestamp createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Timestamp getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Timestamp updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+	public long getRequirementId() {
+		return requirementId;
+	}
+
+	public void setRequirementId(long requirementId) {
+		this.requirementId = requirementId;
+	}
+
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public double getFinalQuotePrice() {
+		return finalQuotePrice;
+	}
+
+	public void setFinalQuotePrice(double finalQuotePrice) {
+		this.finalQuotePrice = finalQuotePrice;
+	}
+
+	public String getHiringChargesType() {
+		return hiringChargesType;
+	}
+
+	public void setHiringChargesType(String hiringChargesType) {
+		this.hiringChargesType = hiringChargesType;
 	}
 	
-	
-	public long calculateQuotation(){
-	
-		return noOfWorkingHours*rentalCharge;
+	public int getQuantity() {
+		return quantity;
 	}
-	
-	public SupplierQuote compareObjects(SupplierQuote dBObj)
-	{
-		if(this.getRentalCharge()!=0){
-			dBObj.setRentalCharge(this.getRentalCharge());
-		}
-		
-		if(this.getNoOfWorkingHours() !=0){
-			dBObj.setNoOfWorkingHours(this.getNoOfWorkingHours());
-		}
-		
-		//if(this.isDriverNeeded())
-		
-		if(this.getNoOfWorkingHours()!=0)
-		{
-			dBObj.setNoOfWorkingHours(this.getNoOfWorkingHours());
-		}
-		
-		
-		
-		
-		return dBObj;
-		
-		
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
+
+	public long getMachineRentalCharges() {
+		return machineRentalCharges;
+	}
+
+	public void setMachineRentalCharges(long machineRentalCharges) {
+		this.machineRentalCharges = machineRentalCharges;
+	}
+
+	public long getMaintenanceCharges() {
+		return maintenanceCharges;
+	}
+
+	public void setMaintenanceCharges(long maintenanceCharges) {
+		this.maintenanceCharges = maintenanceCharges;
+	}
+
+	public String getTransportation() {
+		return transportation;
+	}
+
+	public void setTransportation(String transportation) {
+		this.transportation = transportation;
+	}
+
 	
 
 }

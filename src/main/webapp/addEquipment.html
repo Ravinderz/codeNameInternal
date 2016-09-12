@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Add Equipment</title>
+	<meta name="description" content="Contractor Requirement">
+    <meta name="author" content="congun">
+	
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/quote-form-elements-style.css">
+        <!--<link rel="stylesheet" href="css/quote-form-style.css">-->
+        <!--<link rel="stylesheet" href="css/home.css">-->
+        <link rel="stylesheet" href="css/addEquip.css">
+      <link rel="stylesheet" href="css/congun.css">
+    <script src="js/jquery.min.js"></script>
+	<style>
+        .sub-footer{
+            padding-bottom: 40px;
+        }
+        
+        .nav-wrapper{
+            margin-top: 30px;
+        }
+        .main-content{
+            margin-top: 0px;
+        }
+        
+    </style>
+	<script type="text/javascript">
+        
+$(document).ready(function(){
+	
+
+	/*$('body').hide();
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
+	console.log(user);
+	if(user.role === "supplier"){
+	$('body').show();	
+	$("#user-name").text(user.firstname+" "+user.lastname);
+	}else if(user.role === "contractor"){
+		$(location).attr('href','unauthorized.html');
+	}
+	*/
+	
+	$("#addEquipment").click(function(){
+		var success = "successfully created";
+		var data = JSON.stringify($("#addEquipment-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url:"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		      }
+		});
+	});
+});
+</script>
+
+<script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+</script>
+
+
+</head>
+<body>
+<div class="nav-wrapper">
+   <div class="container">
+		<div class="row">
+			<div class="col-md-12 navigation">
+			<nav class="navbar navbar-defaut navbar-top" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"> <img id="nav-logo" src="images\logo.png" height="75px" width="200px" />
+						</a>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav navbar-right" id="navigation-right">
+							<li class="active"><a href="#"><span>Home</span></a></li>
+							<li><a href="#"><span>Dashboard</span></a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"><span>Ravinder Singh<strong class="caret"></strong></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><span>Profile</span></a></li>
+									<li><a href="#"><span>Logout</span></a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</nav>
+		</div>
+			</div>
+    </div>
+        <div class="container">
+    	<div class="row">
+    	<div class="main-content col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+			<form class="form-horizontal" role="form" id="addEquipment-form" class="f1">
+						<h3 class="text-center text-muted">
+				ADD EQUIPMENT FORM
+			</h3>
+					<div class="form-group">
+					
+				<label for="selectCategory" class="sr-only">
+						Equipment Category
+					</label>
+                 <input type="text" id="equipmentCategory" class="form-control" placeholder="Equipment Category" name="equipmentCategory">	
+				 </div>
+				<div class="form-group">
+				<label for="equipment" class="sr-only">
+						Equipment Name
+					</label>
+                 <input type="text" id="equipment" class="form-control" name="equipment" placeholder="Equipment Name">	
+				 </div>
+				 
+				<div class="form-group">
+				<label for="manufacturer" class="sr-only">
+						Equipment Manufacturer
+					</label>
+                 <input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer">	
+				 </div>
+				 <div class="form-group">
+				<label for="yearOfManufacturing" class="sr-only">
+						Year Of Manufacturing
+					</label>
+                 <input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing">	
+				 </div>
+				 
+				 <div class="form-group">
+				<label for="model" class="sr-only">
+						Model Details
+					</label>
+                 <input type="text" id="model" class="form-control" name="model" placeholder="Model">	
+				 </div>
+				 <div class="form-group">
+				<label for="capacity" class="sr-only">
+						Capacity Details
+					</label>
+                 <input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity">	
+				 </div>
+				 <div id="hidden-fields">
+                                <input type="hidden" name="supplierId" id="supplierId" value="">
+                                <input type="hidden" name="supplierName" id="supplierName" value="">
+                                </div>
+				 <div class="form-group">
+				<label for="quantity" class="sr-only">
+						Equipment Quantity
+					</label>
+                 <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment Quantity">	
+				 </div>
+				
+					<div class="f1-buttons">
+						 
+						<button type="button" class="btn btn-warning" id="addEquipment">
+							Submit
+						</button>	
+					</div>
+			</form>
+								</div>
+					</div>
+</div>
+		<div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+		var user = sessionStorage.getItem("user");
+    	user = $.parseJSON(user);
+    	$('#supplierId').val(user.userId);
+    	$('#supplierName').val(user.firstname+" "+user.lastname);
+		});
+		</script>
+</body>
+</html>

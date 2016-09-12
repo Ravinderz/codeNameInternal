@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Congun</title>
+    <!-- CSS -->
+   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/quote-form-elements-style.css">
+        <link rel="stylesheet" href="css/quote-form-style.css">
+        <link rel="stylesheet" href="css/home.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+<body>
+    <!-- Top content -->
+    <div class="top-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Congun</strong></h1>
+                    <div class="description">
+                        <p> We provide the best rentals of heavy machinary in the city. Get in touch to find out more about how we work, we promise you will not find these many options anywhere else! </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                    <form role="form" action="" method="post" class="f1" id="supplier-quote-form">
+                        <h3>Quote Form</h3>
+                        <p>Give your quote for the requirement</p>
+                        <div class="f1-steps">
+                            <div class="f1-progress">
+                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+                            </div>
+                            <div class="f1-step active">
+                                <div class="f1-step-icon"><i class="fa fa-cogs"></i></div>
+                                <p>Machinary Details</p>
+                            </div>
+                            <div class="f1-step">
+                                <div class="f1-step-icon"><i class="fa fa-calendar"></i></div>
+                                <p>Time Period</p>
+                            </div>
+                            <div class="f1-step">
+                                <div class="f1-step-icon"><i class="fa fa-puzzle-piece"></i></div>
+                                <p>Misc</p>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <h4>Tell us about your machinary..</h4>
+                            <div class="form-group">
+                                <label for="equipmentCategory">Category</label>
+                                <select id="category" class="f1-category form-control" name="equipmentCategory">
+				                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="equipmentName">Equipment</label>
+                                <select id="equipment" name="equipmentName" class="f1-equipment form-control">
+                                    
+				                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="capacity">Capacity</label>
+                                <input type="text" name="capacity" placeholder="Capacity" class="f1-capacity form-control" id="f1-about-yourself"> </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="model">Model</label>
+                                <input type="text" name="model" placeholder="Model" class="f1-model form-control" id="f1-f1-model"> </div>
+                            <div class="form-group">
+                                <label for="manufacturer">Manufacturer</label><br>
+                                <input type="checkbox" class="manufacturer" name="manufacturer" id="manufacturer" value="JCB" checked> JCB|
+  					 <input type="checkbox" name="manufacturer" id="manufacturer" value="Bharat" checked>Bharat Earth Movers|
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="TRF" checked>TRF|
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Cat" checked>Caterpillar|
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Komatsu " checked>Komatsu|
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Volvo " checked>Volvo|
+					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Hitachi " checked>Hitachi|
+						
+                             </div>
+                        <div class="form-group">
+                                <label  for="manufacturedyear">Manufactured Year</label>
+                                <input type="text" name="manufacturedyear" placeholder="Duration" class="f1-email form-control" id="f1-email"> </div>
+                            
+                            <div class="f1-buttons">
+                                <button type="button" class="btn btn-next">Next</button>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="sr-only" for="quantity">Quantity</label>
+                                <input type="number" name="quantity" placeholder="Quantity" class="f1-email form-control" id="f1-email"> </div>
+                            
+                            <div class="form-group">
+                                <label class="sr-only" for="MachineRentalCharges">Machine Rental Charges</label>
+                                <input type="number" name="MachineRentalCharges" placeholder="Machine Rental Charges" class="f1-email form-control" id="f1-email"> </div>
+                            
+                            <div class="form-group">
+                                <label class="sr-only" for="maintenanceCharges">Maintainance Charges</label>
+                                <input type="number" name="maintenanceCharges" placeholder="Maintainance Charges" class="f1-email form-control" id="f1-email"> </div>
+                            
+                                <div class="f1-buttons">
+                                <button type="button" class="btn btn-previous">Previous</button>
+                                <button type="button" class="btn btn-next">Next</button>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <h4>Misc</h4>
+                            <div class="form-group">
+                                    <label for="transportation"> Transportation provided</label><br>
+                                    <input type="radio" name="transportation" value="to" id="transportation"> TO
+                                    <input type="radio" name="transportation" value="tofro" id="transportation"> To&Fro </div>
+                                <div class="form-group">
+                                    <label for="driverAvailable"> Driver Available </label><br>
+                                    <input type="radio" name="driverAvailable" value="true" id="driverNeeded"> Yes
+                                    <input type="radio" name="driverAvailable" value="false" id="driverNeeded" checked> No </div>
+                            <div class="form-group">
+                                    <label for="driverAvailable"> Helper Available </label><br>
+                                    <input type="radio" name="driverAvailable" value="true" id="helperNeeded"> Yes
+                                    <input type="radio" name="driverAvailable" value="false" id="helperNeeded" checked> No </div>
+                            
+                            <div class="form-group">
+                                    <label for="hiringChargersType"> Hiring Charges Type </label>
+                                    <br>
+                                    <input type="radio" name="hiringChargersType" value="hour" id="hiringChargersType"> Hourly
+                                    <br>
+                                    <input type="radio" name="hiringChargersType" value="day" id="hiringChargersType"> Daily
+                                    <br>
+                                    <input type="radio" name="hiringChargersType" value="week" id="hiringChargersType"> Weekly
+                                    <br>
+                                    <input type="radio" name="hiringChargersType" value="month" id="hiringChargersType"> Monthly </div>
+                            
+                            
+                            <div class="form-group">
+                                <label class="sr-only" for="queries">Queries</label>
+                                <input type="text" name="queries" placeholder="Queries" class="f1-email form-control" id="f1-email"> </div>
+                            
+                            <div id="hidden-fields">
+                                <input type="hidden" name="quotePostedById" id="supplierId" value="">
+                                <input type="hidden" name="quotePostedByName" id="supplierName" value="">
+                                <input type="hidden" name="requirementId" id="requirementId" value="">
+                                </div>
+                            
+                            <!-- <div class="form-group">
+                                <label class="sr-only" for="queries">Final Quote</label>
+                                <input type="text" name="finalquote" placeholder="Queries" class="f1-email form-control" id="f1-email"> </div>
+                             -->
+                            
+                            <div class="f1-buttons">
+                                <button type="button" class="btn btn-previous">Previous</button>
+                                <button type="button"  id="btn-submit" class="btn btn-next">Submit</button>
+                            </div>
+                        </fieldset>
+                        <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Requirement posted successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascript -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.backstretch.min.js"></script>
+    <script src="js/retina-1.1.0.min.js"></script>
+    <script src="js/requirement-scripts.js"></script>
+    <script src="js/appProperties.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	
+    	
+    	/* to get parameters from a url */
+    	var getUrlParameter = function getUrlParameter(sParam) {
+    	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    	        sURLVariables = sPageURL.split('&'),
+    	        sParameterName,
+    	        i;
+
+    	    for (i = 0; i < sURLVariables.length; i++) {
+    	        sParameterName = sURLVariables[i].split('=');
+
+    	        if (sParameterName[0] === sParam) {
+    	            return sParameterName[1] === undefined ? true : sParameterName[1];
+    	        }
+    	    }
+    	};
+    	
+    	var reqid = getUrlParameter('reqId');
+    	var categoryParam = getUrlParameter('category');
+    	var equipment = getUrlParameter('equipment');
+    	console.log('reqid',reqid);
+    	var user = sessionStorage.getItem("user");
+		//var user = localStorage.getItem("user");
+		console.log(user);
+    	user = $.parseJSON(user);
+    	$('#supplierId').val(user.userId);
+    	$('#supplierName').val(user.firstname+" "+user.lastname);
+    	$('#requirementId').val(reqid);
+    	
+/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = []
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#category").append($("<option />").val(value).text(value));
+    					category[i] = value;
+    					i++
+    			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
+    			$.ajax({
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				
+    				});
+    			}
+    			});
+    			}
+    		}
+    	});
+    	
+    	/* This function will be called when there is change in the category dropdown */
+    	
+    	$("#category").on('change',function(){
+    		var selectedOption = $("#category option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log("equipments ",equipments);
+    				$("#equipment").html("");
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				});	
+    			}
+    				
+    		});
+    	});
+    	
+    	
+       
+/* This action will be called when a contractor will submit the form  */
+    	
+        $("#btn-submit").click(function(){
+		var success = "successfully created";
+		var data = JSON.stringify($("#supplier-quote-form").serializeObject());
+		console.log(data);
+            
+            $.ajax({
+			url:AppData.relativeUrl+"supplier/submitquote",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log(data);
+		    	 if(data === "SS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',AppData.relativeUrl+"user/dashboard.html");
+		    			 //history.back();	    
+		    			});
+		    	 }
+		      }
+
+                });
+    });
+
+    });    
+    </script>    
+<script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+</script>
+
+    
+    
+    
+    
+    <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+</body>
+
+</html>

@@ -1,7 +1,10 @@
 package com.congun.web.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +19,7 @@ import com.congun.web.util.ResponseConstants;
 
 @Repository
 public class UserDao {
+	private static Logger logger = Logger.getLogger(UserDao.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -28,56 +32,82 @@ public class UserDao {
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public String saveUser(User user){
+		logger.info("Entered into UserDao.saveUser method ");
 		try{
 		List<User> userList = getSession().createCriteria(User.class).add(Restrictions.eq("username", user.getUsername())).list()	;
 		if(userList.size() == 0){
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
+
+		Date date = new Date();
+		Timestamp currTime = new Timestamp(date.getTime());
+		user.setCreatedtime(currTime);
+		user.setUpdatedtime(currTime);
+		user.setActiveFlag(1);
 		getSession().saveOrUpdate(user);
-			return ResponseConstants.SUCCESS_CODE;
+			return ResponseConstants.USER_SUCCESS_CODE;
 		}else
-			return ResponseConstants.FAILURE_CODE;
+			return ResponseConstants.USER_FAILURE_CODE;
 		}catch(Exception e){
-			return ResponseConstants.EXCEPTION_CODE;
+			e.printStackTrace();
+			return ResponseConstants.USER_EXCEPTION_CODE;
 		}
 	}
 	
 	@Transactional
 	public String updateUser(User user){
+		logger.info("Entered into UserDao.updateUser method ");
 		try{
+		//User existingUser = (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId", user.getUserId())).list().get(0);
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
+		Date date = new Date();
+		Timestamp currTime = new Timestamp(date.getTime());
+		//user.setCreatedtime(existingUser.getCreatedtime());
+		user.setUpdatedtime(currTime);
 		getSession().saveOrUpdate(user);
-			return ResponseConstants.SUCCESS_CODE;
+			return ResponseConstants.USER_SUCCESS_CODE;
 		}catch(Exception e){
-			return ResponseConstants.EXCEPTION_CODE;
+			e.printStackTrace();
+			return ResponseConstants.USER_EXCEPTION_CODE;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean authenticateUser(User user){
+	public User authenticateUser(User user){
+		logger.info("Entered into UserDao.authenticateUser method ");
 		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		List<User> userList = getSession().createQuery("from User where username = :username and password = :password").setParameter("username", user.getUsername()).setParameter("password",user.getPassword()).list();
 		//user = (User)getSession().createCriteria(User.class).add(Restrictions.eq("user.username", username)).add(Restrictions.eq("user.password", password)).uniqueResult();
 		if(userList.size() > 0){//getting null pointer exception
 			user = userList.get(0);
-			System.out.println("username :: "+user.getUsername());
-			System.out.println("password :: "+user.getPassword());
-			System.out.println("userID :: "+user.getUserId());
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 	}
 	
 
+	@Transactional
 	public User getUserDetails(String username){
+		logger.info("Entered into UserDao.getUserDetails method username: "+username);
 		try{
-			System.out.println("Getting details from DAOImpl :"+username+":");
 			Criteria criteria = getSession().createCriteria(User.class);
 			criteria.setMaxResults(1);
 		User user= (User) criteria.add(Restrictions.eq("username",username)).uniqueResult();
-		System.out.println("Got user with "+user.getUsername()+" from database");
 		return user;
 		}catch(Exception e){
-			System.out.println("Entered Exception Block : ");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Transactional
+	public User getUserbyId(int id){
+		logger.info("Entered into UserDao.getUserbyId method id: "+id);
+		try{
+			Criteria criteria = getSession().createCriteria(User.class);
+			criteria.setMaxResults(1);
+		User user= (User) criteria.add(Restrictions.eq("userId",id)).uniqueResult();
+		return user;
+		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}

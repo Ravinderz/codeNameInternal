@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
+	console.log("user",user);
+	var username = user.firstname+" "+user.lastname;
+	$('#user').text(username);
+	
+	if(user.role==="contractor"){
+		$('#sidebar-list').addClass("contractor-viewable");
+		
+	}
+	
+	$('.logout').click(function(){
+	       console.log("inside logout function")
+	       var user = sessionStorage.getItem("user");
+	        if(user !== null){
+	            sessionStorage.removeItem("user");
+	        }
+	        console.log("user logged out");
+	        $(location).attr('href',"../index.html");
+	    });	
+	
+	var equipments = [];
+	var requirements = [];
+	var quotations = [];
+	var reqList = ""; 
+	
+	
+	
+	$('#requirement').addClass("active");
+	$('#contents-list').html("");
+	$.ajax({
+		url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
+		/*+user.userId,*/
+		type:"get",
+		data:{},
+		success:function(response){
+			response = $.parseJSON(response);
+			console.log(response);
+			$.each(response,function(index,value){
+				requirements[value.requirementId] = value;
+				reqList += '<ul><li class="dynamic-content" ><b><span style="font-size:17px">'+value.title+'</span><br></b><br>Category:'+value.equipmentCategory+'<span style="padding-left:20px">Equipment:'+value.equipmentName+'</span><span style="padding-left:20px">Work Location:'+value.workLocation+'<span style="padding-left:20px">Model:'+value.specificationModel+'<span style="padding-left:20px">Quantity:'+value.quantity+'<br><br>Created Date: '+value.createdTime+'<span style="padding-left:20px"></span><span style="padding-left:110px">No Of Quotes : <span class="badge">'+value.noofquotes+'</span></span><a href="#" class="btn btn-warning req-view-btn" id='+value.requirementId+'>View</a></li></ul>';
+			});
+			$('#contents-list').append(reqList);
+		}
+		});
+	
+	
+	
+	$('.sidebarlist').click(function(e){
+	e.preventDefault();	
+	console.log("Entered ");
+	var id=this.id;
+	reqList = "";
+	
+	if(id === "mappedrequirement"){
+	$('#requirement').removeClass("active");
+	$('#contents-list').html("");
+	console.log("Get Mapped Requirements for user");
+	
+	/* This is for getting all mapped requirements for a particular contractor */
+	
+				$.ajax({
+				url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId,
+				/*+user.userId,*/
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						requirements[value.requirementId] = value;						
+						reqList += '<ul><li class="dynamic-content" id='+value.requirementId+'><b><span style="font-size:18px">'+value.title+'</span><br></b><br>Category:'+value.equipmentCategory+'<span style="padding-left:20px">Equipment:'+value.equipmentName+'</span><span style="padding-left:20px">Work Location:'+value.workLocation+'<span style="padding-left:20px">Model:'+value.specificationModel+'<span style="padding-left:20px">Quantity:'+value.quantity+'<br><br>Start Date: '+$.datepicker.formatDate("dd-mm-yy", new Date(value.startDate))+'<span style="padding-left:20px"></span><a href="supplier-requirement-view.html?id='+value.requirementId+'&category='+value.equipmentCategory+'&equipment='+value.equipmentName+'" class="btn btn-warning">View</a></li></ul>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+	
+	
+					/* ********************************* */
+	  
+	
+	}else if(id === "equipment"){
+		$('#requirement').removeClass("active");
+	$('#contents-list').html("");
+	console.log("Get Equipments posted by user");
+	/* This is for getting all the equipments for a particular user */
+	
+				$.ajax({
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						equipments[value.requirementId] = value;
+						reqList += '<div class="header" style="padding-bottom:25px"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px" class="left"/><div class="right" id="equipmentdetails"><ul><li><span>Category: '+value.equipmentCategory+'</span><span >Equipment: '+value.equipment+'</span><span>Manufacturer: '+value.manufacturer+'</span><span >Model: '+value.model+'</span><li style="padding-top:30px"><span>Manufactured Year: '+value.yearOfManufacturing+'</span><span>Quantity: '+value.quantity+'</span><span>Capacity: '+value.capacity+'</span></li><br><br><a href="#" class="btn btn-warning" data-id="'+value.equipmentId+'" id="delequipment" >Delete Equipment</a><a href="#" class="btn btn-warning" style="float:none;margin-left:300px" data-equipment="'+value.equipmentId+'-'+value.equipmentCategory+'-'+value.equipment+'-'+value.manufacturer+'-'+value.model+'-'+value.yearOfManufacturing+'-'+value.quantity+'-'+value.capacity+'" id="editequipment">Edit Equipment</a></ul></div></div>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+	
+	
+					/* ********************************* */
+	  
+	}else if(id === "requirement"){
+	$('#contents-list').html("");
+	console.log("Get Requirements posted by user");
+	/* This is for getting all the requirements for a particular user*/
+	
+				$.ajax({
+				url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
+				/*+user.userId,*/
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						requirements[value.requirementId] = value;
+						reqList += '<ul><li class="dynamic-content" ><b><span style="font-size:17px">'+value.title+'</span><br></b><br>Category:'+value.equipmentCategory+'<span style="padding-left:20px">Equipment:'+value.equipmentName+'</span><span style="padding-left:20px">Work Location:'+value.workLocation+'<span style="padding-left:20px">Model:'+value.specificationModel+'<span style="padding-left:20px">Quantity:'+value.quantity+'<br><br>Created Date: '+value.createdTime+'<span style="padding-left:20px"></span><span style="padding-left:110px">No Of Quotes : <span class="badge">'+value.noofquotes+'</span></span><a href="#" class="btn btn-warning req-view-btn" id='+value.requirementId+'>View</a></li></ul>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+	
+	
+					/* ********************************* */
+	  
+	}else if(id === "quotation"){
+		$('#requirement').removeClass("active");
+	$('#contents-list').html("");
+	console.log("Get Quotations posted by user");
+	/* This is for getting all the quotations for a particular user */
+	
+				$.ajax({
+				url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+user.userId,
+				/*+user.userId,*/
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						quotations[value.requirementId] = value;
+						reqList += '<ul><li class="dynamic-content" id='+value.quoteId+'>Category: '+value.equipmentCategory+'<span style="padding-left:194px;float:centre;">Equipment : '+value.equipmentName+'</span><span style="padding-left:100px;float:right">Quantity: '+value.quantity+'</span><br><br><span>Model: '+value.model+'</span><span style="padding-left:250px">Manufacturer: '+value.manufacturer+'</span><span style="padding-left:100px;float:right">YearOfManufacture: '+value.manufacturedyear+'</span><br><br>Created Date: '+value.createdTime+'<span style="padding-left:70px">Final Price: <b>'+value.finalQuotePrice+'</b></span><a href="#" class="btn btn-warning">View</a></li></ul>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+	
+	
+					/* ********************************* */
+	
+	}else if (id === "addequipment"){
+		$('#requirement').removeClass("active");
+	$('#contents-list').html("");
+	console.log("Entered Add Equipement Form");
+	reqList = '<h3 style="padding-left:50px">Fill in Details below to add your Equipment..</h3><form id="addequipment-form" align="left" style="padding-left:50px;margin-top:20px"><table><tr><td><p>Equipment Category <span style="padding-left:13px;font-weight:bold;padding-right:20px;">:</span></p></td><td></span><select id="category" class="f1-category form-control" name="equipmentCategory"></select></td><td></td></tr><tr><td><p>EquipmentName <span style="padding-left:38px;font-weight:bold;padding-right:20px;">:</span></td><td><select id="equip-subCategory" name="equipment" class="f1-equipment form-control"></select></td><td></td></tr><tr><td><p>Manufacturer<span style="padding-left:63px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="manufacturer"></input></td><td></td></tr><tr><td><p>Manufactured Year <span style="padding-left:23px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" name="yearOfManufacturing" data-validation="required"></input></td><td><span id="manufacturedyear" style="padding-left:10px;">(format- YYYY Eg: 2016)</span></td></tr><tr><td><p>Model<span style="padding-left:105px;font-weight:bold;padding-right:20px;"> :</span></td><td><input type="text" class="form-control" value="" data-validation="required" name="model"></input></td><td></td></tr><tr><td><p>Capacity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" class="form-control" value="" data-validation="required" name="capacity"></input></td><td></td></tr><tr><td><p>Quantity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td> <input type="text" class="form-control" value="" data-validation="required" name="quantity"></input></td><td></td></tr><tr><td>&nbsp</td></tr><tr align="right"><td></td><td><button type="button" id="equipment-submit-form" >Submit</button><span style="padding-left:20px"></span><input type="reset" value="Reset"></input></td></tr><tr><td></td><input type="hidden" name="supplierId" value='+user.userId+'><td><input type="hidden" name="supplierName" value='+user.firstname+'&nbsp;'+user.lastname+'></td></tr></table></form>';
+	  $('#contents-list').append(reqList);
+	  
+	  
+	  /* This ajax call is made to populate the category and equipment machinary dropdowns */
+  	
+  	var category = []
+  	$.ajax({
+  		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+  		type:"get",
+  		data:{},
+  		success:function(response){
+  			response = $.parseJSON(response);
+  			var i = 0;
+  			
+  			$.each(response,function(index,value){
+  				$("#category").append($("<option />").val(value).text(value));
+  					category[i] = value;
+  					i++
+  			});
+  			$.ajax({
+  				url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+  			type:"get",
+  			data:{},
+  			success:function(equipments){
+  				equipments = $.parseJSON(equipments);
+  				$.each(equipments,function(index,value){
+  				$("#equip-subCategory").append($("<option />").val(value).text(value));
+  				
+  				});
+  			}
+  			});
+  		}
+  	});
+  	 
+	}else if (id === "postrequirement"){
+		$('#requirement').removeClass("active");
+		$(location).attr('href',"../requirement-form.html");
+	}else{
+	$('#contents-list').html("");
+	console.log("Invalid Entry");
+	}
+	
+	});// end of sidebarlist
+	
+	/* This function will be called when there is change in the category dropdown */	
+	$("#contents-list").on('change','#category',function(){
+  		var selectedOption = $("#category option:selected").text();
+  		console.log("selected option ",selectedOption);
+  		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+  		console.log("url ",url);
+  		$.ajax({
+  			url:url,
+  			type:"get",
+  			data:{},
+  			success:function(equipments){
+  				equipments = $.parseJSON(equipments);
+  				console.log("equip-subCategory ",equipments);
+  				$("#equip-subCategory").html("");
+  				$.each(equipments,function(index,value){
+  				$("#equip-subCategory").append($("<option />").val(value).text(value));
+  				});	
+  			}
+  				
+  		});
+  	});
+  	
+	
+	
+	$('#contents-list').on('click','#equipment-submit-form',function(){
+	console.log("Entered Submit form button");
+	var success = "successfully created";
+		var data = JSON.stringify($("#addequipment-form").serializeObject());
+		console.log(data);
+        reqList = "";
+		
+            $.ajax({
+			url:AppData.relativeUrl+"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+				 console.log("Response :"+data);
+				 if (data.search("EE01") != -1) {
+				 console.log("Exception Occured while Adding Equipment");
+				 $('#modal-failure-dialog').modal('show');
+				 $('#modal-failure-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-addsuccess-dialog').modal('hide');},5000
+							);
+			    		});
+						} else {
+						console.log("Updation Success");
+						//$('#addequipment-form').modal('hide');
+						$('#modal-addsuccess-dialog').modal('show');
+						$('#modal-addsuccess-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-addsuccess-dialog').modal('hide');},5000
+							);
+			    		}); 
+						console.log("updation modal closed");
+						console.log("opening equipment modal");
+						$('#contents-list').html("");
+						$.ajax({
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						equipments[value.requirementId] = value;
+						reqList += '<div class="header" style="padding-bottom:25px"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px" class="left"/><div class="right" id="equipmentdetails"><ul><li><span>Category: '+value.equipmentCategory+'</span><span >Equipment: '+value.equipment+'</span><span>Manufacturer: '+value.manufacturer+'</span><span >Model: '+value.model+'</span><li style="padding-top:30px"><span>Manufactured Year: '+value.yearOfManufacturing+'</span><span>Quantity: '+value.quantity+'</span><span>Capacity: '+value.capacity+'</span></li><br><br><a href="#" class="btn btn-warning" data-id="'+value.equipmentId+'"  id="delequipment" >Delete Equipment</a><a href="#" class="btn btn-warning" style="float:none;margin-left:300px" data-equipment="'+value.equipmentId+'-'+value.equipmentCategory+'-'+value.equipment+'-'+value.manufacturer+'-'+value.model+'-'+value.yearOfManufacturing+'-'+value.quantity+'-'+value.capacity+'" id="editequipment">Edit Equipment</a></ul></div></div>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+				
+				 }
+		      }
+
+                });
+	});
+	
+	$('#contents-list').on('click','#delequipment',function(){
+	console.log("Ëntered to deletequipment");
+	var $this = $(this);
+    var id = $this.data('id');
+	console.log("P1 Variable:"+id);
+	var equipments= [];
+	reqList = "";
+	var success = "successfully created";
+		var data = "";
+            
+            $.ajax({
+			url:AppData.relativeUrl+"supplier/deleteEquipmentById/"+id,
+		     type:"delete",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log("Response :"+data);
+				 if (data.search("EE01") != -1) {
+				 
+				 console.log("Exception Occured while Adding Equipment");
+				 $('#modal-failure-dialog').modal('show')
+				 $('#modal-failure-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-addsuccess-dialog').modal('hide');},5000
+							);
+			    		});
+						} else {
+						console.log("Updation Success");
+						$('#updateequipment-form').modal('hide');
+						$('#modal-updatesuccess-dialog').modal('show')
+						$('#modal-updatesuccess-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-updatesuccess-dialog').modal('hide');},5000
+							);
+			    		}); 
+						console.log("updation modal closed");
+						console.log("opening equipment modal");
+						$('#contents-list').html("");
+						$.ajax({
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						equipments[value.requirementId] = value;
+						reqList += '<div class="header" style="padding-bottom:25px"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px" class="left"/><div class="right" id="equipmentdetails"><ul><li><span>Category: '+value.equipmentCategory+'</span><span >Equipment: '+value.equipment+'</span><span>Manufacturer: '+value.manufacturer+'</span><span >Model: '+value.model+'</span><li style="padding-top:30px"><span>Manufactured Year: '+value.yearOfManufacturing+'</span><span>Quantity: '+value.quantity+'</span><span>Capacity: '+value.capacity+'</span></li><br><br><a href="#" class="btn btn-warning" data-id="'+value.equipmentId+'"  id="delequipment" >Delete Equipment</a><a href="#" class="btn btn-warning" style="float:none;margin-left:300px" data-equipment="'+value.equipmentId+'-'+value.equipmentCategory+'-'+value.equipment+'-'+value.manufacturer+'-'+value.model+'-'+value.yearOfManufacturing+'-'+value.quantity+'-'+value.capacity+'" id="editequipment">Edit Equipment</a></ul></div></div>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+				
+				 }
+		      }
+
+                });
+	
+	});
+	
+	$('#contents-list').on('click','#editequipment',function(){
+	console.log("Ëntered to edit equipment");
+	var $this = $(this);
+    var equipment = $this.data('equipment');
+	console.log("P1 Variable:"+equipment);
+	var equipments = equipment.split("-");
+	console.log("values :"+equipments.length);
+	console.log(equipments[0]);
+	$('#contents-list').html("");
+	
+	var reqList = '<h3 style="padding-left:50px">Edit the Details below to update your Equipment Details..</h3><form id="updateequipment-form" align="left" style="padding-left:50px;margin-top:20px" aria-hidden="true"><table><tr><td><p>Equipment Category <span style="padding-left:13px;font-weight:bold;padding-right:20px;">:</span></p></td><td></span><input type="text" name="equipmentCategory" value="'+equipments[1]+'"></input></td><td></td></tr><tr><td><p>EquipmentName <span style="padding-left:38px;font-weight:bold;padding-right:20px;">:</span></td><td><input type="text" name="equipment" value="'+equipments[2]+'"></input></td><td></td></tr><tr><td><p>Manufacturer<span style="padding-left:63px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" name="manufacturer" value="'+equipments[3]+'"></input></td><td></td></tr><tr><td><p>Model<span style="padding-left:105px;font-weight:bold;padding-right:20px;"> :</span></td><td><input type="text" name="model" value="'+equipments[4]+'"></input></td><td></td></tr><tr><td><p>Manufactured Year <span style="padding-left:23px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" name="yearOfManufacturing" value="'+equipments[5]+'"></input></td><td><span id="manufacturedyear" style="padding-left:10px;">(format- YYYY Eg: 2016)</span></td></tr><tr><td><p>Quantity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td> <input type="text" name="quantity" value="'+equipments[6]+'"></input></td><td></td></tr><tr><td><p>Capacity <span style="padding-left:90px;font-weight:bold;padding-right:20px;">:</span></p></td><td><input type="text" name="capacity" value="'+equipments[7]+'"></input></td><td></td></tr><tr><td>&nbsp</td></tr><tr align="right"><td></td><td><button type="button" id="equipment-update-form" >Update</button><span style="padding-left:20px"></span><input type="reset" value="Reset"></input></td></tr><tr><td></td><input type="hidden" name="supplierId" value='+user.userId+'><td><input type="hidden" name="supplierName" value='+user.firstname+'&nbsp;'+user.lastname+'></td><td><input type="hidden" name="equipmentId" value='+equipments[0]+'></td></tr></table></form>';
+	
+	$('#contents-list').append(reqList);
+	});
+	
+	$('#contents-list').on('click','#equipment-update-form',function(){
+	console.log("Entered tot Update equipment details form button");
+	var equipments= [];
+	var reqList = "";
+	var success = "successfully created";
+		var data = JSON.stringify($("#updateequipment-form").serializeObject());
+		console.log(data);
+            
+            $.ajax({
+			url:AppData.relativeUrl+"supplier/updateequipment",
+		     type:"put",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log("Response :"+data);
+				 if (data.search("EE01") != -1) {
+				 
+				 console.log("Exception Occured while Adding Equipment");
+				 $('#modal-failure-dialog').modal('show')
+				 $('#modal-failure-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-addsuccess-dialog').modal('hide');},2000
+							);
+			    		});
+						} else {
+						console.log("Updation Success");
+						$('#updateequipment-form').modal('hide');
+						$('#modal-updatesuccess-dialog').modal('show')
+						$('#modal-updatesuccess-dialog').on('shown.bs.modal', function() {
+							setTimeout(function(){
+								$('#modal-updatesuccess-dialog').modal('hide');},2000
+							);
+			    		}); 
+						console.log("updation modal closed");
+						console.log("opening equipment modal");
+						$('#contents-list').html("");
+						$.ajax({
+				url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					$.each(response,function(index,value){
+						equipments[value.requirementId] = value;
+						reqList += '<div class="header" style="padding-bottom:25px"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px" class="left"/><div class="right" id="equipmentdetails"><ul><li><span>Category: '+value.equipmentCategory+'</span><span >Equipment: '+value.equipment+'</span><span>Manufacturer: '+value.manufacturer+'</span><span >Model: '+value.model+'</span><li style="padding-top:30px"><span>Manufactured Year: '+value.yearOfManufacturing+'</span><span>Quantity: '+value.quantity+'</span><span>Capacity: '+value.capacity+'</span></li><br><br><a href="#" class="btn btn-warning" data-id="'+value.equipmentId+'"  id="delequipment" >Delete Equipment</a><a href="#" class="btn btn-warning" style="float:none;margin-left:300px" data-equipment="'+value.equipmentId+'-'+value.equipmentCategory+'-'+value.equipment+'-'+value.manufacturer+'-'+value.model+'-'+value.yearOfManufacturing+'-'+value.quantity+'-'+value.capacity+'" id="editequipment">Edit Equipment</a></ul></div></div>';
+					});
+					$('#contents-list').append(reqList);
+				}
+				});
+				
+				 }
+		      }
+
+                });
+				
+	
+		
+	});
+	
+	function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+	
+	
+	$('#contents-list').on('click','.req-view-btn',function(){
+		console.log("Entered requiremnt  view click function");
+	        var reqid = this.id;
+	        console.log("requirement id :: ",reqid);
+			console.log("requiremnt :: ",requirements[reqid]);
+			sessionStorage.setItem("requirement",JSON.stringify(requirements[reqid]));
+			$(location).attr('href','requirement-view.html');
+	});
+	
+	});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>     
+</head>
+<body>
+    <div class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 navigation">
+			<nav class="navbar navbar-defaut navbar-top" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"> <img id="nav-logo" src="..\images\logo_new.png" height="75px" width="200px" />
+						</a>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<!--<ul class="nav navbar-nav navbar-right" id="navigation-right">
+							<li class="mainmenu"><a href="index.html" class="mainmenu1"><span class="usertext">Home</span></a></li>
+							<li class="mainmenu"><a href="dashboard.html" class="mainmenu1"><span class="usertext">Dashboard</span></a></li>
+							<li class="menu"><span class="usertext">Jayanth</span><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="images/profileicon.png" height="40px" width="40px"><b><strong class="caret"></strong></b></img></a>
+								<ul class="dropdown-menu">
+									<li class="menu"><a href="#" class="submenu1"><span class="submenu1">MyProfile</span></a></li>
+									<li class="divider"></li>
+									<li class="menu"><a href="#" class="submenu1" ><span class="submenu1">LogOut</span></a></li> 
+									
+						</ul>-->
+								<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
+								<li><a href="userprofile.html" role="button"><span id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+					</div>
+				</nav>
+   		</div>
+			</div>
+		</div>
+	</div>
+    </div>
+   <!--<div class="bodytag">
+   <div>
+	<div class="row">
+		<div class="col-md-12">
+		<p style="background:#202e31;width:100%;height:15px;border:transparent"></p></div>
+		</div>
+		</div>
+    </div>	-->
+    <div class="content-main">
+    <div class="container">
+        <div class="row">
+			<div class="col-md-2 list">
+					<ul class="list-unstyled" id="sidebar-list">
+						<li><a href="#home" id="mappedrequirement" class="sidebarlist">Mapped Requirements</a></li>
+						<li><a href="#myequipment" id="equipment" class="sidebarlist">My Equipment</a></li>
+						<li><a href="#myrequirement" id="requirement" class="sidebarlist">My Requirements</a></li>
+						<li><a href="#myquote" id="quotation" class="sidebarlist">My Quotations</a></li>
+						<li><a href="#addequipment" id="addequipment" class="sidebarlist">Add Equipment</a></li>
+						<li><a href="#postrequirement" id="postrequirement" class="sidebarlist">Post Requirement</a></li>
+					</ul>
+			</div>
+			<div class="col-md-8 " id="contents-list">
+				<h3 align="center" style="padding-top:50px" id="welcome"><b>  Welcome!! To the DashBoard ...</b></h3>
+			</div>
+			<div class="modal fade" id="modal-updatesuccess-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">X</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Updation successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-addsuccess-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">X</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Addition successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-failure-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">X</button>
+									<h4 class="modal-title" id="myModalLabel">Failure</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Operation could not be Completed!!</div>
+								</div>
+							</div>
+						</div>
+					</div>
+    </div>
+    </div>
+	</div>
+    <div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+                    
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>	
+							<li><a href="#">Privacy Policy</a></li>	
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>		
+    </body>
+</html>

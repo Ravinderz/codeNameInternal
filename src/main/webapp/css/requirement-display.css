@@ -1,0 +1,79 @@
+.header{
+    margin-top: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.content-main {
+    padding-bottom: 50px;
+}
+
+.content-main h2{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.content-main .list{
+    border-right: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    padding: 0px;
+}
+
+.content-main .list ul li{
+    list-style: none;
+} 
+
+.content-main .item-content-header img{
+    float: left;
+}
+
+.item-content-header-meta {
+    
+    /*float: left;*/
+   /* height: 100px; */
+    position: relative;
+    left:20px;
+}
+
+.item-content-header-meta h3{
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+
+.clear-fix{
+    clear: both;
+}
+
+.content-main .item-content-main ul{
+    padding : 0px;
+}
+
+.content-main .item-content-main ul li{
+    display: inline-block;
+    padding-left: 20px;
+    padding-right:20px;
+}
+
+.content-main .item-content-main ul li:nth-child(1){
+    padding-left: 0px;
+}
+
+.content-main .btn{
+    border-radius: 0px;
+    float : right;
+    padding: 5px 20px;
+}
+
+.content-main .post-req-btn{
+margin-top: 15px;
+margin-right: 10px;
+}
+
+.content-main .item{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.content-main .ul-item{
+    padding-left: 20px;
+    padding-right: 20px;
+}

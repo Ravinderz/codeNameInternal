@@ -16,8 +16,14 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId")
-	public long userId;
+	public int userId;
 	
+    @Column(name = "firstname")
+	public String firstname;
+    
+    @Column(name = "lastname")
+	public String lastname;
+		
 	@Column(name = "username")
 	public String username;
 	
@@ -39,21 +45,36 @@ public class User {
 	@Column(name = "role")
 	public String role;
 	
-	@Column(name = "createdTime")
-	public Timestamp createdTime;
+	@Column(name = "activeFlag")
+	public int activeFlag;
 	
-	@Column(name = "LastupdatedTime")
-	public Timestamp updatedTime;
+	@Column(name = "createdtime")
+	public Timestamp createdtime;
 	
+	@Column(name = "updatedtime")
+	public Timestamp updatedtime;
+
 	
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {
 		return username;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public void setUsername(String username) {
 		this.username = username;
@@ -88,6 +109,32 @@ public class User {
 	public void setCompany_individual_profile(String company_individual_profile) {
 		this.company_individual_profile = company_individual_profile;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+	public Timestamp getCreatedtime() {
+		return createdtime;
+	}
+	public void setCreatedtime(Timestamp createdtime) {
+		this.createdtime = createdtime;
+	}
+	public Timestamp getUpdatedtime() {
+		return updatedtime;
+	}
+	public void setUpdatedtime(Timestamp updatedtime) {
+		this.updatedtime = updatedtime;
+	}
+
 	
 
 }
