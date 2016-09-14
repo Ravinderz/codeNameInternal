@@ -169,7 +169,50 @@
 					</div><!-- end of media -->
 		  			</div>
 		  		</div>
-		  		<div class="col-md-4"></div>
+		  		<div class="col-md-4">
+		  		<div class="heading">
+		  		<h3>Machines<small> added recently</small></h3><a href="#">View All</a>
+		  		<div class="clear-fix"></div>
+		  		</div>
+		  		<div class="machines">
+		  			<div class="media">
+							<div class="media-left">
+								<a href="#">
+								  <img class="media-object" src="http://placehold.it/75x75" alt="...">
+								</a>
+							</div>
+						 <div class="media-body">
+						  		<h4>Excavator</h4>
+						  		<p class="posted-date">posted on : 1 week ago</p>
+						  		<p>Quantity : 1 Capacity : 20TON</p>
+						  </div>
+					</div><!-- end of media -->
+					<div class="media">
+							<div class="media-left">
+								<a href="#">
+								  <img class="media-object" src="http://placehold.it/75x75" alt="...">
+								</a>
+							</div>
+						 <div class="media-body">
+						  		<h4>truckmountedconcretepump</h4>
+						  		<p class="posted-date">posted on : 1 week ago</p>
+						  		<p>Quantity : 1 Capacity : 20 MC Units</p>
+						  </div>
+					</div><!-- end of media -->
+					<div class="media">
+							<div class="media-left">
+								<a href="#">
+								  <img class="media-object" src="http://placehold.it/75x75" alt="...">
+								</a>
+							</div>
+						 <div class="media-body">
+						  		<h4>Excavator</h4>
+						  		<p class="posted-date">posted on : 1 week ago</p>
+						  		<p>Quantity : 1 Capacity : 20TON</p>
+						  </div>
+					</div><!-- end of media -->
+					</div>
+		  		</div>
 		  	</div>
 		  </div>
 				
@@ -286,6 +329,28 @@
  						$('.recent-quote-list').append(recentQuotes);
  					}
  					});
+ 				
+ 				var equipments;
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							
+ 							equipments += '<div class="media"><div class="media-left"><a href="#">'
+ 	 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
+ 	 							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
+ 						});
+ 						$('.recent-quote-list').html("");
+ 						$('.recent-quote-list').append(recentQuotes);
+ 					}
+ 					});
+ 				
+ 				
  				
  				
  				

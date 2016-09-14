@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.User;
@@ -52,6 +53,12 @@ public class UserController {
 	public 	String getUserById(@PathVariable("id") long id){
 		logger.info("Entered into UserController.getUserById method  UserId:"+id);
 		return userService.getUserById(id);	
+	}
+	
+	@RequestMapping(value="/updatePassword/{userId}" , method=RequestMethod.PUT)
+	public 	String updatePassword(@PathVariable("userId") long userId,@RequestParam String oldPassword,@RequestParam String newPassword){
+		logger.info("Entered into UserController.updatePassword method  UserId:"+userId);
+		return userService.updatePassword(userId,oldPassword,newPassword);	
 	}
 	
 	

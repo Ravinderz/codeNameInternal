@@ -80,4 +80,10 @@ public class UserService {
 		
 	}
 
+	public String updatePassword(long userId, String oldPassword, String newPassword) {
+		logger.info("Entered into SupplierQuoteService.updatePassword method ");
+		String status= userdao.updateUser(userId,oldPassword,newPassword);
+		return status;	
+	}
+
 }

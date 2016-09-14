@@ -80,12 +80,16 @@
 		  		<div class="col-md-7"><span>This will be something about project</span></div>
 		  		<div class="col-md-4">
 		  			<div class="profile-card">
+		  			<a href="#edit-profile" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
+		  			<div class="clear-fix"></div>
+		  			<div class="profile-data">
 		  				<i class="fa fa-user"></i>
 		  				<ul>
 		  					<li>Welcome back</li>
 		  					<li><h2 id="user-name">User</h2></li>
 		  				</ul>
 		  				<div class="clear-fix"></div>
+		  				</div>
 		  				<div class="profile-progress-bar">
 		  					<p>Complete your profile</p>
 		  					<div class="progress">
@@ -184,10 +188,98 @@
  				</div>
  			</div>
  		</div>
- 		<!-- starting the js here -->
+
+		<!-- starting the js here -->
  		<script src="../js/jquery.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
 		<script src="../js/appProperties.js"></script>
+
+ 		
+ 		<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="edit-profile" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+								</div>
+								<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="register-form">
+										
+										<div class="form-group">
+											<label for="firstname" class="sr-only"> FirstName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="firstname"
+													placeholder="Firstname" id="firstName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lastname" class="sr-only"> LastName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="lastname"
+													placeholder="Lastname" id="lastName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="username" class="sr-only"> Email </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="username"
+													placeholder="email" name="username">
+											</div>
+										</div>
+						<input type="hidden" id="password" name="password">
+						<input type="hidden" id="role" name="role">
+						<input type="hidden" id="userId" name="userId">
+						
+
+						<div class="form-group">
+											<label for="mobile" class="sr-only"> Mobile </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="mobile"
+													placeholder="mobile" name="mobileNumber">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="constitution" class="sr-only">
+												Constitution </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control"
+													placeholder="Constitution" id="constitution"
+													name="constitution">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="website" class="sr-only"> Website </label>
+											<div class="col-sm-12">
+												<input type="text" placeholder="website"
+													class="form-control" id="website" name="website">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="company_individual_profile" class="sr-only">
+												Company Profile </label>
+											<div class="col-sm-12">
+												<input type="text" placeholder="Company profile"
+													class="form-control" id="company_individual_profile"
+													name="company_individual_profile">
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="update" class="btn btn-next modal-btn">update</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+ 		
  		<script type="text/javascript">
  			$(document).ready(function(){
  				var user = sessionStorage.getItem("user");
@@ -206,6 +298,47 @@
 					console.log("user logged out");
 					$(location).attr('href', "../index.html");
 				});
+ 				
+ 				$('#userId').val(user.userId);
+ 				$('#firstName').val(user.firstname);
+ 				$('#lastName').val(user.lastname);
+ 				$('#username').val(user.username);
+ 				$('#password').val(user.password);
+ 				$('#mobile').val(user.mobileNumber);
+ 				$('#role').val(user.role);
+ 				$('#constitution').val(user.constitution);
+ 				$('#website').val(user.website);
+ 				$('#company_individual_profile').val(user.company_individual_profile);
+ 				
+ 				$('.modal-btn').click(function() {
+ 					console.log("inside update btn");
+ 					var formData = $("#register-form").serializeObject();
+ 					console.log("created time ",user.createdtime)
+ 					formData.createdtime = $.date(user.createdtime,2);
+ 					var data = JSON.stringify(formData);
+ 					var temp = $.parseJSON(data);
+ 					temp.createdtime = user.createdtime;
+ 					temp = JSON.stringify(temp);
+					console.log(data);
+					 $.ajax({
+							url : AppData.relativeUrl+"user/updateuser",
+							type : "put",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+							success : function(response) {
+								if(response === "US01"){
+									console.log("successfully udpated");
+									sessionStorage.setItem("user",temp);
+									location.reload();
+									/* $('#edit-profile').modal('hide'); */
+									
+								}else{
+									console.log("exception while udpating");
+								}
+							}
+							});
+ 				});
+ 				
  				
 				var requirements = [];
  				
@@ -286,13 +419,91 @@
  		
  		</script>
  		<script type="text/javascript">
- 		$.date = function(dateObject) {
+ 		
+ 		$.fn.serializeObject = function() {
+ 			var o = {};
+ 			var a = this.serializeArray();
+ 			$.each(a, function() {
+ 				if (o[this.name] !== undefined) {
+ 					if (!o[this.name].push) {
+ 						o[this.name] = [ o[this.name] ];
+ 					}
+ 					o[this.name].push(this.value || '');
+ 				} else {
+ 					o[this.name] = this.value || '';
+ 				}
+ 			});
+ 			return o;
+ 		};
+ 		
+ 		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
  		    var date = d.toDateString();
+ 		    console.log(d);
+ 		    console.log(date);
+ 		    if(pattern === 1){
  		    var dateArr = date.split(" ");
  		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    }
+ 		    else if(pattern === 2){
+ 		    	console.log("date" +dateObject);
+ 		    	var dateArr = dateObject.split(' ');
+ 		    	var time = dateArr[3].split(':');
+ 		    	var HH = parseInt(time[0])+6;
+ 		    	var mm = parseInt(time[1])+30;
+ 		    	var ss = time[2];
+ 		    	if(dateArr[1].length === 3)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		    	else if(dateArr[1].length === 2)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		    }
  		    return date;
  		};
+ 		
+ 		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			console.log(month)
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
+ 		}
+ 		
  		</script>	
  				
     </body>

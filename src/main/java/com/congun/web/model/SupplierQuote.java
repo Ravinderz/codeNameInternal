@@ -30,35 +30,11 @@ public class SupplierQuote {
 	@Column(name = "machineRentalCharges")
 	public long machineRentalCharges;
 	
-	@Column(name = "model")
-	public String model;
-	
-	@Column(name = "manufacturedyear")
-	public String manufacturedyear;
-	
-	@Column(name = "manufacturer")
-	public String[] manufacturer;
-	
-	@Column(name = "capacity")
-	public int capacity;
-	
-		@Column(name = "driverfare")
-	public long driverfare;
-	
 	@Column(name = "driverAvailabile")
 	public boolean driverAvailable;
 	
-	@Column(name = "helperAvailable")
-	public boolean helperAvailable;
-	
-	@Column(name = "maintenanceCharges")
-	public long maintenanceCharges;
-	
 	@Column(name = "queries")
 	public String queries;
-	
-	@Column(name = "transportation")
-	public String transportation;
 	
 	@Column(name = "quotePostedById")
 	public long quotePostedById;
@@ -86,9 +62,6 @@ public class SupplierQuote {
 	
 	@Column(name = "finalQuotePrice")
 	public double finalQuotePrice;
-	
-	@Column(name = "hiringChargesType")
-	public String hiringChargesType;
 
 	@Column(name = "requirementtitle")
 	public String reqtitle;
@@ -99,22 +72,11 @@ public class SupplierQuote {
 	@Column(name = "reqlocation")
 	public String reqlocation;
 	
-
-	public String getReqlocation() {
-		return reqlocation;
-	}
-
-	public void setReqlocation(String reqlocation) {
-		this.reqlocation = reqlocation;
-	}
-
-	public String getQuoteStatus() {
-		return quoteStatus;
-	}
-
-	public void setQuoteStatus(String quoteStatus) {
-		this.quoteStatus = quoteStatus;
-	}
+	@Column(name = "hoursPerMonth")
+	public String hoursPerMonth;
+	
+	@Column(name = "advance")
+	public String advance;
 
 	public long getQuoteId() {
 		return quoteId;
@@ -140,44 +102,20 @@ public class SupplierQuote {
 		this.equipmentName = equipmentName;
 	}
 
-	public String getModel() {
-		return model;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
-	public String getManufacturedyear() {
-		return manufacturedyear;
+	public long getMachineRentalCharges() {
+		return machineRentalCharges;
 	}
 
-	public void setManufacturedyear(String manufacturedyear) {
-		this.manufacturedyear = manufacturedyear;
-	}
-
-	public String[] getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String[] manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-	public long getDriverfare() {
-		return driverfare;
-	}
-
-	public void setDriverfare(long driverfare) {
-		this.driverfare = driverfare;
+	public void setMachineRentalCharges(long machineRentalCharges) {
+		this.machineRentalCharges = machineRentalCharges;
 	}
 
 	public boolean isDriverAvailable() {
@@ -186,14 +124,6 @@ public class SupplierQuote {
 
 	public void setDriverAvailable(boolean driverAvailable) {
 		this.driverAvailable = driverAvailable;
-	}
-
-	public boolean isHelperAvailable() {
-		return helperAvailable;
-	}
-
-	public void setHelperAvailable(boolean helperAvailable) {
-		this.helperAvailable = helperAvailable;
 	}
 
 	public String getQueries() {
@@ -210,6 +140,14 @@ public class SupplierQuote {
 
 	public void setQuotePostedById(long quotePostedById) {
 		this.quotePostedById = quotePostedById;
+	}
+
+	public String getQuoteStatus() {
+		return quoteStatus;
+	}
+
+	public void setQuoteStatus(String quoteStatus) {
+		this.quoteStatus = quoteStatus;
 	}
 
 	public String getQuotePostedByName() {
@@ -268,46 +206,6 @@ public class SupplierQuote {
 		this.finalQuotePrice = finalQuotePrice;
 	}
 
-	public String getHiringChargesType() {
-		return hiringChargesType;
-	}
-
-	public void setHiringChargesType(String hiringChargesType) {
-		this.hiringChargesType = hiringChargesType;
-	}
-	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public long getMachineRentalCharges() {
-		return machineRentalCharges;
-	}
-
-	public void setMachineRentalCharges(long machineRentalCharges) {
-		this.machineRentalCharges = machineRentalCharges;
-	}
-
-	public long getMaintenanceCharges() {
-		return maintenanceCharges;
-	}
-
-	public void setMaintenanceCharges(long maintenanceCharges) {
-		this.maintenanceCharges = maintenanceCharges;
-	}
-
-	public String getTransportation() {
-		return transportation;
-	}
-
-	public void setTransportation(String transportation) {
-		this.transportation = transportation;
-	}
-
 	public String getReqtitle() {
 		return reqtitle;
 	}
@@ -324,7 +222,29 @@ public class SupplierQuote {
 		this.reqduration = reqduration;
 	}
 
-	
+	public String getReqlocation() {
+		return reqlocation;
+	}
 
+	public void setReqlocation(String reqlocation) {
+		this.reqlocation = reqlocation;
+	}
+
+	public String getHoursPerMonth() {
+		return hoursPerMonth;
+	}
+
+	public void setHoursPerMonth(String hoursPerMonth) {
+		this.hoursPerMonth = hoursPerMonth;
+	}
+
+	public String getAdvance() {
+		return advance;
+	}
+
+	public void setAdvance(String advance) {
+		this.advance = advance;
+	}
+	
 }
 

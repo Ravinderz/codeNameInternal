@@ -25,5 +25,7 @@ public class ResponseConstants {
 	public static final String MACHINE_FAILURE_CODE = "MF01";
 	public static final String MACHINE_EXCEPTION_CODE = "ME01";
 	
+	public static final String WRONG_PASSWORD_CODE = "WPSD";
+	
 	
 }

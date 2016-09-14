@@ -56,8 +56,8 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="contractor-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="contractor-profile.html">Profile</a></li>
+						<li><a class="active" href="contractor-dashboard.html">Dashboard</a></li>
+						<li ><a href="contractor-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
@@ -119,118 +119,9 @@
 						<li><button type="button" class="btn btn-filter">Rejected</button></li>
 						<li><button type="button" class="btn btn-filter">hired</button></li>
 					</ul>
-					<div class="quote-card-container">
-					<div class="media">
-						<div class="media-left">
-							<h4 class="media-heading">Supplier 1</h4>
-							<a href="#">
-							  <img class="media-object" src="http://placehold.it/130x130" alt="...">
-							</a>
-						</div>
-						  <div class="media-body">
-							<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button><span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button><span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button><span>Reject</span></div>
-							<div class="clear-fix"></div>
-								<table class="table table-condensed table-left">
-									 <thead>
-										<tr>
-										  <th>Price Quoted</th>
-										  <th>Equipment Quantity</th>
-										  <th>Avg price</th>
-										  <th>Hours</th>
-										  <th>Driver provided</th>
-										  <th>Advance</th>
-										</tr>
-									 </thead>
-									 <tbody>
-										<tr>
-										  <td>100000</td>
-										  <td>2</td>
-										  <td>250</td>
-										  <td>567</td>
-										  <td>Yes</td>
-										  <td>40000</td>
-										</tr>
-									</tbody>	
-								</table>
-								<div class="date"><span>Applied on : 17th july,2016</span></div>
-							<div class="clear-fix"></div>
-							<h4 id="equipment-heading">equipment details</h4>	
-								<table class="table table-condensed">
-									 <thead>
-										<tr>
-										  <th>Category</th>
-										  <th>Equipment</th>
-										  <th>Manufacturer</th>
-										  <th>Year of Manufacture</th>
-										</tr>
-									 </thead>
-									 <tbody>
-										<tr>
-										  <td>EarthMoving</td>
-										  <td>Dozer</td>
-										  <td>JCB</td>
-										  <td>2015</td>
-										</tr>
-									</tbody>	
-								</table>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-						<div class="media-left">
-							<h4 class="media-heading">Supplier 1</h4>
-							<a href="#">
-							  <img class="media-object" src="http://placehold.it/130x130" alt="...">
-							</a>
-						</div>
-						  <div class="media-body">
-							<div class="interactions"><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button><span>Shortlist</span><button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></button><span>Hire</span><button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button><span>Reject</span></div>
-							<div class="clear-fix"></div>
-								<table class="table">
-									 <thead>
-										<tr>
-										  <th>Price Quoted</th>
-										  <th>Equipment Quantity</th>
-										  <th>Avg price</th>
-										  <th>Hours</th>
-										  <th>Driver provided</th>
-										  <th>Advance</th>
-										</tr>
-									 </thead>
-									 <tbody>
-										<tr>
-										  <td>100000</td>
-										  <td>2</td>
-										  <td>250</td>
-										  <td>567</td>
-										  <td>Yes</td>
-										  <td>40000</td>
-										</tr>
-									</tbody>	
-								</table>
-								<div class="date"><span>Applied on : 17th july,2016</span></div>
-							<div class="clear-fix"></div>
-							<h4 id="equipment-heading">equipment details</h4>	
-								<table class="table">
-									 <thead>
-										<tr>
-										  <th>Category</th>
-										  <th>Equipment</th>
-										  <th>Manufacturer</th>
-										  <th>Year of Manufacture</th>
-										</tr>
-									 </thead>
-									 <tbody>
-										<tr>
-										  <td>EarthMoving</td>
-										  <td>Dozer</td>
-										  <td>JCB</td>
-										  <td>2015</td>
-										</tr>
-									</tbody>	
-								</table>
-						  </div>
+					<div class="quote-card-container" id="quote-display-list">
+
 					</div>
-				</div>
 				</div>
 			</div>
 		</div>
@@ -287,7 +178,7 @@
  		</div>
  		<script type="text/javascript">
  			$(document).ready(function(){
- 			/*	var requirements = [];
+ 				var requirements = [];
  				var quotes = [];
  				var reqId = "";
  				var user = sessionStorage.getItem("user");
@@ -326,7 +217,7 @@
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime,1);
  							console.log("created time :: ",$.date(createdTime,1));
- 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+ 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
  						var tableContent = tableHeader+reqList+tableEndTags;
  						$('.requirement-table').html("");
@@ -335,45 +226,11 @@
  					});
 				
  					$('.requirement-table').on('click','.quote-link',function(e){
- 						e.preventDefault();
+ 						//e.preventDefault();
+ 						$.to_position('#quote-display-list');
  						reqId = this.id;
  						console.log("rq id ::",reqId);
- 						var quoteList = "";
- 						$.ajax({
- 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
- 							
- 							type:"get",
- 							data:{},
- 							success:function(response){
- 								response = $.parseJSON(response);
- 								console.log(response);
- 								var temp = "<div class='container-fluid'>"
- 								$.each(response,function(index,value){
- 									quotes[value.quoteId] = value;
- 									
- 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
- 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
- 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
- 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
- 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
- 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
- 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
- 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
- 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
- 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
- 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
- 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
- 									
- 								});
- 								$('.quote-wrapper').show();
- 								$('.quote-wrapper').removeClass("initial");
- 								$('.quote-card-container').html("");
- 								$('.quote-card-container').append(quoteList);
- 								
- 							}
- 							});
- 						
- 						
+ 						$.getQuotes(reqId,quotes);
  					});
  					
  					$('.quote-card-container').on('click','.btn-circle',function(){
@@ -386,49 +243,8 @@
  						quote.updatedTime = $.date(quote.updatedTime,2);
  						quote = JSON.stringify(quote);
  						console.log(quote);
- 						var quoteList = "";
- 						 $.ajax({
- 		 					url:AppData.relativeUrl+"supplier/updatequote",
- 		 					type:"put",
- 		 					contentType:"application/json; charset=utf-8",
- 		 					data:quote,
- 		 					success:function(response){
- 		 						console.log(response);
- 		 						$.ajax({
- 		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
- 		 							
- 		 							type:"get",
- 		 							data:{},
- 		 							success:function(response){
- 		 								response = $.parseJSON(response);
- 		 								console.log(response);
- 		 								var temp = "<div class='container-fluid'>"
- 		 								$.each(response,function(index,value){
- 		 									quotes[value.quoteId] = value;
- 		 									
- 		 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
- 		 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
- 		 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
- 		 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
- 		 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
- 		 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
- 		 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
- 		 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
- 		 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
- 		 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
- 		 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
- 		 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
- 		 									
- 		 								});
- 		 								$('.quote-wrapper').show();
- 		 								$('.quote-wrapper').removeClass("initial");
- 		 								$('.quote-card-container').html("");
- 		 								$('.quote-card-container').append(quoteList);
- 		 								
- 		 							}
- 		 							});
- 		 					}
- 		 					});  
+ 						$.udpateQuote(reqId,quotes,quote);
+ 						//udpdate quote method  
  					});
  					
  					$('.btn-filter').click(function(e){
@@ -437,70 +253,8 @@
  						var quoteList = "";
  						console.log("status" , status);
  						console.log("reqId" , reqId);
- 						if(status === "all"){
- 							$.ajax({
-		 							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
-		 							
-		 							type:"get",
-		 							data:{},
-		 							success:function(response){
-		 								response = $.parseJSON(response);
-		 								console.log(response);
-		 								var temp = "<div class='container-fluid'>"
-		 								$.each(response,function(index,value){
-		 									quotes[value.quoteId] = value;
-		 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
-		 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
-		 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
-		 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
-		 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
-		 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
-		 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
-		 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
-		 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
-		 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
-		 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
-		 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
-		 									
-		 								});
-		 								$('.quote-card-container').html("");
-		 								$('.quote-card-container').append(quoteList);
-		 							}
-		 							});
- 						}else{
- 						$.ajax({
- 							url:AppData.relativeUrl+"supplier/getquotesbystatus/"+reqId+"?quoteStatus="+status,
- 							type:"get",
- 							data:{},	
- 							success:function(response){
- 								response = $.parseJSON(response);
- 								console.log(response);
- 								var temp = "<div class='container-fluid'>"
- 								
- 								$.each(response,function(index,value){
- 									quotes[value.quoteId] = value;
- 									
- 									quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
- 									'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
- 									'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
- 									'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
- 									'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
- 									'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
- 									'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
- 									'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
- 									'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
- 									'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
- 									'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
- 									'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
- 									
- 								});
- 								$('.quote-card-container').html("");
- 								$('.quote-card-container').append(quoteList);
- 								
- 							}
- 						});
- 						}
- 					});*/
+ 						$.filterQuotes(status,reqId,quotes);
+ 					});
  					
  				//jquery for pagination
 					var current_page=1;
@@ -514,7 +268,7 @@
 					console.log(clicked_page);
 					if(clicked_page === "prev"){
 						if(current_page === 1){
-						
+							$.getAllRequirementsByPagination(user.userId,current_page,10);
 						}else if(current_page === $('#first').data("value")){
 						next_page = current_page;
 						current_page = previous_page;
@@ -525,6 +279,7 @@
 						$('#middle').text(next_page);
 						$('#last').data("value",next_page+1);
 						$('#last').text(next_page+1);
+						$.getAllRequirementsByPagination(user.userId,current_page,10);
 						}else{
 						next_page = current_page;
 						current_page = previous_page;
@@ -532,6 +287,7 @@
 						$active_element.removeClass("active");
 						$active_element.prev().addClass("active");
 						$active_element = $active_element.prev();
+						$.getAllRequirementsByPagination(user.userId,current_page,10);
 						}
 					}else if(clicked_page === "next"){
 						if(current_page === $('#last').data("value")){
@@ -544,6 +300,7 @@
 						$('#middle').text(previous_page);
 						$('#last').data("value",current_page);
 						$('#last').text(current_page);
+						$.getAllRequirementsByPagination(user.userId,current_page,10);
 						}else{
 						previous_page = current_page;
 						current_page = next_page;
@@ -551,6 +308,7 @@
 						$active_element.removeClass("active");
 						$active_element.next().addClass("active");
 						$active_element = $active_element.next();
+						$.getAllRequirementsByPagination(user.userId,current_page,10);
 						}
 					}else{
 						$active_element = $(this).parent();
@@ -558,6 +316,7 @@
 						previous_page = current_page-1;
 						next_page = current_page+1;
 						$(this).parent().addClass("active").siblings().removeClass("active");
+						$.getAllRequirementsByPagination(user.userId,current_page,10);
 						
 					}
 					
@@ -642,6 +401,161 @@
  			
  			return monNum;
  		}
+ 		
+ 		$.getAllRequirementsByPagination = function(userId,currentPage,pageSize){
+ 			var reqList = "";
+				$.ajax({
+					url:AppData.relativeUrl+"contractor/getAllRequirements/"+userId+"?page="+currentPage+"&pSize="+pageSize,
+					type:"get",
+					data:{},
+					success:function(response){
+						response = $.parseJSON(response);
+						console.log(response);
+						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quotes</th><th>Requirement deadline</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
+						var tableEndTags = '</tbody></table>';
+						$.each(response,function(index,value){
+							//requirements[value.requirementId] = value;
+							var createdTime = value.createdTime;
+							createdTime = $.date(createdTime,1);
+							console.log("created time :: ",$.date(createdTime,1));
+							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+						});
+						var tableContent = tableHeader+reqList+tableEndTags;
+						$('.requirement-table').html("");
+						$('.requirement-table').append(tableContent);
+					}
+					});
+ 			
+ 		}
+ 		
+ 		$.filterQuotes = function(status,reqId,quotes){
+ 			var quoteList = "";
+ 			if(status === "all"){
+					$.ajax({
+							url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
+							
+							type:"get",
+							data:{},
+							success:function(response){
+								response = $.parseJSON(response);
+								console.log(response);
+								var temp = "<div class='container-fluid'>"
+								 $.each(response,function(index,value){
+									quotes[value.quoteId] = value;
+									quoteList = $.quotesByStatus(quoteList,value);
+									
+								}); 
+								$('.quote-card-container').html("");
+								$('.quote-card-container').append(quoteList);
+							}
+							});
+				}else{
+				$.ajax({
+					url:AppData.relativeUrl+"supplier/getquotesbystatus/"+reqId+"?quoteStatus="+status,
+					type:"get",
+					data:{},	
+					success:function(response){
+						response = $.parseJSON(response);
+						console.log(response);
+						var temp = "<div class='container-fluid'>"
+						
+						$.each(response,function(index,value){
+							quotes[value.quoteId] = value;
+							
+							quoteList = $.quotesByStatus(quoteList,value);
+							
+						});
+						$('.quote-card-container').html("");
+						$('.quote-card-container').append(quoteList);
+						
+					}
+				});
+				}
+ 		
+ 		}
+ 		
+ 		$.udpateQuote = function(reqId,quotes,quote){
+ 			var quoteList = "";
+			 $.ajax({
+					url:AppData.relativeUrl+"supplier/updatequote",
+					type:"put",
+					contentType:"application/json; charset=utf-8",
+					data:quote,
+					success:function(response){
+						console.log(response);
+						$.getQuotes(reqId,quotes)
+					}
+					});
+ 		}
+ 		
+ 		$.getQuotes = function(reqId,quotes){
+ 			var quoteList = ""
+ 			$.ajax({
+				url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
+				
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					var temp = "<div class='container-fluid'>"
+					$.each(response,function(index,value){
+						quotes[value.quoteId] = value;
+						quoteList = $.quotesByStatus(quoteList,value);
+					});
+					 $('.quote-wrapper').show();
+					$('.quote-wrapper').removeClass("initial"); 
+					$('.quote-card-container').html("");
+					$('.quote-card-container').append(quoteList);
+					
+				}
+				});
+ 		}
+ 		
+ 		$.quotesByStatus = function(quoteList,value){
+ 			if(value.quoteStatus === "hired"){
+				quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+				'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+				'<div class="interactions"><span class="label label-success">Hired</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+				'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+				'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+				'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+				'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+				'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+			}else if(value.quoteStatus === "rejected"){
+				quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+				'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+				'<div class="interactions"><span class="label label-danger">Rejected</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+				'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+				'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+				'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+				'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+				'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+			}else{
+			quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
+			'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
+			'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+			'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
+			'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
+			'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+			'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+			'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
+			'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+			'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
+			'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
+			'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+			}
+ 			
+ 			return quoteList;
+ 		}
+ 		
+ 		
+ 		$.to_position = function(divid){
+		     $('html, body').animate({'scrollTop':$(divid).offset().top - 50}, 'slow');
+		 }
+ 		
  		</script>		
     </body>
 </html>

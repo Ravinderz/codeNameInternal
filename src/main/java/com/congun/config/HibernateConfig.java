@@ -33,7 +33,7 @@ public class HibernateConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/congun");
 		dataSource.setUsername("root");
-		dataSource.setPassword("mysql");//Change this value to appropriate value when using at other system
+		dataSource.setPassword("letmein");//Change this value to appropriate value when using at other system
 		return dataSource;
 	}
 	
