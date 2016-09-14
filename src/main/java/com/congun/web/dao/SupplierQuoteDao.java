@@ -200,6 +200,9 @@ public class SupplierQuoteDao {
 	public String addEquipment(AddEquipment equipment) {
 		logger.info("Entered into SupplierQuoteDao.addEquipment method");
 		try {
+			Date date = new Date();
+			Timestamp currTime = new Timestamp(date.getTime());
+			equipment.setCreatedTime(currTime);
 			getSession().saveOrUpdate(equipment);
 			return ResponseConstants.SUPPLIER_SUCCESS_CODE;
 		} catch (Exception e) {
@@ -213,6 +216,9 @@ public class SupplierQuoteDao {
 	public String updateEquipment(AddEquipment equipment) {
 		logger.info("Entered into SupplierQuoteDao.updateEquipment method");
 		try {
+			Date date = new Date();
+			Timestamp currTime = new Timestamp(date.getTime());
+			equipment.setUpdatedTime(currTime);
 			logger.info("Entered DAO to update Equipment :"
 					+ equipment.getEquipmentId());
 			getSession().saveOrUpdate(equipment);

@@ -112,5 +112,28 @@ public class UserDao {
 			return null;
 		}
 	}
+    @Transactional
+	public String updateUser(long userId,String oldPassword, String newPassword) {
+		logger.info("Entered into UserDao.updateUser method ");
+		try{
+			 String oldPasswordhash = GenerateHash.getHash(oldPassword);
+			User userDetails = getUserById(userId);
+			String oldPasswordFromDB = userDetails.getPassword();
+			if(oldPasswordFromDB.equals(oldPasswordhash)){
+			userDetails.setPassword(GenerateHash.getHash(newPassword));
+		Date date = new Date();
+		Timestamp currTime = new Timestamp(date.getTime());
+		userDetails.setUpdatedtime(currTime);
+		getSession().saveOrUpdate(userDetails);
+			return ResponseConstants.USER_SUCCESS_CODE;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.USER_EXCEPTION_CODE;
+		}
+		return ResponseConstants.WRONG_PASSWORD_CODE;
+		
+	
+    }
 
 }
