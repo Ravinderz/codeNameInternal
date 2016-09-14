@@ -58,6 +58,7 @@ public class UserDao {
 		logger.info("Entered into UserDao.updateUser method ");
 		try{
 		//User existingUser = (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId", user.getUserId())).list().get(0);
+		user.setPassword(GenerateHash.getHash(user.getPassword()));
 		Date date = new Date();
 		Timestamp currTime = new Timestamp(date.getTime());
 		//user.setCreatedtime(existingUser.getCreatedtime());
