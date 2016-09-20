@@ -1,0 +1,12 @@
+.used-equip-table{
+	margin-top:15px;
+}
+.used-equip-pagination{
+	width:210px;
+	margin : 0 auto;
+}
+
+.pagination .active{
+	background-color: #004d99;
+	color:#fff;
+}

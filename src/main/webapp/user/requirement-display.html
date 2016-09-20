@@ -73,6 +73,8 @@
 		  </div>
 		<div class="container">
 			<div class="row">
+			<a href="#" class="btn btn-warning post-req-btn hide">Post
+					Requirement</a>
 				<h2>Requirement List</h2>
 				<div class="col-md-2 filter">
 					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
@@ -171,6 +173,9 @@
 		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
+		
+		if(user.role === "contractor")
+			$('.post-req-btn').removeClass("hide").addClass("show");
 
 	/* to get parameters from a url */
 	var getUrlParameter = function getUrlParameter(sParam) {

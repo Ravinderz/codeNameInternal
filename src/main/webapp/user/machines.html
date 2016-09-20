@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/machines.css">
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="#"> <img id="nav-logo"
+								src="..\images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="supplier-profile.html" role="button"><span
+										id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+		<div class="container-fluid">
+			<div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="supplier-dashboard.html">Dashboard</a></li>
+						<li><a class="active" href="supplier-profile.html">Profile</a></li>
+						<li><a href="#">Used machines</a></li>
+						<li><a href="#">Feedback</a></li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<div class="search-bar-2">
+						<form>
+							<div class="input-group">
+								<input type="text" id="search-input" class="form-control"
+									placeholder="Search for..."> <span
+									class="input-group-btn">
+									<button class="btn btn-default" type="button" id="search-btn">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#" id="view-machines">View Machine<span
+								class="sr-only">(current)</span></a></li>
+						<li><a href="#" id="add-machines">Add Machine</a></li>
+					</ul>
+				</div>
+				<div class=" col-sm-9 col-md-10 sidebar-content">
+					<ul class="nav-sidebar-content">
+						<li>
+							<div class="media">
+								<div class="media-left">
+									<a href="#">
+								  		<img class="media-object" src="http://placehold.it/100x100" alt="...">
+									</a>
+								</div>
+							 	<div class="media-body">
+							  		<div class="block-top"><h4>Excavator</h4><div class="buttons"><a id="edit" role="button" data-toggle="modal" href="#edit-equipment"><i class="fa fa-edit"></i></a><a id="delete" role="button" data-toggle="modal" href="#delete-equipment"><i class="fa  fa-trash-o"></i></a></div><div class="clear-fix"></div></div>
+							  		<p class="posted-date">Added on : 1 week ago</p>
+							  		<p>Quantity : 1  |  Capacity : 20TON  |   Manufacturer : JCB  |   YOM : 2014 </p>
+						  		</div>
+							</div><!-- end of media -->
+						</li>
+						<li>
+							<div class="media">
+								<div class="media-left">
+									<a href="#">
+								  		<img class="media-object" src="http://placehold.it/100x100" alt="...">
+									</a>
+								</div>
+							 	<div class="media-body">
+							  		<div class="block-top"><h4>Excavator</h4><div class="buttons"><a id="edit" role="button" data-toggle="modal" href="#edit-equipment"><i class="fa fa-edit"></i></a><a id="delete" role="button" data-toggle="modal" href="#delete-equipment"><i class="fa  fa-trash-o"></i></a></div><div class="clear-fix"></div></div>
+							  		<p class="posted-date">Added on : 1 week ago</p>
+							  		<p>Quantity : 1 Capacity : 20TON Manufacturer : JCB YOM : 2014 </p>
+						  		</div>
+							</div><!-- end of media -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+                    
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>	
+							<li><a href="#">Privacy Policy</a></li>	
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 		
+ 		<!-- starting the js here -->
+ 		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/appProperties.js"></script>
+ 		
+ 		
+ 		<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="edit-equipment" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Edit Equipment</h4>
+								</div>
+								<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="equipment-form">
+										
+										<div class="form-group">
+					
+										<label for="selectCategory" class="sr-only">Equipment Category</label>
+						                 <input type="text" id="equipmentCategory" class="form-control" placeholder="Equipment Category" name="equipmentCategory">	
+										 </div>
+										<div class="form-group">
+										<label for="equipment" class="sr-only">
+												Equipment Name
+											</label>
+						                 <input type="text" id="equipment" class="form-control" name="equipment" placeholder="Equipment Name">	
+										 </div>
+										 
+										<div class="form-group">
+										<label for="manufacturer" class="sr-only">
+												Equipment Manufacturer
+											</label>
+						                 <input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer">	
+										 </div>
+										 <div class="form-group">
+										<label for="yearOfManufacturing" class="sr-only">
+												Year Of Manufacturing
+											</label>
+						                 <input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing">	
+										 </div>
+										 
+										 <div class="form-group">
+										<label for="model" class="sr-only">
+												Model Details
+											</label>
+						                 <input type="text" id="model" class="form-control" name="model" placeholder="Model">	
+										 </div>
+										 <div class="form-group">
+										<label for="capacity" class="sr-only">
+												Capacity Details
+											</label>
+						                 <input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity">	
+										 </div>
+										 <div id="hidden-fields">
+						                                <input type="hidden" name="supplierId" id="supplierId" value="">
+						                                <input type="hidden" name="supplierName" id="supplierName" value="">
+						                                </div>
+										 <div class="form-group">
+										<label for="quantity" class="sr-only">
+												Equipment Quantity
+											</label>
+						                 <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment Quantity">	
+										 </div>
+								
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="update" class="btn btn-next modal-btn">update</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+			<!-- ********************* This is for the delete model *********************************** -->
+					<div class="modal fade" id="delete-equipment" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Confirm</h4>
+								</div>
+								<div class="modal-body">
+								<p>Are you sure you want to delete this equipment.</p>
+								</div>
+									<div class="modal-footer">
+										<button type="button" id="yes" data-value="" data-loading-text="<i class='fa fa-cog fa-spin fa-3x fa-fw'></i>
+				<span class='sr-only'>deleting...</span>" class="btn btn-next modal-btn">yes</button>
+										<button type="button" id="no" class="btn btn-next modal-btn">No</button>
+									</div>
+			
+						</div>
+						</div>
+					</div>		
+					
+			<script type="text/javascript">
+ 			$(document).ready(function(){
+ 				
+ 				var userEquipments = [];
+ 				var user = sessionStorage.getItem("user");
+ 				user = $.parseJSON(user);
+ 				console.log(user);
+ 				var username = user.firstname+" "+user.lastname;
+ 				$('#user').text(username);
+ 				$('#user-name').text(username);
+ 				
+ 				$('.logout').click(function() {
+					console.log("inside logout function")
+					var user = sessionStorage.getItem("user");
+					if (user !== null) {
+						sessionStorage.removeItem("user");
+					}
+					console.log("user logged out");
+					$(location).attr('href', "../index.html");
+				});
+ 			
+ 			$('#view-machines').click(function(e){
+ 				$.getAllEquipments(user.userId,userEquipments);	
+ 			});	
+ 			
+ 			var categoryParam;
+ 	    	var sub_category;
+			
+ 			$('#add-machines').click(function(e){
+ 				console.log("inside add machines functuin");
+ 				var machineForm = '<div class="container"><div class="row"><div class="main-content col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">'
+ 				+'<form class="form-horizontal" role="form" id="addEquipment-form" class="f1"><h3 class="text-center text-muted">ADD EQUIPMENT FORM</h3>'
+ 				+'<div class="form-group"><label for="selectCategory">Equipment Category</label>'
+ 				+'<select id="equipmentCategory" class="f1-category form-control" placeholder="Equipment Category" name="equipmentCategory"></select></div>'
+ 				+'<div class="form-group"><label for="equipment">Equipment Name</label><select id="equipment" name="equipment" class="f1-equipment form-control placeholder="Equipment Name"></select>'
+ 				+'	</div><div class="form-group"><label for="manufacturer" class="sr-only">Equipment Manufacturer</label>'
+ 				+'	<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer"></div><div class="form-group">'
+ 				+'	<label for="yearOfManufacturing" class="sr-only">Year Of Manufacturing</label><input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing"></div><div class="form-group"><label for="capacity" class="sr-only">Capacity Details'
+ 				+'	</label><input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity"></div><div id="hidden-fields"><input type="hidden"'
+ 				+'	 name="supplierId" id="supplierId" value='+user.userId+'><input type="hidden" name="supplierName" id="supplierName" value='+username+'></div><div class="form-group"><label'
+ 				+'	 for="quantity" class="sr-only">Equipment Quantity</label><input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment'
+ 				+'	 Quantity"></div><div class="f1-buttons"><button type="button" class="btn btn-warning" id="addEquipment">Submit</button></div></form></div></div></div>';
+ 				
+ 				$('.sidebar-content').html("");
+ 				$('.sidebar-content').append(machineForm);
+ 				
+ 				/* This ajax call is made to populate the category and equipment machinary dropdowns */
+ 	 	    	
+ 	 	    	var category = []
+ 	 	    	$.ajax({
+ 	 	    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+ 	 	    		type:"get",
+ 	 	    		data:{},
+ 	 	    		success:function(response){
+ 	 	    			response = $.parseJSON(response);
+ 	 	    			var i = 0;
+ 	 	    			console.log(response);
+ 	 	    			$.each(response,function(index,value){
+ 	 	    				$("#equipmentCategory").append($("<option />").val(value).text(value));
+ 	 	    					category[i] = value;
+ 	 	    					i++
+ 	 	    			});
+ 	 	    			console.log("cat",categoryParam);
+ 	 	    			if(categoryParam !== undefined){
+ 	 	    			$("#equipmentCategory").val(categoryParam);
+ 	 	    			}
+ 	 	    			if(sub_category !== undefined ){
+ 	 	    				$.ajax({
+ 	 	    					
+ 	 	    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+ 	 	    	    			type:"get",
+ 	 	    	    			data:{},
+ 	 	    	    			success:function(equipments){
+ 	 	    	    				equipments = $.parseJSON(equipments);
+ 	 	    	    				console.log(equipments);
+ 	 	    	    				$.each(equipments,function(index,value){
+ 	 	    	    				$("#equipment").append($("<option />").val(value).text(value));
+ 	 	    	    				
+ 	 	    	    				});
+ 	 	    	    				if(sub_category !== undefined){
+ 	 	    	    				$("#equipment").val(sub_category);
+ 	 	    	    				}
+ 	 	    	    			}
+ 	 	    	    			});
+ 	 	    			}else{
+ 	 	    			$.ajax({
+ 	 	    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+ 	 	    			type:"get",
+ 	 	    			data:{},
+ 	 	    			success:function(equipments){
+ 	 	    				equipments = $.parseJSON(equipments);
+ 	 	    				console.log(equipments);
+ 	 	    				$.each(equipments,function(index,value){
+ 	 	    				$("#equipment").append($("<option />").val(value).text(value));
+ 	 	    				
+ 	 	    				});
+ 	 	    			}
+ 	 	    			});
+ 	 	    			}
+ 	 	    		}
+ 	 	    	});
+ 	 	    	
+ 				
+ 			});
+ 			
+ 			
+ 	    	/* This function will be called when there is change in the category dropdown */
+ 	    	
+ 	    	$(".sidebar-content").on('change','#equipmentCategory',function(){
+ 	    		var selectedOption = $("#equipmentCategory option:selected").text();
+ 	    		console.log("selected option ",selectedOption);
+ 	    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+ 	    		console.log("url ",url);
+ 	    		$.ajax({
+ 	    			url:url,
+ 	    			type:"get",
+ 	    			data:{},
+ 	    			success:function(equipments){
+ 	    				equipments = $.parseJSON(equipments);
+ 	    				console.log("equipments ",equipments);
+ 	    				$("#equipment").html("");
+ 	    				$.each(equipments,function(index,value){
+ 	    				$("#equipment").append($("<option />").val(value).text(value));
+ 	    				});	
+ 	    			}
+ 	    				
+ 	    		});
+ 	    	});
+ 	    	
+ 			
+ 			
+ 			
+ 			$('.sidebar-content').on('click','#addEquipment',function(e){
+ 				console.log("add equipment form");
+ 				var data = JSON.stringify($('#addEquipment-form').serializeObject());
+ 				console.log(data);
+ 			});
+ 			
+ 			$.getAllEquipments(user.userId,userEquipments);	
+ 			
+ 			$('.sidebar-content').on('click','#edit',function(e){
+ 				console.log("inside edit button");
+ 				console.log($(this).data("value"));
+ 				var equipment = userEquipments[$(this).data("value")];
+ 				$('#equipmentCategory').val(equipment.equipmentCategory);
+ 				$('#equipment').val(equipment.equipment);
+ 				$('#manufacturer').val(equipment.manufacturer);
+ 				$('#yearOfManufacturing').val(equipment.yearOfManufacturing);
+ 				$('#capacity').val(equipment.capacity);
+ 				$('#quantity').val(equipment.quantity);
+ 				$('#supplierId').val(user.userId);
+ 				$('#supplierName').val(username);
+ 			});
+ 			
+ 			$('.nav-sidebar-content').on('click','#delete',function(e){
+ 				console.log("inside delete button");
+ 				console.log($(this).data("value"));
+ 				$('#yes').data("value",$(this).data("value"));
+ 			});
+ 				
+ 				
+ 			$('.sidebar-content').on('click','#update',function(e){
+				e.preventDefault();
+				console.log("inside update btn");
+					var formData = $("#equipment-form").serializeObject();
+					var data = JSON.stringify(formData);
+				console.log(data);
+				 $.ajax({
+						url : AppData.relativeUrl+"user/updateuser",
+						type : "put",
+						contentType : "application/json; charset=utf-8",
+						data : data,
+						success : function(response) {
+							if(response === "US01"){
+								console.log("successfully udpated");
+								/* $('#edit-profile').modal('hide'); */
+								
+							}else{
+								console.log("exception while udpating");
+							}
+						}
+						});
+			});
+			
+				
+			
+			
+			$('#no').click(function(){
+				$('#delete-equipment').modal("hide");
+			});
+			
+			$('#yes').click(function(){
+				var $btn = $(this).button('loading');
+				var equipmentId = $(this).data("value");
+				$.ajax({
+ 	 				url:AppData.relativeUrl+"supplier/deleteEquipmentById/"+equipmentId,
+ 	 				type: "delete",
+ 	 				data:{},
+ 	 				success:function(response){
+ 	 					if (response.search("EE01") != -1) {
+ 	 						 console.log("Exception Occured while Adding Equipment");
+ 	 					}else{
+ 	 						 console.log("delete successfull");
+ 	 						 $.getAllEquipments(user.userId,userEquipments);
+ 	 					}	 
+ 	 					
+ 	 				}
+ 	 			});
+				$btn.button('reset');
+				//$('#delete-equipment').modal("hide");
+			});
+ 				
+ 			});
+ 			</script>	
+ 			<script type="text/javascript">
+ 			
+ 			$.fn.serializeObject = function() {
+ 				var o = {};
+ 				var a = this.serializeArray();
+ 				$.each(a, function() {
+ 					if (o[this.name] !== undefined) {
+ 						if (!o[this.name].push) {
+ 							o[this.name] = [ o[this.name] ];
+ 						}
+ 						o[this.name].push(this.value || '');
+ 					} else {
+ 						o[this.name] = this.value || '';
+ 					}
+ 				});
+ 				return o;
+ 			};
+ 			
+ 			$.getAllEquipments = function(userId,userEquipments){
+				$.ajax({
+ 	 				url:AppData.relativeUrl+"supplier/getallequipments/"+userId,
+ 	 				type: "get",
+ 	 				data:{},
+ 	 				success:function(response){
+ 	 					response = $.parseJSON(response);
+ 	 					console.log(response);
+ 	 					var equipmentList = "";
+ 	 					var ul = '<ul class="nav-sidebar-content">';
+ 	 					$.each(response,function(index,value){
+ 	 						userEquipments[value.equipmentId] = value;
+ 	 						equipmentList += '<li><div class="media"><div class="media-left"><a href="#"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px"/></a></div>'+
+ 	 						'<div class="media-body"><div class="block-top"><h4>'+value.equipment+'</h4><div class="buttons"><a id="edit" role="button" data-toggle="modal" data-value='+value.equipmentId+' href="#edit-equipment">'+
+ 	 						'<i class="fa fa-edit"></i></a><a id="delete" role="button" data-toggle="modal" data-value='+value.equipmentId+' href="#delete-equipment"><i class="fa  fa-trash-o"></i></a></div>'+
+ 	 						'<div class="clear-fix"></div></div><p class="posted-date">Added on : 1 week ago</p><p>Quantity :'+value.quantity+' |  Capacity : '+value.capacity+'  |   Manufacturer : '+value.manufacturer+'  |   YOM : '+value.yearOfManufacturing+'</p>'+
+ 	 						'</div></div></li>';
+ 						});
+ 	 					$('.sidebar-content').html("");
+ 	 					$('.sidebar-content').append(ul+equipmentList+'</ul>');
+ 	 					
+ 	 				}
+ 	 			});	
+			};
+ 			</script>
+					
+
+</body>
+</html>

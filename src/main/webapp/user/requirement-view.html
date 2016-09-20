@@ -74,7 +74,9 @@
 		   </div>
 		  </div>
     <div class="container">
-        <div class="row">
+        <div class="row ">
+        <a href="#" class="btn btn-warning post-req-btn hide">Post
+					Requirement</a>
             <h2>Requirement List</h2>
             <div class="col-md-2 filter"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
             <div class="col-md-8 view-item">
@@ -118,6 +120,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="quote-section">
+                    <a href="#" class="btn btn-warning quote-btn show">Give Quote</a>
                     </div>
                 </div>
             </div>
@@ -186,9 +191,31 @@
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 		
+		
 		var requirement = sessionStorage.getItem("requirement");
 		requirement = $.parseJSON(requirement);
 		console.log(requirement);
+		
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		
+		var category = getUrlParameter("category");
+		var sub_ctg = getUrlParameter("sub-category");
+		
 		
 		$('#title').html(requirement.title);
 		$('#category').html(requirement.equipmentCategory);
@@ -202,6 +229,11 @@
 		$('#duration').html(requirement.duration+" months");
 		$('#contact').html(user.mobileNumber);
 		$('#start-date').html(requirement.startDate);
+		
+		if(user.role === "contractor"){
+		$('.post-req-btn').removeClass("hide").addClass("show");
+		$('.quote-btn').removeClass("show").addClass("hide");
+		}
 		
 		
 		$('#user').click(function(e){
@@ -229,6 +261,22 @@
 			}else if(user.role === "supplier"){
 				$(location).attr('href',"supplier-dashboard.html");
 			}
+		});
+		
+		$('.post-req-btn').click(function(e){
+			e.preventDefault();
+			console.log("inside click function");
+			console.log("category",category);
+			console.log("sub",sub_ctg);
+			$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
+		});
+		
+		$('.quote-btn').click(function(e){
+			e.preventDefault();
+			console.log("inside click function");
+			console.log("category",category);
+			console.log("sub",sub_ctg);
+			$(location).attr('href',"../quote-form.html?category="+category+"&sub-category="+sub_ctg+"&reqId="+requirement.requirementId);
 		});
 		
 		

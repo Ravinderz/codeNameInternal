@@ -58,7 +58,7 @@
 					<ul class="sub-menu">
 						<li><a class="active" href="contractor-dashboard.html">Dashboard</a></li>
 						<li ><a href="contractor-profile.html">Profile</a></li>
-						<li><a href="#">Used machines</a></li>
+						<li><a href="used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 					</div>
@@ -117,7 +117,7 @@
 						<li><button type="button" class="btn btn-filter">All</button></li>
 						<li><button type="button" class="btn btn-filter">Shortlisted</button></li>
 						<li><button type="button" class="btn btn-filter">Rejected</button></li>
-						<li><button type="button" class="btn btn-filter">hired</button></li>
+						<li><button type="button" class="btn btn-filter">Hired</button></li>
 					</ul>
 					<div class="quote-card-container" id="quote-display-list">
 
@@ -217,7 +217,7 @@
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime,1);
  							console.log("created time :: ",$.date(createdTime,1));
- 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+ 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
  						var tableContent = tableHeader+reqList+tableEndTags;
  						$('.requirement-table').html("");
@@ -230,6 +230,14 @@
  						$.to_position('#quote-display-list');
  						reqId = this.id;
  						console.log("rq id ::",reqId);
+ 						$.getQuotes(reqId,quotes);
+ 					});
+ 					
+ 					
+ 					$('.requirement-table').on('click','.requirement-link',function(e){
+ 						//e.preventDefault();
+ 						var req = requirements[this.id];
+ 						console.log("rq id ::",req);
  						$.getQuotes(reqId,quotes);
  					});
  					

@@ -57,9 +57,9 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="supplier-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="supplier-profile.html">Profile</a></li>
-						<li><a href="#">Used machines</a></li>
+						<li><a class="active" href="supplier-dashboard.html">Dashboard</a></li>
+						<li><a  href="supplier-profile.html">Profile</a></li>
+						<li><a href="used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 					</div>
@@ -129,17 +129,17 @@
 		</div>
 		<div class="req-pagination">
 			<nav aria-label="Page navigation">
-				<ul class="pagination ">
+				<ul class="pagination">
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="#" aria-label="Previous" data-value="prev">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
+					<li class="active"><a href="#" id="first"  data-value="1">1</a></li>
+					<li><a href="#" id="middle" data-value="2">2</a></li>
+					<li><a href="#" id="last" data-value="3">3</a></li>
 					<li>
-						<a href="#" aria-label="Next">
+						<a href="#" aria-label="Next" data-value="next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
@@ -364,6 +364,81 @@
  					$(location).attr('href',"../quote-form.html?reqId="+$(this).val());
  				});
  				
+ 				//jquery for pagination
+				var current_page=1;
+				var previous_page = current_page-1;
+				var next_page = current_page+1;
+				var $active_element = $('#first').parent();
+			$('.pagination li a').click(function(e){
+				e.preventDefault();
+				console.log(this);
+				var clicked_page = $(this).data("value");
+				console.log(clicked_page);
+				if(clicked_page === "prev"){
+					if(current_page === 1){
+						$.getAllQuotesByPagination(user.userId,current_page,10);
+					}else if(current_page === $('#first').data("value")){
+					next_page = current_page;
+					current_page = previous_page;
+					previous_page = current_page-1;	
+					$('#first').data("value",current_page);
+					$('#first').text(current_page);
+					$('#middle').data("value",next_page);
+					$('#middle').text(next_page);
+					$('#last').data("value",next_page+1);
+					$('#last').text(next_page+1);
+					$.getAllQuotesByPagination(user.userId,current_page,10);
+					}else{
+					next_page = current_page;
+					current_page = previous_page;
+					previous_page = current_page-1;
+					$active_element.removeClass("active");
+					$active_element.prev().addClass("active");
+					$active_element = $active_element.prev();
+					$.getAllQuotesByPagination(user.userId,current_page,10);
+					}
+				}else if(clicked_page === "next"){
+					if(current_page === $('#last').data("value")){
+					previous_page = current_page;
+					current_page = next_page;
+					next_page = current_page+1;	
+					$('#first').data("value",previous_page-1);
+					$('#first').text(previous_page-1);
+					$('#middle').data("value",previous_page);
+					$('#middle').text(previous_page);
+					$('#last').data("value",current_page);
+					$('#last').text(current_page);
+					$.getAllQuotesByPagination(user.userId,current_page,10);
+					}else{
+					previous_page = current_page;
+					current_page = next_page;
+					next_page = current_page+1;	
+					$active_element.removeClass("active");
+					$active_element.next().addClass("active");
+					$active_element = $active_element.next();
+					$.getAllQuotesByPagination(user.userId,current_page,10);
+					}
+				}else{
+					$active_element = $(this).parent();
+					current_page = clicked_page;
+					previous_page = current_page-1;
+					next_page = current_page+1;
+					$(this).parent().addClass("active").siblings().removeClass("active");
+					$.getAllQuotesByPagination(user.userId,current_page,10);
+					
+				}
+				
+				console.log("current",current_page);
+				console.log("prev",previous_page);
+				console.log("next",next_page);
+				
+				
+				
+				
+			});
+			
+ 				
+ 				
  			});
  		</script>
  		<script type="text/javascript">
@@ -373,6 +448,39 @@
  		    var dateArr = date.split(" ");
  		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
  		    return date;
+ 		};
+ 		
+ 		$.getAllQuotesByPagination = function(userId,currentPage,pageSize){
+ 			var quoteList = "";
+ 			$.ajax({
+					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize="+pageSize,
+					/*+user.userId,*/
+					type:"get",
+					data:{},
+					success:function(response){
+						response = $.parseJSON(response);
+						console.log(response.length);
+						console.log(response);
+						if(response.length === 0){
+							$('.quote-table').html("");
+							var noData = '<div class="no-data"><p><span class="above">No Quotes posted by you ,..</span><br><span class="below">Quote a mapped requirement to see you quotes in this section</span></p></div>';
+							$('.quote-table').append(noData);
+						}else{
+						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quantity</th><th>Company/Individual</th><th>Duration</th><th>Status</th><th>Location</th></tr></thead><tbody>';
+						var tableEndTags = '</tbody></table>';
+						$.each(response,function(index,value){
+							var createdTime = value.createdTime;
+							createdTime = $.date(createdTime);
+							console.log("created time :: ",$.date(createdTime));
+							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.quantity+'</td><td>'+value.quotePostedByName+'</td><td>1 Month</td><td>'+value.quoteStatus+'</td><td>Hyderabad</td></tr>';
+						});
+						var tableContent = tableHeader+quoteList+tableEndTags;
+						$('.quote-table').html("");
+						$('.quote-table').append(tableContent);
+					}
+					}
+					});
+ 			
  		};
  		</script>		
  				
