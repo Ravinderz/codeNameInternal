@@ -49,8 +49,6 @@ public class ContractorRequirementQuoteDAO {
 			requirement.setActiveFlag(1);
 			requirement.setCreatedTime(time);
 			requirement.setUpdatedTime(time);
-			requirement.setStartDate(ApplicationUtil.formatDate(requirement
-					.getStartDate()));
 			sessionFactory.getCurrentSession().saveOrUpdate(requirement);
 
 			/*
@@ -62,7 +60,7 @@ public class ContractorRequirementQuoteDAO {
 			 */
 
 			return ResponseConstants.CONTRACTOR_SUCCESS_CODE;
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseConstants.CONTRACTOR_EXCEPTION_CODE;
 		}

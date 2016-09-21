@@ -240,3 +240,12 @@ padding-left:20px;
 display:inline-block;
 padding-left:30px;
 }
+
+.float-left{
+	float:left;
+}
+
+.manufacturer label
+{
+	padding-right:30px;
+}

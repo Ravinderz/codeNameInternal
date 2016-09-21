@@ -29,9 +29,16 @@ public class SupplierQuote {
 	
 	@Column(name = "machineRentalCharges")
 	public long machineRentalCharges;
+
+	
+	@Column(name = "rentalChargesType")
+	public String rentalChargesType;
 	
 	@Column(name = "driverAvailabile")
-	public boolean driverAvailable;
+	public String driverAvailable;
+	
+	@Column(name = "workingHoursPerMonth")
+	public String workingHoursPerMonth;
 	
 	@Column(name = "queries")
 	public String queries;
@@ -72,11 +79,17 @@ public class SupplierQuote {
 	@Column(name = "reqlocation")
 	public String reqlocation;
 	
+	@Column(name = "reqpincode")
+	public String reqpincode;
+	
 	@Column(name = "hoursPerMonth")
 	public String hoursPerMonth;
 	
-	@Column(name = "advance")
-	public String advance;
+	@Column(name = "advanceCharges")
+	public String advanceCharges;
+
+	@Column(name = "advanceChargesType")
+	public String advanceChargesType;
 
 	public long getQuoteId() {
 		return quoteId;
@@ -118,12 +131,20 @@ public class SupplierQuote {
 		this.machineRentalCharges = machineRentalCharges;
 	}
 
-	public boolean isDriverAvailable() {
-		return driverAvailable;
+	public String getRentalChargesType() {
+		return rentalChargesType;
 	}
 
-	public void setDriverAvailable(boolean driverAvailable) {
-		this.driverAvailable = driverAvailable;
+	public void setRentalChargesType(String rentalChargesType) {
+		this.rentalChargesType = rentalChargesType;
+	}
+
+	public String getWorkingHoursPerMonth() {
+		return workingHoursPerMonth;
+	}
+
+	public void setWorkingHoursPerMonth(String workingHoursPerMonth) {
+		this.workingHoursPerMonth = workingHoursPerMonth;
 	}
 
 	public String getQueries() {
@@ -230,6 +251,14 @@ public class SupplierQuote {
 		this.reqlocation = reqlocation;
 	}
 
+	public String getReqpincode() {
+		return reqpincode;
+	}
+
+	public void setReqpincode(String reqpincode) {
+		this.reqpincode = reqpincode;
+	}
+
 	public String getHoursPerMonth() {
 		return hoursPerMonth;
 	}
@@ -238,13 +267,30 @@ public class SupplierQuote {
 		this.hoursPerMonth = hoursPerMonth;
 	}
 
-	public String getAdvance() {
-		return advance;
+	public String getAdvanceCharges() {
+		return advanceCharges;
 	}
 
-	public void setAdvance(String advance) {
-		this.advance = advance;
+	public void setAdvanceCharges(String advanceCharges) {
+		this.advanceCharges = advanceCharges;
 	}
+
+	public String getAdvanceChargesType() {
+		return advanceChargesType;
+	}
+
+	public void setAdvanceChargesType(String advanceChargesType) {
+		this.advanceChargesType = advanceChargesType;
+	}
+
+	public String getDriverAvailable() {
+		return driverAvailable;
+	}
+
+	public void setDriverAvailable(String driverAvailable) {
+		this.driverAvailable = driverAvailable;
+	}
+		
 	
 }
 
