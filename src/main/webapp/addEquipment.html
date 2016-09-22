@@ -8,32 +8,180 @@
     <title>Add Equipment</title>
 	<meta name="description" content="Contractor Requirement">
     <meta name="author" content="congun">
-	
- <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/quote-form-elements-style.css">
+		<link rel="stylesheet" href="css/congun.css">
+		<link rel="stylesheet" href="css/form-elements-style.css">
+		<link rel="stylesheet" href="css/magic-check.css">
+		<link rel="stylesheet" href="css/profile.css">
         <link rel="stylesheet" href="css/addEquip.css">
-      <link rel="stylesheet" href="css/congun.css">
-    <script src="js/jquery.min.js"></script>
-	<style>
-        .sub-footer{
-            padding-bottom: 40px;
-        }
-        
-        .nav-wrapper{
-            margin-top: 30px;
-        }
-        .main-content{
-            margin-top: 0px;
-        }
-        
-    </style>
+     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/requirement-scripts.js"></script>
+    <script src="js/appProperties.js"></script>
 	<script type="text/javascript">
         
 $(document).ready(function(){
 	
+		var user = localStorage.getItem("user");
+		console.log(user);
+		user = $.parseJSON(user);
+		var username = user.firstname+" "+user.lastname;
+			$('#user').text(username);
+			$('#user-name').text(username);
+    	$('#supplierId').val(user.userId);
+    	$('#supplierName').val(user.firstname+" "+user.lastname);
+		$('#mobileNumber').val(user.mobileNumber);
+		$('#supplierId1').val(user.userId);
+    	$('#supplierName1').val(user.firstname+" "+user.lastname);
+		$('#mobileNumber1').val(user.mobileNumber);
+		categoryParam="EarthMoving";
+		equipment="backhoe";
+		
+/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = []
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#category").append($("<option />").val(value).text(value));
+    					category[i] = value;
+    					i++
+    			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
+    			$.ajax({
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				
+    				});
+    			}
+    			});
+    			}
+    		}
+    	});
+    	
+    	/* This function will be called when there is change in the category dropdown */
+    	
+    $("#category").on('change',function(){
+    		var selectedOption = $("#category option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log("equipments ",equipments);
+    				$("#equipment").html("");
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				});	
+    			}
+    				
+    		});
+    	});
+    
+      modelParam = "soil compactor VMII5";
+	  
+     /* This ajax call is for populating all Models*/
+	var model = []
+	var value = "";
+    	$.ajax({
+    		url :AppData.relativeUrl+"machine/getAllModels",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#model").append($("<option />").val(value).text(value));
+    					model[i] = value;
+    					i++
+    			});
+				console.log(document.getElementById("model").value);
+			
+				$.ajax({
+				url :AppData.relativeUrl+"machine/getMachineDetailsByModel/"+model[0]+"/",
+				type:"get",
+				data:{},
+				success:function(response){
+    			response = $.parseJSON(response);
+				value = response;
+    			console.log(response);
+				$("#equipmentCategory").val(value.category);
+				$("#equipmentName").val(value.equipment);
+				$("#manufacturer").val(value.make);
+				$("#capacity").val(value.capacity);			
+				}
+		
+    	});
+		}
+	});
 	
-	$("#addEquipment").click(function(){
+/* This will be called when model changes*/
+	$("#model").on('change',function(){
+    		var selectedOption = $("#model option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+selectedOption+"/"; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(response){
+    			response = $.parseJSON(response);
+				value = response;
+    			console.log(response);
+				$("#equipmentCategory").val(value.category);
+				$("#equipmentName").val(value.equipment);
+				$("#manufacturer").val(value.make);
+				$("#capacity").val(value.capacity);			
+				}
+    				
+    		});
+    	});
+    
+
+	
+	$("#addEquipment-left").click(function(){
 		var success = "successfully created";
 		var data = JSON.stringify($("#addEquipment-form").serializeObject());
 		console.log(data);
@@ -47,6 +195,53 @@ $(document).ready(function(){
 		    	console.log(data);
 		    	if(data === "SS01"){
 		    		$(location).attr('href',"user/supplier-profile.html");
+		    	}
+		      }
+		});
+	});
+	
+	$("#addEquipment-right").click(function(){
+	console.log("from right");
+		var success = "successfully created";
+		var data = JSON.stringify($("#addEquipment-form-right").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url:AppData.relativeUrl+"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		    	if(data === "SS01"){
+		    		$('#modal-success-dialog').modal('show').delay(10000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    		$(location).attr('href',"user/supplier-profile.html");
+					});
+		    	}
+		      }
+		});
+	});
+	
+	
+	$("#addEquipment-left").click(function(){
+	console.log("from left");
+		var success = "successfully created";
+		var data = JSON.stringify($("#addEquipment-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url: AppData.relativeUrl+"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		    	if(data === "SS01"){
+				 $('#modal-success-dialog').modal('show').delay(10000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    		$(location).attr('href',"user/supplier-profile.html");
+					});
 		    	}
 		      }
 		});
@@ -72,104 +267,227 @@ $.fn.serializeObject = function()
     return o;
 };
 </script>
+<script type="text/javascript">
+function setprice(){
+console.log("entered setPrice from left form");
+var value = document.getElementById("pricevalue").value;
+var type = document.getElementById("priceType").value;
+document.getElementById("equipmentprice").value=value+":"+type;
+console.log("Price"+document.getElementById("equipmentprice").value);
+}
 
+function setprice1(){
+console.log("entered setPrice from right form");
+var value = document.getElementById("pricevalue-right").value;
+var type = document.getElementById("priceType-right").value;
+document.getElementById("equipmentprice-right").value=value+":"+type;
+console.log("Price"+document.getElementById("equipmentprice-right").value);
+}
+
+</script>
 
 </head>
 <body>
-<div class="nav-wrapper">
-   <div class="container">
-		<div class="row">
-			<div class="col-md-12 navigation">
-			<nav class="navbar navbar-defaut navbar-top" role="navigation">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#"> <img id="nav-logo" src="images\logo.png" height="75px" width="200px" />
-						</a>
-					</div>
-					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav navbar-right" id="navigation-right">
-							<li class="active"><a href="#"><span>Home</span></a></li>
-							<li><a href="#"><span>Dashboard</span></a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"><span>Ravinder Singh<strong class="caret"></strong></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#"><span>Profile</span></a></li>
-									<li><a href="#"><span>Logout</span></a></li>
-								</ul></li>
-						</ul>
-					</div>
-				</nav>
-		</div>
+   <!-- Top content -->
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="#"> <img id="nav-logo"
+								src="images/logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="userprofile.html" role="button"><span
+										id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
 			</div>
-    </div>
+		</div>
+	</div>
+     <div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-12">
+					<ul class="sub-menu">
+						<li><a href="#">Dashboard</a></li>
+						<li><a class="active" href="#">Profile</a></li>
+						<li><a href="#">Used machines</a></li>
+						<li><a href="#">Feedback</a></li>
+					</ul>
+				</div>
+		   </div>
+		  </div>
         <div class="container">
+		<h3 class="text-center text-muted">ADD EQUIPMENT FORM</h3>
     	<div class="row">
-    	<div class="main-content col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+		<div class="left-main-content col-md-5 form-box">
+		<h4>Select Model Below from existing Equipments...</h4>
 			<form class="form-horizontal" role="form" id="addEquipment-form" class="f1">
-						<h3 class="text-center text-muted">
-				ADD EQUIPMENT FORM
-			</h3>
+				<div class="form-group">
+				<label for="selectModel" class="sr-only">
+						Equipment Model
+					</label>
+				 <select id="model" class="form-control" placeholder="Model" name="model">	</select>
+				 </div>
+				 <div class="form-group">
+				 <label for="selectManufacturer" class="sr-only">
+						Equipment Manufacturer
+					</label>
+				 <input type="text" id="manufacturer" class="form-control" placeholder="Equipment Manufacturer" name="manufacturer"/>
+				 </div>
+				 <div class="form-group">
+				 <label for="selectCapacity" class="sr-only">
+						Capacity
+					</label>
+				 <input type="text" id="capacity" class="form-control" placeholder="Capacity in Ton/Feet/cu.mt Ex: 100Ton" name="capacity"/>
+				 </div>
+				  <div class="form-group">
+				 <label for="selectYearOfManufacture" class="sr-only">
+						Equipment Manufacture Year
+					</label>
+				 <input type="text" id="yom" class="form-control" placeholder="Year of manufacturing Ex: 2010 (YYYY)" name="yearOfManufacturing">	
+				 </div>
+				  <div class="form-group">
+				 <label for="selectQuantity" class="sr-only">
+						Quantity
+					</label>
+				 <input type="text" id="quantity" class="form-control" placeholder="Equipment Quantity" name="quantity">	
+				 </div>
+				  <div class="form-price">
+				 <label for="selectPrice" class="sr-only">
+						Equipment Price
+					</label>
+				<ul>
+					<li>
+				 <input type="text" id="pricevalue" class="form-control" placeholder="Enter Equipment Price" onchange="setprice()"/>
+				 </li>
+				 <li class="priceType">
+                 <select id="priceType" onchange="setprice()">
+				 <option value="hour">Per Hour</option>
+				 <option value="month">Per Month</option>
+                 </select>				 
+				 </li>
+				 </ul>
+				 <input type="hidden" id="equipmentprice" name="equipmentprice" value=""/>
+				 </div>
+				 
+				 <div class="f1-buttons">
+						<button type="button" class="btn btn-warning" id="addEquipment-left">
+							Submit
+						</button>	
+					</div>
+					<input type="hidden" id="supplierId" name="supplierId">
+					<input type="hidden" id="supplierName" name="supplierName">
+					<input type="hidden" id="equipmentCategory" name="equipmentCategory">
+					<input type="hidden" id="equipmentName" name="equipment">
+			 </form>
+			</div>
+		<div class="middle-main-content col-md-2">
+		<label> OR</label>
+		</div>
+    	<div class="main-content col-md-5 form-box">
+		<h4> Couldn't find from Existing models ... Select Below to add new ...</h4>		
+			<form class="form-horizontal" role="form" id="addEquipment-form-right" class="f1">
 					<div class="form-group">
-					
 				<label for="selectCategory" class="sr-only">
 						Equipment Category
 					</label>
-                 <input type="text" id="equipmentCategory" class="form-control" placeholder="Equipment Category" name="equipmentCategory">	
-				 </div>
+                 <select id="category" class="form-control" placeholder="Equipment Category" name="equipmentCategory" >	
+				 </select></div>
 				<div class="form-group">
 				<label for="equipment" class="sr-only">
 						Equipment Name
 					</label>
-                 <input type="text" id="equipment" class="form-control" name="equipment" placeholder="Equipment Name">	
+                 <select id="equipment" class="form-control" name="equipment" placeholder="Equipment Name"></select>
 				 </div>
 				 
 				<div class="form-group">
 				<label for="manufacturer" class="sr-only">
 						Equipment Manufacturer
 					</label>
-                 <input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer">	
+                 <input type="text" id="manufacturer-right" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer">	
 				 </div>
 				 <div class="form-group">
 				<label for="yearOfManufacturing" class="sr-only">
 						Year Of Manufacturing
 					</label>
-                 <input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing">	
+                 <input type="text" id="yearOfManufacturing-right" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing Ex: 2010 (YYYY)">	
 				 </div>
 				 
-				<!--  <div class="form-group">
+				 <div class="form-group">
 				<label for="model" class="sr-only">
 						Model Details
 					</label>
-                 <input type="text" id="model" class="form-control" name="model" placeholder="Model">	
-				 </div> -->
+                 <input type="text" id="model-right" class="form-control" name="model" placeholder="Model">	
+				 </div>
 				 <div class="form-group">
 				<label for="capacity" class="sr-only">
 						Capacity Details
 					</label>
-                 <input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity">	
+                 <input type="text" id="capacity-right" class="form-control" name="capacity" placeholder="Capacity in Ton/Feet/cu.mt Ex: 100Ton">	
 				 </div>
-				 <div id="hidden-fields">
-                                <input type="hidden" name="supplierId" id="supplierId" value="">
-                                <input type="hidden" name="supplierName" id="supplierName" value="">
-                                </div>
 				 <div class="form-group">
 				<label for="quantity" class="sr-only">
 						Equipment Quantity
 					</label>
-                 <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment Quantity">	
+                 <input type="text" id="quantity-right" class="form-control" name="quantity" placeholder="Equipment Quantity">	
 				 </div>
-				
+				 <div class="form-price">
+				 <label for="selectPrice" class="sr-only">
+						Equipment Price
+					</label>
+				 <ul>
+					<li>
+				 <input type="text" id="pricevalue-right" class="form-control" placeholder="Enter Equipment Price" onchange="setprice1()">
+				 </li>
+				 <li class="priceType">
+                 <select id="priceType-right" onchange="setprice1()">
+				 <option value="hour">Per Hour</option>
+				 <option value="month">Per Month</option>
+                 </select>				 
+				 </li>
+				 </ul>
+				 <input type="hidden" id="equipmentprice-right" name="equipmentprice" value=""/>
+				 </div>
 					<div class="f1-buttons">
-						<button type="button" class="btn btn-warning" id="addEquipment">
+						<button type="button" class="btn btn-warning" id="addEquipment-right">
 							Submit
 						</button>	
 					</div>
+					<input type="hidden" id="supplierId1" name="supplierId">
+				    <input type="hidden" id="supplierName1" name="supplierName">
 			</form>
+		</div>
+		    <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
 								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Equipment Added successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 					</div>
 </div>
 		<div class="sub-footer">
@@ -222,13 +540,5 @@ $.fn.serializeObject = function()
  			</div>
  		</div>
 
-		<script type="text/javascript">
-		$(document).ready(function(){
-		var user = sessionStorage.getItem("user");
-    	user = $.parseJSON(user);
-    	$('#supplierId').val(user.userId);
-    	$('#supplierName').val(user.firstname+" "+user.lastname);
-		});
-		</script>
 </body>
 </html>

@@ -380,6 +380,20 @@
 					$(location).attr('href', "../index.html");
 				});
  				
+ 				var total_user_fields = Object.keys(user).length;
+ 				var user_entered_fields = 0;
+ 				$.each(user,function(index,value){
+ 					if(value !== "undefined" || value !== null || value !== "null" || value !== ""){
+ 					user_entered_fields++;
+ 					}
+ 				});
+ 				
+ 				var profile_percent = (user_entered_fields/total_user_fields)*100; 
+ 				console.log("profile_percent",profile_percent)
+ 				$('.progress-bar').attr('aria-valuenow', profile_percent).css('width',profile_percent+"%");
+ 				$('.progress-bar').html(profile_percent+"%");
+ 				console.log(Object.keys(user).length);
+ 				
  				
  				$('#userId').val(user.userId);
  				$('#firstName').val(user.firstname);

@@ -1,3 +1,11 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 30px;
+}
+
 input[type='text']{
 	width : 350px;
 	margin : 0 auto;
@@ -5,7 +13,7 @@ input[type='text']{
 	padding-left : 20px;
 }
 
-#equipment,#category{
+#equipment,#category,#model,#capacity,#yom,#manufacturer {
 	width : 350px;
 	margin : 0 auto;
 	position : relative;
@@ -15,14 +23,66 @@ input[type='text']{
 
 .main-content{
 margin-top : 50px;
+margin-bottom: 50px;
 	padding-top : 25px;
-	height:600px;
+	height:680px;
+	background-color: #202e31;
+	
+}
+
+.main-content select{
+margin-left:10px;
+padding-left:5px;
+height:40px;
+width:100px;
+border-radius:3px;
 }
 
 h3{
-	padding-bottom:40px;
+	padding-bottom:0px;
 }	
 
+h4{
+	padding-left:30px;
+	padding-bottom:20px;
+	color:grey;
+}
 .f1-buttons {
-	float:right;
+padding-top:20px;
+padding-left:350px;
+}
+
+.left-main-content{
+    margin-top : 50px;
+	padding-top : 40px;
+	height:550px;
+	background-color: #202e31;
+}
+
+.middle-main-content{
+
+padding-top:300px;
+text-align:center;
+font-size:20px;
+color:black;
+}
+
+.form-price ul{
+list-style:none;
+padding-left:50px;
+}
+.form-price ul li{
+display:inline-block;
+}
+.form-price ul li input{
+width:250px;
+}
+
+.form-price .priceType select{
+color:black;
+margin-left:10px;
+padding-left:5px;
+height:40px;
+width:110px;
+border-radius:3px;
 }

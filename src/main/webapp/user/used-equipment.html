@@ -13,8 +13,11 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+
 <link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/magic-check.css">
 <link rel="stylesheet" href="../css/used-equipment.css">
+
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 
@@ -58,7 +61,7 @@
 				<div class="col-md-6">
 					<ul class="sub-menu">
 						<li><a href="contractor-dashboard.html">Dashboard</a></li>
-						<li><a href="contractor-profile.html">Profile</a></li>
+						<li><a id="profile" href="#">Profile</a></li>
 						<li><a class="active" href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
@@ -158,7 +161,7 @@
 							  <div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
 								  <h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 									  EarthMoving
 									</a>
 								  </h4>
@@ -294,21 +297,27 @@
 					</div> <!-- end of filter content -->
 					<div class="filter-header"><p>Manufacturer</p></div>
 					<div class="filter-content manufacturer">
-						<input type="checkbox" />JCB <br/>
-						<input type="checkbox" />Hitachi <br/>
-						<input type="checkbox" />TATA <br/>
-						<input type="checkbox" />L&T  <br/>
-						<input type="checkbox" />John Deere <br/>
-						<input type="checkbox" />CAT <br/>
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label> 
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label> 
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
+					</div> 
 					</div>
 					<div class="filter-header"><p>Location</p></div>
 					<div class="filter-content location">
-						<input type="checkbox" />Hyderabad <br/>
-						<input type="checkbox" />Chennai <br/>
-						<input type="checkbox" />Kolkatta <br/>
-						<input type="checkbox" />Mumbai <br/>
-						<input type="checkbox" />Bangalore <br/>
-						<input type="checkbox" />Delhi <br/>
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="location" id="Hyderabad" value="Hyderabad" /><label for="Hyderabad"> Hyderabad </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Chennai" value="Chennai" /><label for="Chennai">Chennai</label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Kolkatta" value="Kolkatta" /><label for="Kolkatta">Kolkatta </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Mumbai" value="Mumbai" /><label for="Mumbai">Mumbai </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Bengaluru" value="Bengaluru " /><label for="Bengaluru">Bengaluru </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Pune" value="Pune " /><label for="Pune">Pune </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Delhi" value="Delhi " /><label for="Delhi">Delhi </label>
+					</div>
 					</div>
 				</div><!-- filter wrapper ends -->
 			</div>
@@ -323,8 +332,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -344,8 +353,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -365,8 +374,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -386,8 +395,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -407,8 +416,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -428,8 +437,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -449,8 +458,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -470,8 +479,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -491,8 +500,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -512,8 +521,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -533,8 +542,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -554,29 +563,8 @@
 							</div>
 						 <div class="media-body">
 							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<h3 class="float-left">Excavator</h3>
-								<p class="float-left"><abbr title="Year of Manufacturing">YOM</abbr> : 2010</p>
+						  		<p class="float-left">Excavator</p>
+								<p class="float-left">Year : 2010</p>
 								<p class="float-right">Price : RS 1000000</p>
 							</div>
 								<div class="clear-fix"></div>
@@ -645,6 +633,35 @@
  				</div>
  			</div>
  		</div>
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			var user = sessionStorage.getItem("user");
+				user = $.parseJSON(user);
+				console.log(user);
+				var username = user.firstname+" "+user.lastname;
+				$('#user').text(username);
+				$('#user-name').text(username);
+				
+				$('.logout').click(function() {
+				console.log("inside logout function")
+				var user = sessionStorage.getItem("user");
+				if (user !== null) {
+					sessionStorage.removeItem("user");
+				}
+				console.log("user logged out");
+				$(location).attr('href', "../index.html");
+			});
+ 			
+ 		$('#profile').click(function(){	
+ 			if(user.role === "contractor"){
+ 				$(location).attr('href',"contractor-profile.html");
+ 			}else if(user.role === "supplier"){
+ 				$(location).attr('href',"supplier-profile.html");
+ 			}
+ 		});	
+ 			
+ 		});
+ 	</script>	
 	</body>
 	</html>
 		

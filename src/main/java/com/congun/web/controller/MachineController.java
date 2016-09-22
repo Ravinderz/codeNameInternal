@@ -30,11 +30,11 @@ public class MachineController {
 	@RequestMapping(value="/getMachinesListFromExcel" , method=RequestMethod.GET)
 	public void getMachinesListFromExcel(){
 		logger.info("Entered into MachineController.getMachinesListFromExcel method");
-		String path="F:\\congunfiles\\SampleExcel.xlsx";
+		String path="E:\\congunfiles\\SampleExcel.xlsx";
 		parser.getMachinesList(path);
 	}
 	
-	@RequestMapping(value="/getMachineDetailsByModel/{model}" , method=RequestMethod.GET)
+	@RequestMapping(value="/getMachineDetailsByModel/{model}/" , method=RequestMethod.GET)
 	public String getMachineDetailsByModel(@PathVariable("model") String model){
 		logger.info("Entered into MachineController.getMachineDetailsByModel method  Model:"+model);
 		return machineService.getMachineDetailsByModel(model);
@@ -44,6 +44,12 @@ public class MachineController {
 	public String getSearchResults(@PathVariable("value") String value){
 		logger.info("Entered into MachineController.getSearchResults method   Search value:"+value);
 		return machineService.getSearchResults(value);
+	}
+	
+	@RequestMapping(value="/getAllModels" , method=RequestMethod.GET)
+	public String getAllModels(){
+		logger.info("Entered into MachineController.getAllModels method");
+		return machineService.getAllModels();
 	}
 	
 }

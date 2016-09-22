@@ -221,6 +221,7 @@ public class SupplierQuoteDao {
 			equipment.setUpdatedTime(currTime);
 			logger.info("Entered DAO to update Equipment :"
 					+ equipment.getEquipmentId());
+			
 			getSession().saveOrUpdate(equipment);
 
 			return ResponseConstants.EQUIPMENT_SUCCESS_CODE;

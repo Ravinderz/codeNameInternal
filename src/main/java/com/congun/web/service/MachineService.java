@@ -49,4 +49,13 @@ public class MachineService {
 			return ResponseConstants.MACHINE_FAILURE_CODE;
 	}
 
+	public String getAllModels() {
+		logger.info("Entered into MachineService.getAllModels method");
+		List<Machines> machine = machineDao.getDistinctModels();
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
 }

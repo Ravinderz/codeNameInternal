@@ -50,8 +50,8 @@
 				<div class="col-md-6">
 					<ul class="sub-menu">
 						<li><a href="supplier-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="supplier-profile.html">Profile</a></li>
-						<li><a href="#">Used machines</a></li>
+						<li><a  href="supplier-profile.html">Profile</a></li>
+						<li><a href="used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -226,6 +226,7 @@
 										 <div id="hidden-fields">
 						                                <input type="hidden" name="supplierId" id="supplierId" value="">
 						                                <input type="hidden" name="supplierName" id="supplierName" value="">
+						                                <input type="hidden" name="equipmentId" id="equipmentId" value="">
 						                                </div>
 										 <div class="form-group">
 										<label for="quantity" class="sr-only">
@@ -306,7 +307,8 @@
  				+'<select id="equipmentCategory" class="f1-category form-control" placeholder="Equipment Category" name="equipmentCategory"></select></div>'
  				+'<div class="form-group"><label for="equipment">Equipment Name</label><select id="equipment" name="equipment" class="f1-equipment form-control placeholder="Equipment Name"></select>'
  				+'	</div><div class="form-group"><label for="manufacturer" class="sr-only">Equipment Manufacturer</label>'
- 				+'	<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer"></div><div class="form-group">'
+ 				+'	<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer"></div><div class="form-group"><label for="Model" class="sr-only">Equipment Model</label>'
+ 				+'	<input type="text" id="model" class="form-control" name="model" placeholder="Equipment Model"></div><div class="form-group">'
  				+'	<label for="yearOfManufacturing" class="sr-only">Year Of Manufacturing</label><input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing"></div><div class="form-group"><label for="capacity" class="sr-only">Capacity Details'
  				+'	</label><input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity"></div><div id="hidden-fields"><input type="hidden"'
  				+'	 name="supplierId" id="supplierId" value='+user.userId+'><input type="hidden" name="supplierName" id="supplierName" value='+username+'></div><div class="form-group"><label'
@@ -406,6 +408,16 @@
  				console.log("add equipment form");
  				var data = JSON.stringify($('#addEquipment-form').serializeObject());
  				console.log(data);
+ 				$.ajax({
+ 	    			url:AppData.relativeUrl+"supplier/addequipment",
+ 	    			type:"post",
+ 	    			contentType:"application/json; charset=utf-8",
+ 	    			data:data,
+ 	    			success:function(response){
+ 	    				console.log(response);
+ 	    			}
+ 	    				
+ 	    		});
  			});
  			
  			$.getAllEquipments(user.userId,userEquipments);	
@@ -417,34 +429,37 @@
  				$('#equipmentCategory').val(equipment.equipmentCategory);
  				$('#equipment').val(equipment.equipment);
  				$('#manufacturer').val(equipment.manufacturer);
+ 				$('#model').val(equipment.model);
  				$('#yearOfManufacturing').val(equipment.yearOfManufacturing);
  				$('#capacity').val(equipment.capacity);
  				$('#quantity').val(equipment.quantity);
  				$('#supplierId').val(user.userId);
  				$('#supplierName').val(username);
+ 				$('#equipmentId').val(equipment.equipmentId);
  			});
  			
- 			$('.nav-sidebar-content').on('click','#delete',function(e){
+ 			$('.sidebar-content').on('click','#delete',function(e){
  				console.log("inside delete button");
  				console.log($(this).data("value"));
  				$('#yes').data("value",$(this).data("value"));
  			});
  				
  				
- 			$('.sidebar-content').on('click','#update',function(e){
+ 			$('#update').click(function(e){
 				e.preventDefault();
 				console.log("inside update btn");
 					var formData = $("#equipment-form").serializeObject();
 					var data = JSON.stringify(formData);
 				console.log(data);
 				 $.ajax({
-						url : AppData.relativeUrl+"user/updateuser",
+						url : AppData.relativeUrl+"/supplier/updateequipment",
 						type : "put",
 						contentType : "application/json; charset=utf-8",
 						data : data,
 						success : function(response) {
-							if(response === "US01"){
+							if(response === "ES01"){
 								console.log("successfully udpated");
+								$.getAllEquipments(user.userId,userEquipments);	
 								/* $('#edit-profile').modal('hide'); */
 								
 							}else{

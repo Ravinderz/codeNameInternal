@@ -89,22 +89,20 @@
                                 <label for="quantity">Number Of Equipments Available</label>
                                 <input type="text" name="quantity" placeholder="Quantity" class="f1-email form-control" id="f1-email"> </div>
                              
-							<div class="form-group manufacturer">
+							<div class="form-group">
 							<label for="manufacturer"> Manufacturer</label>
-							<div class="clear-fix"></div>
-                    			<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label></div>
-  								<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label></div>
-								<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label></div>
-								<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label></div>
-					 			<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label></div>
-					 			<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label></div>
-					 			<div class="float-left"><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label></div>
-					 			<div class="clear-fix"></div>
+                    			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+  								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
+								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
+								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
+					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label>
+					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label>
+					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
                 		    </div>                                
 							 <div class="machineRentalCharges">
                                 <ul>
 									<li><label for="machineRentalCharges">Machine Rental Charges</label>
-                                <input type="text" name="machineRentalCharges" placeholder="Enter Number" class="f1-email form-control" id="f1-email"></li>
+                                <input type="text" name="machineRentalCharges" placeholder="Enter Number" class="f1-email form-control" id="rentalcharges"></li>
 								    <li><label id="permonth" hidden>/per month</label><label id="perhour" hidden>/per hour</label><label id="perwork" hidden>/per work</label><label id="percumt" hidden>/per cu.mt</label>
 								    <label>(inclusive of tax)</label></li>
 								<br>
@@ -113,7 +111,10 @@
                     			<li><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType1" value="fixed" /><label for="rentalyChargesType1"> Fixed </label></li>
   								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
 								</ul>
-                		    </div>                                
+                		    </div>
+                            <div class="totalPrice" hidden>
+							<label for="totalPrice">Total Price : <p id="totalPrice">0</p> </label>
+                            </div>							
                             <div class="form-group">
                                 <h5> Driver/Operator Available </h5><br>
 								<div class="radio-driver">
@@ -122,11 +123,11 @@
                                 <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div>
                             
                             
-                            <div class="form-group" hidden>
+                            <div class="form-group" hidden id="noofworkinghours">
                                 <label for="workingHoursPerMonth">Number Of Hours Working Per Month</label>
                                 <input type="text" name="workingHoursPerMonth" placeholder="Enter in Hours ex: 220(45 hours per week)" class="f1-email form-control" id="noofworkinghours" value=""> </div>
                                 
-                             <div class="advanceCharges">
+                             <div class="advanceCharges" hidden>
                                 <label for="advance">Advance</label>
                                 <ul><li><input type="text" placeholder="Enter Value" class="f1-email form-control" id="f1-value" value="0"onchange="advancecalc()"></li>
 								<li><select id="relation"  class="selectbox" onchange="advancecalc()">
@@ -158,7 +159,7 @@
 								<input type="hidden" name="reqlocation" id="reqlocation" value="">
 								<input type="hidden" name="reqpincode" id="reqpincode" value="">
 								<input type="hidden" name="mobileNumber" id="reqpincode" value="">
-								
+								<input type="hidden" name="finalQuotePrice" id="totalprice" value="">
                                 </div>
                                 
                                <div class="f1-buttons">
@@ -265,10 +266,10 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
-		//reqid=7;
+		reqid=7;
     	console.log('reqid',reqid);
-    	var user = sessionStorage.getItem("user");
-		//var user = localStorage.getItem("user");
+    	//var user = sessionStorage.getItem("user");
+		var user = localStorage.getItem("user");
 		console.log(user);
 		user = $.parseJSON(user);
 		var username = user.firstname+" "+user.lastname;
@@ -320,23 +321,56 @@
 					$('#reqpincode').val(value.pincode);
 					$('#reqduration').val(value.duration);
 				hiringChargesType = value.hiringChargesType;
-					
+
 		console.log("Type : "+hiringChargesType);
-    	
 		if(hiringChargesType === "month"){
 		$("#noofworkinghours").show();
 		$("#permonth").show();
+		if(value.duration >= 30)
+		{
+		$(".advanceCharges").show();
+		}
 		}else if(hiringChargesType === "cu.mt"){
 		$("#percumt").show();
 		}else if(hiringChargesType === "hour"){
 		$("#perhour").show();
 		}else if(hiringChargesType === "work"){
 		$("#perwork").show();
+		if(value.duration >= 30)
+		{
+		$(".advanceCharges").show();
+		}
 		}
 			}
 		});
 		
-		
+
+      $("#rentalcharges").change(function(){
+	  console.log("Entered the function");
+	  var totPrice="";
+	  var rentalcharges = document.getElementById("rentalcharges").value;
+	  console.log("Rental Charges :"+rentalcharges);
+
+	  if(value.hiringChargesType === "hour"){
+	  totPrice = value.duration * rentalcharges * 24;
+	  totPrice = Math.round(totPrice);
+	  $("#totalPrice").html(totPrice);
+	  $(".totalPrice").show("slow");
+	  document.getElementById("totalprice").value=totPrice;
+	  }else if(value.hiringChargesType === "month"){
+	  dayPrice = rentalcharges/30;
+	  totPrice = value.duration * dayPrice;
+	  totPrice = Math.round(totPrice);
+	  $("#totalPrice").html(totPrice);
+	  $(".totalPrice").show("slow");
+	  document.getElementById("totalprice").value=totPrice;
+      }else if(value.hiringChargesType === "work"){
+	  totPrice = rentalcharges;
+	  $("#totalPrice").html(totPrice);
+	  $(".totalPrice").show("slow");
+	  document.getElementById("totalprice").value=totPrice;
+      }
+	   });	  
 /* This ajax call is made to populate the category and equipment machinary dropdowns */
     	
 /*    	var category = []
@@ -426,7 +460,7 @@
 		console.log(data);
             
             $.ajax({
-			url:AppData.relativeUrl+"supplier/submitquote",
+			url:AppData.relativeUrl+"supplier/submitquote11",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -434,7 +468,7 @@
 		    	 console.log(data);
 		    	 if(data === "SS01"){
 		    		 console.log("inside if");
-		    		 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').modal('show').delay(5000);
 		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
 		    			 $(location).attr('href',AppData.relativeUrl+"user/supplier-dashboard.html");
 		    			 //history.back();	    
@@ -461,7 +495,7 @@
 	
 	console.log("Values : "+document.getElementById("advanceCharges").value);
 
-    });    
+    }); 
     </script>    
 <script type="text/javascript">
 $.fn.serializeObject = function()
@@ -491,8 +525,6 @@ $.fn.serializeObject = function()
 	document.getElementById("advanceCharges").value=advance+":"+rel;
 	}
 	</script>
-    
-    
     
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
