@@ -531,8 +531,8 @@ label.error { width: 250px; display: block; float: left; color: red; padding-lef
 .search-bar{
 	position:absolute;
 	width : 330px;
-	top: 380px;
-	left:1100px;
+	top: 270px;
+	left:900px;
 }
 
 .search-bar-2{

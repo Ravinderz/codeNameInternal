@@ -11,7 +11,7 @@
 <!-- <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 
 <link rel="stylesheet" href="../css/congun.css">
@@ -60,9 +60,9 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="contractor-dashboard.html">Dashboard</a></li>
-						<li><a id="profile" href="#">Profile</a></li>
-						<li><a class="active" href="#">Used machines</a></li>
+						<li><a href="#" id="sub-nav-dashboard">Dashboard</a></li>
+						<li><a href="#" id="sub-nav-profile">Profile</a></li>
+						<li><a href="used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -652,13 +652,23 @@
 				$(location).attr('href', "../index.html");
 			});
  			
- 		$('#profile').click(function(){	
- 			if(user.role === "contractor"){
- 				$(location).attr('href',"contractor-profile.html");
- 			}else if(user.role === "supplier"){
- 				$(location).attr('href',"supplier-profile.html");
- 			}
- 		});	
+ 		$('#sub-nav-profile').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('#sub-nav-dashboard').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+		});
  			
  		});
  	</script>	

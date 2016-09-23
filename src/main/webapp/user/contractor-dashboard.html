@@ -11,7 +11,7 @@
 <!-- <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/dashboard.css">
@@ -176,6 +176,26 @@
  				</div>
  			</div>
  		</div>
+		
+		<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="view-requirement-modal" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content requirement-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&#10005;</button>
+									<h4 class="modal-title" id="myModalLabel">requirement title</h4>
+								</div>
+								<div class="modal-body">
+									<div class="media"><div class="media-left"><a href="#"><img class="media-object" id="req-img" src="../images/EarthMoving/backhoe.png" height="130px" width="130px" alt="backhoe/"></a></div><div class="media-body"><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th><th>Quantity</th></tr></thead><tbody><tr><td id="e-cat">EarthMoving</td><td id="e-equip">backhoe</td><td id="e-mfg">JCB,Cat,Volvo </td><td id="e-yom">2015</td><td id="e-cap">undefined</td><td id="e-quant"></td></tr></tbody></table><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Driver Needed</th><th>HiringChargesType</th><th>Work Location</th></tr></thead><tbody><tr><td id="e-start">483600</td><td id="e-end">1</td><td id="e-dur">650</td><td id="e-driver">No</td><td id="e-charge">undefined</td><td id="e-loc"></td></tr></tbody></table></div></div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+		
+		
  		<script type="text/javascript">
  			$(document).ready(function(){
  				var requirements = [];
@@ -216,8 +236,8 @@
  							requirements[value.requirementId] = value;
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime,1);
- 							console.log("created time :: ",$.date(createdTime,1));
- 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+ 							console.log("created time :: ",createdTime);
+ 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>'+$.date(value.endDate,3)+'</td><td>'+value.reqStatus+'</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
  						var tableContent = tableHeader+reqList+tableEndTags;
  						$('.requirement-table').html("");
@@ -230,7 +250,7 @@
  						$.to_position('#quote-display-list');
  						reqId = this.id;
  						console.log("rq id ::",reqId);
- 						$.getQuotes(reqId,quotes);
+ 						$.getQuotes(reqId,quotes,requirements,reqId);
  					});
  					
  					
@@ -238,7 +258,24 @@
  						//e.preventDefault();
  						var req = requirements[this.id];
  						console.log("rq id ::",req);
- 						$.getQuotes(reqId,quotes);
+						$('#myModalLabel').text(req.title);
+						$('#req-img').attr('src','../images/'+req.equipmentCategory+'/'+req.equipmentName+'.png');
+						$('#req-img').attr('alt',req.equipmentName);
+						$('#e-cat').text(req.equipmentCategory);
+						$('#e-equip').text(req.equipmentName);
+						$('#e-mfg').text(req.manufacturer);
+						$('#e-yom').text(req.manufacturedyear);
+						$('#e-cap').text($.getCapacity(req.specificationCapacity));
+						$('#e-quant').text(req.quantity);
+						$('#e-start').text($.date(req.startDate,3));
+						$('#e-end').text($.date(req.endDate,3));
+						$('#e-dur').text(req.duration+" days");
+						$('#e-driver').text(req.driverNeeded);
+						$('#e-charge').text("per "+req.hiringChargesType);
+						$('#e-loc').text(req.workLocation);
+						
+						$('#view-requirement-modal').modal("show");
+ 						
  					});
  					
  					$('.quote-card-container').on('click','.btn-circle',function(){
@@ -251,7 +288,7 @@
  						quote.updatedTime = $.date(quote.updatedTime,2);
  						quote = JSON.stringify(quote);
  						console.log(quote);
- 						$.udpateQuote(reqId,quotes,quote);
+ 						$.udpateQuote(reqId,quotes,quote,requirements);
  						//udpdate quote method  
  					});
  					
@@ -261,7 +298,7 @@
  						var quoteList = "";
  						console.log("status" , status);
  						console.log("reqId" , reqId);
- 						$.filterQuotes(status,reqId,quotes);
+ 						$.filterQuotes(status,reqId,quotes,requirements);
  					});
  					
  				//jquery for pagination
@@ -341,6 +378,12 @@
  			});
  		</script>
  		<script type="text/javascript">
+ 		$.getCapacity = function(Object){
+ 			var arr = Object.split(":");
+ 			var capacity = arr[0]+arr[1]+arr[2];
+ 			return capacity;
+ 		};
+ 		
  		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
  		   //var d = $.format.date(new Date(dateObject), 'yyyy-mm-ddT hh:mm:ssZ'); 
@@ -362,8 +405,53 @@
  		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
  		    	else if(dateArr[1].length === 2)
  		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
- 		    }
+ 		    }else if(pattern === 3){
+ 		    var dateArr = dateObject.split("-");
+ 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+			}
  		    return date;
+ 		};
+		
+		$.getMonthName = function(monNum){
+ 			var month;
+ 			console.log(monNum)
+ 			if(monNum === "01"){
+ 				month = "Jan";
+ 			}
+ 			else if(monNum === "02"){
+ 				month = "Feb";
+ 			}
+ 			else if(monNum === "03"){
+ 				month = "Mar";
+ 			}
+ 			else if(monNum === "04"){
+ 				month = "Apr";
+ 			}
+ 			else if(monNum === "05"){
+ 				month = "May";
+ 			}
+ 			else if(monNum === "06"){
+ 				month = "Jun";
+ 			}
+ 			else if(monNum === "07"){
+ 				month = "Jul";
+ 			}
+ 			else if(monNum === "08"){
+ 				month = "Aug";
+ 			}
+ 			else if(monNum === "09"){
+ 				month = "Sep";
+ 			}
+ 			else if(monNum === "10"){
+ 				month = "Oct";
+ 			}
+ 			else if(monNum === "11"){
+ 				month = "Nov";
+ 			}
+ 			else if(monNum === "12"){
+ 				month = "Dec";
+ 			}
+ 			return month;
  		};
  		
  		$.getMonth = function(month){
@@ -408,7 +496,7 @@
  			}
  			
  			return monNum;
- 		}
+ 		};
  		
  		$.getAllRequirementsByPagination = function(userId,currentPage,pageSize){
  			var reqList = "";
@@ -426,7 +514,7 @@
 							var createdTime = value.createdTime;
 							createdTime = $.date(createdTime,1);
 							console.log("created time :: ",$.date(createdTime,1));
-							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#quote-display-list">(view)</a></td><td>20-sept-16</td><td>Open</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
+							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>'+$.date(value.endDate,3)+'</td><td>'+value.reqStatus+'</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
 						});
 						var tableContent = tableHeader+reqList+tableEndTags;
 						$('.requirement-table').html("");
@@ -436,7 +524,7 @@
  			
  		}
  		
- 		$.filterQuotes = function(status,reqId,quotes){
+ 		$.filterQuotes = function(status,reqId,quotes,requirements){
  			var quoteList = "";
  			if(status === "all"){
 					$.ajax({
@@ -450,7 +538,7 @@
 								var temp = "<div class='container-fluid'>"
 								 $.each(response,function(index,value){
 									quotes[value.quoteId] = value;
-									quoteList = $.quotesByStatus(quoteList,value);
+									quoteList = $.quotesByStatus(quoteList,value,requirements,reqId);
 									
 								}); 
 								$('.quote-card-container').html("");
@@ -470,7 +558,7 @@
 						$.each(response,function(index,value){
 							quotes[value.quoteId] = value;
 							
-							quoteList = $.quotesByStatus(quoteList,value);
+							quoteList = $.quotesByStatus(quoteList,value,requirements,reqId);
 							
 						});
 						$('.quote-card-container').html("");
@@ -482,7 +570,7 @@
  		
  		}
  		
- 		$.udpateQuote = function(reqId,quotes,quote){
+ 		$.udpateQuote = function(reqId,quotes,quote,requirements){
  			var quoteList = "";
 			 $.ajax({
 					url:AppData.relativeUrl+"supplier/updatequote",
@@ -491,12 +579,12 @@
 					data:quote,
 					success:function(response){
 						console.log(response);
-						$.getQuotes(reqId,quotes)
+						$.getQuotes(reqId,quotes,requirements)
 					}
 					});
  		}
  		
- 		$.getQuotes = function(reqId,quotes){
+ 		$.getQuotes = function(reqId,quotes,requirements){
  			var quoteList = ""
  			$.ajax({
 				url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+reqId,
@@ -509,7 +597,7 @@
 					var temp = "<div class='container-fluid'>"
 					$.each(response,function(index,value){
 						quotes[value.quoteId] = value;
-						quoteList = $.quotesByStatus(quoteList,value);
+						quoteList = $.quotesByStatus(quoteList,value,requirements,reqId);
 					});
 					 $('.quote-wrapper').show();
 					$('.quote-wrapper').removeClass("initial"); 
@@ -520,40 +608,52 @@
 				});
  		}
  		
- 		$.quotesByStatus = function(quoteList,value){
+ 		$.quotesByStatus = function(quoteList,value,requirements,reqId){
+ 			var advance = "#N/A";
+ 			console.log("if $.type(value.advance)",$.type(value.advance));
+ 			if(typeof value.advance !== "undefined" || value.advance !== "" || value.advance !== null || value.advance !== "null"){
+ 				
+				console.log("if ",advance);
+ 				advance = value.advance;
+ 			}
+ 			else{
+ 				console.log("else",advance);
+ 				advance = "#N/A";
+ 			}
+ 				
  			if(value.quoteStatus === "hired"){
-				quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
-				'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
-				'<div class="interactions"><span class="label label-success">Hired</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
-				'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
-				'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
-				'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+				quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><span class="label label-success">Hired</span></div><div class="clear-fix"></div><div class="media-left">'+
+				'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+				'<table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+				'<th>Machine Rentals</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+				'<td>'+value.quantity+'</td><td>'+value.machineRentalCharges+'</td><td>'+value.driverAvailable+'</td><td>'+advance+'</td></tr></tbody></table>'+
+				'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
 				'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
-				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
-				'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+requirements[reqId].manufacturer+'</td><td>'+requirements[reqId].manufacturedyear+'</td>'+
+				'<td>'+requirements[reqId].capacity+'</td></tr></tbody></table></div></div>';
 			}else if(value.quoteStatus === "rejected"){
-				quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
-				'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
-				'<div class="interactions"><span class="label label-danger">Rejected</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
-				'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
-				'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
-				'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+				quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><span class="label label-danger">Rejected</span></div><div class="clear-fix"></div><div class="media-left">'+
+				'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+				'<table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+				'<th>Machine Rentals</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+				'<td>'+value.quantity+'</td><td>'+value.machineRentalCharges+'</td><td>'+value.driverAvailable+'</td><td>'+advance+'</td></tr></tbody></table>'+
+				'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
 				'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
-				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
-				'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+requirements[reqId].manufacturer+'</td><td>'+requirements[reqId].manufacturedyear+'</td>'+
+				'<td>'+requirements[reqId].capacity+'</td></tr></tbody></table></div></div>';
 			}else{
-			quoteList += '<div class="media"><div class="media-left"><h4 class="media-heading">'+value.quotePostedByName+'</h4>'+
-			'<a href="#"><img class="media-object" src="http://placehold.it/130x130"alt="..."></a></div><div class="media-body">'+
-			'<div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
+			quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
 			'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
 			'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
-			'<span>Reject</span></div><div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
-			'<th>Avg price</th><th>Hours</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
-			'<td>'+value.quantity+'</td><td>250</td><td>567</td><td>'+value.driverAvailable+'</td><td>40000</td></tr></tbody></table>'+
-			'<div class="date"><span>Applied on : '+new Date(value.createdTime).toDateString()+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
+			'<span>Reject</span></div><div class="clear-fix"></div><div class="media-left">'+
+			'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+			'<table class="table table-condensed table-left"><thead><tr><th>Price Quoted</th><th>Equipment Quantity</th>'+
+			'<th>Machine Rentals</th><th>Driver provided</th><th>Advance</th></tr></thead><tbody><tr><td>'+value.finalQuotePrice+'</td>'+
+			'<td>'+value.quantity+'</td><td>'+value.machineRentalCharges+'</td><td>'+value.driverAvailable+'</td><td>'+advance+'</td></tr></tbody></table>'+
+			'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div><h4 id="equipment-heading">Equipment details</h4>'+
 			'<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Year of Manufacture</th><th>capacity</th></tr></thead>'+
-			'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td>'+
-			'<td>'+value.capacity+'</td></tr></tbody></table></div></div>';
+			'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+requirements[reqId].manufacturer+'</td><td>'+requirements[reqId].manufacturedyear+'</td>'+
+			'<td>'+requirements[reqId].capacity+'</td></tr></tbody></table></div></div>';
 			}
  			
  			return quoteList;

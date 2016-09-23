@@ -30,7 +30,7 @@ public class MachineController {
 	@RequestMapping(value="/getMachinesListFromExcel" , method=RequestMethod.GET)
 	public void getMachinesListFromExcel(){
 		logger.info("Entered into MachineController.getMachinesListFromExcel method");
-		String path="E:\\congunfiles\\SampleExcel.xlsx";
+		String path="/usr/congun/SampleExcel.xlsx";
 		parser.getMachinesList(path);
 	}
 	

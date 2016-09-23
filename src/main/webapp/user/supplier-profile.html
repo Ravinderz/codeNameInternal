@@ -11,7 +11,7 @@
 <!-- <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/profile.css">
@@ -335,7 +335,7 @@
 											<label for="website" class="sr-only"> Website </label>
 											<div class="col-sm-12">
 												<input type="text" placeholder="website"
-													class="form-control" id="website" name="website">
+													class="form-control" id="modal-website" name="website">
 											</div>
 										</div>
 										<div class="form-group">
@@ -403,7 +403,7 @@
  				$('#mobile').val(user.mobileNumber);
  				$('#role').val(user.role);
  				$('#constitution').val(user.constitution);
- 				$('#website').val(user.website);
+ 				$('#modal-website').val(user.website);
  				$('#company_individual_profile').val(user.company_individual_profile);
  				
  				$('.modal-btn').click(function() {
@@ -452,7 +452,7 @@
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime);
  							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
- 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
+ 							+'<img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
  							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
  						});
  						$('.newsfeed').html("");
@@ -487,11 +487,11 @@
  						response = $.parseJSON(response);
  						console.log(response);
  						$.each(response,function(index,value){
- 							var createdTime = "24-09-16"; 
+ 							var createdTime = $.date(value.createdTime);
  							if(index < 3){
  							equipments += '<div class="media"><div class="media-left"><a href="#">'
- 	 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
- 	 							+'<h3>'+value.equipment+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>Quantity :'+value.quantity+' Capacity :'+value.capacity+'TON</p></div></div>';
+ 	 							+'<img src=../images/'+value.equipmentCategory+'/'+value.equipment+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 	 							+'<h3>'+value.equipment+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>Quantity :'+value.quantity+' Capacity :'+value.capacity+'</p></div></div>';
  							}
  						});
  						console.log(equipments);

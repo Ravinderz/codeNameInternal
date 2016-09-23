@@ -236,11 +236,21 @@ padding-left:20px;
 
 .quote-wrapper .media img , .requirement-wrapper .media img{
 padding-left : 15px;
+
+}
+
+.requirement-wrapper .media img{
+	margin-top:20px;
 }
 
 .client-name{
 	float:left;
 	margin-top:20px;
+}
+
+.client-name h4{
+	margin-bottom:0;
+	margin-left:5px;
 }
 
 .applied-date{
@@ -331,9 +341,13 @@ padding-left : 15px;
 	padding-top:8px;
 }
 
+.float-left{
+	float:left;
+}
+
 .give-quote{
 	float:right;
-	margin-top: 40px; 
+	margin-top: 20px; 
 	margin-right:20px;
 }
 
@@ -345,7 +359,30 @@ padding-left : 15px;
 	clear:both;
 }
 
+.social a{
+	padding-left:3px;
+	padding-right:3px;
+}
+
+.social a:hover{
+	text-decoration:none;
+}
+
 .pagination .active{
 	background-color: #004d99;
 	color:#fff;
 }
+
+#view-requirement-modal{
+	top:35%;
+	outline: none;
+}
+
+.no-data{
+	height:300px;
+}
+
+.modal-dialog{
+	width:900px;
+}
+

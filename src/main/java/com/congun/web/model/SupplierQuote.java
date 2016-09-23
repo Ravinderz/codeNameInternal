@@ -82,8 +82,6 @@ public class SupplierQuote {
 	@Column(name = "reqpincode")
 	public String reqpincode;
 	
-	@Column(name = "hoursPerMonth")
-	public String hoursPerMonth;
 	
 	@Column(name = "advanceCharges")
 	public String advanceCharges;
@@ -259,13 +257,6 @@ public class SupplierQuote {
 		this.reqpincode = reqpincode;
 	}
 
-	public String getHoursPerMonth() {
-		return hoursPerMonth;
-	}
-
-	public void setHoursPerMonth(String hoursPerMonth) {
-		this.hoursPerMonth = hoursPerMonth;
-	}
 
 	public String getAdvanceCharges() {
 		return advanceCharges;

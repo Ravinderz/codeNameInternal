@@ -179,28 +179,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="constitution" class="sr-only">
-												Constitution </label>
+											<label for="location" class="sr-only">
+												Location/City </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control"
-													placeholder="Constitution" id="constitution"
-													name="constitution">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="website" class="sr-only"> Website </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="website"
-													class="form-control" id="website" name="website">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="company_individual_profile" class="sr-only">
-												Company Profile </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="Company profile"
-													class="form-control" id="company_individual_profile"
-													name="company_individual_profile">
+													placeholder="Location/City" id="location"
+													name="location">
 											</div>
 										</div>
 										
@@ -225,20 +209,12 @@
 			<div class="row">
 				<h2>Requirement List</h2>
 				<div class="col-md-2 filter">
-					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum</p>
 				</div>
 				<div class="col-md-8 list">
 					<ul class="ul-item">
 					</ul>
 				</div>
 				<div class="col-md-2 ads">
-					<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-						ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-						lorem ipsum</p>
 				</div>
 			</div>
 		</div>
@@ -353,7 +329,7 @@
 				$.each(response,function(index,value){
 					requirements[value.requirementId] = value;
 					reqList += "<li class='item'><div class='item-content'><div class='item-content-header'><img src='"+imagePath+"' height='100px' width='100px' alt='image here' />"
-					+"<div class='item-content-header-meta'><h3>Title</h3><p>"+value.title+"</p></div></div><div class='clear-fix'></div>"
+					+"<div class='item-content-header-meta'><h3>"+value.title+"</h3></div></div><div class='clear-fix'></div>"
 					+"<div class='item-content-main'><ul><li><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
 					+"<li><h5>Model</h5><p>"+value.specificationModel+"</p></li><li><h5>Start date</h5><p>"+value.startDate+"</p></li>"
 					+"<li><h5>Quantity</h5><p>"+value.quantity+"</p></li><li><h5>Duration</h5><p>"+value.duration+" months</p></li></ul>"

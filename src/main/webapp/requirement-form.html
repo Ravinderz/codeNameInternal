@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/congun.css">
 		<link rel="stylesheet" href="css/form-elements-style.css">
-		<link rel="stylesheet" href="css/requirement-form-mod.css">
+		<link rel="stylesheet" href="css/requirement-form.css">
 		<link rel="stylesheet" href="css/magic-check.css">
 		<link rel="stylesheet" href="css/profile.css">
 		<link href="css/jquery-ui.css" rel="stylesheet">
@@ -143,16 +143,16 @@
 								 </ul>								 
 								 <input type="hidden" name="specificationCapacity" id="specificationCapacity" value="">
 								<!--<input type="dropdown" name="specificationCapacity" placeholder="Capacity" class="f1-capacity form-control" id="f1-about-yourself"> <option><value>></value></option>--> </div>
-                    <div class="form-group">        
+                    <div class="form-manufacturer">        
                                 <label for="manufacturer">Manufacturer</label><br>
-                                <input type="checkbox" class="manufacturer" name="manufacturer" id="JCB" value="JCB" checked /><label for="JCB"> JCB&nbsp&nbsp</label>
-  					 <input type="checkbox" name="manufacturer" id="Bharat" value="Bharat" checked /><label for="Bharat">Bharat Earth Movers&nbsp&nbsp</label>
-					 <input type="checkbox"  name="manufacturer" id="TRF" value="TRF" checked /><label for="TRF">TRF&nbsp&nbsp</label>
-					 <input type="checkbox"  name="manufacturer" id="Cat" value="Cat" checked /><label for="Cat">Caterpillar&nbsp&nbsp</label>
-					 <input type="checkbox"  name="manufacturer" id="Komatsu" value="Komatsu " checked /><label for="Komatsu">Komatsu&nbsp&nbsp</label>
-					 <br>
-					 <input type="checkbox"  name="manufacturer" id="Volvo" value="Volvo " checked /><label for="Volvo">Volvo&nbsp&nbsp</label>
-					 <input type="checkbox"  name="manufacturer" id="Hitachi" value="Hitachi " checked /><label for="Hitachi">Hitachi&nbsp&nbsp</label>
+                               <ul><li> <input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" checked /><label for="JCB"> JCB&nbsp&nbsp</label></li>
+  					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" checked /><label for="Bharat">Bharat Earth Movers&nbsp&nbsp</label></li>
+					 <li><input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" checked /><label for="TRF">TRF&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" checked /><label for="Cat">Caterpillar&nbsp&nbsp</label></li>
+					 <li><input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " checked /><label for="Komatsu">Komatsu&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " checked /><label for="Volvo">Volvo&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " checked /><label for="Hitachi">Hitachi&nbsp&nbsp</label></li>
+					 </ul>
 						
                       </div>
 		              <label  for="manufacturedyears">Expected Year of Manufacture</label>
@@ -181,8 +181,8 @@
 							
 							</div>
 							<div class="form-group">
-							<label>Approximate duration of hire : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-							<input type="text" class="textbox" id="numdays2" name="duration"/><label>&nbsp&nbspdays</label>
+							<label>Approximate duration of hire : &nbsp&nbsp&nbsp&nbsp</label>
+							<input type="hidden" class="textbox" id="numdays2" name="duration"><label id="numdays1">0</label><label>&nbsp&nbspdays</label>
 							</div>
                             
 							<div class="form-group">
@@ -333,9 +333,6 @@
  			</div>
  		</div>
     <!-- Javascript -->
-    <!-- <script src="js/jquery-1.11.1.min.js"></script> -->
-	<!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-	<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -484,7 +481,20 @@
 		console.log("Entered After submit");
 		var success = "successfully created";
 		var data = JSON.stringify($("#contractor-requirement-form").serializeObject());
+		//console.log(data);
+		data= $.parseJSON(data);
+		var manufacturer = [];
+		if($.isArray(data.manufacturer)){
+		console.log("It is an Array");
+		}else{
+		console.log("doesnt contain braces");
+		manufacturer.push(data.manufacturer);
+		data.manufacturer = manufacturer;
 		console.log(data);
+		}
+		data = JSON.stringify(data);
+		console.log(data);
+		
             
             $.ajax({
 			url:AppData.relativeUrl+"contractor/contractorRequirement",
@@ -594,6 +604,7 @@ $.fn.serializeObject = function()
         function cal(){
         if(document.getElementById("enddate").value){
             document.getElementById("numdays2").value=GetDays();
+			$("#numdays1").html(GetDays());
         } else {
 		               document.getElementById("numdays2").value=0;
 		}

@@ -33,6 +33,9 @@ public class User {
 	@Column(name = "mobileNumber")
 	public String mobileNumber;
 
+	@Column(name = "location")
+	public String location;
+	
 	@Column(name = "constitution")
 	public String constitution;
 	

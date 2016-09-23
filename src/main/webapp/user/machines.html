@@ -9,7 +9,7 @@
 <meta name="author" content="Congun">
 
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/machines.css">
 </head>
@@ -271,6 +271,23 @@
 						</div>
 					</div>		
 					
+					
+			 <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Requirement posted successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 			<script type="text/javascript">
  			$(document).ready(function(){
  				
@@ -415,6 +432,14 @@
  	    			data:data,
  	    			success:function(response){
  	    				console.log(response);
+						if(response === "SS01"){
+							$('#modal-success-dialog').modal('show').delay(5000);
+						$('#modal-success-dialog').on('shown.bs.modal', function() {
+							$.getAllEquipments(user.userId,userEquipments);
+							$('#modal-success-dialog').modal('hide')
+		    			 //history.back();	    
+		    			});
+						}
  	    			}
  	    				
  	    		});

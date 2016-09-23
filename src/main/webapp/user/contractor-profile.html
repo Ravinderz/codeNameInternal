@@ -11,7 +11,7 @@
 <!-- <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/profile.css">
@@ -299,6 +299,20 @@
 					$(location).attr('href', "../index.html");
 				});
  				
+ 				var total_user_fields = Object.keys(user).length;
+ 				var user_entered_fields = 0;
+ 				$.each(user,function(index,value){
+ 					if(value !== "undefined" || value !== null || value !== "null" || value !== ""){
+ 					user_entered_fields++;
+ 					}
+ 				});
+ 				
+ 				var profile_percent = (user_entered_fields/total_user_fields)*100; 
+ 				console.log("profile_percent",profile_percent)
+ 				$('.progress-bar').attr('aria-valuenow', profile_percent).css('width',profile_percent+"%");
+ 				$('.progress-bar').html(profile_percent+"%");
+ 				console.log(Object.keys(user).length);
+ 				
  				$('#userId').val(user.userId);
  				$('#firstName').val(user.firstname);
  				$('#lastName').val(user.lastname);
@@ -356,7 +370,7 @@
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime);
  							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
- 							+'<img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div><div class="media-body">'
+ 							+'<img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
  							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
  						});
  						$('.newsfeed').html("");
@@ -402,7 +416,7 @@
 			 						console.log(response);
 			 						var recentReq = "";
 			 						$.each(response,function(index,value){
-			 							recentReq += '<li>'+value.title+'</li>';
+			 							recentReq += '<a href="contractor-dashboard.html"><li>'+value.title+'</li></a>';
 			 						});
 			 						console.log(recentReq);
 			 						$('.recent-quote-list').append(recentReq);
@@ -461,6 +475,50 @@
  		};
  		
  		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			console.log(month)
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
+ 		}
+ 		
+ 		$.getMonthName = function(month){
  			var monNum;
  			month = month.toLowerCase();
  			console.log(month)

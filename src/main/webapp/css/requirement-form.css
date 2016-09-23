@@ -292,3 +292,11 @@ label:hover:after {
     /*left: 500px;123px; /* change this value to one that suits you */
     top: 56px; /* change this value to one that suits you */
 }
+
+.form-manufacturer ul{
+list-style:none;
+padding:0px;
+}
+.form-manufacturer ul li{
+display:inline-block;
+}

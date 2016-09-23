@@ -42,7 +42,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="userprofile.html" role="button"><span
+								<li><a href="user/supplier-profile.html" role="button"><span
 										id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
@@ -58,8 +58,8 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="#">Dashboard</a></li>
-						<li><a class="active" href="#">Profile</a></li>
+						<li><a href="user/supplier-dashboard.html">Dashboard</a></li>
+						<li><a href="user/supplier-profile.html">Profile</a></li>
 						<li><a href="#">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
@@ -266,10 +266,9 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
-		reqid=7;
     	console.log('reqid',reqid);
-    	//var user = sessionStorage.getItem("user");
-		var user = localStorage.getItem("user");
+    	var user = sessionStorage.getItem("user");
+		//var user = localStorage.getItem("user");
 		console.log(user);
 		user = $.parseJSON(user);
 		var username = user.firstname+" "+user.lastname;
@@ -460,7 +459,7 @@
 		console.log(data);
             
             $.ajax({
-			url:AppData.relativeUrl+"supplier/submitquote11",
+			url:AppData.relativeUrl+"supplier/submitquote",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -478,6 +477,17 @@
 
                 });
     });
+    	
+    	$('.logout').click(function() {
+			console.log("inside logout function")
+			var user = sessionStorage.getItem("user");
+			if (user !== null) {
+				sessionStorage.removeItem("user");
+			}
+			console.log("user logged out");
+			$(location).attr('href', "../index.html");
+		});
+		
 	
 	$(".uncheck").click(function(){
 		var $label = $(this).parent("label");

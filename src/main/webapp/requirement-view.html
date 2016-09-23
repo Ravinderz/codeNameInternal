@@ -180,28 +180,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="constitution" class="sr-only">
-												Constitution </label>
+											<label for="location" class="sr-only">
+												Location/City </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control"
-													placeholder="Constitution" id="constitution"
-													name="constitution">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="website" class="sr-only"> Website </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="website"
-													class="form-control" id="website" name="website">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="company_individual_profile" class="sr-only">
-												Company Profile </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="Company profile"
-													class="form-control" id="company_individual_profile"
-													name="company_individual_profile">
+													placeholder="Location/City" id="location"
+													name="location">
 											</div>
 										</div>
 										
@@ -225,18 +209,16 @@
     <div class="container">
         <div class="row">
             <h2>Requirement List</h2>
-            <div class="col-md-2 filter"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 filter"></div>
             <div class="col-md-8 view-item">
                 <div class="item-content">
                     <div class="header">
-                        <h4>Title</h4>
-                        <h5 id="title">This is the place where the title of the requirement will be posted</h5>
+                        <h4 id="title">This is the place where the title of the requirement will be posted</h4>
                         <img src="images/EarthMoving/backhoe.png" height="200px" width="200px" class="left"/>
                         <div class="right">
                             <ul>
                                <li><h5>Machine Category</h5><p id="category">Earth Moving</p></li>
                                 <li><h5>Machine Sub-Category</h5><p id="sub-category">Backhoe</p></li>
-                                <li><h5>Model</h5><p id="model">JD-10TON</p></li>
                                 <li><h5>Manufacturer</h5><p id="mfg">JCB</p></li>
                                 <li><h5>Manufacture year</h5><p id="mfg-year">2015</p></li>
                             </ul>
@@ -253,11 +235,14 @@
                                 <div class="col-md-2">
                                     <div class="col-content"><h5>Created by</h5><p id="created-by">some user</p></div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="col-content"><h5>Created on</h5><p id="created-on">10-Dec-2015</p></div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="col-content"><h5>Start date</h5><p id="start-date">15-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>End date</h5><p id="end-date">15-Dec-2015</p></div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
@@ -270,7 +255,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 ads"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 ads"></div>
         </div>    
     </div>
     </div>
@@ -369,15 +354,15 @@
 				$('#title').html(requirement.title);
 				$('#category').html(requirement.equipmentCategory);
 				$('#sub-category').html(requirement.equipmentName);
-				$('#model').html(requirement.specificationModel);
 				$('#mfg').html(requirement.manufacturer);
 				$('#mfg-year').html(requirement.equipmentManufactureYear);
 				$('#desc').html(requirement.workDescription);
 				$('#created-by').html(requirement.contractorName);
 				$('#created-on').html(requirement.createdTime);
-				$('#duration').html(requirement.duration+" months");
+				$('#duration').html(requirement.duration+" days");
 				//$('#contact').html(user.mobileNumber);
 				$('#start-date').html(requirement.startDate);
+				$('#end-date').html(requirement.endDate);
 			}
 			
 		});	
