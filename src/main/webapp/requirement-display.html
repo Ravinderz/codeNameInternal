@@ -96,9 +96,11 @@
 												</div>
 											</div>
 
-
 											<div class="login-btn">
 												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
 											</div>
 											<div class="clear-fix"></div>
 										</form>
@@ -207,6 +209,8 @@
 	<div class="content-main">
 		<div class="container">
 			<div class="row">
+			<a href="#" class="btn btn-warning post-req-btn">Post
+					Requirement</a>
 				<h2>Requirement List</h2>
 				<div class="col-md-2 filter">
 				</div>
@@ -310,7 +314,11 @@
 		var user = sessionStorage.getItem("user");
 		user = $.parseJSON(user);
 		console.log(user);
-	
+		
+		$('#re-link').click(function(e){
+			$('#modal-container-login').modal('hide');
+			$('#modal-container-register').modal('show');
+		});
 		
 		var category = getUrlParameter("category");
 		var sub_ctg = getUrlParameter("sub-category"); 
@@ -422,6 +430,20 @@
 		
 	});
     });
+	
+	$('.post-req-btn').click(function(e){
+		e.preventDefault();
+		if(user !== null && user === "contractor"){
+		console.log("inside click function");
+		console.log("category",category);
+		console.log("sub",sub_ctg);
+		$(location).attr('href',"requirement-form.html?category="+category+"&sub-category="+sub_ctg);
+		}else if(user !== null && user === "supplier"){
+			alert("please contact admin for posting a requirement");
+		}else{
+			$('#modal-container-login').modal('show');
+		}
+	});
 	
 	$('.logout').click(function() {
 		console.log("inside logout function")

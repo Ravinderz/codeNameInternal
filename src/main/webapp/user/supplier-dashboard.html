@@ -229,8 +229,8 @@
  						$.each(response,function(index,value){
  							quotes[value.quoteId] = value;
  							var createdTime = value.createdTime;
- 							createdTime = $.date(createdTime);
- 							console.log("created time :: ",$.date(createdTime));
+ 							createdTime = $.date(createdTime,1);
+ 							console.log("created time :: ",$.date(createdTime,1));
  							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.quotePostedByName+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
  						});
  						var tableContent = tableHeader+quoteList+tableEndTags;

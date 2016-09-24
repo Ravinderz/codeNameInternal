@@ -26,6 +26,9 @@ public class SupplierQuote {
 	
 	@Column(name = "quantity")
 	public int quantity;
+
+	@Column(name = "manufacturer")
+	public String[] manufacturer;
 	
 	@Column(name = "machineRentalCharges")
 	public long machineRentalCharges;
@@ -82,6 +85,8 @@ public class SupplierQuote {
 	@Column(name = "reqpincode")
 	public String reqpincode;
 	
+	@Column(name = "hoursPerMonth")
+	public String hoursPerMonth;
 	
 	@Column(name = "advanceCharges")
 	public String advanceCharges;
@@ -257,6 +262,13 @@ public class SupplierQuote {
 		this.reqpincode = reqpincode;
 	}
 
+	public String getHoursPerMonth() {
+		return hoursPerMonth;
+	}
+
+	public void setHoursPerMonth(String hoursPerMonth) {
+		this.hoursPerMonth = hoursPerMonth;
+	}
 
 	public String getAdvanceCharges() {
 		return advanceCharges;
@@ -280,6 +292,14 @@ public class SupplierQuote {
 
 	public void setDriverAvailable(String driverAvailable) {
 		this.driverAvailable = driverAvailable;
+	}
+
+	public String[] getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String[] manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 		
 	

@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/congun.css">
-		<link rel="stylesheet" href="css/form-elements-style.css">
+	    <link rel="stylesheet" href="css/form-elements-style.css">
 		<link rel="stylesheet" href="css/quote-form-style.css">
 		<link rel="stylesheet" href="css/magic-check.css">
 		<link rel="stylesheet" href="css/profile.css">
@@ -42,7 +42,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="user/supplier-profile.html" role="button"><span
+								<li><a href="userprofile.html" role="button"><span
 										id="user">User</span></a></li>
 								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
@@ -60,7 +60,7 @@
 					<ul class="sub-menu">
 						<li><a href="user/supplier-dashboard.html">Dashboard</a></li>
 						<li><a href="user/supplier-profile.html">Profile</a></li>
-						<li><a href="#">Used machines</a></li>
+						<li><a href="user.used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -82,27 +82,29 @@
                     <form role="form" action="" method="post" class="f1" id="supplier-quote-form">
                         <h3>Quote Form</h3>
                         <p>Give your quote for the requirement</p>
-                        <div class="f1-steps">
                             
                           <fieldset>
                             <div class="form-group">
                                 <label for="quantity">Number Of Equipments Available</label>
-                                <input type="text" name="quantity" placeholder="Quantity" class="f1-email form-control" id="f1-email"> </div>
+                                <input type="text" name="quantity" placeholder="Quantity" class="f1-quantity form-control" id="f1-quantity"/> </div>
                              
-							<div class="form-group">
-							<label for="manufacturer"> Manufacturer</label>
-                    			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
-  								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
-								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
-								<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
-					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label>
-					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label>
-					 			<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
-                		    </div>                                
+				    <div class="form-manufacturer">        
+                    <label for="manufacturer">Manufacturer</label><br>
+                     <ul>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" checked /><label for="JCB"> JCB&nbsp&nbsp</label></li>
+  					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu" /><label for="Komatsu">Komatsu&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi" /><label for="Hitachi">Hitachi&nbsp&nbsp</label></li>
+					 </ul>
+						
+                      </div>                  
 							 <div class="machineRentalCharges">
                                 <ul>
 									<li><label for="machineRentalCharges">Machine Rental Charges</label>
-                                <input type="text" name="machineRentalCharges" placeholder="Enter Number" class="f1-email form-control" id="rentalcharges"></li>
+                                <input type="text" name="machineRentalCharges" placeholder="Enter Number" class="f1-machinerenral form-control" id="rentalcharges"></li>
 								    <li><label id="permonth" hidden>/per month</label><label id="perhour" hidden>/per hour</label><label id="perwork" hidden>/per work</label><label id="percumt" hidden>/per cu.mt</label>
 								    <label>(inclusive of tax)</label></li>
 								<br>
@@ -112,7 +114,7 @@
   								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
 								</ul>
                 		    </div>
-                            <div class="totalPrice" hidden>
+                            <div class="totalPrice">
 							<label for="totalPrice">Total Price : <p id="totalPrice">0</p> </label>
                             </div>							
                             <div class="form-group">
@@ -123,13 +125,14 @@
                                 <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div>
                             
                             
-                            <div class="form-group" hidden id="noofworkinghours">
+                            <div class="form-group" id="noofworkinghours" hidden>
                                 <label for="workingHoursPerMonth">Number Of Hours Working Per Month</label>
-                                <input type="text" name="workingHoursPerMonth" placeholder="Enter in Hours ex: 220(45 hours per week)" class="f1-email form-control" id="noofworkinghours" value=""> </div>
+                                <input type="text" name="workingHoursPerMonth" placeholder="Enter in Hours ex: 180(45 hours/week)" class="f1-workinghours form-control" id="noofworkinghours" value="0" hidden> 
+						    </div>
                                 
                              <div class="advanceCharges" hidden>
                                 <label for="advance">Advance</label>
-                                <ul><li><input type="text" placeholder="Enter Value" class="f1-email form-control" id="f1-value" value="0"onchange="advancecalc()"></li>
+                                <ul><li><input type="text" placeholder="Enter Value" class="f1-advance form-control" id="f1-value" value="0" onchange="advancecalc()"></li>
 								<li><select id="relation"  class="selectbox" onchange="advancecalc()">
                                  <option value="%" selected="selected">% of Total Price</option>
                                  <option value="rupees">Rupees</option>
@@ -145,7 +148,7 @@
                                 
                              <div class="form-group">
                                 <label for="queries">Queries</label>
-                                <input type="text" name="queries" placeholder="Enter for any further details" class="f1-email form-control" id="f1-email"> </div>
+                                <input type="text" name="queries" placeholder="Enter for any further details" class="f1-query form-control" id="f1-queries"> </div>
                                 
                              <div id="hidden-fields">
                              	<input type="hidden" name="equipmentCategory" id="equipmentCategory" value="">
@@ -163,14 +166,9 @@
                                 </div>
                                 
                                <div class="f1-buttons">
-                                <button type="button"  id="btn-submit" class="btn btn-next">Submit</button>
+                                <button type="button"  id="btn-quote" class="btn btn-submit">Submit</button>
                             </div>
-                                
-                              
                         </fieldset>
-                        
-                            
-                         
                         <div class="modal fade" id="modal-success-dialog" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -187,7 +185,6 @@
 						</div>
 					</div>
                     </form>
-                </div>
             </div>
         </div>
     </div>
@@ -266,6 +263,7 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
+		//reqid=1;
     	console.log('reqid',reqid);
     	var user = sessionStorage.getItem("user");
 		//var user = localStorage.getItem("user");
@@ -320,7 +318,7 @@
 					$('#reqpincode').val(value.pincode);
 					$('#reqduration').val(value.duration);
 				hiringChargesType = value.hiringChargesType;
-
+ 
 		console.log("Type : "+hiringChargesType);
 		if(hiringChargesType === "month"){
 		$("#noofworkinghours").show();
@@ -451,43 +449,17 @@
     	
     	
        
-/* This action will be called when a contractor will submit the form  */
-    	
-        $("#btn-submit").click(function(){
-		var success = "successfully created";
-		var data = JSON.stringify($("#supplier-quote-form").serializeObject());
-		console.log(data);
-            
-            $.ajax({
-			url:AppData.relativeUrl+"supplier/submitquote",
-		     type:"post",
-		     contentType:"application/json; charset=utf-8",
-		     data: data,
-		     success:function(data){
-		    	 console.log(data);
-		    	 if(data === "SS01"){
-		    		 console.log("inside if");
-		    		 $('#modal-success-dialog').modal('show').delay(5000);
-		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
-		    			 $(location).attr('href',AppData.relativeUrl+"user/supplier-dashboard.html");
-		    			 //history.back();	    
-		    			});
-		    	 }
-		      }
-
-                });
-    });
-    	
-    	$('.logout').click(function() {
-			console.log("inside logout function")
-			var user = sessionStorage.getItem("user");
-			if (user !== null) {
-				sessionStorage.removeItem("user");
-			}
-			console.log("user logged out");
-			$(location).attr('href', "../index.html");
-		});
-		
+/* This action will be called when a contractor will logout of the form  */
+	
+	$('.logout').click(function() {
+					console.log("inside logout function")
+					var user = sessionStorage.getItem("user");
+					if (user !== null) {
+						sessionStorage.removeItem("user");
+					}
+					console.log("user logged out");
+					$(location).attr('href', "index.html");
+				});
 	
 	$(".uncheck").click(function(){
 		var $label = $(this).parent("label");

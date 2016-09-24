@@ -59,6 +59,14 @@ border: 1px solid transparent;
     background:#ffc13b;
 }
 
+.navbar-toggle{
+	background-color:#ffc13b;
+}
+
+.icon-bar{
+	background-color:#fff;
+}
+
 
 .banner{
 	position: relative;
@@ -499,6 +507,19 @@ border: 1px solid transparent;
 
 .modal-btn:hover{
 	background-color:#FAB216; 
+}
+
+.float-left{
+	float:left;
+}
+
+.float-right{
+	float:right;
+}
+
+.reg-link{
+	padding-right:15px;
+	padding-top:5px;
 }
 
 .clear-fix{

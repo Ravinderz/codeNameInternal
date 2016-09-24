@@ -8,13 +8,11 @@
     <title>Congun</title>
     <!-- CSS -->
    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-  <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">-->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/congun.css">
 		<link rel="stylesheet" href="css/form-elements-style.css">
-		<link rel="stylesheet" href="css/requirement-form.css">
+		<link rel="stylesheet" href="css/requirement-form-mod.css">
 		<link rel="stylesheet" href="css/magic-check.css">
 		<link rel="stylesheet" href="css/profile.css">
 		<link href="css/jquery-ui.css" rel="stylesheet">
@@ -61,9 +59,9 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="contractor-dashboard.html">Dashboard</a></li>
-						<li><a class="active" href="contractor-profile.html">Profile</a></li>
-						<li><a href="#">Used machines</a></li>
+						<li><a href="user/contractor-dashboard.html">Dashboard</a></li>
+						<li><a href="user/contractor-profile.html">Profile</a></li>
+						<li><a href="user/used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -190,7 +188,7 @@
                                     <label for="hiringChargersType"><h5>Hiring Charges Type</h5></label><br>
 									<div class="radio-hiring">
 									<ul>
-                                    <li><input type="radio" name="hiringChargesType" value="hour" class="magic-radio" id="hiringChargersType-hourly"><label for="hiringChargersType-hourly"><span class="radio-span">per Hour</span></label></li>
+                                    <li><input type="radio" name="hiringChargesType" value="hour" class="magic-radio" id="hiringChargersType-hourly" checked><label for="hiringChargersType-hourly"><span class="radio-span">per Hour</span></label></li>
                                     <li><input type="radio" name="hiringChargesType" value="cu.mt" class="magic-radio" id="hiringChargersType-cu.mt"><label for="hiringChargersType-cu.mt"><span class="radio-span">per cu.mt</span></label></li>
 									<br>
                                     <li><input type="radio" name="hiringChargesType" value="work" class="magic-radio" id="hiringChargersType-work"><label for="hiringChargersType-work"><span class="radio-span">per work</span></label></li>
@@ -333,6 +331,8 @@
  			</div>
  		</div>
     <!-- Javascript -->
+	<!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+	<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -374,12 +374,12 @@
 						sessionStorage.removeItem("user");
 					}
 					console.log("user logged out");
-					$(location).attr('href', "../index.html");
+					$(location).attr('href', "index.html");
 				});
 				
 				
     	var categoryParam = getUrlParameter('category');
-    	var equipment = getUrlParameter('equipment');
+    	var equipment = getUrlParameter('sub-category');
     	var user = sessionStorage.getItem("user");
 	    //var user = localStorage.getItem("user");
 		console.log(user);
@@ -477,9 +477,10 @@
        
 /* This action will be called when a contractor will submit the form  */
     	
-        $("#btn-submit").click(function(){
-		console.log("Entered After submit");
-		var success = "successfully created";
+       // $("#btn-submit").click(function(){
+		//console.log("Entered After submit");
+		
+		/*var success = "successfully created";
 		var data = JSON.stringify($("#contractor-requirement-form").serializeObject());
 		//console.log(data);
 		data= $.parseJSON(data);
@@ -497,7 +498,7 @@
 		
             
             $.ajax({
-			url:AppData.relativeUrl+"contractor/contractorRequirement",
+			url:AppData.relativeUrl+"contractor/contractorRequirement11",
 		     type:"post",
 		     contentType:"application/json; charset=utf-8",
 		     data: data,
@@ -513,8 +514,8 @@
 		    	 }
 		      }
 
-                });
-    });
+                });*/
+ //   });
 	
 	
 	
@@ -595,6 +596,7 @@ $.fn.serializeObject = function()
 				
 				if (dropdt < pickdt){
 				alert("Invalid Date Range selected!!");
+				document.getElementById("enddate").value="";
 				return 0;
                 }else{
                 return parseInt((dropdt - pickdt) / (24 * 3600 * 1000));
@@ -604,9 +606,12 @@ $.fn.serializeObject = function()
         function cal(){
         if(document.getElementById("enddate").value){
             document.getElementById("numdays2").value=GetDays();
-			$("#numdays1").html(GetDays());
+			console.log("entered above");
+			$("#numdays1").html(document.getElementById("numdays2").value);
         } else {
 		               document.getElementById("numdays2").value=0;
+					   console.log("entered below");
+					   $("#numdays1").html(document.getElementById("numdays2").value);
 		}
 	}
 	var convertDate = function(usDate) {

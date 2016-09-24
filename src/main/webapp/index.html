@@ -84,6 +84,11 @@
 						});
 						}
 						});
+						
+						$('#re-link').click(function(e){
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-register').modal('show');
+						});
 							
 						
 						$("#login-btn").click(function(e) {
@@ -263,10 +268,12 @@
 													</label>
 												</div>
 											</div>
-
-
+											
 											<div class="login-btn">
 												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
 											</div>
 											<div class="clear-fix"></div>
 										</form>

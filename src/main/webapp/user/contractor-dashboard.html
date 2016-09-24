@@ -610,14 +610,10 @@
  		
  		$.quotesByStatus = function(quoteList,value,requirements,reqId){
  			var advance = "#N/A";
- 			console.log("if $.type(value.advance)",$.type(value.advance));
- 			if(typeof value.advance !== "undefined" || value.advance !== "" || value.advance !== null || value.advance !== "null"){
- 				
-				console.log("if ",advance);
+ 			if($.type(value.advance) !== "undefined" || typeof value.advance !== "undefined" || value.advance !== "" || value.advance !== null || value.advance !== "null"){
  				advance = value.advance;
  			}
  			else{
- 				console.log("else",advance);
  				advance = "#N/A";
  			}
  				

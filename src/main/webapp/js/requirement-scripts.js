@@ -33,21 +33,24 @@ jQuery(document).ready(function() {
     
     // next step
     $('.f1 .btn-next').on('click', function() {
+	    var i=0;
     	var parent_fieldset = $(this).parents('fieldset');
     	var next_step = true;
     	// navigation steps / progress steps
     	var current_active_step = $(this).parents('.f1').find('.f1-step.active');
     	var progress_line = $(this).parents('.f1').find('.f1-progress-line');
-    	
+    	console.log("Entered NEXT BUtton");
     	// fields validation
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
     		if( $(this).val() == "" ) {
     			$(this).addClass('input-error');
     			next_step = false;
+				console.log("Empty Elements: "+document.getElementsByTagName("input")[i].id);
     		}
     		else {
     			$(this).removeClass('input-error');
     		}
+			i++;
     	});
     	// fields validation
     	
@@ -85,21 +88,209 @@ jQuery(document).ready(function() {
     });
     
     // submit
-    $('.f1').on('submit', function(e) {
-    	
+    $('.f1 #btn-submit').on('click', function(e) {
+	var i=0;
+	console.log("Entered JS script of submit from requirement form");
+	var parent_fieldset = $(this).parents('fieldset');
+    	var valid_form = true;
     	// fields validation
-    	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
+    	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
     		if( $(this).val() == "" ) {
-    			e.preventDefault();
     			$(this).addClass('input-error');
+				e.preventDefault();
+				valid_form = false;
+				console.log("Empty Elements: "+document.getElementsByTagName("input")[i].id);
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+			i++;
+    	});
+    	// fields validation
+		if(valid_form){
+		
+		var success = "successfully created";
+		var data = JSON.stringify($("#contractor-requirement-form").serializeObject());
+		//console.log(data);
+		data= $.parseJSON(data);
+		var manufacturer = [];
+		if($.isArray(data.manufacturer)){
+		console.log("It is an Array");
+		}else{
+		console.log("doesnt contain braces");
+		manufacturer.push(data.manufacturer);
+		data.manufacturer = manufacturer;
+		console.log(data);
+		}
+		data = JSON.stringify(data);
+		console.log(data);
+		
+            
+            $.ajax({
+			url:AppData.relativeUrl+"contractor/contractorRequirement",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log(data);
+		    	 if(data === "CS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',AppData.relativeUrl+"user/contractor-dashboard.html");
+		    			 //history.back();	    
+		    			});
+		    	 }
+		      }
+
+                });
+				}else{
+				alert("Please enter all highlighted fields!!!");
+				}
+    });
+    
+		$("#addEquipment-left").click(function(e){
+	console.log("from left JS");
+	var parent_fieldset = $(this).parents('fieldset');
+    	var valid_form = true;
+    	// fields validation
+    	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
+    		if( $(this).val() == "" ) {
+    			$(this).addClass('input-error');
+				e.preventDefault();
+				valid_form = false;
     		}
     		else {
     			$(this).removeClass('input-error');
     		}
     	});
+		
+		if(valid_form){
+		var success = "successfully created";
+		var data = JSON.stringify($("#addEquipment-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url: AppData.relativeUrl+"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		    	if(data === "SS01"){
+				 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    		$(location).attr('href',"user/supplier-profile.html");
+					});
+		    	}
+		      }
+		});
+		}else{
+				alert("Please enter all highlighted fields!!!");
+				}
+	});
+	
+		$("#addEquipment-right").click(function(e){
+	console.log("from right JS");
+	var parent_fieldset = $(this).parents('fieldset');
+    	var valid_form = true;
     	// fields validation
-    	
+    	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
+    		if( $(this).val() == "" ) {
+    			$(this).addClass('input-error');
+				e.preventDefault();
+				valid_form = false;
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+    	});
+		
+		if(valid_form){
+		var success = "successfully created";
+		var data = JSON.stringify($("#addEquipment-form-right").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url: AppData.relativeUrl+"supplier/addequipment",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		    	if(data === "SS01"){
+				 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    		$(location).attr('href',"user/supplier-profile.html");
+					});
+		    	}
+		      }
+		});
+		}else{
+				alert("Please enter all highlighted fields!!!");
+				}
+	});
+	
+	 // submit
+    $('#btn-quote').on('click', function() {
+	console.log("Entered JS script of submit from quote form");
+	var parent_fieldset = $(this).parents('fieldset');
+	 //console.log(parent_fieldset);
+    	var valid_form = true;
+    	// fields validation
+		//console.log(parent_fieldset.find('input[type=text]'));
+    	parent_fieldset.find('input[type=text]').each(function() {
+    		if( $(this).val() == "" ) {
+    			$(this).addClass('input-error');
+				//console.log("Empty elements : "+$(this));
+				valid_form = false;
+				
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+			});
+    	// fields validation
+		if(valid_form){
+		
+		var success = "successfully created";
+		var data = JSON.stringify($("#supplier-quote-form").serializeObject());
+		console.log(data);
+            
+		data= $.parseJSON(data);
+		var manufacturer = [];
+		if($.isArray(data.manufacturer)){
+		console.log("It is an Array");
+		}else{
+		console.log("doesnt contain braces");
+		manufacturer.push(data.manufacturer);
+		data.manufacturer = manufacturer;
+		console.log(data);
+		}
+		data = JSON.stringify(data);
+		console.log(data);
+		
+            $.ajax({
+			url:AppData.relativeUrl+"supplier/submitquote",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log(data);
+		    	 if(data === "SS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(5000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',AppData.relativeUrl+"user/supplier-dashboard.html");
+		    			 //history.back();	    
+		    			});
+		    	 }
+		      }
+
+                });
+				}else{
+				alert("Please enter all highlighted fields!!!");
+				}
     });
-    
     
 });
