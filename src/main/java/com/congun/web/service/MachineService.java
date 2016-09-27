@@ -58,4 +58,22 @@ public class MachineService {
 			return ResponseConstants.MACHINE_FAILURE_CODE;
 	}
 
+	public String getAllManufacturers() {
+		logger.info("Entered into MachineService.getAllManufacturers method");
+		List<Machines> machine = machineDao.getAllManufacturers();
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
+	public String getModelsByMake(String make) {
+		logger.info("Entered into MachineService.getModelsByMake method make:"+make);
+		List<Machines> machine = machineDao.getModelsByMake(make);
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
 }

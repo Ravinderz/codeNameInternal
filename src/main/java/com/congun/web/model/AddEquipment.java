@@ -24,7 +24,6 @@ public int yearOfManufacturing;
 public String model;
 public String capacity;
 public int quantity;
-public String equipmentprice;
 public Timestamp createdTime;
 public Timestamp updatedTime;
 

@@ -347,7 +347,7 @@
     	
     	var currYear = new Date().getFullYear();
 		console.log("Current Year :"+currYear);
-		document.getElementById("manufacturedyear").value=currYear;
+		document.getElementById("manufacturedyear").value=currYear-20;
 		
 		document.getElementById("workdescription").placeholder="Describe work and give total  months required. Driver food & accommodation details for a better quote. Invoice date and damage charges & other terms & conditions for reference. Include area distance etc.";
 		
@@ -550,7 +550,7 @@
 	$("#slider").slider({
 	  min: 0,
       max: 20,
-	  values: [ 0 ],
+	  values: [ 20 ],
 	  slide: function( event, ui ) {
         $( "#manufacturedyear" ).val(ui.values[ 0 ]);
 		range();
@@ -622,9 +622,9 @@ $.fn.serializeObject = function()
       
     <script type="text/javascript">
 	function range(){
-	     var currYear=new Date().getFullYear();
+	     var currYear=parseInt(new Date().getFullYear());
 		 console.log("Current Year :"+currYear);
-		 var x = document.getElementById("manufacturedyear").value;
+		 var x = parseInt(document.getElementById("manufacturedyear").value);
 		console.log("slider value : "+x);
 		document.getElementById("manufacturedyear").value=currYear-x;
 		//console.log(document.getElementById("specificationCapacity").value);

@@ -138,6 +138,22 @@ public class SupplierQuoteDao {
 			return null;
 		}
 	}
+	
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<SupplierQuote> getQuotesbySupplier(long supplierId) {
+		logger.info("Entered into SupplierQuoteDao.getQuotesbySupplier method supplierId:"
+				+ supplierId);
+		try {
+			List<SupplierQuote> supplierQuotationList = (ArrayList<SupplierQuote>) getSession()
+					.createCriteria(SupplierQuote.class)
+					.add(Restrictions.eq("quotePostedById", supplierId)).list();
+			return supplierQuotationList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Transactional
 	@SuppressWarnings("unchecked")
@@ -422,6 +438,23 @@ public class SupplierQuoteDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public boolean checkIfQuoted(Long suppId,Long reqId){
+		logger.info("Entered into DAO to check if quoted for ReqId :"+reqId);
+		try{
+			Criteria criteria = sessionFactory.getCurrentSession().createCriteria(SupplierQuote.class);
+			criteria.add(Restrictions.eq("quotePostedById", suppId));
+			criteria.add(Restrictions.eq("requirementId", reqId));
+			List<SupplierQuote> supplierQuotationList = criteria.list();
+			if(supplierQuotationList.size() >0){
+				return true;
+			}else
+				return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
 		}
 	}
 

@@ -33,15 +33,14 @@ public class SupplierQuote {
 	@Column(name = "machineRentalCharges")
 	public long machineRentalCharges;
 
-	
 	@Column(name = "rentalChargesType")
 	public String rentalChargesType;
 	
 	@Column(name = "driverAvailabile")
 	public String driverAvailable;
 	
-	@Column(name = "workingHoursPerMonth")
-	public String workingHoursPerMonth;
+	@Column(name = "workinghours")
+	public String workinghours;
 	
 	@Column(name = "queries")
 	public String queries;
@@ -64,6 +63,9 @@ public class SupplierQuote {
 	@Column(name = "requirementId")
 	public long requirementId;
 	
+	@Column(name = "reqPostedBy")
+	public String reqPostedBy;
+	
 	@Column(name = "activeFlag")
 	public int activeFlag;
 	
@@ -84,9 +86,6 @@ public class SupplierQuote {
 	
 	@Column(name = "reqpincode")
 	public String reqpincode;
-	
-	@Column(name = "hoursPerMonth")
-	public String hoursPerMonth;
 	
 	@Column(name = "advanceCharges")
 	public String advanceCharges;
@@ -141,13 +140,30 @@ public class SupplierQuote {
 	public void setRentalChargesType(String rentalChargesType) {
 		this.rentalChargesType = rentalChargesType;
 	}
-
-	public String getWorkingHoursPerMonth() {
-		return workingHoursPerMonth;
+	
+	public String getWorkinghours() {
+		return workinghours;
 	}
 
-	public void setWorkingHoursPerMonth(String workingHoursPerMonth) {
-		this.workingHoursPerMonth = workingHoursPerMonth;
+	public void setWorkinghours(String workinghours) {
+		this.workinghours = workinghours;
+	}
+
+	public String getReqPostedBy() {
+		return reqPostedBy;
+	}
+
+	public void setReqPostedBy(String reqPostedBy) {
+		this.reqPostedBy = reqPostedBy;
+	}
+
+
+	public String getWorkingHoursPerMonth() {
+		return workinghours;
+	}
+
+	public void setWorkingHoursPerMonth(String workinghours) {
+		this.workinghours = workinghours;
 	}
 
 	public String getQueries() {
@@ -260,14 +276,6 @@ public class SupplierQuote {
 
 	public void setReqpincode(String reqpincode) {
 		this.reqpincode = reqpincode;
-	}
-
-	public String getHoursPerMonth() {
-		return hoursPerMonth;
-	}
-
-	public void setHoursPerMonth(String hoursPerMonth) {
-		this.hoursPerMonth = hoursPerMonth;
 	}
 
 	public String getAdvanceCharges() {

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.Machines;
 import com.congun.web.util.ResponseConstants;
 
@@ -100,6 +101,35 @@ public class MachineDAO {
 			Criteria criteria = getSession().createCriteria(Machines.class);
 			criteria.setProjection(Projections.distinct(Projections.property("model")));
 			List<Machines> list= criteria.list();
+			return list;
+			}catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
+	}
+	
+	@Transactional
+	public List<Machines> getAllManufacturers() {
+		logger.info("Entered into MachineDAO.getAllManufacturers method");
+		try{
+			Criteria criteria = getSession().createCriteria(Machines.class);
+			criteria.setProjection(Projections.distinct(Projections.property("make")));
+			List<Machines> list= criteria.list();
+			return list;
+			}catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
+	}
+
+	@Transactional
+	public List<Machines> getModelsByMake(String make) {
+		logger.info("Entered into MachineDAO.getModelsByMake method  make:"+make);
+		try{
+			Criteria criteria = getSession().createCriteria(Machines.class);
+			criteria.setProjection(Projections.property("model"));
+			criteria.add(Restrictions.eq("make", make));
+			List<Machines> list = criteria.list();
 			return list;
 			}catch(Exception e){
 				e.printStackTrace();

@@ -281,13 +281,25 @@ padding-left : 15px;
 }
 
 .interactions .label{
-	padding-top: 5px ;
-	padding-bottom: 5px ;
+	padding-top: 10px ;
+	padding-bottom: 10px ;
 	margin-right:115px;
+	font-size:12px;
 }
 
 .label-success{
                 background-color:#dcefdc;
+}
+
+.interactions .label-primary{
+	background-color:#c3daee;
+}
+
+.interactions .label-primary{
+                padding-left:30px;
+                padding-right:30px;
+                border-left:5px solid #2e6da4;
+                color:#2e6da4;
 }
  
 .interactions .label-success{
@@ -374,15 +386,35 @@ padding-left : 15px;
 }
 
 #view-requirement-modal{
-	top:35%;
+	top:20%;
 	outline: none;
 }
 
-.no-data{
-	height:300px;
-}
-
 .modal-dialog{
-	width:900px;
+	width:65%;
 }
 
+.panel-heading > span{
+	margin-top:5px;
+}
+
+.panel-heading .post-req-btn{
+margin-right: 10px;
+margin-top:0;
+margin-bottom:0;
+background-color:#ffc13b;
+color:#fff;
+text-decoration:none;
+border-radius:0;
+border:0;
+}
+
+.panel-heading .post-req-btn:hover{
+box-shadow: 3px 3px 10px #888888;
+border:0;
+}
+
+.contact{
+	margin-right:65px;
+	margin-top:33px;
+}

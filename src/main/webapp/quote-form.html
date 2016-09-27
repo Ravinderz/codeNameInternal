@@ -108,27 +108,28 @@
 								    <li><label id="permonth" hidden>/per month</label><label id="perhour" hidden>/per hour</label><label id="perwork" hidden>/per work</label><label id="percumt" hidden>/per cu.mt</label>
 								    <label>(inclusive of tax)</label></li>
 								<br>
-								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
-								<br>
-                    			<li><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType1" value="fixed" /><label for="rentalyChargesType1"> Fixed </label></li>
-  								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
 								</ul>
-                		    </div>
+								</div>
+							<div class="form-group" id="noofworkinghours" hidden>
+                                <label for="workingHoursPerDay">Number Of Working Hours Per Day</label>
+                                <input type="text" name="workinghours" placeholder="Enter value ex: 9 (9 hours/day)" class="f1-workinghours form-control" id="workinghours" value="0"> 
+						    </div>
                             <div class="totalPrice">
 							<label for="totalPrice">Total Price : <p id="totalPrice">0</p> </label>
-                            </div>							
+                            </div>		
+                                <div class="machineRentalCharges">
+								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
+								<ul>
+                    			<li><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType1" value="fixed" checked /><label for="rentalyChargesType1"> Fixed </label></li>
+  								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
+								</ul>
+                		    </div>							
                             <div class="form-group">
                                 <h5> Driver/Operator Available </h5><br>
 								<div class="radio-driver">
 								<ul>
                                 <li><input type="radio" name="driverAvailable" value="Yes" class="magic-radio" id="driverNeeded-yes"><label for="driverNeeded-yes"><span class="radio-span">Yes</span></label></li>
                                 <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div>
-                            
-                            
-                            <div class="form-group" id="noofworkinghours" hidden>
-                                <label for="workingHoursPerMonth">Number Of Hours Working Per Month</label>
-                                <input type="text" name="workingHoursPerMonth" placeholder="Enter in Hours ex: 180(45 hours/week)" class="f1-workinghours form-control" id="noofworkinghours" value="0" hidden> 
-						    </div>
                                 
                              <div class="advanceCharges" hidden>
                                 <label for="advance">Advance</label>
@@ -141,7 +142,7 @@
 								 <input type="hidden" name="advanceCharges" id="advanceCharges" value="">
 								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
 								<br>
-                                <li><input type="radio" class="magic-radio" name="advanceChargesType" id="advanceChargesType1" value="fixed" /><label for="advanceChargesType1"> Fixed </label></li>
+                                <li><input type="radio" class="magic-radio" name="advanceChargesType" id="advanceChargesType1" value="fixed" checked /><label for="advanceChargesType1"> Fixed </label></li>
   								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="advanceChargesType" id="advanceChargesType2" value="negotiable"><label for="advanceChargesType2">Negotiable</label></li>
 								</ul>
 								</div>
@@ -161,8 +162,9 @@
 								<input type="hidden" name="reqduration" id="reqduration" value="">
 								<input type="hidden" name="reqlocation" id="reqlocation" value="">
 								<input type="hidden" name="reqpincode" id="reqpincode" value="">
-								<input type="hidden" name="mobileNumber" id="reqpincode" value="">
+								<input type="hidden" name="mobileNumber" id="mobileNumber" value="">
 								<input type="hidden" name="finalQuotePrice" id="totalprice" value="">
+								<input type="hidden" name="reqPostedBy" id="reqPostedBy" value="">
                                 </div>
                                 
                                <div class="f1-buttons">
@@ -277,6 +279,7 @@
 		$('#requirementId').val(reqid);
 		$('#mobileNumber').val(user.mobileNumber);
 		
+		
 		var reqList = "";
 		var value = "";
 		var hiringChargesType = "";
@@ -306,7 +309,7 @@
 					+"<li style='padding:0px'><h5>Diesel Charges</h5><p>"+value.dieselCharges+"</p></li>"
 					+"<li><h5>workLocation</h5><p>"+value.workLocation+"</p></li>"
 					+"<li><h5>Pin Code</h5><p>"+value.pincode+"</p></li><br>"
-					+"<li style='padding:0px'><h5>Posted By</h5><p>"+value.contractorName+"<br>Contact: "+value.mobile+"</p></li>"
+					+"<li style='padding:0px'><h5>Posted By</h5><p>"+value.contractorName+"<br></p></li>"
 					+"</ul><div class='clear-fix'></div></div></div>";
 					//reqList += '<ul><li class="dynamic-content" id='+value.quoteId+'>Category: '+value.equipmentCategory+'<span style="padding-left:194px;float:centre;">Equipment : '+value.equipmentName+'</span><span style="padding-left:100px;float:right">Quantity: '+value.quantity+'</span><br><br><span>Model: '+value.model+'</span><span style="padding-left:250px">Manufacturer: '+value.manufacturer+'</span><span style="padding-left:100px;float:right">YearOfManufacture: '+value.manufacturedyear+'</span><br><br>Created Date: '+value.createdTime+'<span style="padding-left:70px">Final Price: <b>'+value.finalQuotePrice+'</b></span><a href="#" class="btn btn-warning">View</a></li></ul>';
 					$('.left-container').html("");
@@ -317,12 +320,13 @@
 					$('#reqlocation').val(value.workLocation);
 					$('#reqpincode').val(value.pincode);
 					$('#reqduration').val(value.duration);
+					$('#reqPostedBy').val(value.contractorName);
 				hiringChargesType = value.hiringChargesType;
- 
+               
 		console.log("Type : "+hiringChargesType);
 		if(hiringChargesType === "month"){
 		$("#noofworkinghours").show();
-		$("#permonth").show();
+		$("#perhour").show();
 		if(value.duration >= 30)
 		{
 		$(".advanceCharges").show();
@@ -342,32 +346,33 @@
 		});
 		
 
-      $("#rentalcharges").change(function(){
-	  console.log("Entered the function");
+      $("#rentalcharges,#workinghours").change(function(){
+	  console.log("Entered rental function");
 	  var totPrice="";
+	  var noofhours=0;
 	  var rentalcharges = document.getElementById("rentalcharges").value;
-	  console.log("Rental Charges :"+rentalcharges);
+	
 
 	  if(value.hiringChargesType === "hour"){
-	  totPrice = value.duration * rentalcharges * 24;
-	  totPrice = Math.round(totPrice);
+	  totPrice = Math.round(rentalcharges);
 	  $("#totalPrice").html(totPrice);
-	  $(".totalPrice").show("slow");
 	  document.getElementById("totalprice").value=totPrice;
 	  }else if(value.hiringChargesType === "month"){
-	  dayPrice = rentalcharges/30;
-	  totPrice = value.duration * dayPrice;
+	
+	  noofhours = document.getElementById("workinghours").value;
+	  totPrice = value.duration * rentalcharges * noofhours;
 	  totPrice = Math.round(totPrice);
 	  $("#totalPrice").html(totPrice);
-	  $(".totalPrice").show("slow");
+	  //$(".totalPrice").show("slow");
 	  document.getElementById("totalprice").value=totPrice;
       }else if(value.hiringChargesType === "work"){
 	  totPrice = rentalcharges;
 	  $("#totalPrice").html(totPrice);
-	  $(".totalPrice").show("slow");
+	  //$(".totalPrice").show("slow");
 	  document.getElementById("totalprice").value=totPrice;
       }
-	   });	  
+	   });	
+
 /* This ajax call is made to populate the category and equipment machinary dropdowns */
     	
 /*    	var category = []

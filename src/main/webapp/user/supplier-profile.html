@@ -383,7 +383,7 @@
  				var total_user_fields = Object.keys(user).length;
  				var user_entered_fields = 0;
  				$.each(user,function(index,value){
- 					if(value !== "undefined" || value !== null || value !== "null" || value !== ""){
+ 					if(value){
  					user_entered_fields++;
  					}
  				});
@@ -450,10 +450,10 @@
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;	
  							var createdTime = value.createdTime;
- 							createdTime = $.date(createdTime);
+ 							createdTime = $.date(createdTime,3);
  							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
  							+'<img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
- 							+'<h3>'+value.contractorName+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>'+value.title+'</p></div></div>';
+ 							+'<h4>'+value.contractorName+'</h4><p class="posted-date">posted on : '+createdTime+'</p><h4>'+value.quantity+' '+value.equipmentName+' needed on '+$.date(value.startDate,3)+' at '+value.workLocation+'</h4></div></div>';
  						});
  						$('.newsfeed').html("");
  						$('.newsfeed').append(newsfeed);
@@ -487,7 +487,7 @@
  						response = $.parseJSON(response);
  						console.log(response);
  						$.each(response,function(index,value){
- 							var createdTime = $.date(value.createdTime);
+ 							var createdTime = $.date(value.createdTime,1);
  							if(index < 3){
  							equipments += '<div class="media"><div class="media-left"><a href="#">'
  	 							+'<img src=../images/'+value.equipmentCategory+'/'+value.equipment+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
@@ -527,12 +527,117 @@
  			return o;
  		};
  		
- 		$.date = function(dateObject) {
+ 		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
  		    var date = d.toDateString();
+ 		    console.log(d);
+ 		    console.log(date);
+ 		    if(pattern === 1){
  		    var dateArr = date.split(" ");
  		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    }
+ 		    else if(pattern === 2){
+ 		    	console.log("date" +dateObject);
+ 		    	var dateArr = dateObject.split(' ');
+ 		    	var time = dateArr[3].split(':');
+ 		    	var HH = parseInt(time[0])+6;
+ 		    	var mm = parseInt(time[1])+30;
+ 		    	var ss = time[2];
+ 		    	if(dateArr[1].length === 3)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		    	else if(dateArr[1].length === 2)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		    }else if(pattern === 3){
+ 	 		    var dateArr = dateObject.split("-");
+ 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 				}
  		    return date;
+ 		};
+ 		
+ 		$.getMonthName = function(monNum){
+ 			var month;
+ 			console.log(monNum)
+ 			if(monNum === "01"){
+ 				month = "Jan";
+ 			}
+ 			else if(monNum === "02"){
+ 				month = "Feb";
+ 			}
+ 			else if(monNum === "03"){
+ 				month = "Mar";
+ 			}
+ 			else if(monNum === "04"){
+ 				month = "Apr";
+ 			}
+ 			else if(monNum === "05"){
+ 				month = "May";
+ 			}
+ 			else if(monNum === "06"){
+ 				month = "Jun";
+ 			}
+ 			else if(monNum === "07"){
+ 				month = "Jul";
+ 			}
+ 			else if(monNum === "08"){
+ 				month = "Aug";
+ 			}
+ 			else if(monNum === "09"){
+ 				month = "Sep";
+ 			}
+ 			else if(monNum === "10"){
+ 				month = "Oct";
+ 			}
+ 			else if(monNum === "11"){
+ 				month = "Nov";
+ 			}
+ 			else if(monNum === "12"){
+ 				month = "Dec";
+ 			}
+ 			return month;
+ 		};
+ 		
+ 		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			console.log(month)
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
  		};
  		</script>	
  				

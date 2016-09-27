@@ -103,5 +103,11 @@ public class SupplierController {
 		return supplierService.getTopFiveRequirementsBysupId(id);
 	}
 	
+	@RequestMapping(value = "/checkifquoted" , method = RequestMethod.GET)
+	public String checkIfQuotated(@RequestParam Long suppid,@RequestParam Long reqId){
+		logger.info("Entered to check if Quotation has been posted by Supplied Id"+suppid+" for Requirement id"+reqId);
+		return supplierService.checkIfQuoted(suppid,reqId);
+	}
+	
 
 }

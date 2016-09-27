@@ -117,6 +117,17 @@ public class SupplierQuoteService {
 			else
 				return ResponseConstants.SUPPLIER_FAILURE_CODE;
 		}
+	
+	public String checkIfQuoted(Long suppId,Long reqId) {
+		logger.info("Entered into service to check if Quoted for Requirement :"+reqId);
+		if(supplierDao.checkIfQuoted(suppId,reqId))
+		return "true";
+		else{
+			logger.info("Could not find any quotation from Supplier Id :"+suppId+" for Requirement :"+reqId);
+			return "false";
+		}
+			
+	}
 }
 
 		

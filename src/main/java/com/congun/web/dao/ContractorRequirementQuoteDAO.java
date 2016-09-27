@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.MappingObject;
+import com.congun.web.model.SupplierQuote;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 import com.congun.web.util.SupplierMapperComponent;
@@ -33,6 +34,9 @@ public class ContractorRequirementQuoteDAO {
 
 	@Autowired
 	SupplierMapperComponent mapperComponent;
+	
+	@Autowired
+	SupplierQuoteDao supplierDao;
 
 	@Transactional
 	protected Session getSession() {
@@ -76,7 +80,14 @@ public class ContractorRequirementQuoteDAO {
 			criteria.add(Restrictions.eq("requirementId", id));
 			ContractorRequirement reqObject = (ContractorRequirement) criteria
 					.uniqueResult();
+			if(reqObject == null){
+				logger.info("Requirement Object with Id "+id+"Doesn't exist!!");
+				return null;
+			}else{
+				logger.info("Requirement Object with Id "+id+"Doesn't exist!!");
 			return reqObject;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -143,9 +154,19 @@ public class ContractorRequirementQuoteDAO {
 			criteria.setProjection(Projections.property("requirementId"));
 			List mappedRequirementsList = (ArrayList) (criteria
 					.add(Restrictions.eq("supplierId", suppId))).list();
+			List quotationsList = (ArrayList) supplierDao.getQuotesbySupplier(suppId);
 			if (mappedRequirementsList.size() > 0) {
-				logger.info("There Are Mapper Requirements for SupplierID: "
+				logger.info("There Are Mapped Requirements for SupplierID: "
 						+ suppId);
+				//logger.info("Initial Mapped :"+mappedRequirementsList.size());
+				/*if(quotationsList.size() > 0){
+				for(Object suppObj : quotationsList){
+					if(mappedRequirementsList.contains(((SupplierQuote)suppObj).getRequirementId())){
+					mappedRequirementsList.remove(((SupplierQuote)suppObj).getRequirementId());
+					}
+				}
+				}
+				logger.info("Final Mapped :"+mappedRequirementsList.size());*/
 				for (Object obj : mappedRequirementsList) {
 					ContractorRequirement requirement = getRequirementById(((Long) obj)
 							.longValue());
