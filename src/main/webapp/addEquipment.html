@@ -24,8 +24,8 @@
         
 $(document).ready(function(){
 	
-		//var user = localStorage.getItem("user");
-		var user = sessionStorage.getItem("user");
+		var user = localStorage.getItem("user");
+		//var user = sessionStorage.getItem("user");
 		console.log(user);
 		user = $.parseJSON(user);
 		var username = user.firstname+" "+user.lastname;
@@ -120,67 +120,6 @@ $(document).ready(function(){
     		});
     	});
     
-      //modelParam = "soil compactor VMII5";
-	  
-     /* This ajax call is for populating all Models*/
-	/*var model = []
-	var value = "";
-    	$.ajax({
-    		url :AppData.relativeUrl+"machine/getAllModels",
-    		type:"get",
-    		data:{},
-    		success:function(response){
-    			response = $.parseJSON(response);
-    			var i = 0;
-    			console.log(response);
-    			$.each(response,function(index,value){
-    				$("#model").append($("<option />").val(value).text(value));
-    					model[i] = value;
-    					i++
-    			});
-				console.log(document.getElementById("model").value);
-			
-				$.ajax({
-				url :AppData.relativeUrl+"machine/getMachineDetailsByModel/"+model[0]+"/",
-				type:"get",
-				data:{},
-				success:function(response){
-    			response = $.parseJSON(response);
-				value = response;
-    			console.log(response);
-				$("#equipmentCategory").val(value.category);
-				$("#equipmentName").val(value.equipment);
-				$("#manufacturer").val(value.make);
-				$("#capacity").val(value.capacity);			
-				}
-		
-    	});
-		}
-	});
-	*/
-/* This will be called when model changes*/
-/*	$("#model").on('change',function(){
-    		var selectedOption = $("#model option:selected").text();
-    		console.log("selected option ",selectedOption);
-    		var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+selectedOption+"/"; 
-    		console.log("url ",url);
-    		$.ajax({
-    			url:url,
-    			type:"get",
-    			data:{},
-    			success:function(response){
-    			response = $.parseJSON(response);
-				value = response;
-    			console.log(response);
-				$("#equipmentCategory").val(value.category);
-				$("#equipmentName").val(value.equipment);
-				$("#manufacturer").val(value.make);
-				$("#capacity").val(value.capacity);			
-				}
-    				
-    		});
-    	});*/
- 
  
      	var manufacturer = []
     	$.ajax({
@@ -305,9 +244,9 @@ $(document).ready(function(){
 	
 	$('.logout').click(function() {
 					console.log("inside logout function")
-					var user = sessionStorage.getItem("user");
+					var user = localStorage.getItem("user");
 					if (user !== null) {
-						sessionStorage.removeItem("user");
+						localStorage.removeItem("user");
 					}
 					console.log("user logged out");
 					$(location).attr('href', "index.html");
@@ -528,7 +467,7 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
+										aria-hidden="true">ï¿½</button>
 									<h4 class="modal-title" id="myModalLabel">Success</h4>
 								</div>
 								<div class="modal-body">

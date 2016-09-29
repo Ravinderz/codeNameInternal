@@ -52,7 +52,7 @@ public class ContractorRequirementController {
 	@RequestMapping(value = "/getAllRequirements/{id}" , method = RequestMethod.GET)
 	public String getAllRequirementsByContractorId(@PathVariable Long id,
 			@RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "pSize", defaultValue = "10") int pSize){
+            @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into ContractorRequirementController.getAllRequirementsByContractorId method  ID:"+id);
 		return service.getAllRequirementsByContractorId(id,page,pSize);
 	}

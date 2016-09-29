@@ -25,38 +25,31 @@ cursor: pointer;
 user-select: none;
 background-image: none;
 border: 1px solid transparent;
-	    transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    -moz-transition: all ease-out 0.5s;
-    transition: all ease-out 0.5s;
+-moz-transition: all ease-out 0.5s;
+transition: all ease-out 0.5s;
 }
 
-#navigation-right  li  a  span {
+#navigation-right  li  a  span{
 	display: inline-block;
-	 transform: skewX(20deg);
-    -o-transform: skewX(20deg);
-    -moz-transform: skewX(20deg);
-    -webkit-transform: skewX(20deg);
-
 }
+
 
 #navigation-right li a:hover,
 #navigation-right li a:focus {
-    background:#ffc13b;
-    color: #fff;
+    color: #ffc13b;
+	background:none;
     outline: none;
 }
 
 #navigation-right li a.active {
-    color:#fff;
-    background:#ffc13b;
+    color:#ffc13b;
+	background:none;
 }
 
 #navigation-right li a.active:hover,
 #navigation-right li a.active:focus {
-    background:#ffc13b;
+    color:#ffc13b;
+	background:none;
 }
 
 .navbar-toggle{
@@ -67,6 +60,13 @@ border: 1px solid transparent;
 	background-color:#fff;
 }
 
+.avatar-dropdown .dropdown{
+margin-top: -13px;
+}
+
+#dropdownMenu1{
+background:none;
+}
 
 .banner{
 	position: relative;

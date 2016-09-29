@@ -14,18 +14,33 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
 <link rel="stylesheet" href="css/custom.css">
+<script src="js/appProperties.js"></script>
+ <script>
+ 	console.log("inside if")
+ if (typeof (Storage) !== "undefined") {
+	 if(localStorage.getItem("user") !== null)
+      window.location = AppData.relativeUrl+"user/index.html";
+    }
+  </script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/appProperties.js"></script>
+
 <script src="js/validation.js"></script>
 <script type="text/javascript">
+$.holdReady( true );
+if (typeof (Storage) !== "undefined") {
+	 if(localStorage.getItem("user") === null)
+     $(location).attr('href',AppData.relativeUrl+"user/index.html");
+}
+$.holdReady( false );
+
 	$(document).ready(function() {
 		
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
 		registerform_submit = validateOnFocusout($("#register-form"));
-						var user = sessionStorage.getItem("user");
+						var user = localStorage.getItem("user");
 						user = $.parseJSON(user);
 						console.log(user);
 						if (user !== null) {
@@ -47,43 +62,60 @@
 						});
 						
 						
-						$("#register").click(
-						function() {
-						var success = "successfully created";
-						var successUrl = "#modal-container-login";
-						var data = JSON.stringify($("#register-form").serializeObject());
-						console.log(data);
-						registerform_submit = validateOnClick($(this));
-						if(registerform_submit){
-						 $.ajax({
-						url : AppData.relativeUrl+"user/register",
-						type : "post",
-						contentType : "application/json; charset=utf-8",
-						data : data,
-						success : function(data) {
-						if (data.search("UF01") != -1) {
-						} else {
-						console.log("inside if");
-						$('#modal-container-register').modal('hide');
-						$('#modal-success-dialog').modal('show');
-						$('#modal-success-dialog').on('shown.bs.modal', function() {
-							setTimeout(function(){
-								$('#modal-success-dialog').modal('hide');},2000
-							);
-							$('#modal-success-dialog').on('hidden.bs.modal', function() {
-			    			 $('#modal-container-login').modal('show');
-			    			 //history.back();	    
-							});
-			    		});  
-						console.log("register modal closed");
-						console.log("opening login modal");
+						$("#register-form").on("keypress",function(e){
+							if(e.which === 13)
+							$.register($("#register"));
+						});
 						
-						//$(location).attr('href',"user/index.html");
-						}
-						}
-						});
-						}
-						});
+						
+						$("#register").click(function() {
+							
+							$.register(this);
+							
+							});
+						
+						$.register = function($this){
+							var success = "successfully created";
+							var successUrl = "#modal-container-login";
+							var data = JSON.stringify($("#register-form").serializeObject());
+							console.log(data);
+							registerform_submit = validateOnClick($this);
+							if(registerform_submit){
+							 $.ajax({
+							url : AppData.relativeUrl+"user/register",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+							success : function(data) {
+							if (data.search("UF01") != -1) {
+							} else {
+							console.log("inside if");
+							$('#modal-container-register').modal('hide');
+							$('#modal-success-dialog').modal('show');
+							$('#modal-success-dialog').on('shown.bs.modal', function() {
+								setTimeout(function(){
+									$('#modal-success-dialog').modal('hide');},2000
+								);
+								$('#modal-success-dialog').on('hidden.bs.modal', function() {
+				    			 $('#modal-container-login').modal('show');
+				    			 //history.back();	    
+								});
+				    		});  
+							console.log("register modal closed");
+							console.log("opening login modal");
+							
+							//$(location).attr('href',"user/index.html");
+							}
+							}
+							});
+							}
+				
+						};
+							
+							
+							
+						
+						
 						
 						$('#re-link').click(function(e){
 							$('#modal-container-login').modal('hide');
@@ -91,49 +123,69 @@
 						});
 							
 						
+						$("#login-form").on("keypress",function(e){
+							if(e.which == 13){
+								$.login($("#login-btn"));
+							}
+						});
+						
 						$("#login-btn").click(function(e) {
 						console.log("inside login function");
-						var data = JSON.stringify($("#login-form").serializeObject());
-						console.log(data);
-						loginform_submit = validateOnClick($(this));
-						if(loginform_submit){
-						console.log("button submiittteed");
-						$.ajax({
-						url : AppData.relativeUrl+"user/login",
-						type : "post",
-						contentType : "application/json; charset=utf-8",
-						data : data,
-														// datatype : "json",  
-						success : function(response) {
-						console.log(response);
-						response = $.parseJSON(response);
-						console.log("got user from userAPI",response.username);
-						$('#modal-container-login').modal('hide');
-						if (typeof (Storage) !== "undefined") {
-						sessionStorage.setItem("user",JSON.stringify(response));
-						} else {
-						console.log(" no storage available");
-						}
-						if (response.role === "supplier") {
-						var user = sessionStorage.getItem("user");
-						user = $.parseJSON(user);
-						console.log(user);
-						if (user !== null) {
-						$(location).attr('href',"user/supplier-profile.html");
-						}
-						} else if (response.role === "contractor") {
-							var user = sessionStorage.getItem("user");
+							$.login($(this));
+						});
+						
+						
+						$.login = function($this){
+							var data = JSON.stringify($("#login-form").serializeObject());
+							console.log(data);
+							loginform_submit = validateOnClick($this);
+							if(loginform_submit){
+							console.log("button submiittteed");
+							$.ajax({
+							url : AppData.relativeUrl+"user/login",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+															// datatype : "json",  
+							success : function(response) {
+							console.log(response);
+							response = $.parseJSON(response);
+							console.log("got user from userAPI",response.username);
+							$('#modal-container-login').modal('hide');
+							if (typeof (Storage) !== "undefined") {
+							localStorage.setItem("user",JSON.stringify(response));
+							} else {
+							console.log(" no storage available");
+							}
+							if (response.role === "supplier") {
+								if (typeof (Storage) !== "undefined") {
+							var user = localStorage.getItem("user");
+								}else{
+									
+								}
 							user = $.parseJSON(user);
 							console.log(user);
 							if (user !== null) {
-							$(location).attr('href',"user/contractor-profile.html");
-							}																//$(location).attr('href',"index.html");
-						}
-						}
-
-						});
+							$(location).attr('href',"user/supplier-profile.html");
 							}
-						});
+							} else if (response.role === "contractor") {
+								if (typeof (Storage) !== "undefined") {
+								var user = localStorage.getItem("user");
+								}else{
+									
+								}
+								user = $.parseJSON(user);
+								console.log(user);
+								if (user !== null) {
+								$(location).attr('href',"user/contractor-profile.html");
+								}																//$(location).attr('href',"index.html");
+							}
+							}
+
+							});
+								}
+						};
+						
 
 						$('.category-img').click(function() {
 						console.log("inside img click function");
@@ -163,7 +215,10 @@
 
 						$('.logout').click(function() {
 							console.log("inside logout function")
-							var user = sessionStorage.getItem("user");
+							var user;
+							if (typeof (Storage) !== "undefined") {
+							user = sessionStorage.getItem("user");
+							}
 							if (user !== null) {
 								sessionStorage.removeItem("user");
 							}

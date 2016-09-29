@@ -201,7 +201,7 @@
  			$(document).ready(function(){
  				var requirements = [];
  				var quotes = [];
- 				var user = sessionStorage.getItem("user");
+ 				var user = localStorage.getItem("user");
  				user = $.parseJSON(user);
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
@@ -209,9 +209,9 @@
  				
  				$('.logout').click(function() {
 					console.log("inside logout function")
-					var user = sessionStorage.getItem("user");
+					var user = localStorage.getItem("user");
 					if (user !== null) {
-						sessionStorage.removeItem("user");
+						localStorage.removeItem("user");
 					}
 					console.log("user logged out");
 					$(location).attr('href', "../index.html");
@@ -364,7 +364,7 @@
 				console.log(clicked_page);
 				if(clicked_page === "prev"){
 					if(current_page === 1){
-						$.getAllQuotesByPagination(user.userId,current_page,10);
+						$.getAllQuotesByPagination(user.userId,current_page,5);
 					}else if(current_page === $('#first').data("value")){
 					next_page = current_page;
 					current_page = previous_page;
@@ -375,7 +375,7 @@
 					$('#middle').text(next_page);
 					$('#last').data("value",next_page+1);
 					$('#last').text(next_page+1);
-					$.getAllQuotesByPagination(user.userId,current_page,10);
+					$.getAllQuotesByPagination(user.userId,current_page,5);
 					}else{
 					next_page = current_page;
 					current_page = previous_page;
@@ -383,7 +383,7 @@
 					$active_element.removeClass("active");
 					$active_element.prev().addClass("active");
 					$active_element = $active_element.prev();
-					$.getAllQuotesByPagination(user.userId,current_page,10);
+					$.getAllQuotesByPagination(user.userId,current_page,5);
 					}
 				}else if(clicked_page === "next"){
 					if(current_page === $('#last').data("value")){
@@ -396,7 +396,7 @@
 					$('#middle').text(previous_page);
 					$('#last').data("value",current_page);
 					$('#last').text(current_page);
-					$.getAllQuotesByPagination(user.userId,current_page,10);
+					$.getAllQuotesByPagination(user.userId,current_page,5);
 					}else{
 					previous_page = current_page;
 					current_page = next_page;
@@ -404,7 +404,7 @@
 					$active_element.removeClass("active");
 					$active_element.next().addClass("active");
 					$active_element = $active_element.next();
-					$.getAllQuotesByPagination(user.userId,current_page,10);
+					$.getAllQuotesByPagination(user.userId,current_page,5);
 					}
 				}else{
 					$active_element = $(this).parent();
@@ -412,7 +412,7 @@
 					previous_page = current_page-1;
 					next_page = current_page+1;
 					$(this).parent().addClass("active").siblings().removeClass("active");
-					$.getAllQuotesByPagination(user.userId,current_page,10);
+					$.getAllQuotesByPagination(user.userId,current_page,5);
 					
 				}
 				

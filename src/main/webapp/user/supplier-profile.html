@@ -363,7 +363,7 @@
 		
  		<script type="text/javascript">
  			$(document).ready(function(){
- 				var user = sessionStorage.getItem("user");
+ 				var user = localStorage.getItem("user");
  				user = $.parseJSON(user);
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
@@ -372,9 +372,9 @@
  				
  				$('.logout').click(function() {
 					console.log("inside logout function")
-					var user = sessionStorage.getItem("user");
+					var user = localStorage.getItem("user");
 					if (user !== null) {
-						sessionStorage.removeItem("user");
+						localStorage.removeItem("user");
 					}
 					console.log("user logged out");
 					$(location).attr('href', "../index.html");

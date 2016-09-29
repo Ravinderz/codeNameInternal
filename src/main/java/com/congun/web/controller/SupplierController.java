@@ -36,7 +36,7 @@ public class SupplierController {
 	@RequestMapping(value="/getquotesbysupplier/{supplierId}" , method=RequestMethod.GET)
 	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId,
 			@RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "pSize", defaultValue = "10") int pSize){
+            @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into SupplierController.getQuotationsBySupplier method  SupplierId:"+suppId);
 		return supplierService.getQuotationsbySupplier(suppId,page,pSize);	
 	}
