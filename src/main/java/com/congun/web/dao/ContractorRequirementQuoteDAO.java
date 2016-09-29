@@ -133,7 +133,7 @@ public class ContractorRequirementQuoteDAO {
 			criteria.setFirstResult((page - 1) * pSize);
 			criteria.setMaxResults(pSize);
 			criteria.add(Restrictions.eq("contractorId", id)).add(
-					Restrictions.eq("activeFlag", 1));
+					Restrictions.eq("activeFlag", 1)).addOrder(Order.desc("createdTime"));;
 			List<ContractorRequirement> reqList = criteria.list();
 			return reqList;
 		} catch (Exception e) {
@@ -153,7 +153,7 @@ public class ContractorRequirementQuoteDAO {
 			criteria.setMaxResults(pSize);
 			criteria.setProjection(Projections.property("requirementId"));
 			List mappedRequirementsList = (ArrayList) (criteria
-					.add(Restrictions.eq("supplierId", suppId))).list();
+					.add(Restrictions.eq("supplierId", suppId))).addOrder(Order.desc("createdTime")).list();
 			List quotationsList = (ArrayList) supplierDao.getQuotesbySupplier(suppId);
 			if (mappedRequirementsList.size() > 0) {
 				logger.info("There Are Mapped Requirements for SupplierID: "

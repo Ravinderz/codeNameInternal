@@ -2,6 +2,7 @@ package com.congun.web.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -131,7 +132,7 @@ public class SupplierQuoteDao {
 		try {
 			List<SupplierQuote> supplierQuotationList = (ArrayList<SupplierQuote>) getSession()
 					.createCriteria(SupplierQuote.class).setFirstResult((page - 1) * pSize).setMaxResults(pSize)
-					.add(Restrictions.eq("quotePostedById", supplierId)).list();
+					.add(Restrictions.eq("quotePostedById", supplierId)).addOrder(Order.desc("createdTime")).list();
 			return supplierQuotationList;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,7 +166,7 @@ public class SupplierQuoteDao {
 			List<SupplierQuote> supplierQuotationList = (ArrayList<SupplierQuote>) getSession()
 					.createCriteria(SupplierQuote.class)
 					.setFirstResult((page - 1) * pSize).setMaxResults(pSize)
-					.add(Restrictions.eq("requirementId", requirementId))
+					.add(Restrictions.eq("requirementId", requirementId)).addOrder(Order.desc("createdTime"))
 					.list();
 
 			return supplierQuotationList;
@@ -416,7 +417,7 @@ public class SupplierQuoteDao {
 			Criteria criteria = getSession()
 					.createCriteria(SupplierQuote.class);
 			criteria.add(Restrictions.eq("requirementId", requirementId));
-			criteria.add(Restrictions.eq("quoteStatus", quoteStatus));
+			criteria.add(Restrictions.eq("quoteStatus", quoteStatus)).addOrder(Order.desc("createdTime"));;
 			List<SupplierQuote> supplierQuotationList = criteria.list();
 			return supplierQuotationList;
 		} catch (Exception e) {
