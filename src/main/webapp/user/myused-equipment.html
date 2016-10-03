@@ -19,6 +19,7 @@
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
 
 
 <!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
@@ -95,63 +96,25 @@
 				<div class="row sub-sub-nav-bar">
 			<div class="page-nav">
 				<ul class="nav navbar-nav">
-				  <li role="presentation" class="active"><a href="#">Equipments for sale</a></li>
+				  <li role="presentation" class="active"><a href="used-equipment.html">Equipments for sale</a></li>
 				  <li role="divider" class="divider"><a href="#"></a></li>
-				  <li role="presentation"><a href="#">My used-equipments</a></li>
+				  <li role="presentation"><a href="myused-equipment.html">My used-equipments</a></li>
 				</ul>
 			</div>
 			</div>
 		</div>
-		 <div class="container">
+		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-		   <div class="panel panel-default used-equip-table">
-			  <div class="panel-heading">Equipments posted for Sale</div>
-			  <div class="quote-table">
-				 <table class="table table-striped">
-					  <thead>
-						<tr>
-						  <th>Date</th>
-						  <th>Equipment</th>
-						  <th>Price</th>
-						  <th>Interested People</th>
-						  <th>Ad Duration</th>
-						  <th>Status</th>
-						  <th>Location</th>
-						</tr>
-					  </thead>
-					  <tbody>
-						<tr>
-						  <td>22-Aug-16</td>
-						  <td>Excavator<a href="#">(view)</a></td>
-						  <td>2000000</td>
-						  <td>2</td>
-						  <td>2 months</td>
-						  <td>Open</td>
-						  <td>Hyderabad</td>
-						</tr>
-						<tr>
-						  <td>22-Aug-16</td>
-						  <td>Crane<a href="#">(view)</a></td>
-						  <td>40000000</td>
-						  <td>0</td>
-						  <td>5 months</td>
-						  <td>Open</td>
-						  <td>Gujarat</td>
-						</tr>
-						<tr>
-						  <td>22-Aug-16</td>
-						  <td>Generator<a href="#">(view)</a></td>
-						  <td>1000000</td>
-						  <td>3</td>
-						  <td>7 days </td>
-						  <td>Open</td>
-						  <td>Karnataka</td>
-						</tr>
-					  </tbody>
-				</table>
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#" id="overview">Overview<span
+								class="sr-only">(current)</span></a></li>
+						<li><a href="#" id="new-post">New Post</a></li>
+						<li><a href="#" id="my-posts">My Posts</a></li>
+					</ul>
 				</div>
-		</div>
+				<div class="col-sm-9 col-md-10 sidebar-content">
+			
 		<div class="used-equip-pagination">
 			<nav aria-label="Page navigation">
 				<ul class="pagination ">
@@ -173,8 +136,9 @@
 		</div>	
 				</div>
 			</div>
-			</div>
-			</div>
+		</div>
+		
+		 	</div>
 				<div class="sub-footer">
 			<div class="container-fluid">
 				<div class="row">
@@ -230,9 +194,9 @@
  			var user = localStorage.getItem("user");
 				user = $.parseJSON(user);
 				console.log(user);
-				var username = user.firstname+" "+user.lastname;
-				$('#user').text(username);
-				$('#user-name').text(username);
+				//var username = user.firstname+" "+user.lastname;
+				//$('#user').text(username);
+				//	$('#user-name').text(username);
 				
 				$('.logout').click(function() {
 				console.log("inside logout function")
@@ -244,6 +208,8 @@
 				$(location).attr('href', "../index.html");
 			});
  			
+				var posts = [];		
+				
  		$('.profile').click(function(e){
 			e.preventDefault();
 			if(user.role === "contractor"){
@@ -261,8 +227,317 @@
 				$(location).attr('href',"supplier-dashboard.html");
 			}
 		});
+		
+		$('#new-post').click(function(e){
+			e.preventDefault();
+			var postform = '<h3 class="text-center text-muted">ADD USED MACHINE FORM</h3><br><div class="main-content form-box text-center"><form role="form" method="post" id="addUsedMachine-form" class="f1"><fieldset>'+
+							'<br><div class="form-group"><label for="selectCategory" class="sr-only">Equipment Category</label>'+
+							'<select id="category" class="form-control" placeholder="Equipment Category" name="category" ></select></div>'+
+							'<div class="form-group"><label for="equipment" class="sr-only">Equipment Name</label>'+
+							'<select id="equipment" class="form-control" name="equipmentName" placeholder="Equipment Name"></select></div>'+
+							'<div class="form-group"><label for="manufacturer" class="sr-only">Equipment Manufacturer</label>'+
+							'<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer Ex: JCB or Hitachi etc.,">'+
+							'</div><div class="form-group"><label for="yearOfManufacturing" class="sr-only">Year Of Manufacturing</label>'+
+							'<input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturer" placeholder="Year of manufacturing Ex: 2010 (YYYY)">'+
+							'</div><div class="form-group"><label for="model" class="sr-only">Model Details</label>'+
+							'<input type="text" id="model" class="form-control" name="model" placeholder="Model"></div><div class="form-group">'+
+							'<label for="capacity" class="sr-only">Capacity Details</label>'+
+							'<input type="text" id="capacity-right" class="form-control" name="capacity" placeholder="Capacity in Ton/Feet/cu.mt Ex: 100Ton">'+
+							'</div><div class="form-group"><label for="meterreading" class="sr-only">Enter Equipment Meter Reading</label>'+
+							'<input type="text" id="reading" class="form-control" name="meterReading" placeholder="Current Equipment meter reading">'+
+							'</div><div class="form-group"><label for="location" class="sr-only">Enter Location</label>'+
+							'<input type="text" id="location" class="form-control" name="location" placeholder="Enter Location of your Equipment">'+
+							'</div><div><label for="sellingprice" class="sr-only">Enter Selling Price</label>'+
+							'<input type="text" id="price" class="form-control" name="price" placeholder="Enter Selling Price of Machine in Rupees"></div>'+
+							'<div class="form-group"><label for="description" class="sr-only">Enter Description</label>'+
+							'<textarea id="description" class="form-control" name="description" rows="15" placeholder="Enter Description about to Machine if any" ></textarea>'+
+							'</div><div class="form-group"><label for="images" class="sr-only">Attach images of your equipmebt</label>'+
+							'<input type="file" name="workAreaImages[]" id="upload-image" accept="image/*" multiple/></div><div class="f1-buttons">'+
+							'<button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button></div><input type="hidden" id="userId" name="userId">'+
+							'<input type="hidden" id="userName" name="userName"><input type="hidden" id="emailId" name="emailId">'+
+							'<input type="hidden" id="mobileNumber" name="contactNo"></fieldset></form></div>';
+			$('.sidebar-content').html("");
+			$('.sidebar-content').html(postform);
+
+			
+		});
+		
+		categoryParam="EarthMoving";
+		equipment="backhoe";
+		manufacturerParam="JCB";
+		modelParam="2DX";
+		
+		/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = []
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#category").append($("<option />").val(value).text(value));
+    					category[i] = value;
+    					i++
+    			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
+    			$.ajax({
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				
+    				});
+    			}
+    			});
+    			}
+    		}
+    	});
+    	
+    	/* This function will be called when there is change in the category dropdown */
+    	
+    $("#category").on('change',function(){
+    		var selectedOption = $("#category option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log("equipments ",equipments);
+    				$("#equipment").html("");
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				});	
+    			}
+    				
+    		});
+    	});
+		
+    	
+    $.constructTable(user,posts);
+    	
+		$('#overview').click(function(e){
+		e.preventDefault();
+		
+		$.constructTable(user,posts);
+		
+		});
+		
+		
+		$('#my-posts').click(function(e){
+			e.preventDefault();
+			
+			var myPosts = "";
+ 			
+ 			$.ajax({
+				url:AppData.relativeUrl+"usedmachine/getPostsByUserId/"+user.userId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					var mediaWrapper = '<div style="margin-top:20px">';
+					$.each(response,function(index,value){
+						posts[value.postId] = value;	
+						var postedTime = value.postedTime;
+						postedTime = $.date(postedTime,1);
+						myPosts += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div>'+
+						'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+						'<p class="float-right">Price : <i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two"><p class="float-left">Meter : '+value.meterReading+'</p>'+
+						'<p class="posted-date float-right">posted on : '+postedTime+'</p></div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p>'+
+						'<div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div>';
+					});
+					var mediaWrapperEndTag = '</div>';	
+					$('.sidebar-content').html("");
+					$('.sidebar-content').html(mediaWrapper+myPosts+mediaWrapperEndTag);	
+				}
+				});
+			
+		});
+		
+			
+	 	
+	 		
+	 		
  			
  		});
+ 	</script>
+ 	<script type="text/javascript">
+ 	
+ 	$.date = function(dateObject,pattern) {
+		    var d = new Date(dateObject);
+		    var date = d.toDateString();
+		    console.log(d);
+		    console.log(date);
+		    if(pattern === 1){
+		    var dateArr = date.split(" ");
+		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+		    }
+		    else if(pattern === 2){
+		    	console.log("date" +dateObject);
+		    	var dateArr = dateObject.split(' ');
+		    	var time = dateArr[3].split(':');
+		    	var HH = parseInt(time[0])+6;
+		    	var mm = parseInt(time[1])+30;
+		    	var ss = time[2];
+		    	if(dateArr[1].length === 3)
+		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+		    	else if(dateArr[1].length === 2)
+		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+		    }else if(pattern === 3){
+	 		    var dateArr = dateObject.split("-");
+	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+				}
+		    return date;
+		};
+		
+		$.getMonthName = function(monNum){
+			var month;
+			console.log(monNum)
+			if(monNum === "01"){
+				month = "Jan";
+			}
+			else if(monNum === "02"){
+				month = "Feb";
+			}
+			else if(monNum === "03"){
+				month = "Mar";
+			}
+			else if(monNum === "04"){
+				month = "Apr";
+			}
+			else if(monNum === "05"){
+				month = "May";
+			}
+			else if(monNum === "06"){
+				month = "Jun";
+			}
+			else if(monNum === "07"){
+				month = "Jul";
+			}
+			else if(monNum === "08"){
+				month = "Aug";
+			}
+			else if(monNum === "09"){
+				month = "Sep";
+			}
+			else if(monNum === "10"){
+				month = "Oct";
+			}
+			else if(monNum === "11"){
+				month = "Nov";
+			}
+			else if(monNum === "12"){
+				month = "Dec";
+			}
+			return month;
+		};
+		
+		$.getMonth = function(month){
+			var monNum;
+			month = month.toLowerCase();
+			console.log(month)
+			if(month === "jan"){
+				monNum = '01';
+			}
+			else if(month === "feb"){
+				monNum = '02';
+			}
+			else if(month === "mar"){
+				monNum = '03';
+			}
+			else if(month === "apr"){
+				monNum = '04';
+			}
+			else if(month === "may"){
+				monNum = '05';
+			}
+			else if(month === "june"){
+				monNum = '06';
+			}
+			else if(month === "july"){
+				monNum = '07';
+			}
+			else if(month === "aug"){
+				monNum = '08';
+			}
+			else if(month === "sep"){
+				monNum = '09';
+			}
+			else if(month === "oct"){
+				monNum = '10';
+			}
+			else if(month === "nov"){
+				monNum = '11';
+			}
+			else if(month === "dec"){
+				monNum = '12';
+			}
+			
+			return monNum;
+		};		
+	
+ 	
+ 	$.constructTable = function(user,posts){
+			
+			var tableContent = "";
+			
+			$.ajax({
+			url:AppData.relativeUrl+"usedmachine/getPostsByUserId/"+user.userId,
+			type:"get",
+			data:{},
+			success:function(response){
+				response = $.parseJSON(response);
+				console.log(response);
+				var tableHead = '<div class="panel panel-default used-equip-table"><div class="panel-heading">Equipments posted for Sale</div><div class="quote-table">'+
+				'<table class="table table-striped"><thead><tr><th>Date</th><th>Equipment</th><th>Price</th><th>Interested People</th><th>Ad Duration</th>'+
+				'<th>Status</th><th>Location</th></tr></thead><tbody>';
+				$.each(response,function(index,value){
+					posts[value.postId] = value;	
+					var postedTime = value.postedTime;
+					postedTime = $.date(postedTime,1);
+					tableContent += '<tr><td>'+postedTime+'</td><td>'+value.equipmentName+'<a href="#">(view)</a></td><td>'+value.price+'</td><td>2</td>'+
+					'<td>2 months</td><td>Open</td><td>'+value.location+'</td></tr>';
+				});
+				var tableEndTags = '</tbody></table></div></div>';
+				$('.sidebar-content').html("");
+				$('.sidebar-content').html(tableHead+tableContent+tableEndTags);	
+			}
+			});
+		};
  	</script>	
 	</body>
 	</html>

@@ -631,52 +631,56 @@ label.error { width: 250px; display: block; float: left; color: red; padding-lef
 	
 }
 
-/*.parallelogram{
-	display: inline-block;
-	text-align: center;
-	padding: 6px 10px;
-	width: 300px;
-	height: 49px;
-	padding-bottom: 10px;
-	transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    background: #202e31;
-    position: relative;
+.enquire{
+	position:fixed;
+	bottom:0;
+	right:0;
+	padding:15px;
+	width:250px;
 }
 
-.rect{
-position:absolute;
-background:#202e31;
-left: -30px;
-height: 49px;
-bottom: 0px;
-padding: 5px 0 0 10px;
-
-        -webkit-transform: skew(20deg);
-       -moz-transform: skew(20deg);
-         -o-transform: skew(20deg);
+.enquire{
+	padding:0;
+	background-color:#fff;
+	border:1px solid #202e31;
 }
-/*
-#text{
-	display: inline-block;
-	transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-}*/
 
-.parallelogram-about-us{
-	display: inline-block;
-	text-align: center;
-	padding: 6px 10px;
-	width: 150px;
-	height: 49px;
-	transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    background: #202e31;
-    position: relative;
-}*/
+.enquire-header{
+	background-color:#202e31;
+}
+
+.enquire h4{
+	border-radius:0;
+	color:#fff;
+	margin-top:0;
+	margin-bottom:0;
+	margin-left:5px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.enquire textarea{
+	border-radius:0;
+}
+
+.fa-minus{
+	cursor:pointer;
+	margin-top: 15px;
+    margin-right: 10px;
+	color:#fff;
+}
+
+#enquire-form input{
+	border-radius:0;
+	margin-bottom:5px;
+}
+
+#enquire-form .btn{
+	float: right;
+    border-radius: 0;
+    color: #fff;
+    background-color: #202e31;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom:10px;
+}

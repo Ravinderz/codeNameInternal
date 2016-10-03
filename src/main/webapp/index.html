@@ -221,7 +221,21 @@
 							console.log("user logged out");
 							$(location).attr('href', "index.html");
 						});
-
+						
+						$('#enquire-form').hide();
+						var display = false;
+						$('.fa-minus').click(function(e){
+							e.preventDefault();
+							if(!display){
+							$('#enquire-form').show("slow");
+							display=true;
+							}else{
+								$('#enquire-form').hide("slow");
+								display=false;
+							}
+						});
+								
+						
 					});
 </script>
 <script type="text/javascript">
@@ -667,6 +681,20 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="enquire">
+		<div class="enquire-header">
+		<h4 class="float-left">Queries</h4>
+		<i class="fa fa-minus float-right"></i>
+		<div class="clear-fix"></div>
+		</div>
+		<form role="form" action="" method="post" class="f1" id="enquire-form">
+			<input type="text" class="form-control" name="name" placeholder="Name">
+			<input type="text" class="form-control" name="Email" placeholder="Email">
+			<input type="text" class="form-control" name="mobile" placeholder="Mobile">
+			<textarea id="description" class="form-control" name="description" rows="3" placeholder="please type in your queries here" ></textarea>
+            <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
+		</form>
 	</div>
 </body>
 </html>

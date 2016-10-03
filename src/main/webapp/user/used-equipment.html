@@ -20,6 +20,7 @@
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
 
 
 <!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
@@ -96,9 +97,9 @@
 			<div class="row sub-sub-nav-bar">
 			<div class="page-nav">
 				<ul class="nav navbar-nav">
-				  <li role="presentation" class="active"><a href="#">Equipments for sale</a></li>
+				  <li role="presentation" class="active"><a href="used-equipment.html">Equipments for sale</a></li>
 				  <li role="divider" class="divider"><a href="#"></a></li>
-				  <li role="presentation"><a href="#">My used-equipments</a></li>
+				  <li role="presentation"><a href="myused-equipment.html">My used-equipments</a></li>
 				</ul>
 			</div>
 			</div>
@@ -299,6 +300,7 @@
 			</div>
 		
 				<div class="col-md-9">
+				<div class="posts">
 					<div class="media">
 							<div class="media-left">
 								<a href="#">
@@ -317,7 +319,8 @@
 						  		<p class="posted-date float-right">posted on : 1 week ago</p>
 							</div>
 								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
+						  		<p class="float-left">Hyderabad</p>
+								<div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a>
 						  </div>
 					</div><!-- end of media -->
 					<div class="media">
@@ -553,7 +556,7 @@
 					</div><!-- end of media -->
 				</div>
 			</div>
-				
+		</div>	
 	</div>
 	
 		
@@ -610,7 +613,7 @@
  		</div>
  	<script type="text/javascript">
  		$(document).ready(function(){
- 			var user = sessionStorage.getItem("user");
+ 			var user = localStorage.getItem("user");
 				user = $.parseJSON(user);
 				console.log(user);
 				var username = user.firstname+" "+user.lastname;
@@ -619,9 +622,9 @@
 				
 				$('.logout').click(function() {
 				console.log("inside logout function")
-				var user = sessionStorage.getItem("user");
+				var user = localStorage.getItem("user");
 				if (user !== null) {
-					sessionStorage.removeItem("user");
+					localStorage.removeItem("user");
 				}
 				console.log("user logged out");
 				$(location).attr('href', "../index.html");
@@ -644,6 +647,144 @@
 				$(location).attr('href',"supplier-dashboard.html");
 			}
 		});
+		
+		var posts = [];
+			var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+					
+			
+ 				$.date = function(dateObject,pattern) {
+ 		 		    var d = new Date(dateObject);
+ 		 		    var date = d.toDateString();
+ 		 		    console.log(d);
+ 		 		    console.log(date);
+ 		 		    if(pattern === 1){
+ 		 		    var dateArr = date.split(" ");
+ 		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		 		    }
+ 		 		    else if(pattern === 2){
+ 		 		    	console.log("date" +dateObject);
+ 		 		    	var dateArr = dateObject.split(' ');
+ 		 		    	var time = dateArr[3].split(':');
+ 		 		    	var HH = parseInt(time[0])+6;
+ 		 		    	var mm = parseInt(time[1])+30;
+ 		 		    	var ss = time[2];
+ 		 		    	if(dateArr[1].length === 3)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		 		    	else if(dateArr[1].length === 2)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		 		    }else if(pattern === 3){
+ 		 	 		    var dateArr = dateObject.split("-");
+ 		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 		 				}
+ 		 		    return date;
+ 		 		};
+ 		 		
+ 		 		$.getMonthName = function(monNum){
+ 		 			var month;
+ 		 			console.log(monNum)
+ 		 			if(monNum === "01"){
+ 		 				month = "Jan";
+ 		 			}
+ 		 			else if(monNum === "02"){
+ 		 				month = "Feb";
+ 		 			}
+ 		 			else if(monNum === "03"){
+ 		 				month = "Mar";
+ 		 			}
+ 		 			else if(monNum === "04"){
+ 		 				month = "Apr";
+ 		 			}
+ 		 			else if(monNum === "05"){
+ 		 				month = "May";
+ 		 			}
+ 		 			else if(monNum === "06"){
+ 		 				month = "Jun";
+ 		 			}
+ 		 			else if(monNum === "07"){
+ 		 				month = "Jul";
+ 		 			}
+ 		 			else if(monNum === "08"){
+ 		 				month = "Aug";
+ 		 			}
+ 		 			else if(monNum === "09"){
+ 		 				month = "Sep";
+ 		 			}
+ 		 			else if(monNum === "10"){
+ 		 				month = "Oct";
+ 		 			}
+ 		 			else if(monNum === "11"){
+ 		 				month = "Nov";
+ 		 			}
+ 		 			else if(monNum === "12"){
+ 		 				month = "Dec";
+ 		 			}
+ 		 			return month;
+ 		 		};
+ 		 		
+ 		 		$.getMonth = function(month){
+ 		 			var monNum;
+ 		 			month = month.toLowerCase();
+ 		 			console.log(month)
+ 		 			if(month === "jan"){
+ 		 				monNum = '01';
+ 		 			}
+ 		 			else if(month === "feb"){
+ 		 				monNum = '02';
+ 		 			}
+ 		 			else if(month === "mar"){
+ 		 				monNum = '03';
+ 		 			}
+ 		 			else if(month === "apr"){
+ 		 				monNum = '04';
+ 		 			}
+ 		 			else if(month === "may"){
+ 		 				monNum = '05';
+ 		 			}
+ 		 			else if(month === "june"){
+ 		 				monNum = '06';
+ 		 			}
+ 		 			else if(month === "july"){
+ 		 				monNum = '07';
+ 		 			}
+ 		 			else if(month === "aug"){
+ 		 				monNum = '08';
+ 		 			}
+ 		 			else if(month === "sep"){
+ 		 				monNum = '09';
+ 		 			}
+ 		 			else if(month === "oct"){
+ 		 				monNum = '10';
+ 		 			}
+ 		 			else if(month === "nov"){
+ 		 				monNum = '11';
+ 		 			}
+ 		 			else if(month === "dec"){
+ 		 				monNum = '12';
+ 		 			}
+ 		 			
+ 		 			return monNum;
+ 		 		};		
  			
  		});
  	</script>	

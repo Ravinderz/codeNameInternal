@@ -155,9 +155,10 @@ jQuery(document).ready(function() {
     	var valid_form = true;
     	// fields validation
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
+    		if( $(this).val() == "") {
     			$(this).addClass('input-error');
-				e.preventDefault();
+				console.log(this.id);
+				//e.preventDefault();
 				valid_form = false;
     		}
     		else {
@@ -196,9 +197,10 @@ jQuery(document).ready(function() {
     	var valid_form = true;
     	// fields validation
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
+    		if( $(this).val() == "" && this.id != "model-right") {
     			$(this).addClass('input-error');
-				e.preventDefault();
+				//e.preventDefault();
+				console.log(this.id);
 				valid_form = false;
     		}
     		else {
@@ -292,5 +294,51 @@ jQuery(document).ready(function() {
 				alert("Please enter all highlighted fields!!!");
 				}
     });
+	
+	//add Used Machine
+	 $('#addUsedMachine').on('click', function(){
+	 console.log("Entered Used Machines");
+	 
+	 	var parent_fieldset = $(this).parents('fieldset');
+    	var valid_form = true;
+    	// fields validation
+    	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
+    		if( $(this).val() == "") {
+    			$(this).addClass('input-error');
+				//e.preventDefault();
+				console.log(this.id);
+				valid_form = false;
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+			});
+				if(valid_form){
+		var success = "successfully created";
+		var data = JSON.stringify($("#addUsedMachine-form").serializeObject());
+		console.log(data);
+		
+		$.ajax({
+			url: AppData.relativeUrl+"usedmachine/postusedmachines",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	console.log(data);
+		    	if(data === "SS01"){
+				 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    		$(location).attr('href',"user/supplier-profile.html");
+					});
+		    	}
+		      }
+		});
+		}else{
+				alert("Please enter all highlighted fields!!!");
+				}
+		
+		
+	 
+	 });
     
 });
