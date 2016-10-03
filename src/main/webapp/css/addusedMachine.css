@@ -1,0 +1,54 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 30px;
+}
+
+input[type='text'], input[type='file'], .form-group textarea {
+	width : 450px;
+	margin : 0 auto;
+	position : relative;
+	padding-left : 20px;
+}
+
+
+.form-group textarea{
+height: 150px;
+margin-top:15px;
+}
+
+.main-content{
+    width: 600px;
+    margin:20px auto;
+	padding-top : 25px;
+	height:900px;
+	background-color: #202e31;
+	
+}
+
+.main-content select{
+height:40px;
+width:450px;
+margin : 0 auto;
+position : relative;
+padding-left : 20px;
+border-radius:3px;
+}
+
+h3{
+	padding-bottom:0px;
+}	
+
+h4{
+	padding-left:30px;
+	padding-bottom:20px;
+	color:grey;
+}
+.f1-buttons {
+padding-top:20px;
+padding-left:350px;
+}
+
+.f1 .input-error { border: 2px solid; border-color: #f35b3f;  }

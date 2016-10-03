@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.congun.web.model.AddEquipment;
+import com.congun.web.model.UsedMachineMapping;
 import com.congun.web.model.UsedMachineSale;
 import com.congun.web.service.UsedMachineSaleService;
 
@@ -16,15 +16,41 @@ import com.congun.web.service.UsedMachineSaleService;
 @RequestMapping("usedmachine")
 public class UsedMachineSaleController {
 
-	private static Logger logger = Logger.getLogger(UsedMachineSaleController.class);
+	private static Logger logger = Logger
+			.getLogger(UsedMachineSaleController.class);
 	@Autowired
 	UsedMachineSaleService saleService;
-	
-	@RequestMapping(value="/postusedmachines" , method=RequestMethod.POST)
-	public String postUsedMachines(@RequestBody UsedMachineSale machineSale){
+
+	@RequestMapping(value = "/postusedmachines", method = RequestMethod.POST)
+	public String postUsedMachines(@RequestBody UsedMachineSale machineSale) {
 		logger.info("Entered into UsedMachinesSaleController.postUsedMachines method");
 		return saleService.postUsedMachines(machineSale);
 	}
 	
-	
+	@RequestMapping(value = "/deletePostById/{postId}", method = RequestMethod.DELETE)
+	public String deletePostById(@PathVariable long postId) {
+		logger.info("Entered into UsedMachinesSaleController.deletePostById method+ postId"
+				+ postId);
+		return saleService.deletePostById(postId);
+	}
+
+	@RequestMapping(value = "/getAllPosts", method = RequestMethod.GET)
+	public String getAllPosts() {
+		logger.info("Entered into UsedMachinesSaleController.getAllPosts method");
+		return saleService.getAllPosts();
+	}
+
+	@RequestMapping(value = "/getPostsByUserId/{userId}", method = RequestMethod.GET)
+	public String getPostsByUserId(@PathVariable long userId) {
+		logger.info("Entered into UsedMachinesSaleController.getPostsByUserId method: userId"
+				+ userId);
+		return saleService.getPostsByUserId(userId);
+	}
+
+	@RequestMapping(value = "/interest/{postId}", method = RequestMethod.POST)
+	public String UsedMachineInterested(@RequestBody UsedMachineMapping usedMachineMapping,@PathVariable long postId) {
+		logger.info("Entered into UsedMachineSaleController.UsedMachineInterested method postId"+postId);
+		return saleService.postInterestedUser(usedMachineMapping,postId);
+	}
+
 }

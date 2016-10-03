@@ -8,8 +8,7 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-<!-- <link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
@@ -18,8 +17,11 @@
  <script>
  	console.log("inside if")
  if (typeof (Storage) !== "undefined") {
-	 if(localStorage.getItem("user") !== null)
-      window.location = AppData.relativeUrl+"user/index.html";
+	 console.log(localStorage.getItem("user"));
+	 if(localStorage.getItem("user")){
+		 console.log("script if");
+	 }
+      //window.location = AppData.relativeUrl+"user/index.html";
     }
   </script>
 <script src="js/jquery.min.js"></script>
@@ -27,12 +29,6 @@
 
 <script src="js/validation.js"></script>
 <script type="text/javascript">
-$.holdReady( true );
-if (typeof (Storage) !== "undefined") {
-	 if(localStorage.getItem("user") === null)
-     $(location).attr('href',AppData.relativeUrl+"user/index.html");
-}
-$.holdReady( false );
 
 	$(document).ready(function() {
 		
@@ -217,10 +213,10 @@ $.holdReady( false );
 							console.log("inside logout function")
 							var user;
 							if (typeof (Storage) !== "undefined") {
-							user = sessionStorage.getItem("user");
+							user = localStorage.getItem("user");
 							}
 							if (user !== null) {
-								sessionStorage.removeItem("user");
+								localStorage.removeItem("user");
 							}
 							console.log("user logged out");
 							$(location).attr('href', "index.html");
@@ -537,15 +533,9 @@ $.holdReady( false );
 					<h2>
 						About<span class="heading"> US</span>
 					</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-						reprehenderit in voluptate velit esse cillum dolore eu fugiat
-						nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-						sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
-						ut perspiciatis unde omnis iste natus error sit voluptatem
-						accusantium</p>
+					<p>At Congun, our mission is to create a market place for construction equipment rentals providing an economic solution to an often expensive 
+					machinery demand. We aspire to be the India’s largest equipment rental network, aiming to safely build a better and stronger future.To be a competent 
+					network in the construction equipment rental industry requires continuous improvement to achieve benchmark reliability and sustainability.</p>
 				</div>
 			</div>
 		</div>
@@ -591,33 +581,9 @@ $.holdReady( false );
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="services-text first">
-						<span><i class="fa fa-cogs fa-2x"></i></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="services-text middle">
-						<span><i class="fa fa-exchange fa-2x"></i></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="services-text last">
-						<span><i class="fa fa-rupee fa-2x"></i></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-				</div>
+				<div class="col-md-4"><div class="services-text first"><span><i class="fa fa-cogs fa-2x"></i></span><h3>Find required equipment</h3><p>Post equipment requirement for your project/need. Get wide range of suppliers matching your requirement with competitive quotes. Choose the best supplier and negotiate.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text middle"><span><i class="fa fa-exchange fa-2x"></i></span><h3>Rent your equipment</h3><p>Increase your business by renting equipment to a larger verified client/customer, generate more money and reduce idle time. Quote the price to preferred client and location & get hired faster.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text last"><span><i class="fa fa-rupee fa-2x"></i></span><h3>Buy or Sell Used Equipment</h3><p>Users can buy/sell their used equipment through our portal. Reduce the cost of marketing without the need to place ads or a third party for buying/selling the equipment.</p></div></div>
 			</div>
 		</div>
 	</div>

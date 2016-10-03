@@ -1,3 +1,7 @@
+body{
+	font-family : Roboto;
+}
+
 #nav-logo{
 	margin-top: -30px;
 }
@@ -187,6 +191,10 @@ background:none;
 .services .first{
     margin-right:0px;
     margin-left:130px;
+}
+
+.services .middle p{
+	padding-bottom:26px;
 }
 
 .services .last{

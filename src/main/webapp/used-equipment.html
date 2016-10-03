@@ -8,19 +8,18 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-<!-- <link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 
-<link rel="stylesheet" href="../css/congun.css">
-<link rel="stylesheet" href="../css/magic-check.css">
-<link rel="stylesheet" href="../css/used-equipment.css">
+<link rel="stylesheet" href="css/congun.css">
+<link rel="stylesheet" href="css/magic-check.css">
+<link rel="stylesheet" href="css/used-equipment.css">
 
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
 
 <!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 </head>
@@ -38,7 +37,7 @@
 									class="icon-bar"></span>
 							</button>
 							<a class="navbar-brand" href="#"> <img id="nav-logo"
-								src="..\images\logo_new.png" height="75px" width="200px" />
+								src="images\logo_new.png" height="75px" width="200px" />
 							</a>
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
@@ -76,7 +75,7 @@
 					<ul class="sub-menu">
 						<li><a href="#" id="sub-nav-dashboard">Dashboard</a></li>
 						<li><a href="#" id="sub-nav-profile">Profile</a></li>
-						<li class="active"><a href="used-equipment.html">Used machines</a></li>
+						<li class="focused"><a href="used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -93,42 +92,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row sub-sub-nav-bar">
-			<div class="page-nav">
-				<ul class="nav navbar-nav">
-				  <li role="presentation" class="active"><a href="#">Equipments for sale</a></li>
-				  <li role="divider" class="divider"><a href="#"></a></li>
-				  <li role="presentation"><a href="#">My used-equipments</a></li>
-				</ul>
-			</div>
-			</div>
 		</div>
-		 <div class="container">
-			<div class="row">
-				<div class="col-md-12">
-		   
-		<div class="used-equip-pagination float-right">
-			<nav aria-label="Page navigation">
-				<ul class="pagination ">
-					<li>
-					  <a href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
-					</li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</div>	
-				</div>
-			</div>
-			<div class="container">
+		 	<div class="container">
+		 	<div class="row">
 				<div class="col-md-3">
 					<div class="filter-wrapper">
 					<div class="filter-header"><p>Equipment Type</p></div>
@@ -299,216 +265,7 @@
 			</div>
 		
 				<div class="col-md-9">
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
-					<div class="media">
-							<div class="media-left">
-								<a href="#">
-								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
-								</a>
-							</div>
-						 <div class="media-body">
-							<div class="line-one">
-						  		<p class="float-left">Excavator</p>
-								<p class="float-left">Year : 2010</p>
-								<p class="float-right">Price : RS 1000000</p>
-							</div>
-								<div class="clear-fix"></div>
-							<div class="line-two">	
-								<p class="float-left">Meter : 1200</p>
-						  		<p class="posted-date float-right">posted on : 1 week ago</p>
-							</div>
-								<div class="clear-fix"></div>
-						  		<p>Hyderabad</p>
-						  </div>
-					</div><!-- end of media -->
+					<div class="posts">
 					<div class="media">
 							<div class="media-left">
 								<a href="#">
@@ -553,6 +310,7 @@
 					</div><!-- end of media -->
 				</div>
 			</div>
+		</div>
 				
 	</div>
 	
@@ -561,7 +319,7 @@
 	<div class="sub-footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p>
+					<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p>
 					</div>
 					<div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
 							<li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
@@ -610,7 +368,7 @@
  		</div>
  	<script type="text/javascript">
  		$(document).ready(function(){
- 			var user = sessionStorage.getItem("user");
+ 			/*var user = localStorage.getItem("user");
 				user = $.parseJSON(user);
 				console.log(user);
 				var username = user.firstname+" "+user.lastname;
@@ -619,9 +377,9 @@
 				
 				$('.logout').click(function() {
 				console.log("inside logout function")
-				var user = sessionStorage.getItem("user");
+				var user = localStorage.getItem("user");
 				if (user !== null) {
-					sessionStorage.removeItem("user");
+					localStorage.removeItem("user");
 				}
 				console.log("user logged out");
 				$(location).attr('href', "../index.html");
@@ -643,8 +401,143 @@
 			}else if(user.role === "supplier"){
 				$(location).attr('href',"supplier-dashboard.html");
 			}
-		});
- 			
+		});*/
+ 			var posts = [];
+			var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p></div><div class="clear-fix"></div><p>'+value.location+'</p></div></div>';
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+ 				
+ 				$.date = function(dateObject,pattern) {
+ 		 		    var d = new Date(dateObject);
+ 		 		    var date = d.toDateString();
+ 		 		    console.log(d);
+ 		 		    console.log(date);
+ 		 		    if(pattern === 1){
+ 		 		    var dateArr = date.split(" ");
+ 		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		 		    }
+ 		 		    else if(pattern === 2){
+ 		 		    	console.log("date" +dateObject);
+ 		 		    	var dateArr = dateObject.split(' ');
+ 		 		    	var time = dateArr[3].split(':');
+ 		 		    	var HH = parseInt(time[0])+6;
+ 		 		    	var mm = parseInt(time[1])+30;
+ 		 		    	var ss = time[2];
+ 		 		    	if(dateArr[1].length === 3)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		 		    	else if(dateArr[1].length === 2)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		 		    }else if(pattern === 3){
+ 		 	 		    var dateArr = dateObject.split("-");
+ 		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 		 				}
+ 		 		    return date;
+ 		 		};
+ 		 		
+ 		 		$.getMonthName = function(monNum){
+ 		 			var month;
+ 		 			console.log(monNum)
+ 		 			if(monNum === "01"){
+ 		 				month = "Jan";
+ 		 			}
+ 		 			else if(monNum === "02"){
+ 		 				month = "Feb";
+ 		 			}
+ 		 			else if(monNum === "03"){
+ 		 				month = "Mar";
+ 		 			}
+ 		 			else if(monNum === "04"){
+ 		 				month = "Apr";
+ 		 			}
+ 		 			else if(monNum === "05"){
+ 		 				month = "May";
+ 		 			}
+ 		 			else if(monNum === "06"){
+ 		 				month = "Jun";
+ 		 			}
+ 		 			else if(monNum === "07"){
+ 		 				month = "Jul";
+ 		 			}
+ 		 			else if(monNum === "08"){
+ 		 				month = "Aug";
+ 		 			}
+ 		 			else if(monNum === "09"){
+ 		 				month = "Sep";
+ 		 			}
+ 		 			else if(monNum === "10"){
+ 		 				month = "Oct";
+ 		 			}
+ 		 			else if(monNum === "11"){
+ 		 				month = "Nov";
+ 		 			}
+ 		 			else if(monNum === "12"){
+ 		 				month = "Dec";
+ 		 			}
+ 		 			return month;
+ 		 		};
+ 		 		
+ 		 		$.getMonth = function(month){
+ 		 			var monNum;
+ 		 			month = month.toLowerCase();
+ 		 			console.log(month)
+ 		 			if(month === "jan"){
+ 		 				monNum = '01';
+ 		 			}
+ 		 			else if(month === "feb"){
+ 		 				monNum = '02';
+ 		 			}
+ 		 			else if(month === "mar"){
+ 		 				monNum = '03';
+ 		 			}
+ 		 			else if(month === "apr"){
+ 		 				monNum = '04';
+ 		 			}
+ 		 			else if(month === "may"){
+ 		 				monNum = '05';
+ 		 			}
+ 		 			else if(month === "june"){
+ 		 				monNum = '06';
+ 		 			}
+ 		 			else if(month === "july"){
+ 		 				monNum = '07';
+ 		 			}
+ 		 			else if(month === "aug"){
+ 		 				monNum = '08';
+ 		 			}
+ 		 			else if(month === "sep"){
+ 		 				monNum = '09';
+ 		 			}
+ 		 			else if(month === "oct"){
+ 		 				monNum = '10';
+ 		 			}
+ 		 			else if(month === "nov"){
+ 		 				monNum = '11';
+ 		 			}
+ 		 			else if(month === "dec"){
+ 		 				monNum = '12';
+ 		 			}
+ 		 			
+ 		 			return monNum;
+ 		 		};		
+			
  		});
  	</script>	
 	</body>

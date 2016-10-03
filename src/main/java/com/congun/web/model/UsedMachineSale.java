@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,7 @@ public class UsedMachineSale {
 	public long postId;
 	
 	@Column(name="userId")
-	public String userId;
+	public long userId;
 	
 	@Column(name="userName")
 	public String userName;
@@ -69,6 +70,9 @@ public class UsedMachineSale {
 	@Column(name="queries")
 	public String queries;
 	
+	@Column(name="activeFlag")
+	public int activeFlag;
+	
 
 	public long getPostId() {
 		return postId;
@@ -78,11 +82,11 @@ public class UsedMachineSale {
 		this.postId = postId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -213,5 +217,15 @@ public class UsedMachineSale {
 	public void setQueries(String queries) {
 		this.queries = queries;
 	}
+
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+	
+	
 	
 }
