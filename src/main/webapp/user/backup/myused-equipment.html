@@ -105,12 +105,12 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3 col-md-3 sidebar">
+				<div class="col-sm-3 col-md-2 sidebar">
 					<div class="submit-post">
-						<a href="../addusedmachine.html"><span class="fa-stack fa-4x"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span><p>Submit a new post</p></a>
+						<span class="fa-stack fa-4x"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span><p>Submit a new post</p></a>
 					</div>
 				</div>
-				<div class="col-sm-9 col-md-9 ">
+				<div class="col-sm-9 col-md-10 ">
 			<div class="sidebar-content"></div>
 		<div class="used-equip-pagination">
 			<nav aria-label="Page navigation">
@@ -186,57 +186,6 @@
  				</div>
  			</div>
  		</div>
- 		
- 		<!-- ********************* This is for the post view model *********************************** -->
-					<div class="modal fade" id="view-post-modal" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content post-modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&#10005;</button>
-									<h4 class="modal-title" id="myModalLabel">Post</h4>
-								</div>
-								<div class="modal-body">
-									<div class="post-content">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-7">
-													<img class="post-image" src="http://placehold.it/250x250" alt="...">
-												</div>
-												<div class="col-md-5 post-text">
-													<h3 id="modal-machine">Excavator</h3>
-													<h4>Price : <span id="modal-price">2000000</span></h4>
-													<h4 >Meter : <span id="modal-meter">100</span> KM</h4>
-													<h4 >Mfg : <span id="modal-mfg">JCB</span></h4>
-													<h4 >Manufactured year : <span id="modal-yom">2014</span></h4>
-													<h4 >location : <span id="modal-location">hyderabad</span></h4>
-													<br>
-													<br>
-													<h4 >posted by : <span id="modal-postedby">Nishant</span></h4>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-7">
-													<ul class="img-thumb">
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-													</ul>
-												</div>
-												<div class="col-md-5">
-												</div>
-											</div>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
- 		
- 		
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var user = localStorage.getItem("user");
@@ -276,6 +225,123 @@
 			}
 		});
 		
+		$('#new-post').click(function(e){
+			e.preventDefault();
+			var postform = '<h3 class="text-center text-muted">ADD USED MACHINE FORM</h3><br><div class="main-content form-box text-center"><form role="form" method="post" id="addUsedMachine-form" class="f1"><fieldset>'+
+							'<br><div class="form-group"><label for="selectCategory" class="sr-only">Equipment Category</label>'+
+							'<select id="category" class="form-control" placeholder="Equipment Category" name="category" ></select></div>'+
+							'<div class="form-group"><label for="equipment" class="sr-only">Equipment Name</label>'+
+							'<select id="equipment" class="form-control" name="equipmentName" placeholder="Equipment Name"></select></div>'+
+							'<div class="form-group"><label for="manufacturer" class="sr-only">Equipment Manufacturer</label>'+
+							'<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer Ex: JCB or Hitachi etc.,">'+
+							'</div><div class="form-group"><label for="yearOfManufacturing" class="sr-only">Year Of Manufacturing</label>'+
+							'<input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturer" placeholder="Year of manufacturing Ex: 2010 (YYYY)">'+
+							'</div><div class="form-group"><label for="model" class="sr-only">Model Details</label>'+
+							'<input type="text" id="model" class="form-control" name="model" placeholder="Model"></div><div class="form-group">'+
+							'<label for="capacity" class="sr-only">Capacity Details</label>'+
+							'<input type="text" id="capacity-right" class="form-control" name="capacity" placeholder="Capacity in Ton/Feet/cu.mt Ex: 100Ton">'+
+							'</div><div class="form-group"><label for="meterreading" class="sr-only">Enter Equipment Meter Reading</label>'+
+							'<input type="text" id="reading" class="form-control" name="meterReading" placeholder="Current Equipment meter reading">'+
+							'</div><div class="form-group"><label for="location" class="sr-only">Enter Location</label>'+
+							'<input type="text" id="location" class="form-control" name="location" placeholder="Enter Location of your Equipment">'+
+							'</div><div><label for="sellingprice" class="sr-only">Enter Selling Price</label>'+
+							'<input type="text" id="price" class="form-control" name="price" placeholder="Enter Selling Price of Machine in Rupees"></div>'+
+							'<div class="form-group"><label for="description" class="sr-only">Enter Description</label>'+
+							'<textarea id="description" class="form-control" name="description" rows="15" placeholder="Enter Description about to Machine if any" ></textarea>'+
+							'</div><div class="form-group"><label for="images" class="sr-only">Attach images of your equipmebt</label>'+
+							'<input type="file" name="workAreaImages[]" id="upload-image" accept="image/*" multiple/></div><div class="f1-buttons">'+
+							'<button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button></div><input type="hidden" id="userId" name="userId">'+
+							'<input type="hidden" id="userName" name="userName"><input type="hidden" id="emailId" name="emailId">'+
+							'<input type="hidden" id="mobileNumber" name="contactNo"></fieldset></form></div>';
+			$('.sidebar-content').html("");
+			$('.sidebar-content').html(postform);
+
+			
+		});
+		
+		categoryParam="EarthMoving";
+		equipment="backhoe";
+		manufacturerParam="JCB";
+		modelParam="2DX";
+		
+		/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = []
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#category").append($("<option />").val(value).text(value));
+    					category[i] = value;
+    					i++
+    			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
+    			$.ajax({
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				
+    				});
+    			}
+    			});
+    			}
+    		}
+    	});
+    	
+    	/* This function will be called when there is change in the category dropdown */
+    	
+    $("#category").on('change',function(){
+    		var selectedOption = $("#category option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log("equipments ",equipments);
+    				$("#equipment").html("");
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				});	
+    			}
+    				
+    		});
+    	});
 		
     	
     $.constructTable(user,posts);
@@ -320,20 +386,7 @@
 		});
 		
 			
-	 	$('.sidebar-content').on("click",".post-view",function(e){
-	 		e.preventDefault();
-	 		var post = posts[this.id];
-			$('#modal-machine').text(post.equipmentName);
-			$('#modal-price').text(post.price);
-			$('#modal-meter').text(post.meterReading);
-			$('#modal-mfg').text(post.manufacturer);
-			$('#modal-yom').text(post.yearOfManufacturer);
-			$('#modal-location').text(post.location);
-			$('#modal-postedby').text(post.userName);
-	 		
-	 		$('#view-post-modal').modal("show");
-	 		
-	 	});
+	 	
 	 		
 	 		
  			
@@ -466,14 +519,14 @@
 			success:function(response){
 				response = $.parseJSON(response);
 				console.log(response);
-				var tableHead = '<div class="panel panel-default used-equip-table"><div class="panel-heading">Equipments posted for Sale</div><div class="post-table">'+
+				var tableHead = '<div class="panel panel-default used-equip-table"><div class="panel-heading">Equipments posted for Sale</div><div class="quote-table">'+
 				'<table class="table table-striped"><thead><tr><th>Date</th><th>Equipment</th><th>Price</th><th>Interested People</th><th>Ad Duration</th>'+
 				'<th>Status</th><th>Location</th></tr></thead><tbody>';
 				$.each(response,function(index,value){
 					posts[value.postId] = value;	
 					var postedTime = value.postedTime;
 					postedTime = $.date(postedTime,1);
-					tableContent += '<tr><td>'+postedTime+'</td><td>'+value.equipmentName+'<a href="#" class="post-view" id='+value.postId+'>(view)</a></td><td>'+value.price+'</td><td>2</td>'+
+					tableContent += '<tr><td>'+postedTime+'</td><td>'+value.equipmentName+'<a href="#">(view)</a></td><td>'+value.price+'</td><td>2</td>'+
 					'<td>2 months</td><td>Open</td><td>'+value.location+'</td></tr>';
 				});
 				var tableEndTags = '</tbody></table></div></div>';

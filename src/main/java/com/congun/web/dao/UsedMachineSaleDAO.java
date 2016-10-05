@@ -1,6 +1,7 @@
 package com.congun.web.dao;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +108,45 @@ public class UsedMachineSaleDAO {
 			List<UsedMachineSale> list = criteria
 					.add(Restrictions.eq("userId", userId))
 					.addOrder(Order.desc("postedTime")).list();
+			return ApplicationUtil.getJsonResponse(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Transactional
+	public String filterUsedMachines(String location, String equipment,
+			String manufacturer) {
+		String delimiter = ":";
+		String[] locationlist = null;
+		String[] equipmentlist =null;
+		String[] manufacturerlist=null;
+		if(location!=null){
+			locationlist = location.split(delimiter);
+		}
+		if(equipment!=null){
+		 equipmentlist = equipment.split(delimiter);
+		}
+		if(manufacturer!=null){
+		 manufacturerlist = manufacturer.split(delimiter);
+		}
+		System.out.println();
+		try {
+			Criteria criteria = getSession().createCriteria(
+					UsedMachineSale.class);
+			if( locationlist!= null && locationlist.length>0){
+				criteria.add(Restrictions.in("location",Arrays.asList(locationlist)));
+				
+			}
+			//if(equipmentlist.length>0){
+			if(equipmentlist!=null && equipmentlist.length>0){
+				criteria.add(Restrictions.in("equipmentName",Arrays.asList(equipmentlist)));
+			}
+			if(manufacturerlist!=null && manufacturerlist.length>0){
+				criteria.add(Restrictions.in("manufacturer",Arrays.asList(manufacturerlist)));
+			}
+			List<UsedMachineSale> list = criteria.list();
 			return ApplicationUtil.getJsonResponse(list);
 		} catch (Exception e) {
 			e.printStackTrace();

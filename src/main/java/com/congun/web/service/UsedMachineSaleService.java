@@ -43,4 +43,10 @@ public class UsedMachineSaleService {
 		return saleDao.postInterestedUser(usedMachineMapping,postId);
 	}
 
+	public String filterUsedMachines(String location, String equipment,
+			String manufacturer) {
+		logger.info("Entered into UsedMachineSaleService.filterUsedMachines method ");
+		return saleDao.filterUsedMachines(location,equipment,manufacturer);
+	}
+
 }

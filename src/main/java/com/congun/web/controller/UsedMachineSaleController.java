@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.UsedMachineMapping;
@@ -51,6 +52,12 @@ public class UsedMachineSaleController {
 	public String UsedMachineInterested(@RequestBody UsedMachineMapping usedMachineMapping,@PathVariable long postId) {
 		logger.info("Entered into UsedMachineSaleController.UsedMachineInterested method postId"+postId);
 		return saleService.postInterestedUser(usedMachineMapping,postId);
+	}
+
+	@RequestMapping(value = "/filterUsedMachines", method = RequestMethod.GET)
+	public String filterUsedMachines(@RequestParam(value = "location",required=false ) String location,@RequestParam(value = "equipment",required=false) String equipment,@RequestParam(value = "manufacturer",required=false) String manufacturer) {
+		logger.info("Entered into UsedMachineSaleController.filterUsedMachines method");
+		return saleService.filterUsedMachines(location,equipment,manufacturer);
 	}
 
 }

@@ -328,7 +328,7 @@ jQuery(document).ready(function() {
 		    	if(data === "SS01"){
 				 $('#modal-success-dialog').modal('show').delay(50000);
 		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
-		    		$(location).attr('href',"user/supplier-profile.html");
+		    		$(location).attr('href',"user/myused-equipment.html");
 					});
 		    	}
 		      }

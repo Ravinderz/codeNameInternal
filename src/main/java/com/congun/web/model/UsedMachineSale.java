@@ -73,7 +73,6 @@ public class UsedMachineSale {
 	@Column(name="activeFlag")
 	public int activeFlag;
 	
-
 	public long getPostId() {
 		return postId;
 	}
