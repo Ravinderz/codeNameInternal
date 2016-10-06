@@ -22,6 +22,10 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	// Specify the URLS for those where authentication not required
 
 	private final String LOGIN = "/login";
+	private final String REGISTER = "/register";
+	private final String GETALLPOSTS = "/getAllPosts";
+	private final String GETREQUIREMENTBYEQUIPMENT = "/getRequirementsByequipment";
+	private final String CONTRACTORREQUIREMENT = "/contractorRequirement";
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -65,7 +69,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private boolean isTokenAuthenticationRequired(String uri, String method) {
-		if ((uri.contains(LOGIN)))
+		if ((uri.contains(LOGIN)) || (uri.contains(GETALLPOSTS)) || (uri.contains(GETREQUIREMENTBYEQUIPMENT)) 
+				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)))
 
 		{
 			return false;

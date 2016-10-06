@@ -46,6 +46,8 @@
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
 									<li><a href="#" class="profile"><span>Profile</span></a></li>
 									<li><a href="#" class="dashboard"><span>Dashboard</span></a></li>
 									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
@@ -300,6 +302,17 @@
 		        if(user !== null){
 		            localStorage.removeItem("user");
 		        }
+		        
+		        $.ajax({
+					url:AppData.relativeUrl+"user/logout",
+					type:"post",
+					data:{},
+					success:function(response){
+					}
+					});
+		        
+		        
+		        
 		        console.log("user logged out");
 		        $(location).attr('href',"../index.html");
 		 });

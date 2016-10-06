@@ -4,12 +4,9 @@ validateOnClick = function($this) {
 	var form_submit = false;
 	
 	var form_group = $this.parents('form');
-	console.log("form_group value ",form_group);
 	form_group.find('input[type="text"], input[type="password"], textarea').each(function() {
 		if( $(this).val() == "" ) {
-		console.log("inside if");
 		form_submit = false;
-			console.log("value of this :", $(this));
 			$(this).parents('.form-group').addClass('has-error has-feedback');
 			if($(this).next('span').length == 0){
 			$("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($(this));
@@ -41,14 +38,10 @@ validateOnFocusout = function($this){
 		count++;
 	});
 	
-	console.log(inputs);
 	$.each(inputs,function(index,value){
-	console.log("value :: ",value);	
 	value.focusout(function(){
 		if(value.val() == ""){
-			console.log(value.val())
 			form_submit = false;
-				console.log("value of this :", value);
 				value.parents('.form-group').addClass('has-error has-feedback');
     			if(value.next('span').length == 0){
 	    			$("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(value);

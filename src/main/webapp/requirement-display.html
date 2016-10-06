@@ -29,7 +29,7 @@
 										class="icon-bar"></span> <span class="icon-bar"></span> <span
 										class="icon-bar"></span>
 								</button>
-								<a class="navbar-brand" href="#"> <img id="nav-logo"
+								<a class="navbar-brand" href="index.html"> <img id="nav-logo"
 									src="images\logo.png" height="75px" width="200px" />
 								</a>
 							</div>
@@ -317,10 +317,6 @@
 		    }
 		};
 		
-		var user = localStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-		
 		$('#re-link').click(function(e){
 			$('#modal-container-login').modal('hide');
 			$('#modal-container-register').modal('show');
@@ -374,7 +370,7 @@
 		
 		$("#register").click(function() {
 			
-			$.register(this);
+			$.register($(this));
 			
 			});
 		
@@ -439,7 +435,7 @@
 	
 	$("#login-btn").click(function(e) {
 	console.log("inside login function");
-		$.login(this);
+		$.login($(this));
 	});
 	
 	
@@ -507,16 +503,6 @@
 		}else{
 			$('#modal-container-login').modal('show');
 		}
-	});
-	
-	$('.logout').click(function() {
-		console.log("inside logout function")
-		var user = localStorage.getItem("user");
-		if (user !== null) {
-			localStorage.removeItem("user");
-		}
-		console.log("user logged out");
-		$(location).attr('href', "index.html");
 	});
 	
 	});

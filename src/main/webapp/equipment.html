@@ -28,7 +28,7 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#"> <img id="nav-logo"
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
 								src="images\logo.png" height="75px" width="200px" />
 							</a>
 						</div>
@@ -311,17 +311,6 @@
 
 		var category = getUrlParameter('category');
 					
-						/* var user = sessionStorage.getItem("user");
-						user = $.parseJSON(user);
-						console.log(user);
-						if (user !== null) {
-							console.log("inside if");
-							$(location).attr('href',"user/equipment.html?category="+category);
-						} else {
-							console.log("nothing to do");
-							
-						} */
-					
 						
 						$('#modal-container-login').on('hidden.bs.modal', function(){
 							console.log("clearing the fields");
@@ -345,7 +334,7 @@
 						
 						$("#register").click(function() {
 							
-							$.register(this);
+							$.register($(this));
 							
 							});
 						
@@ -396,7 +385,7 @@
 						
 						$("#login-btn").click(function(e) {
 						console.log("inside login function");
-							$.login(this);
+							$.login($(this));
 						});
 						
 						
@@ -452,18 +441,6 @@
 						};
 						
 			
-								$('.logout').click(function() {
-									console.log("inside logout function")
-									var user = localStorage.getItem("user");
-									if (user !== null) {
-										localStorage.removeItem("user");
-									}
-									console.log("user logged out");
-									$(location).attr('href', "index.html");
-								});
-		
-
-						
 						var equipment = '';
 						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
 								'miniexcavator', 'loader', 'motorgrader',

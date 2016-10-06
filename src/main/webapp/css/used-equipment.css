@@ -1,3 +1,17 @@
+.header {
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #f9f9f9;
+}
+
+.navigation {
+    margin-top: 20px;
+}
+
 .used-equip-table{
 	margin-top:15px;
 }

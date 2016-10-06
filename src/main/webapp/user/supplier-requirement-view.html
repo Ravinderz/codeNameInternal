@@ -19,7 +19,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/appProperties.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.8.3.js"></script> -->
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -74,19 +74,25 @@
 				}
 				});
 	
-	
 					/* ********************************* */
-        
 	
-	$('.logout').click(function() {
-		console.log("inside logout function")
-		var user = sessionStorage.getItem("user");
-		if (user !== null) {
-			sessionStorage.removeItem("user");
-		}
-		console.log("user logged out");
-		$(location).attr('href', "../index.html");
-	});
+				$('.logout').click(function(){
+				       console.log("inside logout function")
+				       var user = localStorage.getItem("user");
+				        if(user !== null){
+				            localStorage.removeItem("user");
+				        }
+				        
+				        $.ajax({
+		 					url:AppData.relativeUrl+"user/logout",
+		 					type:"post",
+		 					data:{},
+		 					success:function(response){
+		 					}
+		 					});
+				        console.log("user logged out");
+				        $(location).attr('href',"../index.html");
+				 });
 	
 	});    
     </script>
@@ -121,28 +127,32 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#"> <img id="nav-logo"
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
 								src="..\images\logo_new.png" height="75px" width="200px" />
 							</a>
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
-							<!--<ul class="nav navbar-nav navbar-right" id="navigation-right">
-							<li class="mainmenu"><a href="index.html" class="mainmenu1"><span class="usertext">Home</span></a></li>
-							<li class="mainmenu"><a href="dashboard.html" class="mainmenu1"><span class="usertext">Dashboard</span></a></li>
-							<li class="menu"><span class="usertext">Jayanth</span><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="images/profileicon.png" height="40px" width="40px"><b><strong class="caret"></strong></b></img></a>
-								<ul class="dropdown-menu">
-									<li class="menu"><a href="#" class="submenu1"><span class="submenu1">MyProfile</span></a></li>
-									<li class="divider"></li>
-									<li class="menu"><a href="#" class="submenu1" ><span class="submenu1">LogOut</span></a></li>
-								</ul></li>
-														
-						</ul>-->
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
-								<li><a href="userprofile.html" role="button"><span
-										id="user">User</span></a></li>
-								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="index.html"><span>About Us</span></a></li>
+								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="supplier-profile" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="supplier-profile"><span>Profile</span></a></li>
+									<li><a href="supplier-dashboard"><span>Dashboard</span></a></li>
+									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
 							</ul>
 						</div>
 					</nav>
