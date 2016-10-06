@@ -56,8 +56,16 @@ public class User {
 	
 	@Column(name = "updatedtime")
 	public Timestamp updatedtime;
+	
+	public String token= null;
 
 	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public long getUserId() {
 		return userId;
 	}

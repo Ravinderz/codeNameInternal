@@ -27,5 +27,15 @@ public class ResponseConstants {
 	
 	public static final String WRONG_PASSWORD_CODE = "WPSD";
 	
+	// AUTHENTICATION INTERCEPTOR
+	public static final String AUTH_SUCCESS_CODE = "AS01";
+	public static final String AUTH_FAILURE_CODE = "AF01";
+	public static final String UNAUTHORISED_SERVICE_CALL = "Unauthorised Service Call";
+	public static final String AUTHENTICATION_FAILED_STRING = "Authentication Failed";
 	
+	public static final String USR_LOGOUT_TOKEN_ERR_CODE = "UF02";
+	public static final String USR_LOGOUT_TOKEN_ERR_MSG = "User session inatives";
+	
+	public static final String ERROR_CODE = "errorCode";
+	public static final String ERROR_MESSAGE = "errorMsg";
 }

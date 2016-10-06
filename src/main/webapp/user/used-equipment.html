@@ -481,6 +481,7 @@
  		</div>
  	<script type="text/javascript">
  		$(document).ready(function(){
+ 			var posts = [];
  			var user = localStorage.getItem("user");
 				user = $.parseJSON(user);
 				console.log(user);
@@ -612,6 +613,29 @@
 				query = "equipment="+equipmentChecked;
 			}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length  === 0){
 				flag = false;
+				var post = "";
+	 				$.ajax({
+	 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+	 					type:"get",
+	 					data:{},
+	 					success:function(response){
+	 						response = $.parseJSON(response);
+	 						console.log(response);
+	 						$.each(response,function(index,value){
+	 							posts[value.postId] = value;	
+	 							var postedTime = value.postedTime;
+	 							postedTime = $.date(postedTime,1);
+	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+	 						});
+	 						$('.posts').html("");
+	 						$('.posts').append(post);
+	 					}
+	 					});
+			
 			}
 			
 			console.log(query+"::::"+flag);
@@ -646,7 +670,7 @@
 		
 		
 		
-		var posts = [];
+
 			var post = "";
  				$.ajax({
  					url:AppData.relativeUrl+"usedmachine/getAllPosts",

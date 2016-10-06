@@ -369,6 +369,12 @@
  				$('#user').text(username);
  				$('#user-name').text(username);
  				
+ 				$.ajaxSetup({
+ 				    beforeSend: function(xhr) {
+ 				        xhr.setRequestHeader('token', user.token);
+ 				    }
+ 				});
+ 				
  				$('.logout').click(function() {
 					console.log("inside logout function")
 					var user = localStorage.getItem("user");
