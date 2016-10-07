@@ -279,12 +279,9 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
-		//reqid=1;
     	console.log('reqid',reqid);
-    	var user = localStorage.getItem("user");
-		//var user = localStorage.getItem("user");
+    	var user = $.getUser();
 		console.log(user);
-		user = $.parseJSON(user);
 		var username = user.firstname+" "+user.lastname;
 			$('#user').text(username);
 			$('#user-name').text(username);
@@ -387,98 +384,26 @@
       }
 	   });	
 
-/* This ajax call is made to populate the category and equipment machinary dropdowns */
-    	
-/*    	var category = []
-    	$.ajax({
-    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
-    		type:"get",
-    		data:{},
-    		success:function(response){
-    			response = $.parseJSON(response);
-    			var i = 0;
-    			console.log(response);
-    			$.each(response,function(index,value){
-    				$("#category").append($("<option />").val(value).text(value));
-    					category[i] = value;
-    					i++
-    			});
-    			console.log("cat",categoryParam);
-    			if(categoryParam !== undefined){
-    			$("#category").val(categoryParam);
-    			}
-    			if(equipment !== undefined ){
-    				$.ajax({
-    					
-    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
-    	    			type:"get",
-    	    			data:{},
-    	    			success:function(equipments){
-    	    				equipments = $.parseJSON(equipments);
-    	    				console.log(equipments);
-    	    				$.each(equipments,function(index,value){
-    	    				$("#equipment").append($("<option />").val(value).text(value));
-    	    				
-    	    				});
-    	    				if(equipment !== undefined){
-    	    				$("#equipment").val(equipment);
-    	    				}
-    	    			}
-    	    			});
-    			}else{
-    			$.ajax({
-    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
-    			type:"get",
-    			data:{},
-    			success:function(equipments){
-    				equipments = $.parseJSON(equipments);
-    				console.log(equipments);
-    				$.each(equipments,function(index,value){
-    				$("#equipment").append($("<option />").val(value).text(value));
-    				
-    				});
-    			}
-    			});
-    			}
-    		}
-    	});
-    	
-    	/* This function will be called when there is change in the category dropdown */
-    	
-  /*  $("#category").on('change',function(){
-    		var selectedOption = $("#category option:selected").text();
-    		console.log("selected option ",selectedOption);
-    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
-    		console.log("url ",url);
-    		$.ajax({
-    			url:url,
-    			type:"get",
-    			data:{},
-    			success:function(equipments){
-    				equipments = $.parseJSON(equipments);
-    				console.log("equipments ",equipments);
-    				$("#equipment").html("");
-    				$.each(equipments,function(index,value){
-    				$("#equipment").append($("<option />").val(value).text(value));
-    				});	
-    			}
-    				
-    		});
-    	}); */
-    	
     	
        
 /* This action will be called when a contractor will logout of the form  */
 	
-	$('.logout').click(function() {
-					console.log("inside logout function")
-					var user = localStorage.getItem("user");
-					if (user !== null) {
-						localStorage.removeItem("user");
-					}
-					console.log("user logged out");
-					$(location).attr('href', "index.html");
-				});
+	$('.logout').click(function(){
+ 			       console.log("inside logout function")
+ 			       var user = localStorage.getItem("user");
+ 			        if(user !== null){
+ 			            localStorage.removeItem("user");
+ 			        }
+ 			        $.ajax({
+ 	 					url:AppData.relativeUrl+"user/logout",
+ 	 					type:"post",
+ 	 					data:{},
+ 	 					success:function(response){
+ 	 					}
+ 	 					});
+ 			        console.log("user logged out");
+ 			        $(location).attr('href',"../index.html");
+ 			 });
 	
 	$(".uncheck").click(function(){
 		var $label = $(this).parent("label");

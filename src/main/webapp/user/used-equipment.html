@@ -484,8 +484,7 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var posts = [];
- 			var user = localStorage.getItem("user");
-				user = $.parseJSON(user);
+ 			var user = $.getUser();
 				console.log(user);
 				var username = user.firstname+" "+user.lastname;
 				$('#user').text(username);
@@ -505,9 +504,6 @@
 		 					success:function(response){
 		 					}
 		 					});
-				        
-				        
-				        
 				        console.log("user logged out");
 				        $(location).attr('href',"../index.html");
 				 });

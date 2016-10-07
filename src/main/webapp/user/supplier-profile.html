@@ -45,10 +45,10 @@
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-								  <li><a href="supplier-profile" class="profile"><span id="user">User</span></a></li>
+								  <li><a href="supplier-profile.html" class="profile"><span id="user">User</span></a></li>
 								  	<li role="separator" class="divider"></li>
-									<li><a href="supplier-profile"><span>Profile</span></a></li>
-									<li><a href="supplier-dashboard"><span>Dashboard</span></a></li>
+									<li><a href="supplier-profile.html"><span>Profile</span></a></li>
+									<li><a href="supplier-dashboard.html"><span>Dashboard</span></a></li>
 									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#" class="logout"><span>logout</a></span></li>
@@ -378,8 +378,7 @@
 		
  		<script type="text/javascript">
  			$(document).ready(function(){
- 				var user = localStorage.getItem("user");
- 				user = $.parseJSON(user);
+ 				var user = $.getUser();
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
@@ -482,7 +481,7 @@
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;	
  							var createdTime = value.createdTime;
- 							createdTime = $.date(createdTime,3);
+ 							createdTime = $.date(createdTime,1);
  							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
  							+'<img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
  							+'<h4>'+value.contractorName+'</h4><p class="posted-date">posted on : '+createdTime+'</p><h4>'+value.quantity+' '+value.equipmentName+' needed on '+$.date(value.startDate,3)+' at '+value.workLocation+'</h4></div></div>';

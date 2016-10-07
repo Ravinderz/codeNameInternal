@@ -48,10 +48,10 @@
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-								    <li><a href="contractor-profile"><span id="user">User</span></a></li>
+								    <li><a href="contractor-profile.html"><span id="user">User</span></a></li>
 								  	<li role="separator" class="divider"></li>
-									<li><a href="contractor-profile"><span>Profile</span></a></li>
-									<li><a href="contrator-dashboard"><span>Dashboard</span></a></li>
+									<li><a href="contractor-profile.html"><span>Profile</span></a></li>
+									<li><a href="contrator-dashboard.html"><span>Dashboard</span></a></li>
 									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#" class="logout"><span>logout</a></span></li>
@@ -218,8 +218,7 @@
  				var requirements = [];
  				var quotes = [];
  				var reqId = "";
- 				var user = localStorage.getItem("user");
- 				user = $.parseJSON(user);
+ 				var user = $.getUser();
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);

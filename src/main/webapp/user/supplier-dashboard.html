@@ -47,10 +47,10 @@
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-								  <li><a href="supplier-profile" class="profile"><span id="user">User</span></a></li>
+								  <li><a href="supplier-profile.html" class="profile"><span id="user">User</span></a></li>
 								  	<li role="separator" class="divider"></li>
-									<li><a href="supplier-profile"><span>Profile</span></a></li>
-									<li><a href="supplier-dashboard"><span>Dashboard</span></a></li>
+									<li><a href="supplier-profile.html"><span>Profile</span></a></li>
+									<li><a href="supplier-dashboard.html"><span>Dashboard</span></a></li>
 									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#" class="logout"><span>logout</a></span></li>
@@ -218,8 +218,7 @@
  			$(document).ready(function(){
  				var requirements = [];
  				var quotes = [];
- 				var user = localStorage.getItem("user");
- 				user = $.parseJSON(user);
+ 				var user = $.getUser();
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
@@ -254,7 +253,7 @@
  					
  					
  					 $.ajax({
- 					url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId,
+ 					url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId+"?page=1&pSize=20",
  					type:"get",
  					data:{},
  					success:function(response){
@@ -392,7 +391,7 @@
 				console.log(clicked_page);
 				if(clicked_page === "prev"){
 					if(current_page === 1){
-						$.getAllQuotesByPagination(user.userId,current_page,5);
+						$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					}else if(current_page === $('#first').data("value")){
 					next_page = current_page;
 					current_page = previous_page;
@@ -403,7 +402,7 @@
 					$('#middle').text(next_page);
 					$('#last').data("value",next_page+1);
 					$('#last').text(next_page+1);
-					$.getAllQuotesByPagination(user.userId,current_page,5);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					}else{
 					next_page = current_page;
 					current_page = previous_page;
@@ -411,7 +410,7 @@
 					$active_element.removeClass("active");
 					$active_element.prev().addClass("active");
 					$active_element = $active_element.prev();
-					$.getAllQuotesByPagination(user.userId,current_page,5);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					}
 				}else if(clicked_page === "next"){
 					if(current_page === $('#last').data("value")){
@@ -424,7 +423,7 @@
 					$('#middle').text(previous_page);
 					$('#last').data("value",current_page);
 					$('#last').text(current_page);
-					$.getAllQuotesByPagination(user.userId,current_page,5);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					}else{
 					previous_page = current_page;
 					current_page = next_page;
@@ -432,7 +431,7 @@
 					$active_element.removeClass("active");
 					$active_element.next().addClass("active");
 					$active_element = $active_element.next();
-					$.getAllQuotesByPagination(user.userId,current_page,5);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					}
 				}else{
 					$active_element = $(this).parent();
@@ -440,7 +439,7 @@
 					previous_page = current_page-1;
 					next_page = current_page+1;
 					$(this).parent().addClass("active").siblings().removeClass("active");
-					$.getAllQuotesByPagination(user.userId,current_page,5);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					
 				}
 				
@@ -588,10 +587,10 @@
  			return monNum;
  		};
  		
- 		$.getAllQuotesByPagination = function(userId,currentPage,pageSize){
+ 		$.getAllQuotesByPagination = function(userId,currentPage,pageSize,requirements){
  			var quoteList = "";
  			$.ajax({
-					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize="+pageSize,
+					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize=20", //this is hard coded 
 					/*+user.userId,*/
 					type:"get",
 					data:{},

@@ -308,8 +308,7 @@
  			$(document).ready(function(){
  				
  				var userEquipments = [];
- 				var user = localStorage.getItem("user");
- 				user = $.parseJSON(user);
+ 				var user = $.getUser();
  				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);

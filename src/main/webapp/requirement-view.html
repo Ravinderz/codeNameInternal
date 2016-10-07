@@ -322,7 +322,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		
+		var user;
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
@@ -497,28 +497,29 @@
 										// datatype : "json",  
 		success : function(response) {
 		console.log(response);
-		response = $.parseJSON(response);
 		console.log("got user from userAPI",response.username);
 		$('#modal-container-login').modal('hide');
 		if (typeof (Storage) !== "undefined") {
-		sessionStorage.setItem("user",JSON.stringify(response));
+		$.setUser(response);
 		} else {
 		console.log(" no storage available");
 		}
+		
+		response = $.parseJSON(response);
+		
 		if (response.role === "supplier") {
 			if (typeof (Storage) !== "undefined") {
-		var user = localStorage.getItem("user");
+		user = $.getUser();
 			}else{
 				
 			}
-		user = $.parseJSON(user);
 		console.log(user);
 		if (user !== null) {
 		$(location).attr('href',"user/supplier-profile.html");
 		}
 		} else if (response.role === "contractor") {
 			if (typeof (Storage) !== "undefined") {
-			var user = localStorage.getItem("user");
+			user = $.getUser();
 			}else{
 				
 			}

@@ -201,8 +201,7 @@
 <script src="../js/appProperties.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var user = localStorage.getItem("user");
-		user = $.parseJSON(user);
+		var user = $.getUser();
 		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);

@@ -1,8 +1,8 @@
 package com.congun.web.dao;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -19,8 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.DropDownMaster;
 import com.congun.web.model.MappingObject;
-import com.congun.web.model.SupplierQuote;
-import com.congun.web.util.ApplicationUtil;
+import com.congun.web.model.MappingReqSort;
 import com.congun.web.util.ResponseConstants;
 import com.congun.web.util.SupplierMapperComponent;
 
@@ -153,7 +152,7 @@ public class ContractorRequirementQuoteDAO {
 			criteria.setMaxResults(pSize);
 			criteria.setProjection(Projections.property("requirementId"));
 			List mappedRequirementsList = (ArrayList) (criteria
-					.add(Restrictions.eq("supplierId", suppId))).addOrder(Order.desc("createdTime")).list();
+					.add(Restrictions.eq("supplierId", suppId))).list();
 			List quotationsList = (ArrayList) supplierDao.getQuotesbySupplier(suppId);
 			if (mappedRequirementsList.size() > 0) {
 				logger.info("There Are Mapped Requirements for SupplierID: "
@@ -172,7 +171,12 @@ public class ContractorRequirementQuoteDAO {
 							.longValue());
 					reqList.add(requirement);
 				}
+				
+				
+				
 			}
+			
+		Collections.sort(reqList,new MappingReqSort());
 			return reqList;
 		} catch (Exception e) {
 			e.printStackTrace();
