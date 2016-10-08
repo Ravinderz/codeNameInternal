@@ -74,7 +74,7 @@
 					<ul class="sub-menu">
 						<li><a href="user/supplier-dashboard.html">Dashboard</a></li>
 						<li><a href="user/supplier-profile.html">Profile</a></li>
-						<li><a href="user.used-equipment.html">Used machines</a></li>
+						<li><a href="user/used-equipment.html">Used machines</a></li>
 						<li><a href="#">Feedback</a></li>
 					</ul>
 				</div>
@@ -389,21 +389,24 @@
 /* This action will be called when a contractor will logout of the form  */
 	
 	$('.logout').click(function(){
- 			       console.log("inside logout function")
- 			       var user = localStorage.getItem("user");
- 			        if(user !== null){
- 			            localStorage.removeItem("user");
- 			        }
- 			        $.ajax({
- 	 					url:AppData.relativeUrl+"user/logout",
- 	 					type:"post",
- 	 					data:{},
- 	 					success:function(response){
- 	 					}
- 	 					});
- 			        console.log("user logged out");
- 			        $(location).attr('href',"../index.html");
- 			 });
+						       console.log("inside logout function")
+						        
+						        $.ajax({
+				 					url:AppData.relativeUrl+"user/logout",
+				 					type:"post",
+				 					data:{},
+				 					success:function(response){
+				 						var user = localStorage.getItem("user");
+								        if(user !== null){
+								            localStorage.removeItem("user");
+								        }
+								        
+								        console.log("user logged out");
+								        $(location).attr('href',"index.html");
+				 					}
+				 					});
+						        
+						 });
 	
 	$(".uncheck").click(function(){
 		var $label = $(this).parent("label");

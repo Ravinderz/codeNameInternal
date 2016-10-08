@@ -492,20 +492,22 @@
 				
 				$('.logout').click(function(){
 				       console.log("inside logout function")
-				       var user = localStorage.getItem("user");
-				        if(user !== null){
-				            localStorage.removeItem("user");
-				        }
 				        
 				        $.ajax({
 		 					url:AppData.relativeUrl+"user/logout",
 		 					type:"post",
 		 					data:{},
 		 					success:function(response){
+		 						var user = localStorage.getItem("user");
+						        if(user !== null){
+						            localStorage.removeItem("user");
+						        }
+						        
+						        console.log("user logged out");
+						        $(location).attr('href',"../index.html");
 		 					}
 		 					});
-				        console.log("user logged out");
-				        $(location).attr('href',"../index.html");
+				        
 				 });
  			
  		$('#sub-nav-profile').click(function(e){
@@ -587,14 +589,14 @@
 					equipmentChecked += ":"+$(this).val();
 				}
 				}
-				else if($(this).attr('name') === "manufacturer"){
+				else if($(this).attr('name') === 'manufacturer'){
 					if(mfgChecked.length === 0){
 						mfgChecked += $(this).val();
 						}
 						else{
 							mfgChecked += ":"+$(this).val();
 						}
-				}else if($(this).attr('name') === "location"){
+				}else if($(this).attr('name') === 'location'){
 					if(locationChecked.length === 0){
 						locationChecked += $(this).val();
 						}
@@ -608,6 +610,9 @@
 			
 			if(locationChecked.length !== 0 && equipmentChecked.length !== 0 && mfgChecked.length !== 0){
 			query = "location="+locationChecked+"&equipment="+equipmentChecked+"&manufacturer="+mfgChecked; 
+			}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length === 0){
+				console.log("all three filters are zero")
+				flag = false;
 			}else if(locationChecked.length === 0 && (mfgChecked.length !== 0 && equipmentChecked.length !== 0)){
 				query = "equipment="+equipmentChecked+"&manufacturer="+mfgChecked;
 			}else if(equipmentChecked.length === 0 && (locationChecked.length !== 0 && mfgChecked.length !== 0)){
@@ -620,32 +625,8 @@
 				query = "location="+locationChecked;
 			}else if(locationChecked.length === 0 && mfgChecked.length === 0){
 				query = "equipment="+equipmentChecked;
-			}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length  === 0){
-				flag = false;
-				var post = "";
-	 				$.ajax({
-	 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
-	 					type:"get",
-	 					data:{},
-	 					success:function(response){
-	 						response = $.parseJSON(response);
-	 						console.log(response);
-	 						$.each(response,function(index,value){
-	 							posts[value.postId] = value;	
-	 							var postedTime = value.postedTime;
-	 							postedTime = $.date(postedTime,1);
-	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
-								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
-								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
-	 						});
-	 						$('.posts').html("");
-	 						$('.posts').append(post);
-	 					}
-	 					});
-			
 			}
+				
 			
 			console.log(query+"::::"+flag);
 			
@@ -674,6 +655,30 @@
 					}
 					});
 			
+			}else{
+				var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+		
 			}
 		});
 		

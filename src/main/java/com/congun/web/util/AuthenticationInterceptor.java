@@ -26,7 +26,10 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	private final String GETALLPOSTS = "/getAllPosts";
 	private final String GETREQUIREMENTBYEQUIPMENT = "/getRequirementsByequipment";
 	private final String CONTRACTORREQUIREMENT = "/contractorRequirement";
-
+	private final String GETDISTINCTCATEGORY = "/getDistinctCategory";
+	private final String GETEQUIPMENTBYCATEGORY = "/getEquipmentByCategory";
+	private final String FILTERUSEDMACHINES = "/filterUsedMachines";
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -70,7 +73,9 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 	private boolean isTokenAuthenticationRequired(String uri, String method) {
 		if ((uri.contains(LOGIN)) || (uri.contains(GETALLPOSTS)) || (uri.contains(GETREQUIREMENTBYEQUIPMENT)) 
-				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)))
+				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)) 
+				|| (uri.contains(GETDISTINCTCATEGORY)) || (uri.contains(GETEQUIPMENTBYCATEGORY))
+				|| (uri.contains(FILTERUSEDMACHINES)))
 
 		{
 			return false;

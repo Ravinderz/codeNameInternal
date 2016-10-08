@@ -310,23 +310,22 @@
 		
 		$('.logout').click(function(){
 		       console.log("inside logout function")
-		       var user = localStorage.getItem("user");
-		        if(user !== null){
-		            localStorage.removeItem("user");
-		        }
 		        
 		        $.ajax({
 					url:AppData.relativeUrl+"user/logout",
 					type:"post",
 					data:{},
 					success:function(response){
+						var user = localStorage.getItem("user");
+				        if(user !== null){
+				            localStorage.removeItem("user");
+				        }
+				        
+				        console.log("user logged out");
+				        $(location).attr('href',"../index.html");
 					}
 					});
 		        
-		        
-		        
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
 		 });
 		
 	});	

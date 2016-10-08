@@ -383,19 +383,22 @@
     	
     	$('.logout').click(function(){
 		       console.log("inside logout function")
-		       var user = localStorage.getItem("user");
-		        if(user !== null){
-		            localStorage.removeItem("user");
-		        }
+		        
 		        $.ajax({
 					url:AppData.relativeUrl+"user/logout",
 					type:"post",
 					data:{},
 					success:function(response){
+						var user = localStorage.getItem("user");
+				        if(user !== null){
+				            localStorage.removeItem("user");
+				        }
+				        
+				        console.log("user logged out");
+				        $(location).attr('href',"index.html");
 					}
 					});
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
+		        
 		 });
 				
 				
@@ -494,48 +497,6 @@
     	}); 
     	
     	
-       
-/* This action will be called when a contractor will submit the form  */
-    	
-       // $("#btn-submit").click(function(){
-		//console.log("Entered After submit");
-		
-		/*var success = "successfully created";
-		var data = JSON.stringify($("#contractor-requirement-form").serializeObject());
-		//console.log(data);
-		data= $.parseJSON(data);
-		var manufacturer = [];
-		if($.isArray(data.manufacturer)){
-		console.log("It is an Array");
-		}else{
-		console.log("doesnt contain braces");
-		manufacturer.push(data.manufacturer);
-		data.manufacturer = manufacturer;
-		console.log(data);
-		}
-		data = JSON.stringify(data);
-		console.log(data);
-		
-            
-            $.ajax({
-			url:AppData.relativeUrl+"contractor/contractorRequirement11",
-		     type:"post",
-		     contentType:"application/json; charset=utf-8",
-		     data: data,
-		     success:function(data){
-		    	 console.log(data);
-		    	 if(data === "CS01"){
-		    		 console.log("inside if");
-		    		 $('#modal-success-dialog').modal('show').delay(50000);
-		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
-		    			 $(location).attr('href',AppData.relativeUrl+"user/contractor-dashboard.html");
-		    			 //history.back();	    
-		    			});
-		    	 }
-		      }
-
-                });*/
- //   });
 	
 	
 	
