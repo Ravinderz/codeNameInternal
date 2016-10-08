@@ -51,8 +51,8 @@
 								    <li><a href="contractor-profile.html"><span id="user">User</span></a></li>
 								  	<li role="separator" class="divider"></li>
 									<li><a href="contractor-profile.html"><span>Profile</span></a></li>
-									<li><a href="contrator-dashboard.html"><span>Dashboard</span></a></li>
-									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
+									<li><a href="contrator-dashboard.html"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#" class="logout"><span>logout</a></span></li>
 								  </ul>
@@ -72,10 +72,10 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a class="active" href="contractor-dashboard.html">Dashboard</a></li>
+						<li><a class="active" href="contractor-dashboard.html">Rental board</a></li>
 						<li ><a href="contractor-profile.html">Profile</a></li>
-						<li><a href="used-equipment.html">Used machines</a></li>
-						<li><a href="#">Feedback</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
 					</ul>
 					</div>
 				<div class="col-md-6">	
@@ -96,7 +96,7 @@
 			<div class="row">
 				<div class="col-md-12">
 		   <div class="panel panel-default my-req">
-			  <div class="panel-heading"><span class="float-left">My Requirements</span><a href="../requirement-form.html" class="btn btn-warning post-req-btn float-right">Post
+			  <div class="panel-heading"><span class="float-left">My posts</span><a href="../requirement-form.html" class="btn btn-warning post-req-btn float-right">Post
 					Requirement</a><div class="clear-fix"></div></div>
 			  <div class="requirement-table">
 				 
@@ -256,7 +256,7 @@
  					success:function(response){
  						response = $.parseJSON(response);
  						console.log(response);
- 						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quotes</th><th>Requirement deadline</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
+ 						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement title</th><th>Quotes</th><th>End date</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
  						var tableEndTags = '</tbody></table>';
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;

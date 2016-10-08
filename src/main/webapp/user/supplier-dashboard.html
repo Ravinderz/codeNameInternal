@@ -50,8 +50,8 @@
 								  <li><a href="supplier-profile.html" class="profile"><span id="user">User</span></a></li>
 								  	<li role="separator" class="divider"></li>
 									<li><a href="supplier-profile.html"><span>Profile</span></a></li>
-									<li><a href="supplier-dashboard.html"><span>Dashboard</span></a></li>
-									<li><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
+									<li><a href="supplier-dashboard.html"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#" class="logout"><span>logout</a></span></li>
 								  </ul>
@@ -70,10 +70,10 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a class="active" href="supplier-dashboard.html">Dashboard</a></li>
+						<li><a class="active" href="supplier-dashboard.html">Rental board</a></li>
 						<li><a  href="supplier-profile.html">Profile</a></li>
-						<li><a href="used-equipment.html">Used machines</a></li>
-						<li><a href="#">Feedback</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
 					</ul>
 					</div>
 				<div class="col-md-6">	
@@ -126,7 +126,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h4>Mapped Requirements</h4>
+					<h4>Recommendations for you</h4>
 					<div class="requirement-card-wrapper">
 					
 					
@@ -272,16 +272,16 @@
  										console.log("inside ifff");
  									reqList += '<div class="media"><div><h4 class="media-heading">'+value.title+'</h4></div><div class="media-left"><a href="#">'
  		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
- 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><div class="interactions"><span class="label label-primary">quoted</span></div></div><div class="clear-fix"></div><div class="applied-date"><span>Applied on : '+createdTime+'</span></div>'
- 		 							+'<h4 id="equipment-heading">equipment details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
+ 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><div class="interactions"><span class="label label-primary">quoted</span></div></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
+ 		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
  		 							+'<th>Year of Manufacture</th><th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
  		 							+'<td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
  									}else{
  										console.log("inside elseeeee");
  										reqList += '<div class="media"><div><h4 class="media-heading">'+value.title+'</h4></div><div class="media-left"><a href="#">'
  	 		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
- 	 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>Applied on : '+createdTime+'</span></div>'
- 	 		 							+'<h4 id="equipment-heading">equipment details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
+ 	 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
+ 	 		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
  	 		 							+'<th>Year of Manufacture</th><th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
  	 		 							+'<td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
  		 							}
