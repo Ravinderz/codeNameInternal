@@ -29,6 +29,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	private final String GETDISTINCTCATEGORY = "/getDistinctCategory";
 	private final String GETEQUIPMENTBYCATEGORY = "/getEquipmentByCategory";
 	private final String FILTERUSEDMACHINES = "/filterUsedMachines";
+	private final String FORGOETPASSWORD = "/forgotPassword";
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -75,7 +76,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		if ((uri.contains(LOGIN)) || (uri.contains(GETALLPOSTS)) || (uri.contains(GETREQUIREMENTBYEQUIPMENT)) 
 				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)) 
 				|| (uri.contains(GETDISTINCTCATEGORY)) || (uri.contains(GETEQUIPMENTBYCATEGORY))
-				|| (uri.contains(FILTERUSEDMACHINES)))
+				|| (uri.contains(FILTERUSEDMACHINES)) || (uri.contains(FORGOETPASSWORD)))
 
 		{
 			return false;

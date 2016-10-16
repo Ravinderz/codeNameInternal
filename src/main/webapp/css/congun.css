@@ -637,6 +637,7 @@ label.error { width: 250px; display: block; float: left; color: red; padding-lef
 	right:0;
 	padding:15px;
 	width:250px;
+	z-index:999;
 }
 
 .enquire{

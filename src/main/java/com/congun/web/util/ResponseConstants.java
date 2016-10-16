@@ -5,6 +5,8 @@ public class ResponseConstants {
 	public static final String USER_SUCCESS_CODE = "US01";
 	public static final String USER_FAILURE_CODE = "UF01";
 	public static final String USER_EXCEPTION_CODE = "UE01";
+	public static final String USER_FORGET_PASSWORD_SUCCESS_CODE = "UPS01 : password successfully updated";
+	public static final String USER_FORGET_PASSWORD_EXCEPTION_CODE = "UPE01 : password updation failed";
 
 	public static final String CONTRACTOR_SUCCESS_CODE = "CS01";
 	public static final String CONTRACTOR_FAILURE_CODE = "CF01";

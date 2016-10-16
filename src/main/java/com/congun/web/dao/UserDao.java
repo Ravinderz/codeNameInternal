@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -177,6 +178,31 @@ public class UserDao {
 		return ResponseConstants.WRONG_PASSWORD_CODE;
 
 	}
+	
+	@Transactional
+	public String forgotPassword(String email,User user){
+		logger.info("Entered into UserDao.updateUser method ");
+		try{
+			Query getQuery = getSession().createQuery("from User where username = :username");
+			getQuery.setParameter("username", email);
+			User user1 = (User)getQuery.list().get(0);
+			System.out.println("this is the user ::"+user1.getUsername());
+			user1.setPassword(GenerateHash.getHash(user.getPassword()));
+			System.out.println("password hash : "+user.getPassword());
+			String hqlQuery = "update User set password = :password where username = :username";
+			int result = getSession().createQuery(hqlQuery)
+					     .setParameter("password", user1.getPassword())
+					     .setParameter("username", email)
+					     .executeUpdate();
+			System.out.println("result : "+result);
+			return ResponseConstants.USER_FORGET_PASSWORD_SUCCESS_CODE;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.USER_FORGET_PASSWORD_EXCEPTION_CODE;
+		}
+		
+	}
+	
 
 	@Transactional
 	private String entryInUserSessionTable(long userId, Session session) {

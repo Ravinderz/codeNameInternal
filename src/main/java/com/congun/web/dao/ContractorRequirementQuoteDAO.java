@@ -157,15 +157,6 @@ public class ContractorRequirementQuoteDAO {
 			if (mappedRequirementsList.size() > 0) {
 				logger.info("There Are Mapped Requirements for SupplierID: "
 						+ suppId);
-				//logger.info("Initial Mapped :"+mappedRequirementsList.size());
-				/*if(quotationsList.size() > 0){
-				for(Object suppObj : quotationsList){
-					if(mappedRequirementsList.contains(((SupplierQuote)suppObj).getRequirementId())){
-					mappedRequirementsList.remove(((SupplierQuote)suppObj).getRequirementId());
-					}
-				}
-				}
-				logger.info("Final Mapped :"+mappedRequirementsList.size());*/
 				for (Object obj : mappedRequirementsList) {
 					ContractorRequirement requirement = getRequirementById(((Long) obj)
 							.longValue());

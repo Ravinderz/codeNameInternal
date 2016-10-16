@@ -77,5 +77,14 @@ public class UserController {
 				+ userId);
 		return userService.updatePassword(userId, oldPassword, newPassword);
 	}
+	
+	@RequestMapping(value = "/forgotPassword/{email}",method = RequestMethod.PUT)
+	public String forgotPassword(@PathVariable("email") String email,
+			@RequestBody User user){
+		logger.info("Entered into UserController.forgetPassword method  UserId:"
+				+ email);
+		return userService.forgotPassword(email, user);
+		
+	}
 
 }

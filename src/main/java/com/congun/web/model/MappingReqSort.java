@@ -2,19 +2,20 @@ package com.congun.web.model;
 
 import java.util.Comparator;
 
-public class MappingReqSort implements Comparator {
+public class MappingReqSort implements Comparator<ContractorRequirement> {
+
 
 	@Override
-	public int compare(Object o1, Object o2) {
-		long reqId1 = ((ContractorRequirement) o1).requirementId;
-		long reqId2 = ((ContractorRequirement) o2).requirementId;
-		if (reqId1 < reqId2)
+	public int compare(ContractorRequirement o1, ContractorRequirement o2) {
+		
+		if(o1.createdTime.after(o2.createdTime)){
 			return -1;
-		else if (reqId1 > reqId2)
+		}else if(o1.createdTime.before(o2.createdTime)){
 			return 1;
-		else
+		}else{
 			return 0;
-
+		}
+		
 	}
 
 }

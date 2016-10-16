@@ -86,5 +86,10 @@ public class UserService {
 		return status;	
 	}
 
+	public String forgotPassword(String email,User user) {
+		logger.info("Entered into SupplierQuoteService.forgetPassword method ");
+		String status= userdao.forgotPassword(email,user);
+		return status;	
+	}
 }
 

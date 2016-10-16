@@ -1,9 +1,23 @@
 var AppData = {
+		/*relativeUrl: 'http://www.mydailydriver.in/'*/
 			/*relativeUrl: 'http://139.59.6.85:8080/congun/'*/
 			relativeUrl: "http://localhost:8070/congun/"
 		};
 
 $(document).ready(function(){
+	
+	$('#enquire-form').hide();
+	var display = false;
+	$('.fa-minus').click(function(e){
+		e.preventDefault();
+		if(!display){
+		$('#enquire-form').show("slow");
+		display=true;
+		}else{
+			$('#enquire-form').hide("slow");
+			display=false;
+		}
+	});
 	
 	
 	$.getUser = function(){
