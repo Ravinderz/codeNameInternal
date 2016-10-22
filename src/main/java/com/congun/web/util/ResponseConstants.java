@@ -7,7 +7,12 @@ public class ResponseConstants {
 	public static final String USER_EXCEPTION_CODE = "UE01";
 	public static final String USER_FORGET_PASSWORD_SUCCESS_CODE = "UPS01 : password successfully updated";
 	public static final String USER_FORGET_PASSWORD_EXCEPTION_CODE = "UPE01 : password updation failed";
-
+	public static final String INVALID_USER_EXCEPTION_CODE = "ICE01";
+	public static final String INVALID_USER_EXCEPTION_MESSAGE = "Invalid Credentials";
+	public static final String USER_FORGET_PASSWORD_EMAIL_SUCCESS_CODE = "UPES01 : Email successfully sent";
+	public static final String USER_FORGET_PASSWORD_EMAIL_EXCEPTION_CODE = "UPEE01 : Email failed";
+	
+	
 	public static final String CONTRACTOR_SUCCESS_CODE = "CS01";
 	public static final String CONTRACTOR_FAILURE_CODE = "CF01";
 	public static final String CONTRACTOR_EXCEPTION_CODE = "CE01";

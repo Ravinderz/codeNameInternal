@@ -94,6 +94,33 @@ public class ApplicationUtil {
 		eClient.sendEmail(eModel);
 
 	}
+	
+	
+	public static void sendForgotPassEmail(String email,String hash) {
+		// int supplierId = 6;
+		// get email of supplier from supplier table . Need to add API for this
+		// String emailId = "nishant.vengala@gmail.com";
+		logger.info("sending forgot password to the registered user:" + email);
+
+		EmailModel eModel = new EmailModel();
+		// eModel.setFrom("nishant.vengala@gmail.com");
+		eModel.setFrom("admin@congun.com");
+		eModel.setTo(email);
+		eModel.setSubject("Congun forgot Password");
+		String msg ="<p>Please click on the below link to reset your account<p>"+"<br/>";
+		String url="http://www.mydailydriver.in/verify.html?email=";
+		String footer = "<p> &copy Congun. All Rights Reserved.</p>";
+		url=url+email+"&V="+hash;
+		url = "<a href='"+url+"'>"+url+"</a><br/>";
+		msg = msg + url +footer;
+		eModel.setMsg(msg);
+		EmailClient eClient = new EmailClient();
+
+		eClient.sendEmail(eModel);
+
+	}
+	
+	
 
 	public void sendQuoteEmailToContractor(String contractorEmail, String Name,
 			String mobileNo, String title) {

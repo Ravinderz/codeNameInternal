@@ -149,7 +149,7 @@
 
 
 .page-nav{
-	margin-left:175px;
+	margin-left:255px;
 }
 
 .sub-sub-nav-bar{
@@ -289,4 +289,14 @@
     z-index: 1002;
     text-align:center;
     overflow: auto;
+}
+
+.name,.contact{
+	border: 1px solid #337ab7;
+	color: #337ab7;
+	padding:5px;
+}
+
+.name{
+	margin-right:5px;
 }

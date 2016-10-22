@@ -685,3 +685,15 @@ label.error { width: 250px; display: block; float: left; color: red; padding-lef
     margin-right: 5px;
     margin-bottom:10px;
 }
+
+.invalid-error{
+	margin-left: 20px;
+    color: red;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#forgot-pass-link{
+	float:right;
+	padding-bottom:15px;
+}

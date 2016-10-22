@@ -1,0 +1,13 @@
+.panel{
+	    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#nav-logo{
+	margin-top:-3px;
+	margin-bottom:15px;
+}
+
+.nav-wrapper{
+	height:100px;
+}

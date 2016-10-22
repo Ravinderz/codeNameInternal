@@ -3,13 +3,14 @@ package com.congun.web.dao;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,13 @@ public class UsedMachineSaleDAO {
 	public String postInterestedUser(UsedMachineMapping usedMachineMapping,long postId) {
 		logger.info("Entered into UsedMachineSaleDAO.postInterestedUser method");
 		try {
+			Criteria criteria = getSession().createCriteria(
+					UsedMachineMapping.class);
+			criteria.add(Restrictions.eq("postId", postId));
+			criteria.add(Restrictions.eq("username", usedMachineMapping.getUsername()));
+			if(criteria.list().size() != 0 || !criteria.list().isEmpty()){
+				return ResponseConstants.SUPPLIER_SUCCESS_CODE;
+			}else{
 			Date date = new Date();
 			Timestamp currTime = new Timestamp(date.getTime());
 			usedMachineMapping.setPostId(postId);
@@ -62,7 +70,23 @@ public class UsedMachineSaleDAO {
 			usedMachineMapping.setActiveFlag(1);
 			usedMachineMapping.setUpdatedtime(currTime);
 			getSession().saveOrUpdate(usedMachineMapping);
+			
+			Criteria InterestedCount = getSession().createCriteria(
+					UsedMachineMapping.class);
+			InterestedCount.add(Restrictions.eq("postId", postId));
+			
+			
+			
+			int count = new HashSet(InterestedCount.list()).size();
+			
+			String hqlQuery = "update UsedMachineSale set interestedPplCount = :count where postId = :postId";
+			int result = getSession().createQuery(hqlQuery)
+					     .setParameter("count", count)
+					     .setParameter("postId", postId)
+					     .executeUpdate();
+			System.out.println("result : "+result);
 			return ResponseConstants.SUPPLIER_SUCCESS_CODE;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
@@ -70,6 +94,23 @@ public class UsedMachineSaleDAO {
 
 	}
 
+	@Transactional
+	public String getInterestedUser(long postId) {
+		logger.info("Entered into UsedMachineSaleDAO.postInterestedUser method");
+		try {
+			Criteria criteria = getSession().createCriteria(
+					UsedMachineMapping.class);
+			criteria.add(Restrictions.eq("postId", postId));
+			Set<UsedMachineSale> interestedPpl = new HashSet<UsedMachineSale>(criteria.list());
+			return ApplicationUtil.getJsonResponse(interestedPpl);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
+		}
+
+	}
+	
+	
 	@Transactional
 	public String deletePostById(long postId) {
 		logger.info("Entered into UsedMachineSaleDAO.deletePostById method");

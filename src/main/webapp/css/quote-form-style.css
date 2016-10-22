@@ -190,6 +190,13 @@ list-style:none;
 .machineRentalCharges ul li{
 display:inline-block;
 }
+
+.form-manufacturer ul li{
+display:inline-block;
+margin-right:15px;
+}
+
+
 .machineRentalCharges ul li input{
 width:175px;
 }

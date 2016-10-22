@@ -45,8 +45,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li><a href="index.html"><span>Home</span></a></li>
-								<li><a href="index.html"><span>About Us</span></a></li>
-								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
 								<li class="avatar-dropdown">
 								<div class="dropdown">
 								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -77,10 +76,9 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="#" id="sub-nav-dashboard">Rental board</a></li>
 						<li><a href="#" id="sub-nav-profile">Profile</a></li>
+						<li><a href="#" id="sub-nav-dashboard">Rental board</a></li>
 						<li class="active"><a href="used-equipment.html">Used equipment</a></li>
-						<li><a href="#">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6">	
@@ -99,9 +97,9 @@
 			<div class="row sub-sub-nav-bar">
 			<div class="page-nav">
 				<ul class="nav navbar-nav">
-				  <li role="presentation" class="active"><a href="used-equipment.html">Equipments for sale</a></li>
+				  <li role="presentation" class="active"><a href="used-equipment.html">For Sale</a></li>
 				  <li role="divider" class="divider"><a href="#"></a></li>
-				  <li role="presentation"><a href="myused-equipment.html">My used-equipments</a></li>
+				  <li role="presentation"><a href="myused-equipment.html">Sell My Equipment</a></li>
 				</ul>
 			</div>
 			</div>
@@ -446,11 +444,9 @@
 					<div class="middle">
 						<h3>Quick Links</h3>
 						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="FAQ.html">FAQ</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Contact US</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Privacy Policy</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="Terms.html">Terms and conditions</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -480,6 +476,7 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var posts = [];
+ 			var interested = [];
  			var user = $.getUser();
 				console.log(user);
 				var username = user.firstname+" "+user.lastname;
@@ -567,6 +564,7 @@
     		}
     	});
 		
+    	
 		$('.filter-content').on("click","input[type='checkbox']",function(e){
 			var checked = "";
 			var equipmentChecked = "";
@@ -641,11 +639,26 @@
 						$.each(response,function(index,value){
  							var postedTime = value.postedTime;
  							postedTime = $.date(postedTime,1);
+ 							var isInterested = false;
+ 							console.log(interested[value.postId]+" is equal to "+value.postId);
+ 							if(interested[value.postId] == value.postId){
+ 								console.log("inisde if isInteresed tis true");
+ 								isInterested = true;
+ 							}
+ 							
+ 							if(isInterested){
  							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
 							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
 							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
 							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 							}else{
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+ 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 							}
  						});
  						$('.posts').html("");
  						$('.posts').append(post);
@@ -665,11 +678,25 @@
  							posts[value.postId] = value;	
  							var postedTime = value.postedTime;
  							postedTime = $.date(postedTime,1);
+ 							var isInterested = false;
+ 							console.log(interested[value.postId]+" is equal to "+value.postId);
+ 							if(interested[value.postId] == value.postId){
+ 								isInterested = true;
+ 								console.log("inisde if isInteresed tis true");
+ 							}
+ 							if(isInterested){
  							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
 							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
 							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
 							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 							}else{
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" 	alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
+ 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 							}
  						});
  						$('.posts').html("");
  						$('.posts').append(post);
@@ -698,13 +725,55 @@
 							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
 							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
 							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
  						});
  						$('.posts').html("");
  						$('.posts').append(post);
  					}
  					});
 					
+ 				var clickedPosts = [];
+ 				$('.posts').on("click",".interested",function(e){
+ 					var postId = this.id;
+ 					console.log("clickedpost",clickedPosts[0]);
+ 					if(clickedPosts[0]){
+ 						console.log("inside if")
+ 						var interaction = clickedPosts[0]
+ 						console.log("interactionssss",interaction);
+ 						interaction.html("");
+ 						interaction.html("<a class='fa fa-flash interested' id="+clickedPosts[1]+">&nbsp;interest</a>");
+ 					}
+ 					
+ 					clickedPosts[1] = postId;
+ 					var parent = $(this).parents(".user-interactions");
+ 					clickedPosts[0] = parent;
+ 					interested[postId] = postId;
+					var postUser = $.getUser();
+					delete postUser.password;
+					delete postUser.createdtime;
+					delete postUser.updatedtime;
+					delete postUser.constitution;
+					delete postUser.company_individual_profile;
+					delete postUser.website;
+					delete postUser.role;
+					delete postUser.token;
+					console.log(postUser);
+					postUser = JSON.stringify(postUser);
+					 $.ajax({
+	 					url:AppData.relativeUrl+"usedmachine/interest/"+postId,
+	 					type:"post",
+	 					contentType:"application/json; charset=utf-8",
+	 					data:postUser,
+	 					success:function(response){
+	 						console.log(response);
+	 						console.log(parent);
+	 						parent.html("");
+	 						var element = "<span class='name'> Name : "+posts[postId].userName+"</span><span class='contact'> Contact : "+posts[postId].contactNo+"</span>";
+	 						parent.html(element);
+	 					}
+	 					});
+
+ 				});
 			
  				$.date = function(dateObject,pattern) {
  		 		    var d = new Date(dateObject);

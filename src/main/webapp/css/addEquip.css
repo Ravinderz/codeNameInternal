@@ -13,7 +13,7 @@ input[type='text']{
 	padding-left : 20px;
 }
 
-#equipment,#category,#model,#capacity,#yom,#manufacturer {
+#equipment,#category,#model,#manufacturer {
 	width : 350px;
 	margin : 0 auto;
 	position : relative;
@@ -21,11 +21,51 @@ input[type='text']{
 	
 }
 
+#quantity {
+	width : 165px;
+	margin : 0;
+	position : relative;
+	padding-left : 20px;
+	float:left;
+	margin-left: 54px;
+    margin-right: 20px;
+    margin-bottom: 15px;	
+}
+
+#yom{
+	width : 165px;
+	margin : 0;
+	position : relative;
+	padding-left : 20px;
+	float:left;
+    margin-bottom: 15px;	
+}
+
+#model-right,#capacity-right{
+	width : 165px;
+	margin : 0;
+	position : relative;
+	padding-left : 20px;
+	float:left;
+	margin-left: 54px;
+    margin-right: 20px;
+    margin-bottom: 15px;	
+}
+
+#yearOfManufacturing-right,#quantity-right{
+	width : 165px;
+	margin : 0;
+	position : relative;
+	padding-left : 20px;
+	float:left;
+    margin-bottom: 15px;	
+}
+
 .main-content{
 margin-top : 50px;
 margin-bottom: 50px;
 	padding-top : 25px;
-	height:680px;
+	height:500px;
 	background-color: #202e31;
 	
 }
@@ -55,16 +95,24 @@ padding-left:350px;
 .left-main-content{
     margin-top : 50px;
 	padding-top : 40px;
-	height:550px;
+	height:500px;
 	background-color: #202e31;
 }
 
 .middle-main-content{
 
-padding-top:300px;
+padding-top:235px;
 text-align:center;
 font-size:20px;
 color:black;
+}
+
+.middle-main-content label {
+	padding: 15px;
+	font-weight:500;
+	background-color: #ffc13b;
+	border-radius: 50%;
+	color: white;
 }
 
 .form-price ul{

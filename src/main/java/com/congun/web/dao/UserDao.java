@@ -65,7 +65,7 @@ public class UserDao {
 			// User existingUser =
 			// (User)getSession().createCriteria(User.class).add(Restrictions.eq("userId",
 			// user.getUserId())).list().get(0);
-			user.setPassword(GenerateHash.getHash(user.getPassword()));
+			user.setPassword(user.getPassword());
 			Date date = new Date();
 			Timestamp currTime = new Timestamp(date.getTime());
 			// user.setCreatedtime(existingUser.getCreatedtime());
@@ -180,25 +180,54 @@ public class UserDao {
 	}
 	
 	@Transactional
-	public String forgotPassword(String email,User user){
+	public String forgotPassword(String email,String hash,User user){
 		logger.info("Entered into UserDao.updateUser method ");
 		try{
 			Query getQuery = getSession().createQuery("from User where username = :username");
 			getQuery.setParameter("username", email);
 			User user1 = (User)getQuery.list().get(0);
-			System.out.println("this is the user ::"+user1.getUsername());
-			user1.setPassword(GenerateHash.getHash(user.getPassword()));
+			if(user1.getEmailCode().equals(hash)){
+			System.out.println("this is the user ::"+user.getUsername());
+			user.setPassword(GenerateHash.getHash(user.getPassword()));
 			System.out.println("password hash : "+user.getPassword());
 			String hqlQuery = "update User set password = :password where username = :username";
 			int result = getSession().createQuery(hqlQuery)
-					     .setParameter("password", user1.getPassword())
+					     .setParameter("password", user.getPassword())
 					     .setParameter("username", email)
 					     .executeUpdate();
 			System.out.println("result : "+result);
 			return ResponseConstants.USER_FORGET_PASSWORD_SUCCESS_CODE;
+			}else{
+				return ResponseConstants.USER_FORGET_PASSWORD_EXCEPTION_CODE;
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			return ResponseConstants.USER_FORGET_PASSWORD_EXCEPTION_CODE;
+		}
+		
+	}
+	
+	@Transactional
+	public String sendEmail(String email){
+		logger.info("Entered into UserDao.updateUser method ");
+		try{
+			String emailCode = GenerateHash.getHash(email);
+			String hqlQuery = "update User set emailCode = :emailCode where username = :username";
+			int result = getSession().createQuery(hqlQuery)
+					     .setParameter("emailCode", emailCode)
+					     .setParameter("username", email)
+					     .executeUpdate();
+			System.out.println("result : "+result);
+			if(result != 0 ){
+				ApplicationUtil.sendForgotPassEmail(email, emailCode);
+				return ResponseConstants.USER_FORGET_PASSWORD_EMAIL_SUCCESS_CODE;
+			}else{
+				return ResponseConstants.USER_FORGET_PASSWORD_EMAIL_EXCEPTION_CODE;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseConstants.USER_FORGET_PASSWORD_EMAIL_EXCEPTION_CODE;
 		}
 		
 	}

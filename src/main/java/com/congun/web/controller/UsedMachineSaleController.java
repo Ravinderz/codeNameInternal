@@ -53,6 +53,12 @@ public class UsedMachineSaleController {
 		logger.info("Entered into UsedMachineSaleController.UsedMachineInterested method postId"+postId);
 		return saleService.postInterestedUser(usedMachineMapping,postId);
 	}
+	
+	@RequestMapping(value = "/getInterestedppl/{postId}", method = RequestMethod.GET)
+	public String getInteresedPeople(@PathVariable long postId) {
+		logger.info("Entered into UsedMachineSaleController.UsedMachineInterested method postId"+postId);
+		return saleService.getInterestedUser(postId);
+	}
 
 	@RequestMapping(value = "/filterUsedMachines", method = RequestMethod.GET)
 	public String filterUsedMachines(@RequestParam(value = "location",required=false ) String location,@RequestParam(value = "equipment",required=false) String equipment,@RequestParam(value = "manufacturer",required=false) String manufacturer) {

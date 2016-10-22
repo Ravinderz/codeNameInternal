@@ -78,12 +78,20 @@ public class UserController {
 		return userService.updatePassword(userId, oldPassword, newPassword);
 	}
 	
-	@RequestMapping(value = "/forgotPassword/{email}",method = RequestMethod.PUT)
-	public String forgotPassword(@PathVariable("email") String email,
+	@RequestMapping(value = "/forgotPassword/sendEmail/{email}/",method = RequestMethod.PUT)
+	public String sendEmail(@PathVariable("email") String email){
+		logger.info("Entered into UserController.forgetPassword method  UserId:"
+				+ email);
+		return userService.sendEmail(email);
+		
+	}
+	
+	@RequestMapping(value = "/forgotPassword/{email}/{hash}",method = RequestMethod.PUT)
+	public String forgotPassword(@PathVariable("email") String email, @PathVariable("hash") String hash,
 			@RequestBody User user){
 		logger.info("Entered into UserController.forgetPassword method  UserId:"
 				+ email);
-		return userService.forgotPassword(email, user);
+		return userService.forgotPassword(email, hash,user);
 		
 	}
 

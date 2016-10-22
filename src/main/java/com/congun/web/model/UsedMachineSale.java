@@ -67,12 +67,24 @@ public class UsedMachineSale {
 	@Column(name="noOfViews")
 	public String noOfViews;
 	
+	@Column(name="interestedPplCount")
+	public int interestedPplCount;
+	
+	
 	@Column(name="queries")
 	public String queries;
 	
 	@Column(name="activeFlag")
 	public int activeFlag;
 	
+	public int getInterestedPplCount() {
+		return interestedPplCount;
+	}
+
+	public void setInterestedPplCount(int interestedPplCount) {
+		this.interestedPplCount = interestedPplCount;
+	}
+
 	public long getPostId() {
 		return postId;
 	}

@@ -51,6 +51,9 @@ public class User {
 	@Column(name = "role")
 	public String role;
 	
+	@Column(name = "emailCode")
+	public String emailCode;
+	
 	@Column(name = "activeFlag")
 	public int activeFlag;
 	
@@ -63,6 +66,21 @@ public class User {
 	public String token= null;
 
 	
+	
+	
+	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getEmailCode() {
+		return emailCode;
+	}
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
+	}
 	public String getToken() {
 		return token;
 	}

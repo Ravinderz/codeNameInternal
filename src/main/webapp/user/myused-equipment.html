@@ -44,8 +44,7 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
 								<li><a href="index.html"><span>Home</span></a></li>
-								<li><a href="index.html"><span>About Us</span></a></li>
-								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
 								<li class="avatar-dropdown">
 								<div class="dropdown">
 								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -76,10 +75,9 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="#" class="dashboard">Rental board</a></li>
 						<li><a href="#" class="profile">Profile</a></li>
+						<li><a href="#" class="dashboard">Rental board</a></li>
 						<li class="active"><a href="used-equipment.html">Used equipment</a></li>
-						<li><a href="#">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6">	
@@ -98,9 +96,9 @@
 				<div class="row sub-sub-nav-bar">
 			<div class="page-nav">
 				<ul class="nav navbar-nav">
-				  <li role="presentation" class="active"><a href="used-equipment.html">Equipments for sale</a></li>
+				  <li role="presentation" class="active"><a href="used-equipment.html">For Sale</a></li>
 				  <li role="divider" class="divider"><a href="#"></a></li>
-				  <li role="presentation"><a href="myused-equipment.html">My used-equipments</a></li>
+				  <li role="presentation"><a href="myused-equipment.html">Sell My Equipment</a></li>
 				</ul>
 			</div>
 			</div>
@@ -136,6 +134,18 @@
 				</div>
 			</div>
 		</div>
+		<div class="interested-list initial">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4>People who showed Interest in the post</h4>
+					<div class="interested-ppl-container" id="interested-ppl-display">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 		
 		 	</div>
  <div class="sub-footer">
@@ -153,11 +163,9 @@
 					<div class="middle">
 						<h3>Quick Links</h3>
 						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="FAQ.html">FAQ</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Contact US</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Privacy Policy</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="Terms.html">Terms and conditions</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -237,8 +245,8 @@
  		
  	<script type="text/javascript">
  		$(document).ready(function(){
- 			var user = $.getUser();
-				console.log(user);
+ 			 var user = $.getUser();
+				console.log(user); 
 				//var username = user.firstname+" "+user.lastname;
 				//$('#user').text(username);
 				//	$('#user-name').text(username);
@@ -295,6 +303,7 @@
 		});
 		
 		
+		
 		$('#my-posts').click(function(e){
 			e.preventDefault();
 			
@@ -339,6 +348,30 @@
 			$('#modal-postedby').text(post.userName);
 	 		
 	 		$('#view-post-modal').modal("show");
+	 		
+	 	});
+	 	
+	 	$('.sidebar-content').on("click",".ip-count",function(e){
+	 		e.preventDefault();
+	 		var postId = $(this).attr("data-id");
+	 		console.log(postId);
+	 		
+	 		$.ajax({
+				url:AppData.relativeUrl+"usedmachine/getInterestedppl/"+postId,
+				type:"get",
+				data:{},
+				success:function(response){
+					response = $.parseJSON(response);
+					console.log(response);
+					var listContent = "";
+					$.each(response,function(index,value){
+						listContent += '<li><p>'+value.firstname+' '+value.lastname+' '+value.mobileNumber+'</p></li>';
+					});
+					$('#interested-ppl-display').html("");
+					$('#interested-ppl-display').html("<ul class='interested-ppl'>"+listContent+"</ul>");	
+				}
+				});
+	 		
 	 		
 	 	});
 	 		
@@ -480,7 +513,7 @@
 					posts[value.postId] = value;	
 					var postedTime = value.postedTime;
 					postedTime = $.date(postedTime,1);
-					tableContent += '<tr><td>'+postedTime+'</td><td>'+value.equipmentName+'<a href="#" class="post-view" id='+value.postId+'>(view)</a></td><td>'+value.price+'</td><td>2</td>'+
+					tableContent += '<tr><td>'+postedTime+'</td><td>'+value.equipmentName+'<a href="#" class="post-view" id='+value.postId+'>(view)</a></td><td>'+value.price+'</td><td><a href="#" class="ip-count" data-id='+value.postId+'>'+value.interestedPplCount+'</a></td>'+
 					'<td>2 months</td><td>Open</td><td>'+value.location+'</td></tr>';
 				});
 				var tableEndTags = '</tbody></table></div></div>';
