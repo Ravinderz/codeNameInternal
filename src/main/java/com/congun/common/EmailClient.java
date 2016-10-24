@@ -12,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
+import com.congun.web.util.ResponseConstants;
+
 public class EmailClient {
 
 	private static final Logger LOGGER = Logger.getLogger(EmailClient.class);
@@ -23,9 +25,9 @@ public class EmailClient {
 		String subject = eModel.getSubject();
 		String msg = eModel.getMsg();
 
-		String footer = "";
+		String footer = ResponseConstants.MAIL_FOOTER;
 
-		msg = msg + footer;
+		msg = ResponseConstants.DO_NOT_REPLY_MSG+msg + footer;
 
 		// Assuming you are sending email from localhost
 		String host = "a2plcpnl0637.prod.iad2.secureserver.net";
@@ -57,8 +59,21 @@ public class EmailClient {
 			message.setFrom(new InternetAddress(from));
 			LOGGER.debug("Sender added");
 			// Set To: header field of the header.
+			if(eModel.getToList() == null)
+			{
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					eModel.getTo()));
+			}
+			else{
+				LOGGER.debug("Multiple Receipients");
+				for(String userEmail:eModel.getToList())
+				{
+					message.addRecipient(Message.RecipientType.TO, new InternetAddress(
+							userEmail));
+				}
+				
+				
+			}
 			/*
 			 * message.addRecipient(Message.RecipientType.CC, new
 			 * InternetAddress(commonCC));

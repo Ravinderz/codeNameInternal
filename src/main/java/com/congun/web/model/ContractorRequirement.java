@@ -35,6 +35,7 @@ public class ContractorRequirement {
  public String pincode;
  public String mobile;
  public String reqStatus;
+ public String workareaimages;
  public String workDescription;
 
  public Timestamp createdTime;
@@ -42,7 +43,12 @@ public class ContractorRequirement {
  public int activeFlag;
  public int noofquotes;
  
- 
+public String getWorkareaimages() {
+	return workareaimages;
+}
+public void setWorkareaimages(String workareaimages) {
+	this.workareaimages = workareaimages;
+}
 public long getRequirementId() {
 	return requirementId;
 }

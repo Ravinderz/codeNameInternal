@@ -36,30 +36,16 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+							<a class="navbar-brand" href="#"> <img id="nav-logo"
 								src="images/logo_new.png" height="75px" width="200px" />
 							</a>
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li><a href="index.html"><span>Home</span></a></li>
-								<li><a href="index.html"><span>About Us</span></a></li>
-								<li><a href="index.html"><span>Contact Us</span></a></li>
-								<li class="avatar-dropdown">
-								<div class="dropdown">
-								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
-									<span class="caret"></span>
-								  </a>
-								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-									<li><a href="user/contractor-profile.html"><span>Profile</span></a></li>
-									<li><a href="user/contractor-dashboard.html"><span>Dashboard</span></a></li>
-									<li><a href="user/used-equipment.html"><span>Used-Equipment</span></a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#" class="logout"><span>logout</a></span></li>
-								  </ul>
-								</div>
-								</li>
+								<li class="active"><a href="index.html"><span>Home</span></a></li>
+								<li><a href="userprofile.html" role="button"><span
+										id="user">User</span></a></li>
+								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
 							</ul>
 						</div>
 					</nav>
@@ -73,10 +59,10 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="user/contractor-profile.html">Profile</a></li>
 						<li><a href="user/contractor-dashboard.html">Rental board</a></li>
-						<li><a href="user/used-equipment.html">Used machines</a></li>
-						
+						<li><a href="user/contractor-profile.html">Profile</a></li>
+						<li><a href="user/used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
 					</ul>
 				</div>
 		   </div>
@@ -94,7 +80,7 @@
 					</div>
 				</div>
                 <div class="col-md-6 form-box">
-                    <form role="form" action="" method="post" class="f1" id="contractor-requirement-form">
+                    <form role="form" method="post" class="f1" id="contractor-requirement-form" >
                         <h3>Requirement Form</h3>
                         <p>Give your requirement details</p>
                         <div class="f1-steps">
@@ -253,16 +239,17 @@
                                 <label for="workdescription">Work Description</label>
 								 <textarea class="form-control" name="workDescription" placeholder="workdescription" rows="10" id="workdescription" style="margin: 0px -0.703125px 0px 0px; height: 221px; width: 488px;"></textarea>
                             </div>
-							
-							<div class="upload-image">
-							<label for="workareaimages">Attach Imgages of work Area</label>
-							<input type="file" name="workAreaImages[]" id="upload-image" accept="image/*" multiple/><label>(You can select multple images to upload at a time)
-                            </div>                            
+                            <div class="form-group">
+							<label for="uploadimage">Click to Upload Images of your work site (optional)</label>
+							<button type="button" id="upload-direct" class="btn btn-submit">Upload Images</button>
+							</div>
                             <div id="hidden-fields">
                                 <input type="hidden" name="contractorId" id="contractorId" value="">
                                 <input type="hidden" name="contractorName" id="contractorName" value="">
                                 <input type="hidden" name="mobile" id="contractorMobile" value="">
                                 <input type="hidden" name="reqStatus" id="requirementStatus" value="open">
+								<input type="hidden" name="workareaimages" id="workareaimages" value="">
+								<input type="hidden"  id="uploadtype" value="requirement">
                                 </div>
                             
                             <!-- <div class="form-group">
@@ -280,7 +267,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
+									<button type="button" class="modal-close" data-dismiss="modal"
 										aria-hidden="true">×</button>
 									<h4 class="modal-title" id="myModalLabel">Success</h4>
 								</div>
@@ -290,7 +277,84 @@
 							</div>
 						</div>
 					</div>
+					
                     </form>
+					 <div class="modal fade" id="modal-image-upload" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="modal-close" data-dismiss="modal"
+										aria-hidden="true">x</button>
+									<h4 class="modal-title" id="myModalLabel" >Add Images</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-box">
+									<form role="form"   class="form-horizontal login-form" id="imageuploadform" enctype="multipart/form-data">
+				
+		        <!--  File to upload: <input type="file" name="file">
+ 
+		           Name: <input type="text" name="name">
+				   <input type="submit" value="Upload" class="btn btn-submit"> Press here to upload the file!-->
+				  
+                          <div class="form-upload">
+							<label for="workareaimages">Attach Images of work Area (select max 5 images)</label>
+							<ul><li><input type="file" name="files" id="upload-image" accept="image/*" multiple="multiple"/></li>
+							<li><input type="hidden" id="senderid" name="uploaderid"> <input type="hidden" id="type" name="type" value="requirement"></li>
+							<li><input type="submit" value= "Upload" id="imageuploader" class="btn btn-submit"><!--<input type="submit" value="Upload" id="imageuploader" class="btn btn-submit"> --> Press here to upload the file!</li>
+							</ul>
+							<label>(You can select multple images to upload at a time)</label>
+                            </div>                            
+					<div class="clear-fix"></div>
+	              </form>
+
+									
+								</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-upload-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="modal-close" data-dismiss="modal"
+										aria-hidden="true">x</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Images Uploaded successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+						<!--<form method="post" class="f2" id="imageform" action="contractor/uploadimage" enctype="multipart/form-data">
+							<div class="upload-image">
+							<label for="workareaimages">Attach Imgages of work Area</label>
+							<ul style="list-style:none"><li style="display:inline-block"><input type="file" name="workAreaImages" form="imageform" id="upload-image" accept="image/*" multiple/></li>
+							<li style="display:inline-block"><button type="button"  id="btn-upload" class="btn btn-submit">Upload</button></li>
+							</ul>
+							<label>(You can select multple images to upload at a time)</label>
+                            </div>                            -->
+				  <!-- <form role="form" method="POST" class="f1 imageform" action="http://localhost:8080/congun/upload/uploadimage" enctype="multipart/form-data" hidden>
+				
+		        <!--  File to upload: <input type="file" name="file">
+ 
+		           Name: <input type="text" name="name">
+				   <input type="submit" value="Upload" class="btn btn-submit"> Press here to upload the file!-->
+				  
+                        <!--    <div class="form-upload">
+							<label for="workareaimages">Attach Imgages of work Area</label>
+							<ul><li><input type="file" name="file" id="upload-image" accept="image/*" multiple="multiple"/></li>
+							<li><input type="hidden" id="senderid" name="uploaderid"> <input type="hidden" id="type" name="type" value="requirement"></li>
+							<li><input type="submit" value="Upload" class="btn btn-submit"> Press here to upload the file!</li>
+							</ul>
+							<label>(You can select multple images to upload at a time)</label>
+                            </div>                            
+					
+	              </form>-->
+
                 </div>
             </div>
         </div>
@@ -299,11 +363,11 @@
     <div class="container-fluid">
  			<div class="row">
  				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
-                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3>
-                <ul>
-                	<li><span class="fa fa-angle-right"></span><a href="user/faq.html">FAQ</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="user/contact.html">Contact Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="user/terms.html">Terms and Conditions</a></li>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
                     </ul></div></div>
                 <div class="col-md-4">
 
@@ -315,16 +379,35 @@
                                 <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
                         </ul>
                         <div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-google-plus" href="#"></a>
-                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                           <a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
                         </div>
                     </div>
                 </div>
  			</div>
  		</div>
     </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
     <!-- Javascript -->
 	<!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
 	<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
@@ -362,32 +445,23 @@
     	    }
     	};
     	
-    	$('.logout').click(function(){
-		       console.log("inside logout function")
-		        
-		        $.ajax({
-					url:AppData.relativeUrl+"user/logout",
-					type:"post",
-					data:{},
-					success:function(response){
-						var user = localStorage.getItem("user");
-				        if(user !== null){
-				            localStorage.removeItem("user");
-				        }
-				        
-				        console.log("user logged out");
-				        $(location).attr('href',"index.html");
+		$('.logout').click(function() {
+					console.log("inside logout function")
+					var user = sessionStorage.getItem("user");
+					if (user !== null) {
+						sessionStorage.removeItem("user");
 					}
-					});
-		        
-		 });
+					console.log("user logged out");
+					$(location).attr('href', "index.html");
+				});
 				
 				
     	var categoryParam = getUrlParameter('category');
     	var equipment = getUrlParameter('sub-category');
-    	var user = $.getUser();
-	    //var user = localStorage.getItem("user");
+    	//var user = sessionStorage.getItem("user");
+	    var user = localStorage.getItem("user");
 		console.log(user);
+		user = $.parseJSON(user);
 		var username = user.firstname+" "+user.lastname;
 			$('#user').text(username);
 			$('#user-name').text(username);
@@ -395,7 +469,7 @@
 			$('#contractorId').val(user.userId);
 	    	$('#contractorName').val(user.firstname+" "+user.lastname);
 	    	$('#contractorMobile').val(user.mobileNumber);	
-		
+		    $('#senderid').val(user.userId);
     	
 /* This ajax call is made to populate the category and equipment machinary dropdowns */
     	
@@ -478,6 +552,48 @@
     	}); 
     	
     	
+       
+/* This action will be called when a contractor will submit the form  */
+    	
+       // $("#btn-submit").click(function(){
+		//console.log("Entered After submit");
+		
+		/*var success = "successfully created";
+		var data = JSON.stringify($("#contractor-requirement-form").serializeObject());
+		//console.log(data);
+		data= $.parseJSON(data);
+		var manufacturer = [];
+		if($.isArray(data.manufacturer)){
+		console.log("It is an Array");
+		}else{
+		console.log("doesnt contain braces");
+		manufacturer.push(data.manufacturer);
+		data.manufacturer = manufacturer;
+		console.log(data);
+		}
+		data = JSON.stringify(data);
+		console.log(data);
+		
+            
+            $.ajax({
+			url:AppData.relativeUrl+"contractor/contractorRequirement11",
+		     type:"post",
+		     contentType:"application/json; charset=utf-8",
+		     data: data,
+		     success:function(data){
+		    	 console.log(data);
+		    	 if(data === "CS01"){
+		    		 console.log("inside if");
+		    		 $('#modal-success-dialog').modal('show').delay(50000);
+		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
+		    			 $(location).attr('href',AppData.relativeUrl+"user/contractor-dashboard.html");
+		    			 //history.back();	    
+		    			});
+		    	 }
+		      }
+
+                });*/
+ //   });
 	
 	
 	

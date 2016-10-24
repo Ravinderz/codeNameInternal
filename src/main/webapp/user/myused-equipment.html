@@ -133,12 +133,12 @@
 		</div>	
 				</div>
 			</div>
-		</div>
+		</div> 
 		<div class="interested-list initial">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h4>People who showed Interest in the post</h4>
+				<div class="col-md-3"></div>
+				<div class="col-md-9">
 					<div class="interested-ppl-container" id="interested-ppl-display">
 
 					</div>
@@ -181,10 +181,10 @@
 								href="mailto:info@congun.com">info@congun.com</a></li>
 						</ul>
 						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
+					<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
 						</div>
 					</div>
 				</div>
@@ -208,7 +208,7 @@
 										<div class="container">
 											<div class="row">
 												<div class="col-md-7">
-													<img class="post-image" src="http://placehold.it/250x250" alt="...">
+													<img class="post-image" id="img-250" src="http://placehold.it/250x250" width="250px" height="250px" alt="...">
 												</div>
 												<div class="col-md-5 post-text">
 													<h3 id="modal-machine">Excavator</h3>
@@ -225,11 +225,6 @@
 											<div class="row">
 												<div class="col-md-7">
 													<ul class="img-thumb">
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
-														<li><a href="#"><img class="post-img-thumb" src="http://placehold.it/50x50" alt="..."></a></li>
 													</ul>
 												</div>
 												<div class="col-md-5">
@@ -247,9 +242,8 @@
  		$(document).ready(function(){
  			 var user = $.getUser();
 				console.log(user); 
-				//var username = user.firstname+" "+user.lastname;
-				//$('#user').text(username);
-				//	$('#user-name').text(username);
+			
+			$('.interested-list').hide();
 				
 			$('.logout').click(function(){
 						       console.log("inside logout function")
@@ -321,7 +315,8 @@
 						posts[value.postId] = value;	
 						var postedTime = value.postedTime;
 						postedTime = $.date(postedTime,1);
-						myPosts += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="http://placehold.it/100x100" alt="..."></a></div>'+
+						var imgArr = value.imagesuploaded.split(",");
+						myPosts += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
 						'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
 						'<p class="float-right">Price : <i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two"><p class="float-left">Meter : '+value.meterReading+'</p>'+
 						'<p class="posted-date float-right">posted on : '+postedTime+'</p></div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p>'+
@@ -335,6 +330,11 @@
 			
 		});
 		
+		
+		$('.img-thumb').on("click",".post-img-thumb",function(e){
+			e.preventDefault();
+			$('#img-250').attr("src",$(this).attr("src"));
+		});
 			
 	 	$('.sidebar-content').on("click",".post-view",function(e){
 	 		e.preventDefault();
@@ -346,13 +346,26 @@
 			$('#modal-yom').text(post.yearOfManufacturer);
 			$('#modal-location').text(post.location);
 			$('#modal-postedby').text(post.userName);
-	 		
+			var imgArr = post.imagesuploaded.split(",");
+			$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
+			var listContent = "";
+			$.each(imgArr,function(index,value){
+				console.log("index",index);
+				var imgid = '#thumb-img'+index;
+				listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+			});
+			
+			$('.img-thumb').html("");
+			$('.img-thumb').html(listContent);
 	 		$('#view-post-modal').modal("show");
 	 		
 	 	});
 	 	
 	 	$('.sidebar-content').on("click",".ip-count",function(e){
 	 		e.preventDefault();
+	 		
+	 		$('.interested-list').show();
+	 		
 	 		var postId = $(this).attr("data-id");
 	 		console.log(postId);
 	 		
@@ -363,12 +376,15 @@
 				success:function(response){
 					response = $.parseJSON(response);
 					console.log(response);
-					var listContent = "";
+					var tableHeading = '<div class="panel panel-default interested-ppl-table"><div class="panel-heading">People who showed Interest in the post</div><div class="post-table">'+
+					'<table class="table table-striped"><thead><tr><th>Name</th><th>Email</th><th>Contact</th></tr></thead><tbody>';
+					var tableContent = "";
 					$.each(response,function(index,value){
-						listContent += '<li><p>'+value.firstname+' '+value.lastname+' '+value.mobileNumber+'</p></li>';
+						tableContent += '<tr><td>'+value.firstname+' '+value.lastname+'</td><td>'+value.username+'</td><td>'+value.mobileNumber+'</td></tr>';
 					});
+					var tableEndTags = '</tbody></table></div></div>';
 					$('#interested-ppl-display').html("");
-					$('#interested-ppl-display').html("<ul class='interested-ppl'>"+listContent+"</ul>");	
+					$('#interested-ppl-display').html(tableHeading+tableContent+tableEndTags);	
 				}
 				});
 	 		

@@ -45,4 +45,17 @@ public class ResponseConstants {
 	
 	public static final String ERROR_CODE = "errorCode";
 	public static final String ERROR_MESSAGE = "errorMsg";
+	
+	public static final String UPLOAD_SUCCESS = "UP01";
+	public static final String UPLOAD_FAILURE = "UF01";
+	public static final String UPLOAD_SUCCESS_MESSAGE = "Uploaded Successfully";
+	public static final String UPLOAD_FAILURE_MESSAGE= "Upload Failed";
+	
+	//Contact us
+		public static final String CONTACT_US_SUCCESS = "CUS01";
+		public static final String CONTACT_US_EXP = "CUF01";
+		public static final String[] QRY_MAIL_TO = {"nv00334638@techmahindra.com","nishant.vengala@gmail.com"};
+		public static final String MAIL_FOOTER = "<br><br><br>Regards,<br>Congun Support Team";
+		public static final String DO_NOT_REPLY_MSG="<br>******* This is an auto-generated mail. Please do not reply********<br><br>";
+	
 }

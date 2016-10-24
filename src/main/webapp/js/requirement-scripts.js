@@ -340,5 +340,58 @@ jQuery(document).ready(function() {
 		
 	 
 	 });
+	 
+	 $("#upload-image").on("change", function() {
+	 console.log("No of images :"+$("#upload-image")[0].files.length)
+         if($("#upload-image")[0].files.length > 5) {
+                   alert("You can select only 5 images!!!");
+				   $("#upload-image").val('');
+         } 
+		 });
+	 
+	 //upon click to upload Image
+	  $('#upload-direct').on('click', function(){
+	  $('#modal-image-upload').modal('show').delay(50000);
+	  });
+	  
+	  //upload file
+	  $('#imageuploadform').submit(function(event){
+	   var user = localStorage.getItem("user");
+	   user = $.parseJSON(user);
+	  event.preventDefault();
+	  console.log("Entered Image Uploaded method");
+	  var formData = new FormData ( this );
+	  console.log(formData);
+	  $.ajax({
+	   url: AppData.relativeUrl+"upload/uploadimage/"+user.userId+"/"+document.getElementById("uploadtype").value,
+	   type: "post",
+	   data: formData,
+	   contentType: false,
+	   processData: false,
+	   async:true,
+	   success: function(data){
+	   console.log("success");
+	   console.log(data);
+	  if(data !== "UF01"){
+	               //$('#modal-image-upload').modal('hide').delay(30000);
+				   $('#workareaimages').val(data);
+				   console.log("Images Uploaded : "+document.getElementById("workareaimages").value)
+				   $('#modal-image-upload').modal('hide');
+				   $('#modal-upload-success-dialog').modal('show');
+				   setTimeout(function() { $('#modal-upload-success-dialog').modal('hide'); }, 5000);
+		    	}
+	  },
+	    error: function(data){
+		console.log("error");
+		console.log(data);
+		}
+	  });
+	  });
+	  
+	 // $( "#imageuploadform" ).submit(function( event ) {
+  //alert( "Handler for .submit() called." );
+   //event.preventDefault();
+   //return false;
+//});
     
 });

@@ -31,6 +31,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	private final String FILTERUSEDMACHINES = "/filterUsedMachines";
 	private final String FORGOETPASSWORD = "/forgotPassword";
 	private final String SENDEMAIL = "/sendEmail";
+	private final String USERQUERIES = "/userqueries";
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -78,7 +79,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)) 
 				|| (uri.contains(GETDISTINCTCATEGORY)) || (uri.contains(GETEQUIPMENTBYCATEGORY))
 				|| (uri.contains(FILTERUSEDMACHINES)) || (uri.contains(FORGOETPASSWORD))
-				|| (uri.contains(SENDEMAIL)))
+				|| (uri.contains(SENDEMAIL) || (uri.contains(USERQUERIES))))
 
 		{
 			return false;

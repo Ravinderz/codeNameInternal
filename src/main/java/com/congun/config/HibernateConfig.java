@@ -41,9 +41,9 @@ public class HibernateConfig {
 	private Properties hibernateProperties(){
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.format_sql", "true");
-		properties.put("use_sql_comments","true");
+		properties.put("hibernate.show_sql", "false");
+		//properties.put("hibernate.format_sql", "true");
+		//properties.put("use_sql_comments","true");
 		properties.put("hibernate.id.new_generator_mappings", "false");
 		properties.put("hibernate.hbm2ddl.auto","update");
 		return properties;

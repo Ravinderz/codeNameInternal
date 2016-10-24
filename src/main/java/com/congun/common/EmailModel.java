@@ -1,8 +1,12 @@
 package com.congun.common;
 
+import java.util.List;
+
 public class EmailModel {
 	
 	private String to;
+	
+	private List<String> toList;
 	
 	private String from;
 	
@@ -12,6 +16,15 @@ public class EmailModel {
 	
 	private String msg;
 	
+	
+
+	public List<String> getToList() {
+		return toList;
+	}
+
+	public void setToList(List<String> toList) {
+		this.toList = toList;
+	}
 
 	public String getCcRM() {
 		return ccRM;

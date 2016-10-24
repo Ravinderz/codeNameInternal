@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.model.User;
+import com.congun.web.model.UserQuery;
 import com.congun.web.model.UserSession;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.GenerateHash;
@@ -251,6 +252,22 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return tokenId;
+	}
+	
+	@Transactional
+	public String postQuery(UserQuery usrQry) {
+		logger.info("Entered into UserDao.postQuery method ");
+		try {
+
+			Date date = new Date();
+			Timestamp currTime = new Timestamp(date.getTime());
+			usrQry.setCreatedtime(currTime);
+			getSession().saveOrUpdate(usrQry);
+			return ResponseConstants.CONTACT_US_SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseConstants.CONTACT_US_EXP;
+		}
 	}
 
 }

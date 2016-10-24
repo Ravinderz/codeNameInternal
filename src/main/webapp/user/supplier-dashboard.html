@@ -167,10 +167,10 @@
 								href="mailto:info@congun.com">info@congun.com</a></li>
 						</ul>
 						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
 						</div>
 					</div>
 				</div>
@@ -321,9 +321,15 @@
  							console.log("req",value.requirementId);
  							console.log("req id name",value.reqPostedBy);	
  							var createdTime = value.createdTime;
+ 							var quotePrice = value.finalQuotePrice;
+ 							if(quotePrice){
+ 								console.log("inside quotePrice if")
+ 							}else{
+ 								quotePrice = value.machineRentalCharges;
+ 							}
  							createdTime = $.date(createdTime,1);
  							console.log("created time :: ",$.date(createdTime,1));
- 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.reqPostedBy+'</td><td>'+value.finalQuotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+ 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.reqPostedBy+'</td><td>'+quotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
  						});
  						var tableContent = tableHeader+quoteList+tableEndTags;
  						$('.quote-table').html("");
@@ -604,8 +610,14 @@
 						var tableEndTags = '</tbody></table>';
 						$.each(response,function(index,value){
 							var createdTime = value.createdTime;
+							var quotePrice = value.finalQuotePrice;
+ 							if(quotePrice){
+ 								console.log("inside quotePrice if")
+ 							}else{
+ 								quotePrice = value.machineRentalCharges;
+ 							}
 							createdTime = $.date(createdTime,1);
-							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+requirements[value.requirementId].contractorName+'</td><td>'+value.finalQuotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+requirements[value.requirementId].contractorName+'</td><td>'+quotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
 						});
 						var tableContent = tableHeader+quoteList+tableEndTags;
 						$('.quote-table').html("");

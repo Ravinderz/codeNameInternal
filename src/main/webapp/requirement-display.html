@@ -109,7 +109,7 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="myModalLabel">update password</h4>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
 								</div>
 								<div class="modal-body" id="forgetpass-modal">
 									<div class="form-box">
@@ -126,7 +126,7 @@
 											</div>
 											
 											<div class="login-btn">
-												<button type="button" id="forgetPass" class="btn btn-next modal-btn">update</button>
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
 											</div>
 											<div class="clear-fix"></div>
 										</form>
@@ -166,10 +166,10 @@
 								
 									<form class="form-horizontal" role="form" id="register-form">
 										<div class="form-group radio">
-											<label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="supplier">Supplier
-											</label> <label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="contractor">Contractor
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who has the equipment to lease or to sell used equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> <label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who looking for an equipment for Rent or to buy used equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Contractor
 											</label>
 										</div>
 										<div class="form-group">
@@ -283,10 +283,10 @@
 								href="mailto:info@congun.com">info@congun.com</a></li>
 						</ul>
 						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
 						</div>
 					</div>
 				</div>
@@ -381,6 +381,11 @@
 			
 			});
 		
+		$('#register-username').focusout(function(){
+			$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+			$('#register-username').next('span').remove();
+		});
+		
 		$.register = function($this){
 			var success = "successfully created";
 			var successUrl = "#modal-container-login";
@@ -395,6 +400,11 @@
 			data : data,
 			success : function(data) {
 			if (data.search("UF01") != -1) {
+				console.log(data);
+				$('#register-username').parents('.form-group').addClass('has-error has-feedback');
+				if($('#register-username').next('span').length == 0){
+					$("<span class='error-message' style='color:red'>Username already exists</span>").insertAfter($('#register-username'));
+				}
 			} else {
 			console.log("inside if");
 			$('#modal-container-register').modal('hide');

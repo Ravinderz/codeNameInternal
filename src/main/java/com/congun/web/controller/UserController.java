@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.dao.UserDao;
 import com.congun.web.model.User;
+import com.congun.web.model.UserQuery;
 import com.congun.web.service.UserService;
 
 @RestController
@@ -95,4 +96,10 @@ public class UserController {
 		
 	}
 
+	@RequestMapping(value = "/userqueries", method = RequestMethod.POST)
+	public String postQuery(@RequestBody UserQuery usrQry) {
+		logger.info("Entered into UserController.postQuery method  UserName:"
+				+ usrQry.userName);
+		return userService.postQuery(usrQry);
+	}
 }

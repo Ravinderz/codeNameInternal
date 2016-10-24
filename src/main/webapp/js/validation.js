@@ -5,8 +5,8 @@ validateOnClick = function($this) {
 	
 	var form_group = $this.parents('form');
 	form_group.find('input[type="text"], input[type="password"], textarea').each(function() {
-		if( $(this).val() == "" ) {
-		form_submit = false;
+		if( $(this).val() == "") {
+			form_submit = false;
 			$(this).parents('.form-group').addClass('has-error has-feedback');
 			if($(this).next('span').length == 0){
 			$("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($(this));
@@ -14,8 +14,7 @@ validateOnClick = function($this) {
 			if($(this).next('span').next('span').length == 0){
 			$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($(this).next("span"));
 			}
-		}
-		else {
+		}else {
 			form_submit = true;
 			$(this).addClass('has-success').removeClass('has-error');
 			$(this).next('span').addClass('glyphicon-ok').removeClass('glyphicon-remove');
@@ -23,9 +22,48 @@ validateOnClick = function($this) {
 		}
 });//end of each loop
 	
+/*form_group.find('input[type="radio"]').each(function() {	
+if($('input[type="radio"]').is(':checked')){
+	form_submit = true;
+	console.log("in the if block form submit true");
+	$('input[type="radio"]').parents('.form-group').addClass('has-success').removeClass('has-error');
+	$('input[type="radio"]').parents('.form-group').next('span').remove();
+	break;
+}else{
+	form_submit = false;
+	console.log("in the else block");
+	$('input[type="radio"]').parents('.form-group').addClass('has-error has-feedback');
+	if($('input[type="radio"]').parents('.form-group').next('span').length == 0){
+	$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($('input[type="radio"]').parents('.form-group'));
+	}
+}	
+	});//end of each loop	
+	
+*/	
+	
+	form_group.find('input[type="radio"]').each(function() {	
+		if($(this).is(':checked')){
+			form_submit = true;
+			console.log("in the if block form submit true");
+			$(this).parents('.form-group').addClass('has-success').removeClass('has-error');
+			$(this).parents('.form-group').next('span').remove();
+			return false;
+		}else{
+			form_submit = false;
+			console.log("in the else block");
+			$(this).parents('.form-group').addClass('has-error has-feedback');
+			if($(this).parents('.form-group').next('span').length == 0){
+			$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($(this).parents('.form-group'));
+			}
+		}	
+			});//end of each loop	
+	
+	
 return form_submit;	
 	
 };//function ends
+
+
 
 
 validateOnFocusout = function($this){
@@ -37,6 +75,12 @@ validateOnFocusout = function($this){
 		inputs[count] = $(this);
 		count++;
 	});
+	
+	$('input[type=radio]').change(function() {
+		form_submit = true;
+		$(this).parents('.form-group').addClass('has-success').removeClass('has-error');
+		$(this).parents('.form-group').next('span').remove();
+    });
 	
 	$.each(inputs,function(index,value){
 	value.focusout(function(){

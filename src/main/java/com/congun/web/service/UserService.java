@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.UserDao;
 import com.congun.web.model.User;
+import com.congun.web.model.UserQuery;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 
@@ -95,6 +96,26 @@ public class UserService {
 	public String sendEmail(String email) {
 		logger.info("Entered into SupplierQuoteService.forgetPassword method ");
 		String status= userdao.sendEmail(email);
+		return status;	
+	}
+	
+	public String postQuery(final UserQuery usrQry) {
+		logger.info("Entered into UserService.postQuery method ");
+		String status= userdao.postQuery(usrQry);
+		if(status.equals(ResponseConstants.CONTACT_US_SUCCESS))
+		{
+			new Thread(new Runnable() {
+	    	    public void run() {
+	    	    	try {
+	    	        	ApplicationUtil.emailQueries(usrQry);
+	    	        	
+	    	        } catch (Exception ex) {
+	    	        	logger.error("Exception occured."+ex.getMessage());
+	    	        }
+	    	    }
+	    	}).start();    
+			
+		}
 		return status;	
 	}
 }

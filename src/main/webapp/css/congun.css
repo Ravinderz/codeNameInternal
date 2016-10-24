@@ -509,6 +509,11 @@ background:none;
 	margin: auto auto;
 }
 
+.forgetPass-modal-content{
+	width:500px;
+	margin: auto auto;
+}
+
 .modal-btn{
 	float:right;
 	border-radius:0px;

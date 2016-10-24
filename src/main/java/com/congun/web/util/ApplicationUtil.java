@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -18,6 +19,7 @@ import com.congun.common.EmailModel;
 import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.dao.UserDao;
 import com.congun.web.model.User;
+import com.congun.web.model.UserQuery;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -145,5 +147,20 @@ public class ApplicationUtil {
 		jsonObject.put(ResponseConstants.ERROR_CODE, errorCode);
 		jsonObject.put(ResponseConstants.ERROR_MESSAGE, errorMessage);
 		return jsonObject;
+	}
+	
+	public static void emailQueries(UserQuery usrQry) {
+		logger.info("Sending emails regaring user query");
+		EmailModel eModel = new EmailModel();
+		eModel.setFrom("admin@congun.com");
+		eModel.setToList(Arrays.asList(ResponseConstants.QRY_MAIL_TO));
+		eModel.setSubject(usrQry.getSubject());
+		eModel.setMsg("Hi,<br><br> User <b>" + usrQry.getUserName()
+				+ "</b> with emailid <b>" + usrQry.getEmailId()
+				+ "</b> has a query.<br>" +"\""+ usrQry.getMsg()+"\"");
+		EmailClient eClient = new EmailClient();
+
+		eClient.sendEmail(eModel);
+
 	}
 }

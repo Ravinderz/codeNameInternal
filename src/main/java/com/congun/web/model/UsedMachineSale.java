@@ -67,6 +67,9 @@ public class UsedMachineSale {
 	@Column(name="noOfViews")
 	public String noOfViews;
 	
+	@Column(name="imagesuploaded")
+	public String imagesuploaded;
+	
 	@Column(name="interestedPplCount")
 	public int interestedPplCount;
 	
@@ -77,6 +80,14 @@ public class UsedMachineSale {
 	@Column(name="activeFlag")
 	public int activeFlag;
 	
+	public String getImagesuploaded() {
+		return imagesuploaded;
+	}
+
+	public void setImagesuploaded(String imagesuploaded) {
+		this.imagesuploaded = imagesuploaded;
+	}
+
 	public int getInterestedPplCount() {
 		return interestedPplCount;
 	}
