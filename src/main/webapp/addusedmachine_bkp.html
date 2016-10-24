@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/congun.css">
 		<link rel="stylesheet" href="css/form-elements-style.css">
+		 <link rel="stylesheet" href="css/addusedMachine.css">
 		<link rel="stylesheet" href="css/magic-check.css">
 		<link rel="stylesheet" href="css/profile.css">
-        <link rel="stylesheet" href="css/addusedMachine.css">
      <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/requirement-scripts.js"></script>
@@ -274,9 +274,10 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 		   <div class="row sub-nav-bar">
 				<div class="col-md-12">
 					<ul class="sub-menu">
-						<li><a href="user/supplier-profile.html">Profile</a></li>
 						<li><a href="user/supplier-dashboard.html">Rental board</a></li>
+						<li><a href="user/supplier-profile.html">Profile</a></li>
 						<li><a href="user/used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
 					</ul>
 				</div>
 		   </div>
@@ -347,12 +348,13 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 				 </div>
 				 <div class="form-group">
 				 <label for="description" class="sr-only">Enter Description</label>
-				 <textarea id="description" class="form-control" name="description" rows="15" placeholder="Enter Description about to Machine if any" ></textarea>
+				 <textarea id="description" class="form-control" name="description" rows="15" placeholder="Enter Description about your Machine if any" ></textarea>
 				 </div>
-				 <div class="form-group">
-				 <label for="images" class="sr-only">Attach images of your equipmebt</label>
-				 <input type="file" name="workAreaImages[]" id="upload-image" accept="image/*" multiple/>
-				 </div>
+					 <div class="form-image">
+							<label for="uploadimage" style="padding-left:20px">Click to Upload Images of used machine</label>
+							<button type="button" id="upload-direct" class="btn btn-submit">Upload Images</button>
+							<label class="sublabel">Tip: upload images of front view, back view, meter reading,right & left side view</label>
+					</div>
 					<div class="f1-buttons">
                                 <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
                     </div>
@@ -360,6 +362,8 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 				    <input type="hidden" id="userName" name="userName">
 					<input type="hidden" id="emailId" name="emailId">
 					<input type="hidden" id="mobileNumber" name="contactNo">
+					<input type="hidden"  id="uploadtype" value="usedmachine">
+					<input type="hidden" name="imagesuploaded" id="workareaimages" value="">
 					</fieldset>
 			</form>
 		</div>
@@ -379,15 +383,13 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 							</div>
 						</div>
 					</div>
-				</div>
-					</div>
-					<div class="modal fade" id="modal-image-upload" role="dialog"
+					 <div class="modal fade" id="modal-image-upload" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="modal-close" data-dismiss="modal"
-										aria-hidden="true">x</button>
+										aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel" >Add Images</h4>
 								</div>
 								<div class="modal-body">
@@ -422,7 +424,7 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="modal-close" data-dismiss="modal"
-										aria-hidden="true">x</button>
+										aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel">Success</h4>
 								</div>
 								<div class="modal-body">
@@ -439,9 +441,11 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
  			<div class="row">
  				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
                 <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul>
-                	<li><span class="fa fa-angle-right"></span><a href="user/faq.html">FAQ</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="user/terms.html">Terms and Conditions</a></li>
+                	<li><span class="fa fa-angle-right"></span><a href="user/FAQ.html">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact US</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Privacy Policy</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="user/Terms.html">Terms and conditions</a></li>
                     </ul></div></div>
                 <div class="col-md-4">
 
@@ -453,10 +457,10 @@ console.log("Price"+document.getElementById("equipmentprice-right").value);
                                 <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
                         </ul>
                         <div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-google-plus" href="#"></a>
-                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                           <a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
                         </div>
                     </div>
                 </div>
