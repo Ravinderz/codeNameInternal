@@ -73,12 +73,27 @@ public class UsedMachineSale {
 	@Column(name="interestedPplCount")
 	public int interestedPplCount;
 	
-	
 	@Column(name="queries")
 	public String queries;
 	
+	
 	@Column(name="activeFlag")
 	public int activeFlag;
+	
+	@Column(name="model")
+	public String model;
+	
+	
+	
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	
 	
 	public String getImagesuploaded() {
 		return imagesuploaded;

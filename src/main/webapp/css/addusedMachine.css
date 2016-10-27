@@ -122,3 +122,23 @@ color:black
     font-weight: bold;
     transition: 0.3s;
 }
+
+
+#manufacturer,#yearOfManufacturing{
+	width:217px;
+}
+
+.manufacturer,.yearOfManufacturing{
+	float:left;
+	margin-left:75px;
+}
+
+#model,#capacity-right{
+		width:217px;
+	
+}
+
+.model,.capacity{
+	float:right;
+	margin-right:75px;
+}

@@ -449,17 +449,17 @@
  							}
  							
  							if(isInterested){
- 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
-							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
-							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
  							}else{
  								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
- 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
  							}
  						});
  						$('.posts').html("");
@@ -488,17 +488,17 @@
  								console.log("inisde if isInteresed tis true");
  							}
  							if(isInterested){
- 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
-							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
-							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
  							}else{
  								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
- 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
  							}
  						});
  						$('.posts').html("");
@@ -526,10 +526,10 @@
  							postedTime = $.date(postedTime,1);
  							var imgArr = value.imagesuploaded.split(",");
  							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
-							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
-							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+							'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+							'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a></div></div></div></div></div>';
  						});
  						$('.posts').html("");
  						$('.posts').append(post);

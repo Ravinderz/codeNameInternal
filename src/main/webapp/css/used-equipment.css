@@ -75,6 +75,9 @@
 
 .posted-date{
 	color:#202e31;
+	  font-size: 12px;
+    font-weight: 300;
+    margin-bottom:5px;
 }
 
 .filter-header p{
@@ -193,6 +196,9 @@
 .interested{
 	cursor:pointer;
 	text-decoration:none;
+	border: 1px solid #337ab7;
+	padding:7px;
+	margin-top:-3px;
 }
 
 .interested:hover{
@@ -312,4 +318,31 @@
 
 th{
 	font-weight: 500;
+}
+
+#equip-name{
+	margin-top:0;
+	font-size:22px;
+	font-weight:400;
+}
+
+.fa-rupee{
+	font-size: 18px;
+}
+
+.equip-make{
+	border-right: 1px solid black;
+	margin-right:0 !important;
+	padding-right:8px;
+}
+
+.equip-model{
+	border-right : 1px solid black;
+	margin-right:0 !important;
+	padding-right:8px;
+	padding-left:8px;
+}
+
+.equip-meter{
+	padding-left:8px;
 }

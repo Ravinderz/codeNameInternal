@@ -417,7 +417,7 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			
- 			var posts = [];
+ 			 var posts = [];
  			
  			var loginform_submit = false;
  			var	registerform_submit = false;
@@ -695,10 +695,10 @@
  	 							postedTime = $.date(postedTime,1);
  	 							var imgArr = value.imagesuploaded.split(",");
  	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
- 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
  	 						});
  	 						$('.posts').html("");
  	 						$('.posts').append(post);
@@ -720,10 +720,10 @@
  	 							postedTime = $.date(postedTime,1);
  	 							var imgArr = value.imagesuploaded.split(",");
  	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
- 								'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a> </div></div></div></div></div>';
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
  	 						});
  	 						$('.posts').html("");
  	 						$('.posts').append(post);
@@ -748,10 +748,10 @@
  							postedTime = $.date(postedTime,1);
  							var imgArr = value.imagesuploaded.split(",");
  							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
-							'<div class="media-body"><div class="line-one"><p class="float-left">'+value.equipmentName+'</p><p class="float-left">Year : '+value.yearOfManufacturer+'</p>'+
-							'<p class="float-right">Price : '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-							'<p class="float-left">Meter : '+value.meterReading+'</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left">'+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
+							'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+							'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
  						});
  						$('.posts').html("");
  						$('.posts').append(post);
@@ -764,13 +764,31 @@
  					$('#modal-container-login').modal('show');
  				});
  				
+ 				
+ 				var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+					+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+					+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+					+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+					+'</div><div class="clear-fix"></div></form></div>';
+				
+				
+				$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+				    $(this).find('form')[0].reset();
+				    $('#forgetpass-modal').html("");
+				    $('#forgetpass-modal').html(forgetPassForm);
+				});
+				
+				$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
+					$('.error-msg').html("");
+				});
+ 				
  				$('#forgot-pass-link').click(function(e){
 					e.preventDefault();
 					$('#modal-container-login').modal('hide');
 					$('#modal-container-forgetPass').modal('show');
 				});	
 				
-				$('#forgetPass').click(function(e){
+ 				$('#forgetpass-modal').on("click","#forgetPass",function(e){
 					e.preventDefault();
 					var data = $("#forgetPass-form").serializeObject();
 					console.log(data);
@@ -934,7 +952,7 @@
  		 			
  		 			return monNum;
  		 		};		
-			
+			 
  		});
  	</script>
  	<script type="text/javascript">

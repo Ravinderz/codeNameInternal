@@ -97,6 +97,10 @@ background:none;
 	left:105px;
 }
 
+.category{
+	padding-bottom:25px;
+}
+
 .category img{
 	vertical-align: center;
 	cursor: pointer;
@@ -140,7 +144,7 @@ background:none;
 	width:100%;
 	height:100%;
 	z-index:0;
-    background-color:#f9f9f9;
+    background-color:#fff;
 }
 
 .about-us h2{
@@ -155,7 +159,12 @@ background:none;
     padding: 0px 120px;
 }
 
+.how-we-work{
+	background-color:#f9f9f9;
+}
+
 .how-we-work h2{
+	
 	text-align: center;
 	color:#202e31;
 	font-weight: bold;

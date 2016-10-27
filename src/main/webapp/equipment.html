@@ -473,13 +473,30 @@ $(".invalid-error").hide();
 						};
 						
 						
+						var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+							+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+							+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+							+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+							+'</div><div class="clear-fix"></div></form></div>';
+						
+						
+						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						    $('#forgetpass-modal').html("");
+						    $('#forgetpass-modal').html(forgetPassForm);
+						});
+						
+						$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
+							$('.error-msg').html("");
+						});
+						
 						$('#forgot-pass-link').click(function(e){
 							e.preventDefault();
 							$('#modal-container-login').modal('hide');
 							$('#modal-container-forgetPass').modal('show');
 						});	
 						
-						$('#forgetPass').click(function(e){
+						$('#forgetpass-modal').on("click","#forgetPass",function(e){
 							e.preventDefault();
 							var data = $("#forgetPass-form").serializeObject();
 							console.log(data);

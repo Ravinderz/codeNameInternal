@@ -339,22 +339,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- start of about us -->
-	<div class="about-us">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 about-us-text">
-					<h2>
-						About<span class="heading"> US</span>
-					</h2>
-					<p>Congun private limited (Construction Group United Network), our mission is to create a market place for construction
-					 equipment industry providing a Networking solution to an expensive machinery demand in India. 
-					 We aspire to be the India’s largest equipment rental, buy/sell network, aiming to safely build a better and stronger future. 
-					 We strive to be a competent network in the construction equipment industry with continuous improvement to achieve benchmark reliability and sustainability.</p>
-					</div>
-			</div>
-		</div>
-	</div>
+	
+	
 	<!-- start of how we work -->
 	<div class="how-we-work">
 		<div class="container">
@@ -385,6 +371,23 @@
 			</div>
 		</div>
 	</div>
+	<!-- start of about us -->
+	<div class="about-us">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 about-us-text">
+					<h2>
+						About<span class="heading"> US</span>
+					</h2>
+					<p>Congun private limited (Construction Group United Network), our mission is to create a market place for construction
+					 equipment industry providing a Networking solution to an expensive machinery demand in India. 
+					 We aspire to be the India’s largest equipment rental, buy/sell network, aiming to safely build a better and stronger future. 
+					 We strive to be a competent network in the construction equipment industry with continuous improvement to achieve benchmark reliability and sustainability.</p>
+					</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- start of our services -->
 	<div class="services">
 		<div class="container-fluid">
@@ -402,7 +405,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="partners">
+	<!-- <div class="partners">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -416,7 +419,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div class="sub-footer">
 		<div class="container-fluid">
 			<div class="row">
@@ -482,7 +485,7 @@
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
-		registerform_submit = validateOnFocusout($("#register-form"));
+		/*registerform_submit = validateOnFocusout($("#register-form"));*/
 						var user = $.getUser();
 						if (user !== null) {
 							console.log("user is available");
@@ -526,7 +529,8 @@
 							var successUrl = "#modal-container-login";
 							var data = JSON.stringify($("#register-form").serializeObject());
 							console.log(data);
-							registerform_submit = validateOnClick($this);
+							registerform_submit = $.validateRegisterForm($this);
+							console.log(registerform_submit);
 							if(registerform_submit){
 							 $.ajax({
 							url : AppData.relativeUrl+"user/register",
