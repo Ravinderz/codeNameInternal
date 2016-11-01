@@ -284,7 +284,19 @@
 				response = $.parseJSON(response);
 				console.log(response);
 				value= response;
-					reqList = "<div class='item-content'><div class='item-content-header'><h3>Requirement Details</h3><br><img src='images/"+value.equipmentCategory+"/"+value.equipmentName+".png' height='150px' width='250px' alt='image here'/></div>"
+				
+				var catArr = [];
+		   	     catArr = value.equipmentCategory.split(" ");
+		   	     var category = "";
+		   	     $.each(catArr,function(index,value){
+		   	    	 if(index === catArr.length-1){
+		   	    		 category += value;
+		   	    	 }else{
+		   	    	 category += value+"_";
+		   	    	 }
+		   	     });
+				
+					reqList = "<div class='item-content'><div class='item-content-header'><h3>Requirement Details</h3><br><img src='images/"+category+"/"+value.equipmentName+".png' height='150px' width='250px' alt='image here'/></div>"
 					+"<div class='item-content-header-meta'><h3>"+value.title+"</h3></div>"
 					+"<div class='item-content-main'><ul><li style='padding:0px'><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
 					+"<li><h5>Start date</h5><p>"+value.startDate+"</p></li>"

@@ -572,16 +572,9 @@
 	
 	$('.post-req-btn').click(function(e){
 		e.preventDefault();
-		if(user !== null && user === "contractor"){
-		console.log("inside click function");
-		console.log("category",category);
-		console.log("sub",sub_ctg);
-		$(location).attr('href',"requirement-form.html?category="+category+"&sub-category="+sub_ctg);
-		}else if(user !== null && user === "supplier"){
-			alert("please contact admin for posting a requirement");
-		}else{
+		
 			$('#modal-container-login').modal('show');
-		}
+		
 	});
 	
 	});

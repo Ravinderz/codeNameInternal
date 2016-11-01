@@ -278,8 +278,8 @@
 			<div class="category-row-one">
 				<div class="row">
 					<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img"
-						id="EarthMoving">
-						<img src="images/EarthMoving/dozer.png" alt="" height="150px" width = "150px"/>
+						id="Earth_Moving">
+						<img src="images/Earth_Moving/dozer.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Earth Moving</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
@@ -288,19 +288,19 @@
 						<button class="btn img-btn">Cranes</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="CementMixerAndPumps">
-						<img src="images/CementMixerAndPumps/cementmixer.png" alt="" height="150px" width = "150px" />
+						id="Cement_Mixer_and_Pumps">
+						<img src="images/Cement_Mixer_and_Pumps/cementmixer.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn img-btn-md">Cement mixer & Pumps</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="RoadCompactors">
-						<img src="images/RoadCompactors/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
+						id="Road_Compactors">
+						<img src="images/Road_Compactors/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn">Road Compactors</button>
 					</div>
 					
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="DumpTrucks">
-						<img src="images/DumpTrucks/Tipper.png" alt="" height="150px" width = "150px" />
+						id="Dump_Trucks">
+						<img src="images/Dump_Trucks/Tipper.png" alt="" height="150px" width = "150px" />
 						<button class="btn img-btn">Dump Trucks</button>
 					</div>
 					
@@ -310,13 +310,13 @@
 			<div class="category-row-two">
 				<div class="row">
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="AerialAndMaterialLifts">
-						<img src="images/AerialAndMaterialLifts/Articulating Boom Lifts.png" alt="" height="150px" width = "150px"  />
+						id="Aerial_and_Material_Lifts">
+						<img src="images/Aerial_and_Material_Lifts/Articulating Boom Lifts.png" alt="" height="150px" width = "150px"  />
 						<button class="btn img-btn img-btn-md">Aerial & Material Lifts</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="GeneratorAndCompressor">
-						<img src="images/GeneratorAndCompressor/Generator.png" alt="" height="150px" width = "150px"  />
+						id="Generator_and_Compressor">
+						<img src="images/Generator_and_Compressor/Generator.png" alt="" height="150px" width = "150px"  />
 						<button class="btn img-btn img-btn-lg">Generator & Compressor</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
@@ -326,8 +326,8 @@
 					</div>
 					<div
 						class="col-md-2 col-sm-6 col-xs-12 category-img"
-						id="BatchAndCrusherPlant">
-						<img src="images/BatchAndCrusherPlant/Batching plant.png" alt="" height="150px" width = "150px"/>
+						id="Batch_and_Crusher_Plant">
+						<img src="images/Batch_and_Crusher_Plant/Batching plant.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn img-btn-md">Batch & Crusher Plant</button>
 					</div>
 					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
@@ -789,23 +789,25 @@
 		 					type:"get",
 		 					data:{},
 		 					success:function(response){
-		 						if(response.length === 0 ){
-		 							var content = "<h2 style='text-align:center;'>There are no posts in used equipment</h2>"
-		 							$('.used-scroll').html("");
-		 							$('.used-scroll').html(content);
-		 						}
-		 						
 		 						response = $.parseJSON(response);
-		 						console.log(response);
-		 						$.each(response,function(index,value){
-		 							posts[value.postId] = value;	
-		 							var imgArr = value.imagesuploaded.split(",");
-		 							post += '<div class="item-thumb"><img class="used-img-thumb" src="http://placehold.it/200x180" />'
-		 									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-left"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
-		 						});
-		 						$('.used-scroll').html("");
-		 						$('.used-scroll').append(post);
-		 					}
+		 						if(!jQuery.isEmptyObject(response)){
+		 							console.log(response);
+		 							$.each(response,function(index,value){
+		 								posts[value.postId] = value;	
+		 								var imgArr = value.imagesuploaded.split(",");
+		 								post += '<div class="item-thumb"><img class="used-img-thumb" src="http://placehold.it/200x180" />'
+		 										+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-left"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
+		 							});
+		 							$('.used-scroll').html("");
+		 							$('.used-scroll').append(post);
+		 								
+		 							}else{
+		 								var content = "<h2 style='text-align:center;'>There are no posts in used equipment</h2>"
+		 									$('.used-scroll').html("");
+		 									$('.used-scroll').html(content);
+		 							
+		 							}
+		 						}
 		 					});
 						
 						

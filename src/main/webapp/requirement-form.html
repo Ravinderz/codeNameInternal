@@ -456,6 +456,19 @@
 				
 				
     	var categoryParam = getUrlParameter('category');
+    	if(categoryParam){
+    		
+    		var catArr = [];
+   	     catArr = categoryParam.split("_");
+   	     var category = "";
+   	     $.each(catArr,function(index,value){
+   	    	 if(index === catArr.length-1){
+   	    		 category += value;
+   	    	 }else{
+   	    	 category += value+" ";
+   	    	 }
+   	     });
+    	}
     	var equipment = getUrlParameter('sub-category');
     	//var user = sessionStorage.getItem("user");
 	    var user = localStorage.getItem("user");
@@ -635,7 +648,7 @@
 	});
 	
 	
-	var ImgPath = "images/EarthMoving/backhoe.png"
+	var ImgPath = "images/Earth_Moving/Backhoe Loaders.png"
 	  $("#myImg").attr('src', ImgPath);
 	
 	//$( "#manufacturedyear" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ));
@@ -745,7 +758,18 @@ $.fn.serializeObject = function()
 	</script>
 	<script type="text/javascript">
 	function loadimage(){
-	     var category = $("#category option:selected").val();
+	     var temp = $("#category option:selected").val();
+	     var catArr = [];
+	     catArr = temp.split(" ");
+	     var category = "";
+	     $.each(catArr,function(index,value){
+	    	 if(index === catArr.length-1){
+	    		 category += value;
+	    	 }else{
+	    	 category += value+"_";
+	    	 }
+	     });
+	     
 	     var equipment = $("#equipment option:selected").val();
 		 
 		 console.log("Ëquipment selected : "+category+" Category : "+equipment);

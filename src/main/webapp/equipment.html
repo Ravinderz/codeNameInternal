@@ -523,14 +523,14 @@ $(".invalid-error").hide();
 						});
 			
 						var equipment = '';
-						var EarthMoving = ['Backhoe Loaders','Excavators','Motor Graders','Wheel Loaders','Track Loaders','Chain Dozers','Wheel Dozers','Steer Loaders' ];
+						var Earth_Moving = ['Backhoe Loaders','Excavators','Motor Graders','Wheel Loaders','Track Loaders','Chain Dozers','Wheel Dozers','Steer Loaders' ];
 						var Cranes = [ 'Crawler Cranes', 'Mobile Cranes','Tower Cranes' ];
-						var GeneratorAndCompressor = [ 'Generator Set','Mobile Generator','Air Compressor'];
-						var AerialAndMaterialLifts = ['Telehandler','Material Handler','Boom Lifts','Scissor lifts','Vertical Lifts'];
-						var BatchAndCrusherPlant = [ 'Batching Plant','Stone Crusher'];
-						var CementMixerAndPumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
-						var RoadCompactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)',' Tandem Roller','Single Drum Roller'];
-						var DumpTrucks = [ 'Telehandler','Material mast lifts'];
+						var Generator_and_Compressor = [ 'Generator Set','Mobile Generator','Air Compressor'];
+						var Aerial_and_Material_Lifts = ['Telehandler','Material Handler','Boom Lifts','Scissor lifts','Vertical Lifts'];
+						var Batch_and_Crusher_Plant = [ 'Batching Plant','Stone Crusher'];
+						var CementMixer_and_Pumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
+						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)',' Tandem Roller','Single Drum Roller'];
+						var Dump_Trucks = [ 'Telehandler','Material mast lifts'];
 						var Miscellaneous = [ 'airtools', 'compressor',
 								'tractor', 'waterpump' ];
 						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
@@ -546,29 +546,29 @@ $(".invalid-error").hide();
 						console.log(category);
 						
 						switch (category) {
-						case 'EarthMoving':
-							equipment = EarthMoving;
+						case 'Earth_Moving':
+							equipment = Earth_Moving;
 							break;
 						case 'Cranes':
 							equipment = Cranes;
 							break;
-						case 'GeneratorAndCompressor':
-							equipment = GeneratorAndCompressor;
+						case 'Generator_and_Compressor':
+							equipment = Generator_and_Compressor;
 							break;
-						case 'AerialAndMaterialLifts':
-							equipment = AerialAndMaterialLifts;
+						case 'Aerial_and_Material_Lifts':
+							equipment = Aerial_and_Material_Lifts;
 							break;
-						case 'BatchAndCrusherPlant':
-							equipment = BatchAndCrusherPlant;
+						case 'Batch_and_Crusher_Plant':
+							equipment = Batch_and_Crusher_Plant;
 							break;
-						case 'CementMixerAndPumps':
-							equipment = CementMixerAndPumps;
+						case 'Cement_Mixer_and_Pumps':
+							equipment = Cement_Mixer_and_Pumps;
 							break;
-						case 'RoadCompactors':
-							equipment = RoadCompactors;
+						case 'Road_Compactors':
+							equipment = Road_Compactors;
 							break;
-						case 'DumpTrucks':
-							equipment = DumpTrucks;
+						case 'Dump_Trucks':
+							equipment = Dump_Trucks;
 							break;
 						case 'Miscellaneous':
 							equipment = Miscellaneous;
@@ -583,10 +583,8 @@ $(".invalid-error").hide();
 						console.log("equipment", equipment);
 						var count = 1;
 						var html = "";
-						$
-								.each(
-										equipment,
-										function(index, value) {
+						
+				$.each(equipment,function(index, value) {
 											var name = value;
 											var imagePath = 'images/'
 													+ category + '/' + name
@@ -621,7 +619,9 @@ $(".invalid-error").hide();
 						$('.category-img').click(
 								function() {
 									var sub_ctg = this.id;
-									$(location).attr('href',"requirement-display.html?category="
+									$(location).attr(
+											'href',
+											"requirement-display.html?category="
 													+ category
 													+ "&sub-category="
 													+ sub_ctg);
