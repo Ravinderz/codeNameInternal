@@ -1,15 +1,13 @@
+var baseUrl = window.location.host;
 var AppData = {
-		/*relativeUrl: 'http://www.mydailydriver.in/'*/
-			/*relativeUrl: 'http://139.59.6.85:8080/congun/'*/
-			relativeUrl: "http://localhost:8070/congun/",
-			imageUrl:"http://localhost:8070/congun/uploadedimages/"
-			/*relativeUrl: "http://localhost:8080/congun/",
-			imageUrl:"http://localhost:8080/congun/uploadedimages/"*/
+			/*relativeUrl: 'http://'+baseUrl+'/congun/',
+			imageUrl:'http://'+baseUrl+'/congun/congun/uploadedimages/'*/
+			relativeUrl: 'http://'+baseUrl+'/',
+			imageUrl:'http://'+baseUrl+'/congun/uploadedimages/'
 		};
 
+
 $(document).ready(function(){
-	
-	$('[data-toggle="tooltip"]').tooltip()
 	
 	$('#enquire-form').hide();
 	var display = false;

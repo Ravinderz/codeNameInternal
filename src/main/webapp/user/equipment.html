@@ -173,24 +173,17 @@
 
 						var category = getUrlParameter('category');
 						var equipment = '';
-						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
-								'miniexcavator', 'loader', 'motorgrader',
-								'skidsteer' ];
-						var Cranes = [ 'crawlercrane', 'mobilecrane',
-								'towercrane' ];
-						var Generators = [ 'mobilegenerator',
-								'portablegenerator' ];
-						var AerialLifts = [ 'articulatingboomlift',
-								'scissorlift', 'straighttelescoping' ];
+						var EarthMoving = ['Backhoe Loader','Excavator','Motor Grader','Wheel Loader','Track Loader','Chain Dozer','Wheel Dozer','Haulers/dumpers','Steer Loader' ];
+						var Cranes = [ 'Crawlercrane', 'Mobilecrane',
+								'Towercrane' ];
+						var Generators = [ 'Generator'];
+						var AerialLifts = ['Articulating Boom Lifts',' Straight/ telescoping lifts','Scissor lifts','Reach forklift' ];
 						var PowerDrillers = [ 'anglegrinder', 'breakhammer',
 								'metalcutter', 'stonedriller',
 								'surfacegrinder', 'horizontaldriller' ];
-						var CementMixerTrucks = [ 'cementmixer', 'trailerpump',
-								'truckmountedconcretepump' ];
-						var RoadRollers = [ 'doubledrumroller1', 'hotmixer',
-								'sensorpaver1', 'singledrum' ];
-						var MaterialHandling = [ 'industriallift',
-								'reachforklift', 'telehandlerfork' ];
+						var CementMixerTrucks = [ 'Transit mixer/mixer truck','Concrete truck- boom Pump','Trailer Pump','Batching plant' ];
+						var RoadRollers = ['Asphalt-Pavers(CHAIN)',' Asphalt/tandem compactor','Soil Compactor' ];
+						var MaterialHandling = [ 'Telehandler','Material mast lifts'];
 						var Miscellaneous = [ 'airtools', 'compressor',
 								'tractor', 'waterpump' ];
 						var BoreDrillers = [ 'boredriller', 'piledriving' ];
@@ -241,6 +234,14 @@
 						var count = 1;
 						var html = "";
 						$.each(equipment,function(index, value) {
+							var name = value;
+							if(name.indexOf("/")  >= 0){
+								name.replace("/","_");
+							}
+							if(name.indexOf(" ") >= 0){
+								name.replace(" ","");
+							}
+							
 						var imagePath = '../images/'+ category + '/' + value+ '.png';
 						console.log(imagePath);
 						var firstDiv = "<div class='row'>";

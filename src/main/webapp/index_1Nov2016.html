@@ -12,11 +12,25 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
-<link rel="stylesheet" href="css/equipment.css">
+<link rel="stylesheet" href="css/custom.css">
 
+ <script>
+ 	console.log("inside if")
+ if (typeof (Storage) !== "undefined") {
+	 console.log(localStorage.getItem("user"));
+	 if(localStorage.getItem("user")){
+		 console.log("script if");
+	 }
+      //window.location = AppData.relativeUrl+"user/index.html";
+    }
+  </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/validation.js"></script>
 </head>
 <body>
-	<div class="nav-wrapper">
+	<div class="nav-wrapper-index">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 navigation">
@@ -34,7 +48,6 @@
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-							
 								<li class="active"><a href="used-equipment.html"><span>Used Equipment</span></a></li>
 								<li><a href="contact.html"><span>Contact Us</span></a></li>
 								<li><a id="modal-login" href="#modal-container-login"
@@ -78,7 +91,7 @@
 											<div class="forgotpasswordlink">
 												<a href="#" id="forgot-pass-link">Forgot Password</a>
 											</div>
-											<div class="clear-fix"></div>			
+											<div class="clear-fix"></div>
 											<div class="col-sm-4">
 												<div class="checkbox">
 													<label> <input type="checkbox"> Remember me
@@ -99,8 +112,7 @@
 							</div>
 						</div>
 					</div>
-					
-											<!-- ********************* This is for the forget Password model *********************************** -->
+										<!-- ********************* This is for the forget Password model *********************************** -->
 					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -120,9 +132,10 @@
 													Email </label>
 												<div class="col-sm-12">
 													<input type="email" class="form-control" name="email"
-														placeholder="email" id="email" >
+														placeholder="email" id="forgotpass-email" >
 												</div>
 											</div>
+											<div class="error-msg"></div>
 											
 											<div class="login-btn">
 												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
@@ -134,7 +147,6 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -233,20 +245,186 @@
 			</div>
 		</div>
 	</div>
-	<div class="category">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 banner">
+				<div class="banner-content">
+					<h2>Congun</h2>
+					<p>Hire/Rent, Buy/Sell heavy equipments</p>
+				</div>
+				<!-- <div class="search-bar">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+				</div> -->
+			</div>
+			
+		</div>
+	</div>
+	<div class="container">
+		<div class="category">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Machines we <span class="heading">supply</span>
+					</h2>
+				</div>
+			</div>
+			<div class="category-row-one">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img"
+						id="EarthMoving">
+						<img src="images/EarthMoving/dozer.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Earth Moving</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Cranes">
+						<img src="images/Cranes/Mobile Cranes.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Cranes</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="CementMixerAndPumps">
+						<img src="images/CementMixerAndPumps/cementmixer.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn img-btn-md">Cement mixer & Pumps</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="RoadCompactors">
+						<img src="images/RoadCompactors/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Road Compactors</button>
+					</div>
+					
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="DumpTrucks">
+						<img src="images/DumpTrucks/Tipper.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Dump Trucks</button>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="category-row-two">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="AerialAndMaterialLifts">
+						<img src="images/AerialAndMaterialLifts/Articulating Boom Lifts.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn img-btn-md">Aerial & Material Lifts</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="GeneratorAndCompressor">
+						<img src="images/GeneratorAndCompressor/Generator.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn img-btn-lg">Generator & Compressor</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Drillers">
+						<img src="images/Drillers/boredriller.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn">Drillers</button>
+					</div>
+					<div
+						class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="BatchAndCrusherPlant">
+						<img src="images/BatchAndCrusherPlant/Batching plant.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn img-btn-md">Batch & Crusher Plant</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Miscellaneous">
+						<img src="images/Miscellaneous/compressor.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Misc</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="others">
+						<img src="http://placehold.it/150x150" alt="" />
+						<button class="btn img-btn">Others</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- start of how we work -->
+	<div class="how-we-work">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h2>
-						List Of <span class="heading">Equipments</span>
+						How we<span class="heading"> Work</span>
 					</h2>
 				</div>
 			</div>
-			<div class="category-row-one"></div>
-			<div class="category-row-two"></div>
+			<div class="row">
+				<div class="col-md-3 steps">
+					<div class="num img-circle">1</div>
+					<br> <span class="step-text">Select Equipment </span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">2</div>
+					<br> <span class="step-text">Post Requirement</span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">3</div>
+					<br> <span class="step-text">Get Quote</span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">4</div>
+					<br> <span class="step-text">Finilize the deal</span>
+				</div>
+			</div>
 		</div>
 	</div>
-<div class="sub-footer">
+	<!-- start of about us -->
+	<div class="about-us">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 about-us-text">
+					<h2>
+						About<span class="heading"> US</span>
+					</h2>
+					<p>Congun private limited (Construction Group United Network), our mission is to create a market place for construction
+					 equipment industry providing a Networking solution to an expensive machinery demand in India. 
+					 We aspire to be the India’s largest equipment rental, buy/sell network, aiming to safely build a better and stronger future. 
+					 We strive to be a competent network in the construction equipment industry with continuous improvement to achieve benchmark reliability and sustainability.</p>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- start of our services -->
+	<div class="services">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Our<span class="heading"> Services</span>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"><div class="services-text first"><span><i class="fa fa-cogs fa-2x"></i></span><h3>Find required equipment</h3><p>Post equipment requirement for your project/need. Get wide range of suppliers matching your requirement with competitive quotes. Choose the best supplier and negotiate.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text middle"><span><i class="fa fa-exchange fa-2x"></i></span><h3>Rent your equipment</h3><p>Increase your business by renting equipment to a larger verified client/customer, generate more money and reduce idle time. Quote the price to preferred client and location & get hired faster.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text last"><span><i class="fa fa-rupee fa-2x"></i></span><h3>Buy or Sell Used Equipment</h3><p>Users can buy/sell their used equipment through our portal. Reduce the cost of marketing without the need to place ads or a third party for buying/selling the equipment.</p></div></div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="partners">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Our<span class="heading"> Partners</span>
+					</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="sub-footer">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
@@ -261,9 +439,9 @@
 					<div class="middle">
 						<h3>Quick Links</h3>
 						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="FAQ.html">FAQ</a></li>
 							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="Terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -279,22 +457,33 @@
 								href="mailto:info@congun.com">info@congun.com</a></li>
 						</ul>
 						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
-                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
-                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
-                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a> <a
+								class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a> <a
+								class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a> <a
+								class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- <div class="enquire">
+		<div class="enquire-header">
+		<h4 class="float-left">Leave a msg</h4>
+		<i class="fa fa-minus float-right"></i>
+		<div class="clear-fix"></div>
+		</div>
+		<form role="form" action="" method="post" class="f1" id="enquire-form">
+			<input type="text" class="form-control" name="name" placeholder="Name">
+			<input type="text" class="form-control" name="Email" placeholder="Email">
+			<input type="text" class="form-control" name="mobile" placeholder="Mobile">
+			<textarea id="description" class="form-control" name="description" rows="3" placeholder="please type in your queries here" ></textarea>
+            <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
+		</form>
+	</div> -->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/appProperties.js"></script>
-<script src="js/validation.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		
 		$('[data-toggle="tooltip"]').tooltip()
@@ -302,39 +491,27 @@
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
-		registerform_submit = validateOnFocusout($("#register-form"));	
-		
-
-		/* to get parameters from a url */
-		var getUrlParameter = function getUrlParameter(sParam) {
-		var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
-
-			for (i = 0; i < sURLVariables.length; i++) {
-			sParameterName = sURLVariables[i].split('=');
-
-			if (sParameterName[0] === sParam) {
-			return sParameterName[1] === undefined ? true : sParameterName[1];
-			}
-			}
-			};					
-
-		var category = getUrlParameter('category');
-					
+		/*registerform_submit = validateOnFocusout($("#register-form"));*/
+						var user = $.getUser();
+						if (user !== null) {
+							console.log("user is available");
+							$(location).attr('href',"user/index.html");
+						} else {
+							console.log("nothing to do");
+						}
 						
 						$('#modal-container-login').on('hidden.bs.modal', function(){
 							console.log("clearing the fields");
 						    $(this).find('form')[0].reset();
+						    validateReset($('#login-form'));
 						    $('.invalid-error').html("");
 						});
 						
 						$('#modal-container-register').on('hidden.bs.modal', function(){
 						    $(this).find('form')[0].reset();
+						    validateReset($('#register-form'));
 						});
 						
-						$('#re-link').click(function(e){
-							$('#modal-container-login').modal('hide');
-							$('#modal-container-register').modal('show');
-						});
 						
 						$("#register-form").on("keypress",function(e){
 							if(e.which === 13)
@@ -342,23 +519,24 @@
 						});
 						
 						
+						$('#register-username').focusout(function(){
+							$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+							$('#register-username').next('span').remove();
+						});
+						
 						$("#register").click(function() {
 							
 							$.register($(this));
 							
 							});
 						
-						$('#register-username').focusout(function(){
-							$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
-							$('#register-username').next('span').remove();
-						});
-						
 						$.register = function($this){
 							var success = "successfully created";
 							var successUrl = "#modal-container-login";
 							var data = JSON.stringify($("#register-form").serializeObject());
 							console.log(data);
-							registerform_submit = validateOnClick($this);
+							registerform_submit = $.validateRegisterForm($this);
+							console.log(registerform_submit);
 							if(registerform_submit){
 							 $.ajax({
 							url : AppData.relativeUrl+"user/register",
@@ -395,7 +573,51 @@
 							}
 				
 						};
+							
+						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						    validateReset($('#register-form'));
+						});
+							
+						$('#forgot-pass-link').click(function(e){
+							e.preventDefault();
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-forgetPass').modal('show');
+						});	
 						
+						$('#forgotpass-email').focusin(function(e){
+							$('.error-msg').html("");
+						})
+						
+						$('#forgetPass').click(function(e){
+							e.preventDefault();
+							var data = $("#forgetPass-form").serializeObject();
+							console.log(data);
+								var email = data.email;
+								data = JSON.stringify(data);
+								 $.ajax({
+										url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+										type : "put",
+										contentType : "application/json; charset=utf-8",
+										data : {},
+										success : function(response) {
+											if(response.indexOf("UPEE01") >= 0){
+												
+												$('.error-msg').html("<p>This is not a registered email! please provide a registered mail id</p>")
+											}else{
+												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+											}
+											console.log(response);
+											}
+										});
+							
+						});
+						
+						$('#re-link').click(function(e){
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-register').modal('show');
+						});
+							
 						
 						$("#login-form").on("keypress",function(e){
 							if(e.which == 13){
@@ -408,8 +630,7 @@
 							$.login($(this));
 						});
 						
-						
-$(".invalid-error").hide();
+						$(".invalid-error").hide();
 						
 						$.login = function($this){
 							var data = JSON.stringify($("#login-form").serializeObject());
@@ -475,158 +696,60 @@ $(".invalid-error").hide();
 								}
 						};
 						
-						
-						var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
-							+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
-							+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
-							+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
-							+'</div><div class="clear-fix"></div></form></div>';
-						
-						
-						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
-						    $(this).find('form')[0].reset();
-						    $('#forgetpass-modal').html("");
-						    $('#forgetpass-modal').html(forgetPassForm);
+
+						$('.category-img').click(function() {
+						console.log("inside img click function");
+						var category = this.id;
+						$(location).attr('href',"equipment.html?category="+ category);
 						});
 						
-						$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
-							$('.error-msg').html("");
+						$('#search-btn').click(function(){
+							console.log("search button clicked");
+							var search_val = $('#search-input').val();
+							if(!search_val == ""){
+							console.log("search bar value :: ",search_val);
+							$.ajax({
+								url : AppData.relativeUrl+"machine/search/"+search_val,
+								type : "get",
+								contentType : "application/json; charset=utf-8",
+								data : {},
+																// datatype : "json",  
+								success : function(response) {
+								console.log(response);
+								response = $.parseJSON(response);
+									console.log('response',response);
+							}
+						});
+							}
+							});
+
+						$('.logout').click(function() {
+							console.log("inside logout function")
+							var user;
+							if (typeof (Storage) !== "undefined") {
+							user = localStorage.getItem("user");
+							}
+							if (user !== null) {
+								localStorage.removeItem("user");
+							}
+							console.log("user logged out");
+							$(location).attr('href', "index.html");
 						});
 						
-						$('#forgot-pass-link').click(function(e){
+						/* $('#enquire-form').hide();
+						var display = false;
+						$('.fa-minus').click(function(e){
 							e.preventDefault();
-							$('#modal-container-login').modal('hide');
-							$('#modal-container-forgetPass').modal('show');
-						});	
+							if(!display){
+							$('#enquire-form').show("slow");
+							display=true;
+							}else{
+								$('#enquire-form').hide("slow");
+								display=false;
+							}
+						}); */
+								
 						
-						$('#forgetpass-modal').on("click","#forgetPass",function(e){
-							e.preventDefault();
-							var data = $("#forgetPass-form").serializeObject();
-							console.log(data);
-								var email = data.email;
-								data = JSON.stringify(data);
-								 $.ajax({
-										url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
-										type : "put",
-										contentType : "application/json; charset=utf-8",
-										data : {},
-										success : function(response) {
-											if(response.indexOf("UPEE01") >= 0){
-												$('#forgetpass-modal').html("<p>This is not a registered email! please provide a registered mail id</p>")
-											}else{
-												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
-											}
-											console.log(response);
-											}
-										});
-							
-						});
-			
-						var equipment = '';
-						var EarthMoving = ['Backhoe Loaders','Excavators','Motor Graders','Wheel Loaders','Track Loaders','Chain Dozers','Wheel Dozers','Steer Loaders' ];
-						var Cranes = [ 'Crawler Cranes', 'Mobile Cranes','Tower Cranes' ];
-						var GeneratorAndCompressor = [ 'Generator Set','Mobile Generator','Air Compressor'];
-						var AerialAndMaterialLifts = ['Telehandler','Material Handler','Boom Lifts','Scissor lifts','Vertical Lifts'];
-						var BatchAndCrusherPlant = [ 'Batching Plant','Stone Crusher'];
-						var CementMixerAndPumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
-						var RoadCompactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)',' Tandem Roller','Single Drum Roller'];
-						var DumpTrucks = [ 'Telehandler','Material mast lifts'];
-						var Miscellaneous = [ 'airtools', 'compressor',
-								'tractor', 'waterpump' ];
-						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
-
-						/*if(category === 'earthMovingEquipment'){
-							equipment = earthMovingEquipment;
-						}
-						else 
-						if(category === 'cranes'){
-						equipment = cranes;
-						}*/
-						
-						console.log(category);
-						
-						switch (category) {
-						case 'EarthMoving':
-							equipment = EarthMoving;
-							break;
-						case 'Cranes':
-							equipment = Cranes;
-							break;
-						case 'GeneratorAndCompressor':
-							equipment = GeneratorAndCompressor;
-							break;
-						case 'AerialAndMaterialLifts':
-							equipment = AerialAndMaterialLifts;
-							break;
-						case 'BatchAndCrusherPlant':
-							equipment = BatchAndCrusherPlant;
-							break;
-						case 'CementMixerAndPumps':
-							equipment = CementMixerAndPumps;
-							break;
-						case 'RoadCompactors':
-							equipment = RoadCompactors;
-							break;
-						case 'DumpTrucks':
-							equipment = DumpTrucks;
-							break;
-						case 'Miscellaneous':
-							equipment = Miscellaneous;
-							break;
-						case 'Drillers':
-							equipment = Drillers;
-							break;
-
-						}
-						//category = $.parseJSON(earthMovingEquipment);
-						console.log("category", category);
-						console.log("equipment", equipment);
-						var count = 1;
-						var html = "";
-						$
-								.each(
-										equipment,
-										function(index, value) {
-											var name = value;
-											var imagePath = 'images/'
-													+ category + '/' + name
-													+ '.png';
-											console.log(imagePath);
-											var firstDiv = "<div class='row'>";
-											var firstDivClose = "</div>";
-											if (count === 1) {
-												html += firstDiv;
-											}
-											var col = "<div class='col-md-3 col-sm-12'>"
-													+ "<img src='"+imagePath+"' class='category-img' id='"+value+"' height='170px' width='200px'/><button class='btn img-btn'>"
-													+ value + "</button></div>";
-											html += col;
-											if (equipment.length <= 4) {
-												if (count === equipment.length) {
-													html += firstDivClose;
-													count = 0;
-												}
-											} else {
-												if (count === 4) {
-													html += firstDivClose;
-													count = 0;
-												}
-											}
-											count++;
-										});
-						console.log(html);
-
-						$(".category-row-one").append(html);
-
-						$('.category-img').click(
-								function() {
-									var sub_ctg = this.id;
-									$(location).attr('href',"requirement-display.html?category="
-													+ category
-													+ "&sub-category="
-													+ sub_ctg);
-								});
-
 					});
 </script>
 <script type="text/javascript">
@@ -646,5 +769,6 @@ $(".invalid-error").hide();
 		return o;
 	};
 </script>	
+	
 </body>
 </html>

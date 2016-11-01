@@ -165,45 +165,46 @@
 								
 									<form class="form-horizontal" role="form" id="register-form">
 										<div class="form-group radio">
-											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who has the equipment to lease or to sell used equipment."> <input type="radio"
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I have equipment."> <input type="radio"
 												id="role-supp" name="role" value="supplier" >Supplier
-											</label> <label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who looking for an equipment for Rent or to buy used equipment."> <input type="radio"
-												id="role-cont" name="role" value="contractor" >Contractor
+											</label> 
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I need Equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Client
 											</label>
 										</div>
 										<div class="form-group">
 											<label for="firstname" class="sr-only"> FirstName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="firstname"
-													placeholder="Firstname" id="firstName">
+													placeholder="First Name/Company Name" id="firstName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="lastname" class="sr-only"> LastName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="lastname"
-													placeholder="Lastname" id="lastName">
+													placeholder="Last Name" id="lastName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="username" class="sr-only"> Email </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="register-username"
-													placeholder="email" name="username">
+													placeholder="Personal/Company Mail Id" name="username">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="password" class="sr-only"> Password </label>
 											<div class="col-sm-12">
 												<input type="password" class="form-control" id="register-password"
-													placeholder="password" name="password">
+													placeholder="Enter new password" name="password">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="mobile" class="sr-only"> Mobile </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="mobile"
-													placeholder="mobile" name="mobileNumber">
+													placeholder="Enter 10 digit mobile Number" name="mobileNumber">
 											</div>
 										</div>
 										<div class="form-group">
@@ -344,6 +345,8 @@
 <script src="js/validation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		$('[data-toggle="tooltip"]').tooltip()
 		
 		var loginform_submit = false;
 		var	registerform_submit = false;

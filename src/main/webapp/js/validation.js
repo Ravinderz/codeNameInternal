@@ -227,6 +227,7 @@ $(document).ready(function(){
 	
 	$('#register-password').focusout(function(){
 		var $password = $('#register-password');
+		console.log($password.val());
 		if($('#register-password').val() == ""){
 			registerform_submit = false;
 			$password.parents('.form-group').addClass('has-error has-feedback');
@@ -237,14 +238,14 @@ $(document).ready(function(){
 	    		$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($password.next("span"));
 	    	}
 		}else if($('#register-password').val() !== "undefined"){
-			if(!($('#register-password').val().match(passwordRegex))){
+			if(($('#register-password').val().length < 5)){
 				registerform_submit = false;
 				$password.parents('.form-group').addClass('has-error has-feedback');
 				if($password.next('span').length == 0){
 					$("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($password);
 				}
 				if($password.next('span').next('span').length == 0){
-					$("<span class='error-message' style='color:red'>Password should be atleast 8 characters long with 1 letter and 1 alphabet</span>").insertAfter($password.next("span"));
+					$("<span class='error-message' style='color:red'>Password cannot be less than 5 characters</span>").insertAfter($password.next("span"));
 				}
 			}else{
 				registerform_submit = true;
@@ -294,7 +295,7 @@ $(document).ready(function(){
 		var count = 0;
 		
 		var $firstName = $('#firstName');
-		if($('#firstName').val() == ""){
+		if($('#firstName').val().length == 0){
 			submit_form = false;
 			count++;
 			$firstName.parents('.form-group').addClass('has-error has-feedback');
@@ -398,7 +399,7 @@ $(document).ready(function(){
 	    		$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($password.next("span"));
 	    	}
 		}else if($('#register-password').val() !== "undefined"){
-			if(!($('#register-password').val().match(passwordRegex))){
+			if(($('#register-password').val().length < 5)){
 				submit_form = false;
 				count++;
 				$password.parents('.form-group').addClass('has-error has-feedback');
@@ -406,7 +407,7 @@ $(document).ready(function(){
 					$("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($password);
 				}
 				if($password.next('span').next('span').length == 0){
-					$("<span class='error-message' style='color:red'>Please enter a valid username</span>").insertAfter($password.next("span"));
+					$("<span class='error-message' style='color:red'>password cannot be less than 5 characters</span>").insertAfter($password.next("span"));
 				}
 			}else{
 				submit_form = true;
@@ -447,8 +448,31 @@ $(document).ready(function(){
     			$mobile.next('span').next('span').remove();
 			}
 		}
+		
+		
+	if($('#role-supp').is(':checked')){
+		form_submit = true;
+		console.log("in the if block form submit true");
+		$('#role-supp').parents('.form-group').addClass('has-success').removeClass('has-error');
+		$('#role-supp').parents('.form-group').next('span').remove();
+	}else if($('#role-cont').is(':checked')){
+		form_submit = true;
+		console.log("in the if block form submit true");
+		$('#role-cont').parents('.form-group').addClass('has-success').removeClass('has-error');
+		$('#role-cont').parents('.form-group').next('span').remove();
+	}else{
+		form_submit = false;
+		count++;
+		console.log("in the else block");
+		$('#role-supp').parents('.form-group').addClass('has-error has-feedback');
+		if($('#role-supp').parents('.form-group').next('span').length == 0){
+		$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($('#role-supp').parents('.form-group'));
+		}
+	}
+	
+	
 	 
-	 var radioCount = 0;
+	/* var radioCount = 0;
 	
 	$('#register-form').find('input[type="radio"]').each(function() {	
 		if($(this).is(':checked')){
@@ -465,15 +489,23 @@ $(document).ready(function(){
 			$("<span class='error-message' style='color:red'>Field is required</span>").insertAfter($(this).parents('.form-group'));
 			}
 		}	
-			});
+			});*/
 		
 			
-			console.log(count);
+		/*	console.log(count);
 		if((count > 0  && radioCount == 2) || (count == 0 && radioCount == 2)){
 			submit_form = false;
 		}else{
 			submit_form = true;
-		}
+		}*/
+		
+	if((count > 0 )){
+		submit_form = false;
+	}else{
+		submit_form = true;
+	}
+		
+	
 		return submit_form;
 	};
 	

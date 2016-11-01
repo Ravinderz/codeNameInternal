@@ -110,7 +110,7 @@ public class ApplicationUtil {
 		eModel.setTo(email);
 		eModel.setSubject("Congun forgot Password");
 		String msg ="<p>Please click on the below link to reset your account<p>"+"<br/>";
-		String url="http://www.mydailydriver.in/verify.html?email=";
+		String url="http://www.congun.com/verify.html?email=";
 		String footer = "<p> &copy Congun. All Rights Reserved.</p>";
 		url=url+email+"&V="+hash;
 		url = "<a href='"+url+"'>"+url+"</a><br/>";

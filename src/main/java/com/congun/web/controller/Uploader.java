@@ -47,7 +47,7 @@ public class Uploader {
 				// Creating the directory to store file
 				//String rootPath = ApplicationConstants.PROD_ROOT_PATH;
 				//comment below line of rootpath when deploying in server
-				String rootPath = ApplicationConstants.LOCAL_ROOT_PATH;
+				String rootPath = ApplicationConstants.PROD_ROOT_PATH;
 				File dir = new File(rootPath + File.separator +type);
 				if (!dir.exists()){
 					dir.mkdirs();
