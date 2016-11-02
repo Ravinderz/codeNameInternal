@@ -97,7 +97,9 @@
 		<div class="category">
 			<div class="row">
 				<div class="col-md-12">
+					<h2>
 					Rental Equipment <span class="heading">Category List</span>
+					</h2>
 				</div>
 			</div>
 				<div class="category-row-one">
@@ -412,7 +414,7 @@
 						$.each(response,function(index,value){
 							posts[value.postId] = value;	
 							var imgArr = value.imagesuploaded.split(",");
-							post += '<div class="item-thumb"><img class="used-img-thumb" src="http://placehold.it/200x180" />'
+							post += '<div class="item-thumb"><img class="used-img-thumb" src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="200px" height="180px" />'
 									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-left"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
 						});
 						$('.used-scroll').html("");
