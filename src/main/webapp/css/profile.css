@@ -50,9 +50,9 @@
 }
 
 .first-row .col-md-7{
-	display : flex;
+	/* display : flex;
 	align-items:center;
-	justify-content:center;
+	justify-content:center; */
 	height:250px;
 	background-color: #E5E5E5;
 	margin-right:15px;
@@ -285,4 +285,10 @@
 
 #update{
 	    margin-right: 20px;
+}
+
+/* changes for infographic */
+
+.first-info,.second-info,.third-info{
+	margin-bottom:33px;
 }
