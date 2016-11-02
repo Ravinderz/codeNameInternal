@@ -496,8 +496,22 @@
  							requirements[value.requirementId] = value;	
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime,1);
+ 							
+ 							var catArr = [];
+ 						     catArr = value.equipmentCategory.split(" ");
+ 						     var category = "";
+ 						     $.each(catArr,function(index,value){
+ 						    	 if(index === catArr.length-1){
+ 						    		 category += value;
+ 						    	 }else{
+ 						    	 category += value+"_";
+ 						    	 }
+ 						     });
+ 						     
+ 						    var name = encodeURI(value.equipmentName);
+ 							
  							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
- 							+'<img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 							+'<img class= "media-object" src=../images/'+category+'/'+name+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
  							+'<h4>'+value.contractorName+'</h4><p class="posted-date">posted on : '+createdTime+'</p><h4>'+value.quantity+' '+value.equipmentName+' needed on '+$.date(value.startDate,3)+' at '+value.workLocation+'</h4></div></div>';
  						});
  						$('.newsfeed').html("");
@@ -533,9 +547,23 @@
  						console.log(response);
  						$.each(response,function(index,value){
  							var createdTime = $.date(value.createdTime,1);
+ 							
+ 							var catArr = [];
+						     catArr = value.equipmentCategory.split(" ");
+						     var category = "";
+						     $.each(catArr,function(index,value){
+						    	 if(index === catArr.length-1){
+						    		 category += value;
+						    	 }else{
+						    	 category += value+"_";
+						    	 }
+						     });
+						     
+						    var name = encodeURI(value.equipment);
+ 							
  							if(index < 3){
  							equipments += '<div class="media"><div class="media-left"><a href="#">'
- 	 							+'<img src=../images/'+value.equipmentCategory+'/'+value.equipment+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 	 							+'<img src=../images/'+category+'/'+name+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
  	 							+'<h3>'+value.equipment+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>Quantity :'+value.quantity+' Capacity :'+value.capacity+'</p></div></div>';
  							}
  						});

@@ -1,9 +1,9 @@
 var baseUrl = window.location.host;
 var AppData = {
-			relativeUrl: 'http://'+baseUrl+'/congun/',
-			imageUrl:'http://'+baseUrl+'/congun/congun/uploadedimages/'
-			/*relativeUrl: 'http://'+baseUrl+'/',
-			imageUrl:'http://'+baseUrl+'/congun/uploadedimages/'*/
+			/*relativeUrl: 'http://'+baseUrl+'/congun/',
+			imageUrl:'http://'+baseUrl+'/congun/congun/uploadedimages/'*/
+			relativeUrl: 'http://'+baseUrl+'/',
+			imageUrl:'http://'+baseUrl+'/congun/uploadedimages/'
 		};
 
 

@@ -266,10 +266,23 @@
  								data:{},
  								success:function(response){
  									console.log(response);
+ 									
+ 									var catArr = [];
+ 								     catArr = value.equipmentCategory.split(" ");
+ 								     var category = "";
+ 								     $.each(catArr,function(index,value){
+ 								    	 if(index === catArr.length-1){
+ 								    		 category += value;
+ 								    	 }else{
+ 								    	 category += value+"_";
+ 								    	 }
+ 								     });
+ 								     var name = encodeURI(value.equipmentName);
+ 									
  									if(response === "true" ){
  										console.log("inside ifff");
  									reqList += '<div class="media"><div class="media-left"><a href="#">'
- 		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 		 							+'<img  class="media-object" src=../images/'+category+'/'+name+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
  		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><div class="interactions"><span class="label label-primary">quoted</span></div></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
  		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Quantity</th>'
  		 							+'<th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
@@ -277,7 +290,7 @@
  									}else{
  										console.log("inside elseeeee");
  										reqList += '<div class="media"><div class="media-left"><a href="#">'
- 	 		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 	 		 							+'<img  class="media-object" src=../images/'+category+'/'+name+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
  	 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
  	 		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Quantity</th>'
  	 		 							+'<th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
@@ -345,8 +358,21 @@
  						var quote = quotes[this.id];
  						var req = requirements[quote.requirementId];
  						console.log("rq id ::",req);
+ 						
+ 						var catArr = [];
+					     catArr = req.equipmentCategory.split(" ");
+					     var category = "";
+					     $.each(catArr,function(index,value){
+					    	 if(index === catArr.length-1){
+					    		 category += value;
+					    	 }else{
+					    	 category += value+"_";
+					    	 }
+					     });
+					     var name = encodeURI(req.equipmentName);
+ 						
 						$('#myModalLabel').text(req.title);
-						$('#req-img').attr('src','../images/'+req.equipmentCategory+'/'+req.equipmentName+'.png');
+						$('#req-img').attr('src','../images/'+category+'/'+name+'.png');
 						$('#req-img').attr('alt',req.equipmentName);
 						$('#e-cat').text(req.equipmentCategory);
 						$('#e-equip').text(req.equipmentName);

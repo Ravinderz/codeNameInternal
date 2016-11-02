@@ -321,78 +321,10 @@
 			
  			$('#add-machines').click(function(e){
  				console.log("inside add machines functuin");
- 				var machineForm = '<div class="container"><div class="row"><div class="main-content col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">'
- 				+'<form class="form-horizontal" role="form" id="addEquipment-form" class="f1"><h3 class="text-center text-muted">ADD EQUIPMENT FORM</h3>'
- 				+'<div class="form-group"><label for="selectCategory">Equipment Category</label>'
- 				+'<select id="equipmentCategory" class="f1-category form-control" placeholder="Equipment Category" name="equipmentCategory"></select></div>'
- 				+'<div class="form-group"><label for="equipment">Equipment Name</label><select id="equipment" name="equipment" class="f1-equipment form-control placeholder="Equipment Name"></select>'
- 				+'	</div><div class="form-group"><label for="manufacturer" class="sr-only">Equipment Manufacturer</label>'
- 				+'	<input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer"></div><div class="form-group"><label for="Model" class="sr-only">Equipment Model</label>'
- 				+'	<input type="text" id="model" class="form-control" name="model" placeholder="Equipment Model"></div><div class="form-group">'
- 				+'	<label for="yearOfManufacturing" class="sr-only">Year Of Manufacturing</label><input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturing" placeholder="Year of manufacturing"></div><div class="form-group"><label for="capacity" class="sr-only">Capacity Details'
- 				+'	</label><input type="text" id="capacity" class="form-control" name="capacity" placeholder="Capacity"></div><div id="hidden-fields"><input type="hidden"'
- 				+'	 name="supplierId" id="supplierId" value='+user.userId+'><input type="hidden" name="supplierName" id="supplierName" value='+username+'></div><div class="form-group"><label'
- 				+'	 for="quantity" class="sr-only">Equipment Quantity</label><input type="text" id="quantity" class="form-control" name="quantity" placeholder="Equipment'
- 				+'	 Quantity"></div><div class="f1-buttons"><button type="button" class="btn btn-warning" id="addEquipment">Submit</button></div></form></div></div></div>';
- 				
- 				$('.sidebar-content').html("");
- 				$('.sidebar-content').append(machineForm);
- 				
+ 				 				
  				/* This ajax call is made to populate the category and equipment machinary dropdowns */
- 	 	    	
- 	 	    	var category = []
- 	 	    	$.ajax({
- 	 	    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
- 	 	    		type:"get",
- 	 	    		data:{},
- 	 	    		success:function(response){
- 	 	    			response = $.parseJSON(response);
- 	 	    			var i = 0;
- 	 	    			console.log(response);
- 	 	    			$.each(response,function(index,value){
- 	 	    				$("#equipmentCategory").append($("<option />").val(value).text(value));
- 	 	    					category[i] = value;
- 	 	    					i++
- 	 	    			});
- 	 	    			console.log("cat",categoryParam);
- 	 	    			if(categoryParam !== undefined){
- 	 	    			$("#equipmentCategory").val(categoryParam);
- 	 	    			}
- 	 	    			if(sub_category !== undefined ){
- 	 	    				$.ajax({
- 	 	    					
- 	 	    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
- 	 	    	    			type:"get",
- 	 	    	    			data:{},
- 	 	    	    			success:function(equipments){
- 	 	    	    				equipments = $.parseJSON(equipments);
- 	 	    	    				console.log(equipments);
- 	 	    	    				$.each(equipments,function(index,value){
- 	 	    	    				$("#equipment").append($("<option />").val(value).text(value));
- 	 	    	    				
- 	 	    	    				});
- 	 	    	    				if(sub_category !== undefined){
- 	 	    	    				$("#equipment").val(sub_category);
- 	 	    	    				}
- 	 	    	    			}
- 	 	    	    			});
- 	 	    			}else{
- 	 	    			$.ajax({
- 	 	    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
- 	 	    			type:"get",
- 	 	    			data:{},
- 	 	    			success:function(equipments){
- 	 	    				equipments = $.parseJSON(equipments);
- 	 	    				console.log(equipments);
- 	 	    				$.each(equipments,function(index,value){
- 	 	    				$("#equipment").append($("<option />").val(value).text(value));
- 	 	    				
- 	 	    				});
- 	 	    			}
- 	 	    			});
- 	 	    			}
- 	 	    		}
- 	 	    	});
+ 	 	    	$(location).attr('href',"../addEquipment.html");
+ 	 	    
  	 	    	
  				
  			});
@@ -557,20 +489,148 @@
  	 					var ul = '<ul class="nav-sidebar-content">';
  	 					$.each(response,function(index,value){
  	 						userEquipments[value.equipmentId] = value;
- 	 						equipmentList += '<li><div class="media"><div class="media-left"><a href="#"><img src="../images/'+value.equipmentCategory+'/'+value.equipment+'.png" height="100px" width="100px"/></a></div>'+
+ 	 						var createdTime = $.date(value.createdTime,1);
+ 	 						var catArr = [];
+						     catArr = value.equipmentCategory.split(" ");
+						     var category = "";
+						     $.each(catArr,function(index,value){
+						    	 if(index === catArr.length-1){
+						    		 category += value;
+						    	 }else{
+						    	 category += value+"_";
+						    	 }
+						     });
+						     var name = encodeURI(value.equipment);
+ 	 						
+ 	 						equipmentList += '<li><div class="media"><div class="media-left"><a href="#"><img src="../images/'+category+'/'+name+'.png" height="100px" width="100px"/></a></div>'+
  	 						'<div class="media-body"><div class="block-top"><h4>'+value.equipment+'</h4><div class="buttons"><a id="edit" role="button" data-toggle="modal" data-value='+value.equipmentId+' href="#edit-equipment">'+
  	 						'<i class="fa fa-edit"></i></a><a id="delete" role="button" data-toggle="modal" data-value='+value.equipmentId+' href="#delete-equipment"><i class="fa  fa-trash-o"></i></a></div>'+
- 	 						'<div class="clear-fix"></div></div><p class="posted-date">Added on : 1 week ago</p><p>Quantity :'+value.quantity+' |  Capacity : '+value.capacity+'  |   Manufacturer : '+value.manufacturer+'  |   YOM : '+value.yearOfManufacturing+'</p>'+
+ 	 						'<div class="clear-fix"></div></div><p class="posted-date">Added on : '+createdTime+'</p><p>Quantity :'+value.quantity+' |  Capacity : '+value.capacity+'  |   Manufacturer : '+value.manufacturer+'  |   YOM : '+value.yearOfManufacturing+'</p>'+
  	 						'</div></div></li>';
  						});
  	 					$('.sidebar-content').html("");
  	 					$('.sidebar-content').append(ul+equipmentList+'</ul>');
  	 					
  	 				}
- 	 			});	
-			};
+ 	 			});
+				
+ 			};
+				
+				$.date = function(dateObject,pattern) {
+		 		    var d = new Date(dateObject);
+		 		    var date = d.toDateString();
+		 		    console.log(d);
+		 		    console.log(date);
+		 		    if(pattern === 1){
+		 		    var dateArr = date.split(" ");
+		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+		 		    }
+		 		    else if(pattern === 2){
+		 		    	console.log("date" +dateObject);
+		 		    	var dateArr = dateObject.split(' ');
+		 		    	var time = dateArr[3].split(':');
+		 		    	var HH = parseInt(time[0])+6;
+		 		    	var mm = parseInt(time[1])+30;
+		 		    	var ss = time[2];
+		 		    	if(dateArr[1].length === 3)
+		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+		 		    	else if(dateArr[1].length === 2)
+		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+		 		    }else if(pattern === 3){
+		 	 		    var dateArr = dateObject.split("-");
+		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+		 				}
+		 		    return date;
+		 		};
+		 		
+		 		$.getMonthName = function(monNum){
+		 			var month;
+		 			console.log(monNum)
+		 			if(monNum === "01"){
+		 				month = "Jan";
+		 			}
+		 			else if(monNum === "02"){
+		 				month = "Feb";
+		 			}
+		 			else if(monNum === "03"){
+		 				month = "Mar";
+		 			}
+		 			else if(monNum === "04"){
+		 				month = "Apr";
+		 			}
+		 			else if(monNum === "05"){
+		 				month = "May";
+		 			}
+		 			else if(monNum === "06"){
+		 				month = "Jun";
+		 			}
+		 			else if(monNum === "07"){
+		 				month = "Jul";
+		 			}
+		 			else if(monNum === "08"){
+		 				month = "Aug";
+		 			}
+		 			else if(monNum === "09"){
+		 				month = "Sep";
+		 			}
+		 			else if(monNum === "10"){
+		 				month = "Oct";
+		 			}
+		 			else if(monNum === "11"){
+		 				month = "Nov";
+		 			}
+		 			else if(monNum === "12"){
+		 				month = "Dec";
+		 			}
+		 			return month;
+		 		};
+		 		
+		 		$.getMonth = function(month){
+		 			var monNum;
+		 			month = month.toLowerCase();
+		 			console.log(month)
+		 			if(month === "jan"){
+		 				monNum = '01';
+		 			}
+		 			else if(month === "feb"){
+		 				monNum = '02';
+		 			}
+		 			else if(month === "mar"){
+		 				monNum = '03';
+		 			}
+		 			else if(month === "apr"){
+		 				monNum = '04';
+		 			}
+		 			else if(month === "may"){
+		 				monNum = '05';
+		 			}
+		 			else if(month === "june"){
+		 				monNum = '06';
+		 			}
+		 			else if(month === "july"){
+		 				monNum = '07';
+		 			}
+		 			else if(month === "aug"){
+		 				monNum = '08';
+		 			}
+		 			else if(month === "sep"){
+		 				monNum = '09';
+		 			}
+		 			else if(month === "oct"){
+		 				monNum = '10';
+		 			}
+		 			else if(month === "nov"){
+		 				monNum = '11';
+		 			}
+		 			else if(month === "dec"){
+		 				monNum = '12';
+		 			}
+		 			
+		 			return monNum;
+		 		};	
+				
+			
  			</script>
-					
 
 </body>
 </html>

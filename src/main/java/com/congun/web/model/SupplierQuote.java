@@ -93,6 +93,17 @@ public class SupplierQuote {
 	@Column(name = "advanceChargesType")
 	public String advanceChargesType;
 
+	@Column(name = "quotepriceType")
+	public String quotePriceType;
+	
+	public String getQuotePriceType() {
+		return quotePriceType;
+	}
+
+	public void setQuotePriceType(String quotePriceType) {
+		this.quotePriceType = quotePriceType;
+	}
+
 	public long getQuoteId() {
 		return quoteId;
 	}

@@ -290,9 +290,22 @@
  					$('.requirement-table').on('click','.requirement-link',function(e){
  						//e.preventDefault();
  						var req = requirements[this.id];
+ 						
+ 						var catArr = [];
+					     catArr = req.equipmentCategory.split(" ");
+					     var category = "";
+					     $.each(catArr,function(index,value){
+					    	 if(index === catArr.length-1){
+					    		 category += value;
+					    	 }else{
+					    	 category += value+"_";
+					    	 }
+					     });
+					     var name = encodeURI(req.equipmentName);
+ 						
  						console.log("rq id ::",req);
 						$('#myModalLabel').text(req.title);
-						$('#req-img').attr('src','../images/'+req.equipmentCategory+'/'+req.equipmentName+'.png');
+						$('#req-img').attr('src','../images/'+category+'/'+name+'.png');
 						$('#req-img').attr('alt',req.equipmentName);
 						$('#e-cat').text(req.equipmentCategory);
 						$('#e-equip').text(req.equipmentName);
@@ -662,52 +675,66 @@
  			else{
  				advance = "N/A";
  			}
+ 			
+ 			
+ 			var catArr = [];
+		     catArr = value.equipmentCategory.split(" ");
+		     var category = "";
+		     $.each(catArr,function(index,value){
+		    	 if(index === catArr.length-1){
+		    		 category += value;
+		    	 }else{
+		    	 category += value+"_";
+		    	 }
+		     });
+		     var name = encodeURI(value.equipmentName);
+ 			
  				
  			if(value.quoteStatus === "hired"){
 				quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><span class="label label-success">Hired</span></div><div class="clear-fix"></div><div class="media-left">'+
-				'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+				'<a href="#"><img class= "media-object" src=../images/'+category+'/'+name+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Equipment Quantity</th></tr></thead>'+
 				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.quantity+'</td>'+
 				'</tr></tbody></table>'+
 				'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div>'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Driver provided</th><th>Rental Charges Type</th><th>Machine Rentals</th><th>Advance</th><th>Price Quoted</th>'+
-				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+'</td>'+
+				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+' /per '+value.quotePriceType+'</td>'+
 				'</tr></tbody></table><div class="contact float-right">Contact : '+value.mobileNumber+'</div> </div></div>';
 			}else if(value.quoteStatus === "rejected"){
 				quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><span class="label label-danger">Rejected</span></div><div class="clear-fix"></div><div class="media-left">'+
-				'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+				'<a href="#"><img class= "media-object" src=../images/'+category+'/'+name+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Equipment Quantity</th></tr></thead>'+
 				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.quantity+'</td>'+
 				'</tr></tbody></table>'+
 				'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div>'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Driver provided</th><th>Rental Charges Type</th><th>Machine Rentals</th><th>Advance</th><th>Price Quoted</th>'+
-				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+'</td>'+
+				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+' /per '+value.quotePriceType+'</td>'+
 				'</tr></tbody></table></div></div>';
 			}else if(value.quoteStatus === "shortlisted"){
 				quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
 				'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
 				'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
 				'<span>Reject</span></div><div class="clear-fix"></div><div class="media-left">'+
-				'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+				'<a href="#"><img class= "media-object" src=../images/'+category+'/'+name+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Equipment Quantity</th></tr></thead>'+
 				'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.quantity+'</td>'+
 				'</tr></tbody></table>'+
 				'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div>'+
 				'<table class="table table-condensed table-left"><thead><tr><th>Driver provided</th><th>Rental Charges Type</th><th>Machine Rentals</th><th>Advance</th><th>Price Quoted</th>'+
-				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+'</td>'+
+				'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+' /per '+value.quotePriceType+'</td>'+
 				'</tr></tbody></table><div class="contact float-right">Contact : '+value.mobileNumber+'</div> </div></div>';
 			}else{
 			quoteList += '<div class="media"><h4 class="media-heading float-left">'+value.quotePostedByName+'</h4><div class="interactions"><button type="button" class="btn btn-warning btn-circle" id="'+value.quoteId+'#shortlisted"><i class="glyphicon glyphicon-eye-open"></i></button>'+
 			'<span>Shortlist</span><button type="button" class="btn btn-success btn-circle" id="'+value.quoteId+'#hired"><i class="glyphicon glyphicon-ok"></i></button>'+
 			'<span>Hire</span><button type="button" class="btn btn-danger btn-circle" id="'+value.quoteId+'#rejected"><i class="glyphicon glyphicon-remove"></i></button>'+
 			'<span>Reject</span></div><div class="clear-fix"></div><div class="media-left">'+
-			'<a href="#"><img class= "media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
+			'<a href="#"><img class= "media-object" src=../images/'+category+'/'+name+'.png height=130px width=130px alt='+value.equipmentName+'/></a></div><div class="media-body">'+
 			'<table class="table table-condensed table-left"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th><th>Equipment Quantity</th></tr></thead>'+
 			'<tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td><td>'+value.manufacturer+'</td><td>'+value.quantity+'</td>'+
 			'</tr></tbody></table>'+
 			'<div class="date"><span>Applied on : '+$.date(value.createdTime,1)+'</span></div><div class="clear-fix"></div>'+
 			'<table class="table table-condensed table-left"><thead><tr><th>Driver provided</th><th>Rental Charges Type</th><th>Machine Rentals</th><th>Advance</th><th>Price Quoted</th>'+
-			'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+'</td>'+
+			'</tr></thead><tbody><tr><td>'+value.driverAvailable+'</td><td>'+value.rentalChargesType+'</td><td>'+value.machineRentalCharges+'</td><td>'+advance+'</td><td>'+value.finalQuotePrice+' /per '+value.quotePriceType+'</td>'+
 			'</tr></tbody></table></div></div>';
 			
 			

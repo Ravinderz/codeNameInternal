@@ -39,7 +39,7 @@ public class Uploader {
 				byte[] bytes = file.getBytes();
                 filename=file.getOriginalFilename();
                 String fileExt = filename.substring(filename.lastIndexOf(".")+1,filename.length());
-                String name = filename.substring(0,filename.lastIndexOf("."));
+                String name = filename.substring(0,filename.lastIndexOf(".")).replaceAll(" ", "_");
                 name = name+"_"+System.currentTimeMillis();
                 filename = name+"."+fileExt;
                 uploadedimages=uploadedimages+filename+",";

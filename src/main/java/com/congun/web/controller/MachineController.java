@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.service.MachineService;
@@ -28,9 +29,9 @@ public class MachineController {
 	}
 	
 	@RequestMapping(value="/getMachinesListFromExcel" , method=RequestMethod.GET)
-	public void getMachinesListFromExcel(){
+	public void getMachinesListFromExcel(@RequestParam String path){
 		logger.info("Entered into MachineController.getMachinesListFromExcel method");
-		String path="/usr/congun/SampleExcel.xlsx";
+		/*String path="/usr/congun/SampleExcel.xlsx";*/
 		parser.getMachinesList(path);
 	}
 	

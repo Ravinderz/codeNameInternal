@@ -774,7 +774,7 @@ $.fn.serializeObject = function()
 		 
 		 console.log("Ëquipment selected : "+category+" Category : "+equipment);
 		 	
-	  var ImgPath = "images/"+category+"/"+equipment+".png"
+	  var ImgPath = "images/"+category+"/"+encodeURI(equipment)+".png"
 	  $("#myImg").attr('src', ImgPath);
 	  //$("#hoverimage").attr('style','content:url('+ImgPath+')');
 	}
