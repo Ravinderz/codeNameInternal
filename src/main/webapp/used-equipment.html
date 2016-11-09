@@ -284,13 +284,26 @@
 					<div class="filter-header"><p>Manufacturer</p></div>
 					<div class="filter-content manufacturer">
 					<div class="input-wrapper">
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label> 
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label> 
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
+					<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Terex" value="Terex" /><label for="Terex">Terex</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Mahindra" value="Mahindra" /><label for="Mahindra">Mahindra</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CAT" value="CAT" /><label for="CAT">Caterpillar </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CASE" value="CASE" /><label for="CASE">CASE </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="HYNDAI" value="HYNDAI" /><label for="HYNDAI">HYNDAI</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Leyland Deere" value="Leyland Deere" /><label for="Leyland Deere">Leyland Deere</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="L&T komutsu" value="L&T komutsu" /><label for="L&T komutsu">L&T komutsu</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Kobelco" value="Kobelco" /><label for="Kobelco">Kobelco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bobcat" value="Bobcat" /><label for="Bobcat">Bobcat</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Sany" value="Sany" /><label for="Sany">Sany</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Atlas Copco" value="Atlas Copco" /><label for="Atlas Copco">Atlas Copco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ajax Fiori" value="Ajax Fiori" /><label for="Ajax Fiori">Ajax Fiori</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Eicher" value="Eicher" /><label for="Eicher">Eicher</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Aquarius" value="Aquarius" /><label for="Aquarius">Aquarius</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ammann Apollo" value="Ammann Apollo" /><label for="Ammann Apollo">Ammann Apollo</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="umatech" value="umatech" /><label for="umatech">umatech</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Veermer" value="Veermer" /><label for="Veermer">Veermer</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Generac" value="Generac" /><label for="Generac">Generac</label>
 					</div> 
 					</div>
 					<div class="filter-header"><p>Location</p></div>
@@ -425,7 +438,6 @@
  			var loginform_submit = false;
  			var	registerform_submit = false;
  			loginform_submit = validateOnFocusout($("#login-form"));
- 			registerform_submit = validateOnFocusout($("#register-form"));
  			
  			$('#re-link').click(function(e){
  				$('#modal-container-login').modal('hide');
@@ -465,7 +477,7 @@
  				var successUrl = "#modal-container-login";
  				var data = JSON.stringify($("#register-form").serializeObject());
  				console.log(data);
- 				registerform_submit = validateOnClick($this);
+ 				registerform_submit = $.validateRegisterForm($this);
  				if(registerform_submit){
  				 $.ajax({
  				url : AppData.relativeUrl+"user/register",
@@ -605,7 +617,7 @@
  	    	    			success:function(equipments){
  	    	    				equipments = $.parseJSON(equipments);
  	    	    				$.each(equipments,function(index,value){
- 	    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+value+' value='+value+' /><label for='+value+'>'+value+'</label> '
+ 	    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+encodeURI(value)+' value='+encodeURI(value)+' /><label for='+encodeURI(value)+'>'+value+'</label> '
  	    	    				});
  	    	    				panelContent += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title">'+
  	    	    				'<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" aria-expanded="false" aria-controls="collapse'+i+'">'+
@@ -643,10 +655,11 @@
  					}
  					else if($(this).attr('name') === 'manufacturer'){
  						if(mfgChecked.length === 0){
- 							mfgChecked += $(this).val();
+ 							var mfg = encodeURI($(this).val());
+ 							mfgChecked += mfg;
  							}
  							else{
- 								mfgChecked += ":"+$(this).val();
+ 								mfgChecked += ":"+mfg;
  							}
  					}else if($(this).attr('name') === 'location'){
  						if(locationChecked.length === 0){

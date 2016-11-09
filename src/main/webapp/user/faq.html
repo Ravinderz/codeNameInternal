@@ -153,7 +153,6 @@
 	$(document).ready(function() {
 		
 	var user = $.getUser();
-		console.log(user);
 		var username = user.firstname + " " + user.lastname;
 		$('#user').text(username);
 
@@ -185,8 +184,6 @@
 		});
 
 		$('.logout').click(function() {
-			console.log("inside logout function")
-
 			$.ajax({
 				url : AppData.relativeUrl + "user/logout",
 				type : "post",
@@ -196,8 +193,6 @@
 					if (user !== null) {
 						localStorage.removeItem("user");
 					}
-
-					console.log("user logged out");
 					$(location).attr('href', "../index.html");
 				}
 			});

@@ -400,7 +400,6 @@
  		<script type="text/javascript">
  			$(document).ready(function(){
  				var user = $.getUser();
- 				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
  				$('#user-name').text(username);
@@ -408,8 +407,6 @@
 
  				
  				$('.logout').click(function(){
-				       console.log("inside logout function")
-				        
 				        $.ajax({
 		 					url:AppData.relativeUrl+"user/logout",
 		 					type:"post",
@@ -419,8 +416,6 @@
 						        if(user !== null){
 						            localStorage.removeItem("user");
 						        }
-						        
-						        console.log("user logged out");
 						        $(location).attr('href',"../index.html");
 		 					}
 		 					});
@@ -436,12 +431,8 @@
  				});
  				
  				var profile_percent = (user_entered_fields/total_user_fields)*100; 
- 				console.log("profile_percent",profile_percent)
  				$('.progress-bar').attr('aria-valuenow', profile_percent).css('width',profile_percent+"%");
  				$('.progress-bar').html(profile_percent+"%");
- 				console.log(Object.keys(user).length);
- 				
- 				
  				$('#userId').val(user.userId);
  				$('#firstName').val(user.firstname);
  				$('#lastName').val(user.lastname);
@@ -452,16 +443,13 @@
  				$('#role').val(user.role);
  				
  				$('.modal-btn').click(function() {
- 					console.log("inside update btn");
  					var formData = $("#register-form").serializeObject();
- 					console.log("created time ",user.createdtime)
  					formData.createdtime = $.date(user.createdtime,2);
  					var data = JSON.stringify(formData);
  					var temp = $.parseJSON(data);
  					temp.createdtime = user.createdtime;
  					temp["token"] = user.token;
  					temp = JSON.stringify(temp);
-					console.log(temp);
 					   $.ajax({
 							url : AppData.relativeUrl+"user/updateuser",
 							type : "put",
@@ -469,10 +457,8 @@
 							data : data,
 							success : function(response) {
 								if(response === "US01"){
-									console.log("successfully udpated");
 									localStorage.setItem("user",temp);
 									location.reload();
-									
 								}else{
 									console.log("exception while udpating");
 								}
@@ -486,12 +472,10 @@
  				var newsfeed = "";
  				$.ajax({
  					url:AppData.relativeUrl+"contractor/getAllRequirements",
- 					/*+user.userId,*/
  					type:"get",
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;	
  							var createdTime = value.createdTime;
@@ -522,12 +506,10 @@
  				var recentQuotes = "";
  				$.ajax({
  					url:AppData.relativeUrl+"supplier/getLatestRequirements/"+user.userId,
- 					/*+user.userId,*/
  					type:"get",
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							recentQuotes += '<a href="supplier-dashboard.html"><li>'+value.equipmentName +'  Quoted Price : '+value.finalQuotePrice+'</li></a>';
  						});
@@ -539,12 +521,10 @@
  				var equipments="";
  				$.ajax({
  					url:AppData.relativeUrl+"supplier/getallequipments/"+user.userId,
- 					/*+user.userId,*/
  					type:"get",
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							var createdTime = $.date(value.createdTime,1);
  							
@@ -567,7 +547,6 @@
  	 							+'<h3>'+value.equipment+'</h3><p class="posted-date">posted on : '+createdTime+'</p><p>Quantity :'+value.quantity+' Capacity :'+value.capacity+'</p></div></div>';
  							}
  						});
- 						console.log(equipments);
  						$('.machines').html("");
  						$('.machines').append(equipments);
  					}
@@ -603,14 +582,11 @@
  		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
  		    var date = d.toDateString();
- 		    console.log(d);
- 		    console.log(date);
  		    if(pattern === 1){
  		    var dateArr = date.split(" ");
  		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
  		    }
  		    else if(pattern === 2){
- 		    	console.log("date" +dateObject);
  		    	var dateArr = dateObject.split(' ');
  		    	var time = dateArr[3].split(':');
  		    	var HH = parseInt(time[0])+6;
@@ -629,7 +605,6 @@
  		
  		$.getMonthName = function(monNum){
  			var month;
- 			console.log(monNum)
  			if(monNum === "01"){
  				month = "Jan";
  			}
@@ -672,7 +647,6 @@
  		$.getMonth = function(month){
  			var monNum;
  			month = month.toLowerCase();
- 			console.log(month)
  			if(month === "jan"){
  				monNum = '01';
  			}

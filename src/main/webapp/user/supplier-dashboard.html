@@ -216,13 +216,10 @@
  				var requirements = [];
  				var quotes = [];
  				var user = $.getUser();
- 				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
  				
  				$('.logout').click(function(){
-				       console.log("inside logout function")
-				        
 				        $.ajax({
 		 					url:AppData.relativeUrl+"user/logout",
 		 					type:"post",
@@ -232,22 +229,15 @@
 						        if(user !== null){
 						            localStorage.removeItem("user");
 						        }
-						        
-						        console.log("user logged out");
 						        $(location).attr('href',"../index.html");
 		 					}
 		 					});
 				        
 				 });
  				
- 				
  				var reqList = "";
  				var flag = false;
  				var quoteList = "";
- 				
- 				
- 					
- 					
  					
  					 $.ajax({
  					url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId+"?page=1&pSize=20",
@@ -255,7 +245,6 @@
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;	
  							var createdTime = value.createdTime;
@@ -265,7 +254,6 @@
  								type:"get",
  								data:{},
  								success:function(response){
- 									console.log(response);
  									
  									var catArr = [];
  								     catArr = value.equipmentCategory.split(" ");
@@ -280,7 +268,6 @@
  								     var name = encodeURI(value.equipmentName);
  									
  									if(response === "true" ){
- 										console.log("inside ifff");
  									reqList += '<div class="media"><div class="media-left"><a href="#">'
  		 							+'<img  class="media-object" src=../images/'+category+'/'+name+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
  		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><div class="interactions"><span class="label label-primary">quoted</span></div></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
@@ -288,7 +275,6 @@
  		 							+'<th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
  		 							+'<td>'+value.quantity+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
  									}else{
- 										console.log("inside elseeeee");
  										reqList += '<div class="media"><div class="media-left"><a href="#">'
  	 		 							+'<img  class="media-object" src=../images/'+category+'/'+name+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
  	 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
@@ -296,11 +282,8 @@
  	 		 							+'<th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
  	 		 							+'<td>'+value.quantity+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
  		 							}
- 									console.log(reqList);
  									$('.requirement-card-wrapper').html("");
  			 						$('.requirement-card-wrapper').append(reqList);
- 			 						console.log("finished the first");
- 		 						
  								}
  							});
  						});
@@ -314,13 +297,10 @@
  				
  				$.ajax({
  					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+user.userId,
- 					/*+user.userId,*/
  					type:"get",
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response.length);
- 						console.log(response);
  						if(response.length === 0){
  							$('.quote-table').html("");
  							var noData = '<div class="no-data"><p><span class="above">No Quotes posted by you ,..</span><br><span class="below">Quote a mapped requirement to see you quotes in this section</span></p></div>';
@@ -331,8 +311,6 @@
  						var tableEndTags = '</tbody></table>';
  						$.each(response,function(index,value){
  							quotes[value.quoteId] = value;
- 							console.log("req",value.requirementId);
- 							console.log("req id name",value.reqPostedBy);	
  							var createdTime = value.createdTime;
  							var quotePrice = value.finalQuotePrice;
  							if(quotePrice){
@@ -341,13 +319,11 @@
  								quotePrice = value.machineRentalCharges;
  							}
  							createdTime = $.date(createdTime,1);
- 							console.log("created time :: ",$.date(createdTime,1));
- 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.reqPostedBy+'</td><td>'+quotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+ 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.reqPostedBy+'</td><td>'+quotePrice+' per '+value.quotePriceType+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
  						});
  						var tableContent = tableHeader+quoteList+tableEndTags;
  						$('.quote-table').html("");
  						$('.quote-table').append(tableContent);
- 						console.log("finished the second");
  					}
  					}
  					
@@ -357,8 +333,6 @@
  						//e.preventDefault();
  						var quote = quotes[this.id];
  						var req = requirements[quote.requirementId];
- 						console.log("rq id ::",req);
- 						
  						var catArr = [];
 					     catArr = req.equipmentCategory.split(" ");
 					     var category = "";
@@ -404,7 +378,6 @@
  				
  				$('.requirement-card-wrapper').on('click','#quote-btn',function(e){
  					e.preventDefault();
- 					console.log($(this).val());
  					$(location).attr('href',"../quote-form.html?reqId="+$(this).val());
  				});
  				
@@ -415,9 +388,7 @@
 				var $active_element = $('#first').parent();
 			$('.pagination li a').click(function(e){
 				e.preventDefault();
-				console.log(this);
 				var clicked_page = $(this).data("value");
-				console.log(clicked_page);
 				if(clicked_page === "prev"){
 					if(current_page === 1){
 						$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
@@ -471,18 +442,7 @@
 					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
 					
 				}
-				
-				console.log("current",current_page);
-				console.log("prev",previous_page);
-				console.log("next",next_page);
-				
-				
-				
-				
 			});
-			
- 				
- 				
  			});
  		</script>
  		<script type="text/javascript">
@@ -499,7 +459,6 @@
  		
  		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
- 		   //var d = $.format.date(new Date(dateObject), 'yyyy-mm-ddT hh:mm:ssZ'); 
  		    var date = d.toDateString();
  		    if(pattern === 1){
  		    var dateArr = date.split(" ");
@@ -508,7 +467,6 @@
  		    else if(pattern === 4){
  		    	var dateObj = new Date(toDate(dateObject));
 		    	dateObj.setDate(dateObj.getDate() + 3);
-		    	console.log(dateObj);
 		    	date = dateObj.toDateString();
  	 		    var dateArr = date.split(" ");
  	 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
@@ -532,7 +490,6 @@
 		
 		$.getMonthName = function(monNum){
  			var month;
- 			console.log(monNum)
  			if(monNum === "01"){
  				month = "Jan";
  			}
@@ -575,7 +532,6 @@
  		$.getMonth = function(month){
  			var monNum;
  			month = month.toLowerCase();
- 			console.log(month)
  			if(month === "jan"){
  				monNum = '01';
  			}
@@ -619,14 +575,12 @@
  		$.getAllQuotesByPagination = function(userId,currentPage,pageSize,requirements){
  			var quoteList = "";
  			$.ajax({
-					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize=20", //this is hard coded 
+					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize="+pageSize, //this is hard coded 
 					/*+user.userId,*/
 					type:"get",
 					data:{},
 					success:function(response){
 						response = $.parseJSON(response);
-						console.log(response.length);
-						console.log(response);
 						if(response.length === 0){
 							$('.quote-table').html("");
 							var noData = '<div class="no-data"><p><span class="above">No Quotes posted by you ,..</span><br><span class="below">Quote a mapped requirement to see you quotes in this section</span></p></div>';
@@ -643,7 +597,7 @@
  								quotePrice = value.machineRentalCharges;
  							}
 							createdTime = $.date(createdTime,1);
-							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+requirements[value.requirementId].contractorName+'</td><td>'+quotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+requirements[value.requirementId].contractorName+'</td><td>'+quotePrice+' per'+value.quotePriceType+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
 						});
 						var tableContent = tableHeader+quoteList+tableEndTags;
 						$('.quote-table').html("");

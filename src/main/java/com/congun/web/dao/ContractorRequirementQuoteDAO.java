@@ -83,7 +83,7 @@ public class ContractorRequirementQuoteDAO {
 				logger.info("Requirement Object with Id "+id+"Doesn't exist!!");
 				return null;
 			}else{
-				logger.info("Requirement Object with Id "+id+"Doesn't exist!!");
+				logger.info("Requirement Object with Id "+id+" exist!!");
 			return reqObject;
 			}
 			

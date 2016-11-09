@@ -241,13 +241,8 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			 var user = $.getUser();
-				console.log(user); 
-			
 			$('.interested-list').hide();
-				
 			$('.logout').click(function(){
-						       console.log("inside logout function")
-						        
 						        $.ajax({
 				 					url:AppData.relativeUrl+"user/logout",
 				 					type:"post",
@@ -257,8 +252,6 @@
 								        if(user !== null){
 								            localStorage.removeItem("user");
 								        }
-								        
-								        console.log("user logged out");
 								        $(location).attr('href',"../index.html");
 				 					}
 				 					});
@@ -309,7 +302,6 @@
 				data:{},
 				success:function(response){
 					response = $.parseJSON(response);
-					console.log(response);
 					var mediaWrapper = '<div style="margin-top:20px">';
 					$.each(response,function(index,value){
 						posts[value.postId] = value;	
@@ -350,7 +342,6 @@
 			$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
 			var listContent = "";
 			$.each(imgArr,function(index,value){
-				console.log("index",index);
 				var imgid = '#thumb-img'+index;
 				listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
 			});
@@ -363,19 +354,14 @@
 	 	
 	 	$('.sidebar-content').on("click",".ip-count",function(e){
 	 		e.preventDefault();
-	 		
 	 		$('.interested-list').show();
-	 		
 	 		var postId = $(this).attr("data-id");
-	 		console.log(postId);
-	 		
 	 		$.ajax({
 				url:AppData.relativeUrl+"usedmachine/getInterestedppl/"+postId,
 				type:"get",
 				data:{},
 				success:function(response){
 					response = $.parseJSON(response);
-					console.log(response);
 					var tableHeading = '<div class="panel panel-default interested-ppl-table"><div class="panel-heading">People who showed Interest in the post</div><div class="post-table">'+
 					'<table class="table table-striped"><thead><tr><th>Name</th><th>Email</th><th>Contact</th></tr></thead><tbody>';
 					var tableContent = "";
@@ -387,12 +373,7 @@
 					$('#interested-ppl-display').html(tableHeading+tableContent+tableEndTags);	
 				}
 				});
-	 		
-	 		
 	 	});
-	 		
-	 		
- 			
  		});
  	</script>
  	<script type="text/javascript">
@@ -400,14 +381,11 @@
  	$.date = function(dateObject,pattern) {
 		    var d = new Date(dateObject);
 		    var date = d.toDateString();
-		    console.log(d);
-		    console.log(date);
 		    if(pattern === 1){
 		    var dateArr = date.split(" ");
 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
 		    }
 		    else if(pattern === 2){
-		    	console.log("date" +dateObject);
 		    	var dateArr = dateObject.split(' ');
 		    	var time = dateArr[3].split(':');
 		    	var HH = parseInt(time[0])+6;
@@ -426,7 +404,6 @@
 		
 		$.getMonthName = function(monNum){
 			var month;
-			console.log(monNum)
 			if(monNum === "01"){
 				month = "Jan";
 			}
@@ -469,7 +446,6 @@
 		$.getMonth = function(month){
 			var monNum;
 			month = month.toLowerCase();
-			console.log(month)
 			if(month === "jan"){
 				monNum = '01';
 			}
@@ -521,7 +497,6 @@
 			data:{},
 			success:function(response){
 				response = $.parseJSON(response);
-				console.log(response);
 				var tableHead = '<div class="panel panel-default used-equip-table"><div class="panel-heading">Equipments posted for Sale</div><div class="post-table">'+
 				'<table class="table table-striped"><thead><tr><th>Date</th><th>Equipment</th><th>Price</th><th>Interested People</th><th>Ad Duration</th>'+
 				'<th>Status</th><th>Location</th></tr></thead><tbody>';

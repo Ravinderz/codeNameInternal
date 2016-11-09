@@ -351,7 +351,6 @@
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
-		registerform_submit = validateOnFocusout($("#register-form"));	
 		
 
 		/* to get parameters from a url */
@@ -407,7 +406,7 @@
 							var successUrl = "#modal-container-login";
 							var data = JSON.stringify($("#register-form").serializeObject());
 							console.log(data);
-							registerform_submit = validateOnClick($this);
+							registerform_submit = $.validateRegisterForm($this);
 							if(registerform_submit){
 							 $.ajax({
 							url : AppData.relativeUrl+"user/register",

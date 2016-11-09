@@ -20,14 +20,21 @@
 	 console.log(localStorage.getItem("user"));
 	 if(localStorage.getItem("user")){
 		 console.log("script if");
+		 var baseUrl = window.location.host;
+		 if(baseUrl.indexOf("localhost") !== -1){
+		 	baseUrl = baseUrl + '/congun';
+		 	window.location = "http://"+baseUrl+"/user/index.html";
+		 }else{
+			 window.location = "http://"+baseUrl+"/user/index.html";
+		 } 
 	 }
-      //window.location = AppData.relativeUrl+"user/index.html";
+      
     }
   </script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/appProperties.js"></script>
 <script src="js/validation.js"></script>
+<script src="js/appProperties.js"></script>
 </head>
 <body>
 	<div class="nav-wrapper-index">
@@ -333,7 +340,7 @@
 					<div
 						class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="Batch_and_Crusher_Plant">
-						<img src="images/Batch_and_Crusher_Plant/Batching plant.png" alt="" height="150px" width = "150px"/>
+						<img src="images/Batch_and_Crusher_Plant/Batching Plant.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn img-btn-md">Batch & Crusher Plant</button>
 					</div>
 					
@@ -435,7 +442,7 @@
 	</div>
 
 	<!-- start of how we work -->
-	<div class="how-we-work">
+<!-- 	<div class="how-we-work">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -463,7 +470,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- start of about us -->
 	<div class="about-us">
 		<div class="container-fluid">
@@ -580,7 +587,6 @@
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
-		/*registerform_submit = validateOnFocusout($("#register-form"));*/
 						var user = $.getUser();
 						if (user !== null) {
 							console.log("user is available");

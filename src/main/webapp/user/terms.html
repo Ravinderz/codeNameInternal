@@ -198,7 +198,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var user = $.getUser();
-	console.log(user);
 	var username = user.firstname + " " + user.lastname;
 	$('#user').text(username);
 
@@ -230,8 +229,6 @@ $(document).ready(function() {
 	});
 
 	$('.logout').click(function() { 
-		console.log("inside logout function")
-
 		$.ajax({
 			url : AppData.relativeUrl + "user/logout",
 			type : "post",
@@ -241,8 +238,6 @@ $(document).ready(function() {
 				if (user !== null) {
 					localStorage.removeItem("user");
 				}
-
-				console.log("user logged out");
 				$(location).attr('href', "../index.html");
 			}
 		});

@@ -153,7 +153,6 @@
 	$(document).ready(function() {
 		
 		var user = $.getUser();
-		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 		
@@ -181,7 +180,6 @@
 	var reqList = "";
 	var requirements = [];
 	var imagePath = "../images/"+category+"/"+sub_ctg+".png";
-	console.log(imagePath)
 	$.ajax({
 		url : AppData.relativeUrl+"contractor/getRequirementsByequipment/"+sub_ctg,
 		type : "get",
@@ -189,7 +187,6 @@
 		data : {},
 		success : function(response) {
 			response = $.parseJSON(response);
-			console.log(response);
 			$.each(response,function(index,value){
 				requirements[value.requirementId] = value;
 				reqList += "<li class='item'><div class='item-content'><div class='item-content-header'><img src='"+imagePath+"' height='100px' width='100px' alt='image here' />"
@@ -208,30 +205,18 @@
 	
 	$('.post-req-btn').click(function(e){
 		e.preventDefault();
-		console.log("inside click function");
-		console.log("category",category);
-		console.log("sub",sub_ctg);
 		$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
 	});
 	
 	$('.ul-item').on('click','.view-btn',function(e){
-		console.log("Ëntered to view requirement");
 		e.preventDefault();
-		console.log("inside click function");
-		console.log("category",category);
-		console.log("sub",sub_ctg);
-		console.log(this.id);
-		console.log(requirements[this.id]);
 		var requirement = JSON.stringify(requirements[this.id]);
-		console.log(requirement);
 		sessionStorage.setItem("requirement",requirement);
 		$(location).attr('href',"requirement-view.html?category="+category+"&sub-category="+sub_ctg);
 	});
 	
 
 	$('.logout').click(function(){
-	       console.log("inside logout function")
-	        
 	        $.ajax({
 				url:AppData.relativeUrl+"user/logout",
 				type:"post",
@@ -241,8 +226,6 @@
 			        if(user !== null){
 			            localStorage.removeItem("user");
 			        }
-			        
-			        console.log("user logged out");
 			        $(location).attr('href',"../index.html");
 				}
 				});

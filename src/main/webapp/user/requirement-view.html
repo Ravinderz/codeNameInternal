@@ -130,7 +130,7 @@
                                     <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
                                 </div>
                                 <div class="col-md-2">
-                                   <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div>
+                                   <!-- <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div> -->
                                 </div>
                             </div>
                         </div>
@@ -195,14 +195,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var user = $.getUser();
-		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
-		
-		
 		var requirement = sessionStorage.getItem("requirement");
 		requirement = $.parseJSON(requirement);
-		console.log(requirement);
 		
 		/* to get parameters from a url */
 		var getUrlParameter = function getUrlParameter(sParam) {
@@ -273,24 +269,16 @@
 		
 		$('.post-req-btn').click(function(e){
 			e.preventDefault();
-			console.log("inside click function");
-			console.log("category",category);
-			console.log("sub",sub_ctg);
 			$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
 		});
 		
 		$('.quote-btn').click(function(e){
 			e.preventDefault();
-			console.log("inside click function");
-			console.log("category",category);
-			console.log("sub",sub_ctg);
 			$(location).attr('href',"../quote-form.html?reqId="+requirement.requirementId);
 		});
 		
 		
 		$('.logout').click(function(){
-		       console.log("inside logout function")
-		        
 		        $.ajax({
 					url:AppData.relativeUrl+"user/logout",
 					type:"post",
@@ -300,16 +288,10 @@
 				        if(user !== null){
 				            localStorage.removeItem("user");
 				        }
-				        
-				        console.log("user logged out");
 				        $(location).attr('href',"../index.html");
 					}
 					});
-		        
 		 });
-		
-		
-		
 		});    
     </script>
     <script type="text/javascript">
@@ -329,7 +311,5 @@
 		return o;
 	};
 </script>    
- 		
- 				
     </body>
 </html>

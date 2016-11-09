@@ -226,13 +226,10 @@
  				var quotes = [];
  				var reqId = "";
  				var user = $.getUser();
- 				console.log(user);
  				var username = user.firstname+" "+user.lastname;
  				$('#user').text(username);
  				
  				$('.logout').click(function(){
-				       console.log("inside logout function")
-				        
 				        $.ajax({
 		 					url:AppData.relativeUrl+"user/logout",
 		 					type:"post",
@@ -242,8 +239,6 @@
 						        if(user !== null){
 						            localStorage.removeItem("user");
 						        }
-						        
-						        console.log("user logged out");
 						        $(location).attr('href',"../index.html");
 		 					}
 		 					});
@@ -262,14 +257,12 @@
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement title</th><th>Quotes</th><th>End date</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
  						var tableEndTags = '</tbody></table>';
  						$.each(response,function(index,value){
  							requirements[value.requirementId] = value;
  							var createdTime = value.createdTime;
  							createdTime = $.date(createdTime,1);
- 							console.log("created time :: ",createdTime);
  							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>'+$.date(value.startDate,4)+'</td><td>'+value.reqStatus+'</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
  						});
  						var tableContent = tableHeader+reqList+tableEndTags;
@@ -282,7 +275,6 @@
  						//e.preventDefault();
  						$.to_position('#quote-display-list');
  						reqId = this.id;
- 						console.log("rq id ::",reqId);
  						$.getQuotes(reqId,quotes,requirements,reqId);
  					});
  					
@@ -303,7 +295,6 @@
 					     });
 					     var name = encodeURI(req.equipmentName);
  						
- 						console.log("rq id ::",req);
 						$('#myModalLabel').text(req.title);
 						$('#req-img').attr('src','../images/'+category+'/'+name+'.png');
 						$('#req-img').attr('alt',req.equipmentName);
@@ -333,7 +324,6 @@
  						quote.createdTime = $.date(quote.createdTime,2);
  						quote.updatedTime = $.date(quote.updatedTime,2);
  						quote = JSON.stringify(quote);
- 						console.log(quote);
  						$.udpateQuote(reqId,quotes,quote,requirements);
  						//udpdate quote method  
  					});
@@ -342,8 +332,6 @@
  						e.preventDefault();
  						var status = $(this).text().toLowerCase();
  						var quoteList = "";
- 						console.log("status" , status);
- 						console.log("reqId" , reqId);
  						$.filterQuotes(status,reqId,quotes,requirements);
  					});
  					
@@ -354,9 +342,7 @@
 					var $active_element = $('#first').parent();
 				$('.pagination li a').click(function(e){
 					e.preventDefault();
-					console.log(this);
 					var clicked_page = $(this).data("value");
-					console.log(clicked_page);
 					if(clicked_page === "prev"){
 						if(current_page === 1){
 							$.getAllRequirementsByPagination(user.userId,current_page,5);
@@ -410,17 +396,7 @@
 						$.getAllRequirementsByPagination(user.userId,current_page,5);
 						
 					}
-					
-					console.log("current",current_page);
-					console.log("prev",previous_page);
-					console.log("next",next_page);
-					
-					
-					
-					
 				});
-					
- 					
  			});
  		</script>
  		<script type="text/javascript">
@@ -437,7 +413,6 @@
  		
  		$.date = function(dateObject,pattern) {
  		    var d = new Date(dateObject);
- 		   //var d = $.format.date(new Date(dateObject), 'yyyy-mm-ddT hh:mm:ssZ'); 
  		    var date = d.toDateString();
  		    if(pattern === 1){
  		    var dateArr = date.split(" ");
@@ -446,14 +421,11 @@
  		   else if(pattern === 4){
 		    	var dateObj = new Date(toDate(dateObject));
 		    	dateObj.setDate(dateObj.getDate() + 3);
-		    	console.log(dateObj);
 		    	date = dateObj.toDateString();
-		    	console.log(date);
 	 		    var dateArr = date.split(" ");
 	 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
 	 		    }
  		    else if(pattern === 2){
- 		    	console.log("date" +dateObject);
  		    	var dateArr = dateObject.split(' ');
  		    	var time = dateArr[3].split(':');
  		    	var HH = parseInt(time[0])+6;
@@ -472,7 +444,6 @@
 		
 		$.getMonthName = function(monNum){
  			var month;
- 			console.log(monNum)
  			if(monNum === "01"){
  				month = "Jan";
  			}
@@ -515,7 +486,6 @@
  		$.getMonth = function(month){
  			var monNum;
  			month = month.toLowerCase();
- 			console.log(month)
  			if(month === "jan"){
  				monNum = '01';
  			}
@@ -564,14 +534,12 @@
 					data:{},
 					success:function(response){
 						response = $.parseJSON(response);
-						console.log(response);
 						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quotes</th><th>Requirement deadline</th><th>Status</th><th>Clone</th><th>Share</th></tr></thead><tbody>';
 						var tableEndTags = '</tbody></table>';
 						$.each(response,function(index,value){
 							//requirements[value.requirementId] = value;
 							var createdTime = value.createdTime;
 							createdTime = $.date(createdTime,1);
-							console.log("created time :: ",$.date(createdTime,1));
 							reqList += '<tr><td>'+createdTime+'</td><td>'+value.title+'<a href="#" id='+value.requirementId+' class="requirement-link">(view)</a></td><td>'+value.noofquotes+'<a id='+value.requirementId+' class="quote-link" href="#">(view)</a></td><td>'+$.date(value.endDate,3)+'</td><td>'+value.reqStatus+'</td><td>Clone</td><td><div class="social"><a class="img-circle fa fa-facebook-f" href="#"></a><a class="img-circle fa fa-twitter" href="#"></a><a class="img-circle fa fa-whatsapp" href="#"></a></div></td></tr>';
 						});
 						var tableContent = tableHeader+reqList+tableEndTags;
@@ -592,7 +560,6 @@
 							data:{},
 							success:function(response){
 								response = $.parseJSON(response);
-								console.log(response);
 								var temp = "<div class='container-fluid'>"
 								 $.each(response,function(index,value){
 									quotes[value.quoteId] = value;
@@ -610,7 +577,6 @@
 					data:{},	
 					success:function(response){
 						response = $.parseJSON(response);
-						console.log(response);
 						var temp = "<div class='container-fluid'>"
 						
 						$.each(response,function(index,value){
@@ -636,7 +602,6 @@
 					contentType:"application/json; charset=utf-8",
 					data:quote,
 					success:function(response){
-						console.log(response);
 						$.getQuotes(reqId,quotes,requirements)
 					}
 					});
@@ -651,7 +616,6 @@
 				data:{},
 				success:function(response){
 					response = $.parseJSON(response);
-					console.log(response);
 					var temp = "<div class='container-fluid'>"
 					$.each(response,function(index,value){
 						quotes[value.quoteId] = value;
@@ -670,7 +634,6 @@
  			var advance = "N/A";
  			if(value.advance){
  				advance = value.advance;
- 				console.log("i fififi");
  			}
  			else{
  				advance = "N/A";

@@ -302,7 +302,6 @@
 		var loginform_submit = false;
 		var	registerform_submit = false;
 		loginform_submit = validateOnFocusout($("#login-form"));
-		registerform_submit = validateOnFocusout($("#register-form"));	
 		
 
 		/* to get parameters from a url */
@@ -358,7 +357,7 @@
 							var successUrl = "#modal-container-login";
 							var data = JSON.stringify($("#register-form").serializeObject());
 							console.log(data);
-							registerform_submit = validateOnClick($this);
+							registerform_submit = $.validateRegisterForm($this);
 							if(registerform_submit){
 							 $.ajax({
 							url : AppData.relativeUrl+"user/register",
@@ -529,7 +528,7 @@ $(".invalid-error").hide();
 						var Aerial_and_Material_Lifts = ['Telehandlers','Material Lifts','Boom Lifts','Scissor Lifts','Vertical Lifts'];
 						var Batch_and_Crusher_Plant = [ 'Batching Plant','Crusher Plant'];
 						var Cement_Mixer_and_Pumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
-						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Roller','Single Drum Roller'];
+						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Rollers','Single Drum Rollers'];
 						var Dump_Trucks = [ 'Heavy Dumpers','Tippers'];
 						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
 

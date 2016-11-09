@@ -1,4 +1,9 @@
 var baseUrl = window.location.host;
+if(baseUrl.indexOf("localhost") !== -1){
+	
+	baseUrl = baseUrl + '/congun';
+	console.log(baseUrl);
+}
 var AppData = {
 			/*relativeUrl: 'http://'+baseUrl+'/congun/',
 			imageUrl:'http://'+baseUrl+'/congun/congun/uploadedimages/'*/

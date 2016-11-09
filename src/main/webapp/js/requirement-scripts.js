@@ -21,7 +21,7 @@ function bar_progress(progress_line_object, direction) {
 
 jQuery(document).ready(function() {
 	
-    
+    var submitted = false;
     /*
         Form
     */
@@ -89,6 +89,9 @@ jQuery(document).ready(function() {
     
     // submit
     $('.f1 #btn-submit').on('click', function(e) {
+    	if(submitted){
+    		return false;
+    	}else{
 	var i=0;
 	console.log("Entered JS script of submit from requirement form");
 	var parent_fieldset = $(this).parents('fieldset');
@@ -147,9 +150,14 @@ jQuery(document).ready(function() {
 				}else{
 				alert("Please enter all highlighted fields!!!");
 				}
+		submitted = true;
+    	}
     });
-    
+    	var submitted_left = false;
 		$("#addEquipment-left").click(function(e){
+			if(submitted_left){
+				return false;
+			}else{
 	console.log("from left JS");
 	var parent_fieldset = $(this).parents('fieldset');
     	var valid_form = true;
@@ -189,9 +197,16 @@ jQuery(document).ready(function() {
 		}else{
 				alert("Please enter all highlighted fields!!!");
 				}
+		submitted_left = true;
+			}
 	});
 	
+		var submitted_right = false;
+		
 		$("#addEquipment-right").click(function(e){
+			if(submitted_right){
+				return false;
+			}else{
 	console.log("from right JS");
 	var parent_fieldset = $(this).parents('fieldset');
     	var valid_form = true;
@@ -231,10 +246,15 @@ jQuery(document).ready(function() {
 		}else{
 				alert("Please enter all highlighted fields!!!");
 				}
+		submitted_right = true;
+			}
 	});
 	
 	 // submit
     $('#btn-quote').on('click', function() {
+    	if(submitted){
+    		return false;
+    	}else{
 	console.log("Entered JS script of submit from quote form");
 	var parent_fieldset = $(this).parents('fieldset');
 	 //console.log(parent_fieldset);
@@ -293,10 +313,16 @@ jQuery(document).ready(function() {
 				}else{
 				alert("Please enter all highlighted fields!!!");
 				}
+    	submitted = true;
+    	}
     });
 	
 	//add Used Machine
 	 $('#addUsedMachine').on('click', function(){
+		 console.log(submitted);
+		 if(submitted){
+			 return false;
+		 }else{
 	 console.log("Entered Used Machines");
 	 
 	 	var parent_fieldset = $(this).parents('fieldset');
@@ -310,6 +336,7 @@ jQuery(document).ready(function() {
 				valid_form = false;
     		}
     		else {
+    			console.log("input error remved");
     			$(this).removeClass('input-error');
     		}
 			});
@@ -336,9 +363,12 @@ jQuery(document).ready(function() {
 		}else{
 				alert("Please enter all highlighted fields!!!");
 				}
-		
-		
-	 
+		if(valid_form){
+		submitted = true;
+		}else{
+			submitted = false;	
+		}
+		 }
 	 });
 	 
 	 $("#upload-image").on("change", function() {
@@ -354,8 +384,13 @@ jQuery(document).ready(function() {
 	  $('#modal-image-upload').modal('show').delay(50000);
 	  });
 	  
+	  var uploadSubmitted = false;
 	  //upload file
 	  $('#imageuploadform').submit(function(event){
+		  
+		  if(uploadSubmitted){
+			  return false;
+		  }else{
 	   var user = localStorage.getItem("user");
 	   user = $.parseJSON(user);
 	  event.preventDefault();
@@ -386,6 +421,10 @@ jQuery(document).ready(function() {
 		console.log(data);
 		}
 	  });
+	  
+	  uploadSubmitted = false;
+	  
+		  }
 	  });
 	  
 	 // $( "#imageuploadform" ).submit(function( event ) {

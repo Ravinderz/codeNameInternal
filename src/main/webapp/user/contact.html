@@ -201,7 +201,6 @@
 	$(document).ready(function() {
 		
 	var user = $.getUser();
-		console.log(user);
 		var username = user.firstname + " " + user.lastname;
 		$('#user').text(username);
 
@@ -229,16 +228,13 @@
 		
 		$('#contact-btn').click(function(e){
 			e.preventDefault();
-			
 			var data = JSON.stringify($("#contact-form").serializeObject());
-			console.log(data);
 			$.ajax({
 				url: AppData.relativeUrl+"user/userqueries",
 				type : "post",
 				contentType : "application/json; charset=utf-8",
 				data : data,
 				success : function(response){
-					console.log(response);
 					if(response === "CUS01"){
 						$('.form-container').html("");
 						$('.form-container').html("<p>Thank you for contacting us. Our Support team will get in touch with you shortly.</p>")
@@ -261,8 +257,6 @@
 		});
 
 		$('.logout').click(function() {
-			console.log("inside logout function")
-
 			$.ajax({
 				url : AppData.relativeUrl + "user/logout",
 				type : "post",
@@ -272,8 +266,6 @@
 					if (user !== null) {
 						localStorage.removeItem("user");
 					}
-
-					console.log("user logged out");
 					$(location).attr('href', "../index.html");
 				}
 			});

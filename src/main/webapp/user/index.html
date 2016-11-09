@@ -160,7 +160,7 @@
 					<div
 						class="col-md-2 col-sm-6 col-xs-12 category-img"
 						id="Batch_and_Crusher_Plant">
-						<img src="../images/Batch_and_Crusher_Plant/Batching plant.png" alt="" height="150px" width = "150px"/>
+						<img src="../images/Batch_and_Crusher_Plant/Batching Plant.png" alt="" height="150px" width = "150px"/>
 						<button class="btn img-btn img-btn-md">Batch & Crusher Plant</button>
 					</div>
 					
@@ -261,7 +261,7 @@
 		</div>
 	</div>
     
-     	<!-- start of how we work -->
+<!--      	start of how we work
  	<div class="how-we-work">
     <div class="container">
  			<div class="row">
@@ -280,7 +280,7 @@
                                         <span class="step-text">Finilize the deal</span></div>
 	 		</div>
  		</div>
-    </div>
+    </div> -->
  		<!-- start of about us -->
     <div class="about-us">
  	<div class="container-fluid">
@@ -372,18 +372,15 @@
 	$(document).ready(function() {
 	
 		var user = $.getUser();
-		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 		
 		$('.category-img').click(function(){
-			console.log("inside img click function");
 			var category = this.id;
 			$(location).attr('href',"equipment.html?category="+category);
 		});
 		
 		$('.dashboard').click(function(){
-			console.log("inside dashboard click")
 			if(user.role === "contractor"){
 				$(location).attr('href',"contractor-dashboard.html");
 			}else if(user.role === "supplier"){
@@ -392,7 +389,6 @@
 			
 		});
 		$('.profile').click(function(){
-			console.log("inside dashboard click")
 			if(user.role === "contractor"){
 				$(location).attr('href',"contractor-profile.html");
 			}else if(user.role === "supplier"){
@@ -410,7 +406,6 @@
 				success:function(response){
 					response = $.parseJSON(response);
 					if(!jQuery.isEmptyObject(response)){
-						console.log(response);
 						$.each(response,function(index,value){
 							posts[value.postId] = value;	
 							var imgArr = value.imagesuploaded.split(",");
@@ -431,8 +426,6 @@
 		
 		
 		$('.logout').click(function(){
-		       console.log("inside logout function")
-		        
 		        $.ajax({
 					url:AppData.relativeUrl+"user/logout",
 					type:"post",
@@ -442,8 +435,6 @@
 				        if(user !== null){
 				            localStorage.removeItem("user");
 				        }
-				        
-				        console.log("user logged out");
 				        $(location).attr('href',"../index.html");
 					}
 					});

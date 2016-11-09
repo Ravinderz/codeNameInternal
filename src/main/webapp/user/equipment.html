@@ -166,7 +166,6 @@
 		};
 
 		var user = $.getUser();
-		console.log(user);
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 
@@ -180,7 +179,7 @@
 						var Aerial_and_Material_Lifts = ['Telehandlers','Material Lifts','Boom Lifts','Scissor Lifts','Vertical Lifts'];
 						var Batch_and_Crusher_Plant = [ 'Batching Plant','Crusher Plant'];
 						var Cement_Mixer_and_Pumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
-						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Roller','Single Drum Roller'];
+						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Rollers','Single Drum Rollers'];
 						var Dump_Trucks = [ 'Heavy Dumpers','Tippers'];
 						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
 
@@ -224,14 +223,11 @@
 
 						}
 						//category = $.parseJSON(earthMovingEquipment);
-						console.log("category", category);
-						console.log("equipment", equipment);
 						var count = 1;
 						var html = "";
 						$.each(equipment,function(index, value) {
 							
 						var imagePath = '../images/'+ category + '/' + value+ '.png';
-						console.log(imagePath);
 						var firstDiv = "<div class='row'>";
 						var firstDivClose = "</div>";
 						if (count === 1) {
@@ -254,8 +250,6 @@
 						}
 						count++;
 						});
-						console.log(html);
-
 						$(".category-row-one").append(html);
 
 						$('.category-img').click(function() {
@@ -291,8 +285,6 @@
 						});
 						
 						$('.logout').click(function(){
-						       console.log("inside logout function")
-						        
 						        $.ajax({
 				 					url:AppData.relativeUrl+"user/logout",
 				 					type:"post",
@@ -302,8 +294,6 @@
 								        if(user !== null){
 								            localStorage.removeItem("user");
 								        }
-								        
-								        console.log("user logged out");
 								        $(location).attr('href',"../index.html");
 				 					}
 				 					});

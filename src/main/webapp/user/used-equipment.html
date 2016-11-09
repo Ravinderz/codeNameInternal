@@ -76,8 +76,8 @@
 		   <div class="row sub-nav-bar">
 				<div class="col-md-6">
 					<ul class="sub-menu">
-						<li><a href="#" id="sub-nav-profile">Profile</a></li>
-						<li><a href="#" id="sub-nav-dashboard">Rental board</a></li>
+						<li><a href="#" id="sub-nav-profile" class="profile">Profile</a></li>
+						<li><a href="#" id="sub-nav-dashboard" class="dashboard">Rental board</a></li>
 						<li class="active"><a href="used-equipment.html">Used equipment</a></li>
 					</ul>
 				</div>
@@ -144,12 +144,25 @@
 					<div class="filter-content manufacturer">
 					<div class="input-wrapper">
 						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label> 
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label> 
-						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Terex" value="Terex" /><label for="Terex">Terex</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Mahindra" value="Mahindra" /><label for="Mahindra">Mahindra</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CAT" value="CAT" /><label for="CAT">Caterpillar </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CASE" value="CASE" /><label for="CASE">CASE </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="HYNDAI" value="HYNDAI" /><label for="HYNDAI">HYNDAI</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Leyland Deere" value="Leyland Deere" /><label for="Leyland Deere">Leyland Deere</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="L&T komutsu" value="L&T komutsu" /><label for="L&T komutsu">L&T komutsu</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Kobelco" value="Kobelco" /><label for="Kobelco">Kobelco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bobcat" value="Bobcat" /><label for="Bobcat">Bobcat</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Sany" value="Sany" /><label for="Sany">Sany</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Atlas Copco" value="Atlas Copco" /><label for="Atlas Copco">Atlas Copco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ajax Fiori" value="Ajax Fiori" /><label for="Ajax Fiori">Ajax Fiori</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Eicher" value="Eicher" /><label for="Eicher">Eicher</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Aquarius" value="Aquarius" /><label for="Aquarius">Aquarius</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ammann Apollo" value="Ammann Apollo" /><label for="Ammann Apollo">Ammann Apollo</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="umatech" value="umatech" /><label for="umatech">umatech</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Veermer" value="Veermer" /><label for="Veermer">Veermer</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Generac" value="Generac" /><label for="Generac">Generac</label>
 					</div> 
 					</div>
 					<div class="filter-header"><p>Location</p></div>
@@ -279,14 +292,11 @@
  			var posts = [];
  			var interested = [];
  			var user = $.getUser();
-				console.log(user);
 				var username = user.firstname+" "+user.lastname;
 				$('#user').text(username);
 				$('#user-name').text(username);
 				
 				$('.logout').click(function(){
-				       console.log("inside logout function")
-				        
 				        $.ajax({
 		 					url:AppData.relativeUrl+"user/logout",
 		 					type:"post",
@@ -296,8 +306,6 @@
 						        if(user !== null){
 						            localStorage.removeItem("user");
 						        }
-						        
-						        console.log("user logged out");
 						        $(location).attr('href',"../index.html");
 		 					}
 		 					});
@@ -305,7 +313,7 @@
 				 });
 				
  			
- 		$('#sub-nav-profile').click(function(e){
+ 		$('.profile').click(function(e){
 			e.preventDefault();
 			if(user.role === "contractor"){
 				$(location).attr('href',"contractor-profile.html");
@@ -314,7 +322,7 @@
 			}
 		});
 		
-		$('#sub-nav-dashboard').click(function(e){
+		$('.dashboard').click(function(e){
 			e.preventDefault();
 			if(user.role === "contractor"){
 				$(location).attr('href',"contractor-dashboard.html");
@@ -337,8 +345,6 @@
     			response = $.parseJSON(response);
     			var i = 1;
     			var panelContent = "";
-    			
-    			console.log(response);
     			$.each(response,function(index,value){
     				var panelBody = "";	
 						$.ajax({
@@ -348,7 +354,7 @@
     	    			success:function(equipments){
     	    				equipments = $.parseJSON(equipments);
     	    				$.each(equipments,function(index,value){
-    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+value+' value='+value+' /><label for='+value+'>'+value+'</label> '
+    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+encodeURI(value)+' value='+encodeURI(value)+' /><label for='+encodeURI(value)+'>'+value+'</label> '
     	    				});
     	    				panelContent += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title">'+
     	    				'<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" aria-expanded="false" aria-controls="collapse'+i+'">'+
@@ -373,9 +379,7 @@
 			var locationChecked = "";
 			var query = "";
 			
-			console.log(mfgChecked.length);
 			$('input[type="checkbox"]:checked').each(function(){
-				
 				
 				if($(this).attr('name') === 'equipment'){
 				if(equipmentChecked.length === 0){
@@ -387,10 +391,11 @@
 				}
 				else if($(this).attr('name') === 'manufacturer'){
 					if(mfgChecked.length === 0){
-						mfgChecked += $(this).val();
+						var mfg = encodeURI($(this).val());
+							mfgChecked += mfg;
 						}
 						else{
-							mfgChecked += ":"+$(this).val();
+							mfgChecked += ":"+mfg;
 						}
 				}else if($(this).attr('name') === 'location'){
 					if(locationChecked.length === 0){
@@ -407,7 +412,6 @@
 			if(locationChecked.length !== 0 && equipmentChecked.length !== 0 && mfgChecked.length !== 0){
 			query = "location="+locationChecked+"&equipment="+equipmentChecked+"&manufacturer="+mfgChecked; 
 			}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length === 0){
-				console.log("all three filters are zero")
 				flag = false;
 			}else if(locationChecked.length === 0 && (mfgChecked.length !== 0 && equipmentChecked.length !== 0)){
 				query = "equipment="+equipmentChecked+"&manufacturer="+mfgChecked;
@@ -422,12 +426,6 @@
 			}else if(locationChecked.length === 0 && mfgChecked.length === 0){
 				query = "equipment="+equipmentChecked;
 			}
-				
-			
-			console.log(query+"::::"+flag);
-			
-			console.log("heheh ",checked);
-			
 			if(flag){
 			var post = "";
 			$.ajax({
@@ -436,18 +434,14 @@
 					data:{},
 					success:function(response){
 						response = $.parseJSON(response);
-						console.log(response);
 						$.each(response,function(index,value){
  							var postedTime = value.postedTime;
  							postedTime = $.date(postedTime,1);
  							var imgArr = value.imagesuploaded.split(",");
  							var isInterested = false;
- 							console.log(interested[value.postId]+" is equal to "+value.postId);
  							if(interested[value.postId] == value.postId){
- 								console.log("inisde if isInteresed tis true");
  								isInterested = true;
  							}
- 							
  							if(isInterested){
  								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
  								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
@@ -475,17 +469,14 @@
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							posts[value.postId] = value;	
  							var postedTime = value.postedTime;
  							postedTime = $.date(postedTime,1);
  							var imgArr = value.imagesuploaded.split(",");
  							var isInterested = false;
- 							console.log(interested[value.postId]+" is equal to "+value.postId);
  							if(interested[value.postId] == value.postId){
  								isInterested = true;
- 								console.log("inisde if isInteresed tis true");
  							}
  							if(isInterested){
  								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
@@ -519,7 +510,6 @@
  					data:{},
  					success:function(response){
  						response = $.parseJSON(response);
- 						console.log(response);
  						$.each(response,function(index,value){
  							posts[value.postId] = value;	
  							var postedTime = value.postedTime;
@@ -539,11 +529,9 @@
  				var clickedPosts = [];
  				$('.posts').on("click",".interested",function(e){
  					var postId = this.id;
- 					console.log("clickedpost",clickedPosts[0]);
  					if(clickedPosts[0]){
  						console.log("inside if")
  						var interaction = clickedPosts[0]
- 						console.log("interactionssss",interaction);
  						interaction.html("");
  						interaction.html("<a class='fa fa-flash interested' id="+clickedPosts[1]+">&nbsp;interest</a>");
  					}
@@ -561,7 +549,6 @@
 					delete postUser.website;
 					delete postUser.role;
 					delete postUser.token;
-					console.log(postUser);
 					postUser = JSON.stringify(postUser);
 					 $.ajax({
 	 					url:AppData.relativeUrl+"usedmachine/interest/"+postId,
@@ -569,8 +556,6 @@
 	 					contentType:"application/json; charset=utf-8",
 	 					data:postUser,
 	 					success:function(response){
-	 						console.log(response);
-	 						console.log(parent);
 	 						parent.html("");
 	 						var element = "<span class='name'> Name : "+posts[postId].userName+"</span><span class='contact'> Contact : "+posts[postId].contactNo+"</span>";
 	 						parent.html(element);
@@ -598,7 +583,6 @@
  					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
  					var listContent = "";
  					$.each(imgArr,function(index,value){
- 						console.log("index",index);
  						var imgid = '#thumb-img'+index;
  						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
  					});
@@ -676,7 +660,6 @@
  		 		$.getMonth = function(month){
  		 			var monNum;
  		 			month = month.toLowerCase();
- 		 			console.log(month)
  		 			if(month === "jan"){
  		 				monNum = '01';
  		 			}
