@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+
+<link rel="stylesheet" href="css/congun.css">
+<link rel="stylesheet" href="css/magic-check.css">
+<link rel="stylesheet" href="css/used-equipment.css">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/validation.js"></script>
+
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+									<li class="active"><a href="#"><span>About Us</span></a></li>
+									<li><a href="contact.html"><span>Contact</span></a></li>
+									<li><a id="modal-login" href="#modal-container-login"
+										role="button" data-toggle="modal"><span>Login</span></a></li>
+									<li><a id="modal-register"
+										href="#modal-container-register" role="button"
+										data-toggle="modal"><span>Free SignUp</span></a></li>
+								</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="modal-container-login" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Login</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-box">
+										<form class="form-horizontal login-form" id="login-form"
+											role="form" name="login-form">
+											<div class="form-group">
+												<label for="username" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="text" name="username" placeholder="username"
+														class="form-control" id="username" >
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-sm-2 control-label sr-only">
+													Password </label>
+												<div class="col-sm-12">
+													<input type="password" class="form-control" name="password"
+														placeholder="password" id="password" >
+												</div>
+											</div>
+											<span class="invalid-error"></span>
+											<div class="forgotpasswordlink">
+												<a href="#" id="forgot-pass-link">Forgot Password</a>
+											</div>
+											<div class="clear-fix"></div>
+											<div class="col-sm-4">
+												<div class="checkbox">
+													<label> <input type="checkbox"> Remember me
+													</label>
+												</div>
+											</div>
+
+											<div class="login-btn">
+												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+											<!-- ********************* This is for the forget Password model *********************************** -->
+					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content forgetPass-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+								</div>
+								<div class="modal-body" id="forgetpass-modal">
+									<div class="form-box">
+										<form class="form-horizontal forgetPass-form" id="forgetPass-form"
+											role="form" name="forgetPass-form">
+											
+											<div class="form-group">
+												<label for="email" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="email" class="form-control" name="email"
+														placeholder="email" id="email" >
+												</div>
+											</div>
+											
+											<div class="login-btn">
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Registration successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ************************************* This is for the login model *************************************  -->
+				<!-- ********************* This is for the register model *********************************** -->
+				<div class="modal fade" id="modal-container-register" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content register-modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">Register</h4>
+							</div>
+							<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="register-form">
+										<div class="form-group radio">
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who has the equipment to lease or to sell used equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> <label class="radio-inline" data-toggle="tooltip" data-placement="top" title="The user who looking for an equipment for Rent or to buy used equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Contractor
+											</label>
+										</div>
+										<div class="form-group">
+											<label for="firstname" class="sr-only"> FirstName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="firstname"
+													placeholder="Firstname" id="firstName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lastname" class="sr-only"> LastName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="lastname"
+													placeholder="Lastname" id="lastName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="username" class="sr-only"> Email </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="register-username"
+													placeholder="email" name="username">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="sr-only"> Password </label>
+											<div class="col-sm-12">
+												<input type="password" class="form-control" id="register-password"
+													placeholder="password" name="password">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="mobile" class="sr-only"> Mobile </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="mobile"
+													placeholder="mobile" name="mobileNumber">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="location" class="sr-only">
+												Location/City </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control"
+													placeholder="Location/City" id="location"
+													name="location">
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="register" class="btn btn-next modal-btn">Register</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- register modal ends -->
+	
+
+	<div class="content-main">
+		 	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+		   
+		<div class="used-equip-pagination float-right">
+			<nav aria-label="Page navigation">
+				<ul class="pagination ">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+				</div>
+			</div>
+		 	<div class="row">
+				<div class="col-md-3">
+					<div class="filter-wrapper">
+					<div class="filter-header"><p>Equipment Type</p></div>
+					<div class="filter-content">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							<!--content will be inserted here dynamically  -->
+						</div>
+					</div> <!-- end of filter content -->
+					<div class="filter-header"><p>Manufacturer</p></div>
+					<div class="filter-content manufacturer">
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar </label>
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu " /><label for="Komatsu">Komatsu </label> 
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo " /><label for="Volvo">Volvo </label> 
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi " /><label for="Hitachi">Hitachi </label>
+					</div> 
+					</div>
+					<div class="filter-header"><p>Location</p></div>
+					<div class="filter-content location">
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="location" id="Hyderabad" value="Hyderabad" /><label for="Hyderabad"> Hyderabad </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Chennai" value="Chennai" /><label for="Chennai">Chennai</label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Kolkatta" value="Kolkatta" /><label for="Kolkatta">Kolkatta </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Mumbai" value="Mumbai" /><label for="Mumbai">Mumbai </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Bengaluru" value="Bengaluru " /><label for="Bengaluru">Bengaluru </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Pune" value="Pune " /><label for="Pune">Pune </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Delhi" value="Delhi " /><label for="Delhi">Delhi </label>
+					</div>
+					</div>
+				</div><!-- filter wrapper ends -->
+			</div>
+		
+				<div class="col-md-9">
+					<div class="posts">
+					
+					<div class="media"><div class="media-left"><a href="#">
+					<img class="media-object" data-id="14" src="http://localhost:8070/congun/uploadedimages/usedmachine/material-handling-equipment_1477324779438.png" width="100px" height="100px" alt="..."></a>
+					</div><div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">Piledriving <span>(2013)</span></p>
+		
+  <p class="float-right"><i class="fa fa-rupee"></i> 123456</p></div><div class="clear-fix"></div><div class="line-two">
+  <p class="float-left equip-make">JCB </p>
+  <p class="float-left equip-model">3DX</p>
+  <p class="float-left equip-meter">12000 kms</p>
+  <p class="posted-date float-right">posted on : 24-Oct-2016</p></div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> Hyderabad</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div>
+					
+					
+					<!-- Content will go here  -->
+					
+					
+					
+					
+				</div>
+			</div>
+		</div>
+				
+	</div>
+	
+		
+	</div>
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 		<!-- ********************* This is for the post view model *********************************** -->
+					<div class="modal fade" id="view-post-modal" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content post-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&#10005;</button>
+									<h4 class="modal-title" id="myModalLabel">Post</h4>
+								</div>
+								<div class="modal-body">
+									<div class="post-content">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-7">
+													<img class="post-image" id="img-250" src="http://placehold.it/250x250" width="250px" height="250px" alt="...">
+												</div>
+												<div class="col-md-5 post-text">
+													<h3 id="modal-machine">Excavator</h3>
+													<h4>Price : <span id="modal-price">2000000</span></h4>
+													<h4 >Meter : <span id="modal-meter">100</span> KM</h4>
+													<h4 >Mfg : <span id="modal-mfg">JCB</span></h4>
+													<h4 >Manufactured year : <span id="modal-yom">2014</span></h4>
+													<h4 >location : <span id="modal-location">hyderabad</span></h4>
+													<br>
+													<br>
+													<h4 >posted by : <span id="modal-postedby">Nishant</span></h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-7">
+													<ul class="img-thumb">
+													</ul>
+												</div>
+												<div class="col-md-5">
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+  	<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
+	</body>
+	</html>
+		

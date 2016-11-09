@@ -9,14 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "user")
+@DynamicUpdate(value=true)
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="userId")
-	public int userId;
+	public long userId;
 	
     @Column(name = "firstname")
 	public String firstname;
@@ -33,6 +36,9 @@ public class User {
 	@Column(name = "mobileNumber")
 	public String mobileNumber;
 
+	@Column(name = "location")
+	public String location;
+	
 	@Column(name = "constitution")
 	public String constitution;
 	
@@ -45,6 +51,9 @@ public class User {
 	@Column(name = "role")
 	public String role;
 	
+	@Column(name = "emailCode")
+	public String emailCode;
+	
 	@Column(name = "activeFlag")
 	public int activeFlag;
 	
@@ -53,12 +62,35 @@ public class User {
 	
 	@Column(name = "updatedtime")
 	public Timestamp updatedtime;
+	
+	public String token= null;
 
 	
-	public int getUserId() {
+	
+	
+	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getEmailCode() {
+		return emailCode;
+	}
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {

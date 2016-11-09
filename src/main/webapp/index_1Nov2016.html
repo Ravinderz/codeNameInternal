@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/congun.css">
+<link rel="stylesheet" href="css/custom.css">
+
+ <script>
+ 	console.log("inside if")
+ if (typeof (Storage) !== "undefined") {
+	 console.log(localStorage.getItem("user"));
+	 if(localStorage.getItem("user")){
+		 console.log("script if");
+	 }
+      //window.location = AppData.relativeUrl+"user/index.html";
+    }
+  </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/validation.js"></script>
+</head>
+<body>
+	<div class="nav-wrapper-index">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="images\logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li class="active"><a href="used-equipment.html"><span>Used Equipment</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li><a id="modal-login" href="#modal-container-login"
+									role="button" data-toggle="modal"><span>Login</span></a></li>
+								<li><a id="modal-register" href="#modal-container-register"
+									role="button" data-toggle="modal"><span>Free SignUp</span></a></li>
+							</ul>
+						</div>
+					</nav>
+					<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="modal-container-login" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Login</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-box">
+										<form class="form-horizontal login-form" id="login-form"
+											role="form" name="login-form">
+											<div class="form-group">
+												<label for="username" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="text" name="username" placeholder="username"
+														class="form-control" id="username" >
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-sm-2 control-label sr-only">
+													Password </label>
+												<div class="col-sm-12">
+													<input type="password" class="form-control" name="password"
+														placeholder="password" id="password" >
+												</div>
+											</div>
+											<span class="invalid-error"></span>
+											<div class="forgotpasswordlink">
+												<a href="#" id="forgot-pass-link">Forgot Password</a>
+											</div>
+											<div class="clear-fix"></div>
+											<div class="col-sm-4">
+												<div class="checkbox">
+													<label> <input type="checkbox"> Remember me
+													</label>
+												</div>
+											</div>
+											
+											<div class="login-btn">
+												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+										<!-- ********************* This is for the forget Password model *********************************** -->
+					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content forgetPass-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+								</div>
+								<div class="modal-body" id="forgetpass-modal">
+									<div class="form-box">
+										<form class="form-horizontal forgetPass-form" id="forgetPass-form"
+											role="form" name="forgetPass-form">
+											
+											<div class="form-group">
+												<label for="email" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="email" class="form-control" name="email"
+														placeholder="email" id="forgotpass-email" >
+												</div>
+											</div>
+											<div class="error-msg"></div>
+											
+											<div class="login-btn">
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Registration successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ************************************* This is for the login model *************************************  -->
+				<!-- ********************* This is for the register model *********************************** -->
+				<div class="modal fade" id="modal-container-register" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content register-modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">Register</h4>
+							</div>
+							<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="register-form">
+										<div class="form-group radio">
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I have equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> 
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I need Equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Client
+											</label>
+										</div>
+										<div class="form-group">
+											<label for="firstname" class="sr-only"> FirstName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="firstname"
+													placeholder="First Name/Company Name" id="firstName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lastname" class="sr-only"> LastName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="lastname"
+													placeholder="Last Name" id="lastName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="username" class="sr-only"> Email </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="register-username"
+													placeholder="Personal/Company Mail Id" name="username">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="sr-only"> Password </label>
+											<div class="col-sm-12">
+												<input type="password" class="form-control" id="register-password"
+													placeholder="Enter new password" name="password">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="mobile" class="sr-only"> Mobile </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="mobile"
+													placeholder="Enter 10 digit mobile Number" name="mobileNumber">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="location" class="sr-only">
+												Location/City </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control"
+													placeholder="Location/City" id="location"
+													name="location">
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="register" class="btn btn-next modal-btn">Register</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- register modal ends -->
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 banner">
+				<div class="banner-content">
+					<h2>Congun</h2>
+					<p>Hire/Rent, Buy/Sell heavy equipments</p>
+				</div>
+				<!-- <div class="search-bar">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+				</div> -->
+			</div>
+			
+		</div>
+	</div>
+	<div class="container">
+		<div class="category">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Machines we <span class="heading">supply</span>
+					</h2>
+				</div>
+			</div>
+			<div class="category-row-one">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-12  col-md-offset-1 category-img"
+						id="EarthMoving">
+						<img src="images/EarthMoving/dozer.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Earth Moving</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Cranes">
+						<img src="images/Cranes/Mobile Cranes.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Cranes</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="CementMixerAndPumps">
+						<img src="images/CementMixerAndPumps/cementmixer.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn img-btn-md">Cement mixer & Pumps</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="RoadCompactors">
+						<img src="images/RoadCompactors/doubledrumroller1.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn">Road Compactors</button>
+					</div>
+					
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="DumpTrucks">
+						<img src="images/DumpTrucks/Tipper.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Dump Trucks</button>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="category-row-two">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="AerialAndMaterialLifts">
+						<img src="images/AerialAndMaterialLifts/Articulating Boom Lifts.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn img-btn-md">Aerial & Material Lifts</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="GeneratorAndCompressor">
+						<img src="images/GeneratorAndCompressor/Generator.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn img-btn-lg">Generator & Compressor</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Drillers">
+						<img src="images/Drillers/boredriller.png" alt="" height="150px" width = "150px"  />
+						<button class="btn img-btn">Drillers</button>
+					</div>
+					<div
+						class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="BatchAndCrusherPlant">
+						<img src="images/BatchAndCrusherPlant/Batching plant.png" alt="" height="150px" width = "150px"/>
+						<button class="btn img-btn img-btn-md">Batch & Crusher Plant</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img"
+						id="Miscellaneous">
+						<img src="images/Miscellaneous/compressor.png" alt="" height="150px" width = "150px" />
+						<button class="btn img-btn">Misc</button>
+					</div>
+					<div class="col-md-2 col-sm-6 col-xs-12 category-img" id="others">
+						<img src="http://placehold.it/150x150" alt="" />
+						<button class="btn img-btn">Others</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- start of how we work -->
+	<div class="how-we-work">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						How we<span class="heading"> Work</span>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 steps">
+					<div class="num img-circle">1</div>
+					<br> <span class="step-text">Select Equipment </span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">2</div>
+					<br> <span class="step-text">Post Requirement</span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">3</div>
+					<br> <span class="step-text">Get Quote</span>
+				</div>
+				<div class="col-md-3 steps">
+					<div class="num img-circle">4</div>
+					<br> <span class="step-text">Finilize the deal</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- start of about us -->
+	<div class="about-us">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 about-us-text">
+					<h2>
+						About<span class="heading"> US</span>
+					</h2>
+					<p>Congun private limited (Construction Group United Network), our mission is to create a market place for construction
+					 equipment industry providing a Networking solution to an expensive machinery demand in India. 
+					 We aspire to be the India’s largest equipment rental, buy/sell network, aiming to safely build a better and stronger future. 
+					 We strive to be a competent network in the construction equipment industry with continuous improvement to achieve benchmark reliability and sustainability.</p>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- start of our services -->
+	<div class="services">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Our<span class="heading"> Services</span>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"><div class="services-text first"><span><i class="fa fa-cogs fa-2x"></i></span><h3>Find required equipment</h3><p>Post equipment requirement for your project/need. Get wide range of suppliers matching your requirement with competitive quotes. Choose the best supplier and negotiate.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text middle"><span><i class="fa fa-exchange fa-2x"></i></span><h3>Rent your equipment</h3><p>Increase your business by renting equipment to a larger verified client/customer, generate more money and reduce idle time. Quote the price to preferred client and location & get hired faster.</p></div></div>
+ 				<div class="col-md-4"><div class="services-text last"><span><i class="fa fa-rupee fa-2x"></i></span><h3>Buy or Sell Used Equipment</h3><p>Users can buy/sell their used equipment through our portal. Reduce the cost of marketing without the need to place ads or a third party for buying/selling the equipment.</p></div></div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="partners">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Our<span class="heading"> Partners</span>
+					</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="FAQ.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="Terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a> <a
+								class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a> <a
+								class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a> <a
+								class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="enquire">
+		<div class="enquire-header">
+		<h4 class="float-left">Leave a msg</h4>
+		<i class="fa fa-minus float-right"></i>
+		<div class="clear-fix"></div>
+		</div>
+		<form role="form" action="" method="post" class="f1" id="enquire-form">
+			<input type="text" class="form-control" name="name" placeholder="Name">
+			<input type="text" class="form-control" name="Email" placeholder="Email">
+			<input type="text" class="form-control" name="mobile" placeholder="Mobile">
+			<textarea id="description" class="form-control" name="description" rows="3" placeholder="please type in your queries here" ></textarea>
+            <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
+		</form>
+	</div> -->
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		$('[data-toggle="tooltip"]').tooltip()
+		
+		var loginform_submit = false;
+		var	registerform_submit = false;
+		loginform_submit = validateOnFocusout($("#login-form"));
+		/*registerform_submit = validateOnFocusout($("#register-form"));*/
+						var user = $.getUser();
+						if (user !== null) {
+							console.log("user is available");
+							$(location).attr('href',"user/index.html");
+						} else {
+							console.log("nothing to do");
+						}
+						
+						$('#modal-container-login').on('hidden.bs.modal', function(){
+							console.log("clearing the fields");
+						    $(this).find('form')[0].reset();
+						    validateReset($('#login-form'));
+						    $('.invalid-error').html("");
+						});
+						
+						$('#modal-container-register').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						    validateReset($('#register-form'));
+						});
+						
+						
+						$("#register-form").on("keypress",function(e){
+							if(e.which === 13)
+							$.register($("#register"));
+						});
+						
+						
+						$('#register-username').focusout(function(){
+							$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+							$('#register-username').next('span').remove();
+						});
+						
+						$("#register").click(function() {
+							
+							$.register($(this));
+							
+							});
+						
+						$.register = function($this){
+							var success = "successfully created";
+							var successUrl = "#modal-container-login";
+							var data = JSON.stringify($("#register-form").serializeObject());
+							console.log(data);
+							registerform_submit = $.validateRegisterForm($this);
+							console.log(registerform_submit);
+							if(registerform_submit){
+							 $.ajax({
+							url : AppData.relativeUrl+"user/register",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+							success : function(data) {
+							if (data.search("UF01") != -1) {
+								console.log(data);
+								$('#register-username').parents('.form-group').addClass('has-error has-feedback');
+								if($('#register-username').next('span').length == 0){
+									$("<span class='error-message' style='color:red'>Username already exists</span>").insertAfter($('#register-username'));
+								}
+							} else {
+							console.log("inside if");
+							$('#modal-container-register').modal('hide');
+							$('#modal-success-dialog').modal('show');
+							$('#modal-success-dialog').on('shown.bs.modal', function() {
+								setTimeout(function(){
+									$('#modal-success-dialog').modal('hide');},2000
+								);
+								$('#modal-success-dialog').on('hidden.bs.modal', function() {
+				    			 $('#modal-container-login').modal('show');
+				    			 //history.back();	    
+								});
+				    		});  
+							console.log("register modal closed");
+							console.log("opening login modal");
+							
+							//$(location).attr('href',"user/index.html");
+							}
+							}
+							});
+							}
+				
+						};
+							
+						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						    validateReset($('#register-form'));
+						});
+							
+						$('#forgot-pass-link').click(function(e){
+							e.preventDefault();
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-forgetPass').modal('show');
+						});	
+						
+						$('#forgotpass-email').focusin(function(e){
+							$('.error-msg').html("");
+						})
+						
+						$('#forgetPass').click(function(e){
+							e.preventDefault();
+							var data = $("#forgetPass-form").serializeObject();
+							console.log(data);
+								var email = data.email;
+								data = JSON.stringify(data);
+								 $.ajax({
+										url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+										type : "put",
+										contentType : "application/json; charset=utf-8",
+										data : {},
+										success : function(response) {
+											if(response.indexOf("UPEE01") >= 0){
+												
+												$('.error-msg').html("<p>This is not a registered email! please provide a registered mail id</p>")
+											}else{
+												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+											}
+											console.log(response);
+											}
+										});
+							
+						});
+						
+						$('#re-link').click(function(e){
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-register').modal('show');
+						});
+							
+						
+						$("#login-form").on("keypress",function(e){
+							if(e.which == 13){
+								$.login($("#login-btn"));
+							}
+						});
+						
+						$("#login-btn").click(function(e) {
+						console.log("inside login function");
+							$.login($(this));
+						});
+						
+						$(".invalid-error").hide();
+						
+						$.login = function($this){
+							var data = JSON.stringify($("#login-form").serializeObject());
+							console.log(data);
+							loginform_submit = validateOnClick($this);
+							if(loginform_submit){
+							console.log("button submiittteed");
+							$.ajax({
+							url : AppData.relativeUrl+"user/login",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+															// datatype : "json",  
+							success : function(response) {
+							if(response === "UF01"){
+								//this is here where we need to update the modal
+								$(".invalid-error").show();
+								$('.invalid-error').html("Invalid Credentials....!!!. please try again...");
+								$('#username').focusin(function(){
+									$('.invalid-error').html("");
+								});
+								
+								$('#password').focusin(function(){
+									$('.invalid-error').html("");
+								});
+								
+							}else{
+							
+							console.log("got user from userAPI",response.username);
+							$('#modal-container-login').modal('hide');
+							if (typeof (Storage) !== "undefined") {
+							$.setUser(response);
+							} else {
+							console.log(" no storage available");
+							}
+							response = $.parseJSON(response);
+							
+							if (response.role === "supplier") {
+								if (typeof (Storage) !== "undefined") {
+							user = $.getUser();
+								}else{
+									
+								}
+							console.log(user);
+							if (user !== null) {
+							$(location).attr('href',"user/supplier-profile.html");
+							}
+							} else if (response.role === "contractor") {
+								if (typeof (Storage) !== "undefined") {
+								user = $.getUser();
+								}else{
+									
+								}
+								console.log(user);
+								if (user !== null) {
+								$(location).attr('href',"user/contractor-profile.html");
+								}																//$(location).attr('href',"index.html");
+							}
+							}
+							}
+
+							});
+								}
+						};
+						
+
+						$('.category-img').click(function() {
+						console.log("inside img click function");
+						var category = this.id;
+						$(location).attr('href',"equipment.html?category="+ category);
+						});
+						
+						$('#search-btn').click(function(){
+							console.log("search button clicked");
+							var search_val = $('#search-input').val();
+							if(!search_val == ""){
+							console.log("search bar value :: ",search_val);
+							$.ajax({
+								url : AppData.relativeUrl+"machine/search/"+search_val,
+								type : "get",
+								contentType : "application/json; charset=utf-8",
+								data : {},
+																// datatype : "json",  
+								success : function(response) {
+								console.log(response);
+								response = $.parseJSON(response);
+									console.log('response',response);
+							}
+						});
+							}
+							});
+
+						$('.logout').click(function() {
+							console.log("inside logout function")
+							var user;
+							if (typeof (Storage) !== "undefined") {
+							user = localStorage.getItem("user");
+							}
+							if (user !== null) {
+								localStorage.removeItem("user");
+							}
+							console.log("user logged out");
+							$(location).attr('href', "index.html");
+						});
+						
+						/* $('#enquire-form').hide();
+						var display = false;
+						$('.fa-minus').click(function(e){
+							e.preventDefault();
+							if(!display){
+							$('#enquire-form').show("slow");
+							display=true;
+							}else{
+								$('#enquire-form').hide("slow");
+								display=false;
+							}
+						}); */
+								
+						
+					});
+</script>
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
+	
+</body>
+</html>

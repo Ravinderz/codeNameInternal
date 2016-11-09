@@ -10,9 +10,11 @@
    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/quote-form-elements-style.css">
-        <link rel="stylesheet" href="css/quote-form-style.css">
-        <link rel="stylesheet" href="css/home.css">
+		<link rel="stylesheet" href="css/congun.css">
+	    <link rel="stylesheet" href="css/form-elements-style.css">
+		<link rel="stylesheet" href="css/quote-form-style.css">
+		<link rel="stylesheet" href="css/magic-check.css">
+		<link rel="stylesheet" href="css/profile.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,139 +23,166 @@
         <![endif]-->
 <body>
     <!-- Top content -->
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="images/logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="index.html"><span>About Us</span></a></li>
+								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+									<li><a href="user/supplier-profile.html"><span>Profile</span></a></li>
+									<li><a href="user/supplier-dashboard.html"><span>Rental board</span></a></li>
+									<li><a href="user/used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-12">
+					<ul class="sub-menu">
+						<li><a href="user/supplier-profile.html">Profile</a></li>
+						<li><a href="user/supplier-dashboard.html">Rental board</a></li>
+						<li><a href="user/used-equipment.html">Used equipment</a></li>
+					</ul>
+				</div>
+		   </div>
+		  </div>
     <div class="top-content">
         <div class="container">
+            
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>Congun</strong></h1>
-                    <div class="description">
-                        <p> We provide the best rentals of heavy machinary in the city. Get in touch to find out more about how we work, we promise you will not find these many options anywhere else! </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+				<div class="col-md-6">
+					<div class="left-container">
+						<h1><strong>Congun</strong></h1>
+						<div class="description">
+							<p> We provide the best rentals of heavy machinary in the city. Get in touch to find out more about how we work, we promise you will not find these many options anywhere else! </p>
+						</div>
+					</div>
+				</div>
+                <div class="col-md-6 form-box">
                     <form role="form" action="" method="post" class="f1" id="supplier-quote-form">
                         <h3>Quote Form</h3>
                         <p>Give your quote for the requirement</p>
-                        <div class="f1-steps">
-                            <div class="f1-progress">
-                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
-                            </div>
-                            <div class="f1-step active">
-                                <div class="f1-step-icon"><i class="fa fa-cogs"></i></div>
-                                <p>Machinary Details</p>
-                            </div>
-                            <div class="f1-step">
-                                <div class="f1-step-icon"><i class="fa fa-calendar"></i></div>
-                                <p>Time Period</p>
-                            </div>
-                            <div class="f1-step">
-                                <div class="f1-step-icon"><i class="fa fa-puzzle-piece"></i></div>
-                                <p>Misc</p>
-                            </div>
-                        </div>
-                        <fieldset>
-                            <h4>Tell us about your machinary..</h4>
+                            
+                          <fieldset>
                             <div class="form-group">
-                                <label for="equipmentCategory">Category</label>
-                                <select id="category" class="f1-category form-control" name="equipmentCategory">
-				                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="equipmentName">Equipment</label>
-                                <select id="equipment" name="equipmentName" class="f1-equipment form-control">
-                                    
-				                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="capacity">Capacity</label>
-                                <input type="text" name="capacity" placeholder="Capacity" class="f1-capacity form-control" id="f1-about-yourself"> </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="model">Model</label>
-                                <input type="text" name="model" placeholder="Model" class="f1-model form-control" id="f1-f1-model"> </div>
-                            <div class="form-group">
-                                <label for="manufacturer">Manufacturer</label><br>
-                                <input type="checkbox" class="manufacturer" name="manufacturer" id="manufacturer" value="JCB" checked> JCB|
-  					 <input type="checkbox" name="manufacturer" id="manufacturer" value="Bharat" checked>Bharat Earth Movers|
-					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="TRF" checked>TRF|
-					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Cat" checked>Caterpillar|
-					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Komatsu " checked>Komatsu|
-					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Volvo " checked>Volvo|
-					 <input type="checkbox"  name="manufacturer" id="manufacturer" value="Hitachi " checked>Hitachi|
+                                <label for="quantity">Number Of Equipments Available</label>
+                                <input type="text" name="quantity" placeholder="Quantity" class="f1-quantity form-control" id="f1-quantity"/> </div>
+                             
+				    <div class="form-manufacturer">        
+                    <label for="manufacturer">Manufacturer</label><br>
+                     <ul>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" checked /><label for="JCB"> JCB&nbsp&nbsp</label></li>
+  					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Bharat" value="Bharat" /><label for="Bharat">Bharat Earth Movers&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="TRF" value="TRF" /><label for="TRF">TRF&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Cat" value="Cat" /><label for="Cat">Caterpillar&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"  class="magic-checkbox" name="manufacturer" id="Komatsu" value="Komatsu" /><label for="Komatsu">Komatsu&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo&nbsp&nbsp</label></li>
+					 <li><input type="checkbox"   class="magic-checkbox" name="manufacturer" id="Hitachi" value="Hitachi" /><label for="Hitachi">Hitachi&nbsp&nbsp</label></li>
+					 </ul>
 						
-                             </div>
-                        <div class="form-group">
-                                <label  for="manufacturedyear">Manufactured Year</label>
-                                <input type="text" name="manufacturedyear" placeholder="Duration" class="f1-email form-control" id="f1-email"> </div>
-                            
-                            <div class="f1-buttons">
-                                <button type="button" class="btn btn-next">Next</button>
-                            </div>
-                        </fieldset>
-                        <fieldset>
+                      </div>                  
+							 <div class="machineRentalCharges">
+                                <ul>
+									<li><label for="machineRentalCharges">Machine Rental Charges</label>
+                                <input type="text" name="machineRentalCharges" placeholder="Enter Number" class="f1-machinerenral form-control" id="rentalcharges"></li>
+								    <li><label id="permonth" hidden>/per month</label><label id="perhour" hidden>/per hour</label><label id="perwork" hidden>/per work</label><label id="percumt" hidden>/per cu.mt</label>
+								    <label>(inclusive of tax)</label></li>
+								<br>
+								</ul>
+								</div>
+							<div class="form-group" id="noofworkinghours" hidden>
+                                <label for="workingHoursPerDay">Number Of Working Hours Per Day</label>
+                                <input type="text" name="workinghours" placeholder="Enter value ex: 9 (9 hours/day)" class="f1-workinghours form-control" id="workinghours" value="0"> 
+						    </div>
+                            <div class="totalPrice">
+							<label for="totalPrice">Total Price : <p id="totalPrice">0</p> </label>
+                            </div>		
+                                <div class="machineRentalCharges">
+								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
+								<ul>
+                    			<li><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType1" value="fixed" checked /><label for="rentalyChargesType1"> Fixed </label></li>
+  								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
+								</ul>
+                		    </div>							
                             <div class="form-group">
-                                <label class="sr-only" for="quantity">Quantity</label>
-                                <input type="number" name="quantity" placeholder="Quantity" class="f1-email form-control" id="f1-email"> </div>
-                            
-                            <div class="form-group">
-                                <label class="sr-only" for="MachineRentalCharges">Machine Rental Charges</label>
-                                <input type="number" name="MachineRentalCharges" placeholder="Machine Rental Charges" class="f1-email form-control" id="f1-email"> </div>
-                            
-                            <div class="form-group">
-                                <label class="sr-only" for="maintenanceCharges">Maintainance Charges</label>
-                                <input type="number" name="maintenanceCharges" placeholder="Maintainance Charges" class="f1-email form-control" id="f1-email"> </div>
-                            
-                                <div class="f1-buttons">
-                                <button type="button" class="btn btn-previous">Previous</button>
-                                <button type="button" class="btn btn-next">Next</button>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <h4>Misc</h4>
-                            <div class="form-group">
-                                    <label for="transportation"> Transportation provided</label><br>
-                                    <input type="radio" name="transportation" value="to" id="transportation"> TO
-                                    <input type="radio" name="transportation" value="tofro" id="transportation"> To&Fro </div>
-                                <div class="form-group">
-                                    <label for="driverAvailable"> Driver Available </label><br>
-                                    <input type="radio" name="driverAvailable" value="true" id="driverNeeded"> Yes
-                                    <input type="radio" name="driverAvailable" value="false" id="driverNeeded" checked> No </div>
-                            <div class="form-group">
-                                    <label for="driverAvailable"> Helper Available </label><br>
-                                    <input type="radio" name="driverAvailable" value="true" id="helperNeeded"> Yes
-                                    <input type="radio" name="driverAvailable" value="false" id="helperNeeded" checked> No </div>
-                            
-                            <div class="form-group">
-                                    <label for="hiringChargersType"> Hiring Charges Type </label>
-                                    <br>
-                                    <input type="radio" name="hiringChargersType" value="hour" id="hiringChargersType"> Hourly
-                                    <br>
-                                    <input type="radio" name="hiringChargersType" value="day" id="hiringChargersType"> Daily
-                                    <br>
-                                    <input type="radio" name="hiringChargersType" value="week" id="hiringChargersType"> Weekly
-                                    <br>
-                                    <input type="radio" name="hiringChargersType" value="month" id="hiringChargersType"> Monthly </div>
-                            
-                            
-                            <div class="form-group">
-                                <label class="sr-only" for="queries">Queries</label>
-                                <input type="text" name="queries" placeholder="Queries" class="f1-email form-control" id="f1-email"> </div>
-                            
-                            <div id="hidden-fields">
+                                <h5> Driver/Operator Available </h5><br>
+								<div class="radio-driver">
+								<ul>
+                                <li><input type="radio" name="driverAvailable" value="Yes" class="magic-radio" id="driverNeeded-yes"><label for="driverNeeded-yes"><span class="radio-span">Yes</span></label></li>
+                                <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div>
+                                
+                             <div class="advanceCharges" hidden>
+                                <label for="advance">Advance</label>
+                                <ul><li><input type="text" placeholder="Enter Value" class="f1-advance form-control" id="f1-value" value="0" onchange="advancecalc()"></li>
+								<li><select id="relation"  class="selectbox" onchange="advancecalc()">
+                                 <option value="%" selected="selected">% of Total Price</option>
+                                 <option value="rupees">Rupees</option>
+                                 <option value="months">no of Months</option>
+								 </select></li>
+								 <input type="hidden" name="advanceCharges" id="advanceCharges" value="">
+								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
+								<br>
+                                <li><input type="radio" class="magic-radio" name="advanceChargesType" id="advanceChargesType1" value="fixed" checked /><label for="advanceChargesType1"> Fixed </label></li>
+  								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="advanceChargesType" id="advanceChargesType2" value="negotiable"><label for="advanceChargesType2">Negotiable</label></li>
+								</ul>
+								</div>
+                                
+                             <div class="form-group">
+                                <label for="queries">Queries</label>
+                                <input type="text" name="queries" placeholder="Enter for any further details" class="f1-query form-control" id="f1-queries"> </div>
+                                
+                             <div id="hidden-fields">
+                             	<input type="hidden" name="equipmentCategory" id="equipmentCategory" value="">
+                                <input type="hidden" name="equipmentName" id="equipmentName" value="">
                                 <input type="hidden" name="quotePostedById" id="supplierId" value="">
                                 <input type="hidden" name="quotePostedByName" id="supplierName" value="">
                                 <input type="hidden" name="requirementId" id="requirementId" value="">
+                                <input type="hidden" name="quoteStatus" id="quoteStatus" value="open">
+								<input type="hidden" name="reqtitle" id="reqtitle" value="">
+								<input type="hidden" name="reqduration" id="reqduration" value="">
+								<input type="hidden" name="reqlocation" id="reqlocation" value="">
+								<input type="hidden" name="reqpincode" id="reqpincode" value="">
+								<input type="hidden" name="mobileNumber" id="mobileNumber" value="">
+								<input type="hidden" name="finalQuotePrice" id="totalprice" value="">
+								<input type="hidden" name="reqPostedBy" id="reqPostedBy" value="">
+								<input type="hidden" name="quotePriceType" id="quotePriceType" value="">
                                 </div>
-                            
-                            <!-- <div class="form-group">
-                                <label class="sr-only" for="queries">Final Quote</label>
-                                <input type="text" name="finalquote" placeholder="Queries" class="f1-email form-control" id="f1-email"> </div>
-                             -->
-                            
-                            <div class="f1-buttons">
-                                <button type="button" class="btn btn-previous">Previous</button>
-                                <button type="button"  id="btn-submit" class="btn btn-next">Submit</button>
+                                
+                               <div class="f1-buttons">
+                                <button type="button"  id="btn-quote" class="btn btn-submit">Submit</button>
                             </div>
                         </fieldset>
                         <div class="modal fade" id="modal-success-dialog" role="dialog"
@@ -166,27 +195,53 @@
 									<h4 class="modal-title" id="myModalLabel">Success</h4>
 								</div>
 								<div class="modal-body">
-									<div class="alert alert-success" role="alert">Requirement posted successfully ...</div>
+									<div class="alert alert-success" role="alert">Quotation Submitted successfully ...</div>
 								</div>
 							</div>
 						</div>
 					</div>
                     </form>
-                </div>
             </div>
         </div>
+    </div>
+	<div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul>
+                	<li><span class="fa fa-angle-right"></span><a href="user/faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="user/contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="user/terms.html">Terms and Conditions</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                           <a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
     </div>
     <!-- Javascript -->
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.backstretch.min.js"></script>
-    <script src="js/retina-1.1.0.min.js"></script>
     <script src="js/requirement-scripts.js"></script>
     <script src="js/appProperties.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
     	
-    	
+		document.getElementById("advanceCharges").value="0:%";
     	/* to get parameters from a url */
     	var getUrlParameter = function getUrlParameter(sParam) {
     	    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -204,126 +259,165 @@
     	};
     	
     	var reqid = getUrlParameter('reqId');
-    	var categoryParam = getUrlParameter('category');
-    	var equipment = getUrlParameter('equipment');
     	console.log('reqid',reqid);
-    	var user = sessionStorage.getItem("user");
-		//var user = localStorage.getItem("user");
+    	var user = $.getUser();
 		console.log(user);
-    	user = $.parseJSON(user);
+		var username = user.firstname+" "+user.lastname;
+			$('#user').text(username);
+			$('#user-name').text(username);
     	$('#supplierId').val(user.userId);
     	$('#supplierName').val(user.firstname+" "+user.lastname);
-    	$('#requirementId').val(reqid);
-    	
-/* This ajax call is made to populate the category and equipment machinary dropdowns */
-    	
-    	var category = []
-    	$.ajax({
-    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
-    		type:"get",
-    		data:{},
-    		success:function(response){
-    			response = $.parseJSON(response);
-    			var i = 0;
-    			console.log(response);
-    			$.each(response,function(index,value){
-    				$("#category").append($("<option />").val(value).text(value));
-    					category[i] = value;
-    					i++
-    			});
-    			console.log("cat",categoryParam);
-    			if(categoryParam !== undefined){
-    			$("#category").val(categoryParam);
-    			}
-    			if(equipment !== undefined ){
-    				$.ajax({
-    					
-    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
-    	    			type:"get",
-    	    			data:{},
-    	    			success:function(equipments){
-    	    				equipments = $.parseJSON(equipments);
-    	    				console.log(equipments);
-    	    				$.each(equipments,function(index,value){
-    	    				$("#equipment").append($("<option />").val(value).text(value));
-    	    				
-    	    				});
-    	    				if(equipment !== undefined){
-    	    				$("#equipment").val(equipment);
-    	    				}
-    	    			}
-    	    			});
-    			}else{
-    			$.ajax({
-    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
-    			type:"get",
-    			data:{},
-    			success:function(equipments){
-    				equipments = $.parseJSON(equipments);
-    				console.log(equipments);
-    				$.each(equipments,function(index,value){
-    				$("#equipment").append($("<option />").val(value).text(value));
-    				
-    				});
-    			}
-    			});
-    			}
-    		}
-    	});
-    	
-    	/* This function will be called when there is change in the category dropdown */
-    	
-    	$("#category").on('change',function(){
-    		var selectedOption = $("#category option:selected").text();
-    		console.log("selected option ",selectedOption);
-    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
-    		console.log("url ",url);
-    		$.ajax({
-    			url:url,
-    			type:"get",
-    			data:{},
-    			success:function(equipments){
-    				equipments = $.parseJSON(equipments);
-    				console.log("equipments ",equipments);
-    				$("#equipment").html("");
-    				$.each(equipments,function(index,value){
-    				$("#equipment").append($("<option />").val(value).text(value));
-    				});	
-    			}
-    				
-    		});
-    	});
-    	
+		$('#requirementId').val(reqid);
+		$('#mobileNumber').val(user.mobileNumber);
+		
+		
+		var reqList = "";
+		var value = "";
+		var hiringChargesType = "";
+		//categoryParam="EarthMoving";
+		//equipment="backhoe";
+		$.ajax({
+			url : AppData.relativeUrl+"contractor/contractorRequirement/"+reqid,
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			data : {},
+			success : function(response) {
+				response = $.parseJSON(response);
+				console.log(response);
+				value= response;
+				
+				var catArr = [];
+		   	     catArr = value.equipmentCategory.split(" ");
+		   	     var category = "";
+		   	     $.each(catArr,function(index,value){
+		   	    	 if(index === catArr.length-1){
+		   	    		 category += value;
+		   	    	 }else{
+		   	    	 category += value+"_";
+		   	    	 }
+		   	     });
+				
+					reqList = "<div class='item-content'><div class='item-content-header'><h3>Requirement Details</h3><br><img src='images/"+category+"/"+encodeURI(value.equipmentName)+".png' height='150px' width='250px' alt='image here'/></div>"
+					+"<div class='item-content-header-meta'><h3>"+value.title+"</h3></div>"
+					+"<div class='item-content-main'><ul><li style='padding:0px'><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
+					+"<li><h5>Start date</h5><p>"+value.startDate+"</p></li>"
+					+"<li><h5>End date</h5><p>"+value.endDate+"</p></li>"
+					+"<li><h5>Quantity</h5><p>"+value.quantity+"</p></li><br><li style='padding:0px'><h5>Duration</h5><p>"+value.duration+" days</p></li>"
+					+"<li><h5>Manufactured Year</h5><p>"+value.manufacturedyear+" Onwards</p></li>"
+					+"<li><h5>hiringChargesType</h5><p>per "+value.hiringChargesType+"</p></li>"
+					+"<li><h5>Transportation</h5><p>"+value.transportation+"</p></li>"
+					+"<li style='padding:0px'><h5>Description</h5><p>"+value.workDescription+"</p></li><br>"
+					+"<li style='padding:0px'><h5>Driver Needed</h5><p>"+value.driverNeeded+"</p></li>"
+					+"<li><h5>Manufacturers</h5><p>"+value.manufacturer+"</p></li><br>"
+					+"<li style='padding:0px'><h5>Diesel Charges</h5><p>"+value.dieselCharges+"</p></li>"
+					+"<li><h5>workLocation</h5><p>"+value.workLocation+"</p></li>"
+					+"<li><h5>Pin Code</h5><p>"+value.pincode+"</p></li><br>"
+					+"<li style='padding:0px'><h5>Posted By</h5><p>"+value.contractorName+"<br></p></li>"
+					+"</ul><div class='clear-fix'></div></div></div>";
+					//reqList += '<ul><li class="dynamic-content" id='+value.quoteId+'>Category: '+value.equipmentCategory+'<span style="padding-left:194px;float:centre;">Equipment : '+value.equipmentName+'</span><span style="padding-left:100px;float:right">Quantity: '+value.quantity+'</span><br><br><span>Model: '+value.model+'</span><span style="padding-left:250px">Manufacturer: '+value.manufacturer+'</span><span style="padding-left:100px;float:right">YearOfManufacture: '+value.manufacturedyear+'</span><br><br>Created Date: '+value.createdTime+'<span style="padding-left:70px">Final Price: <b>'+value.finalQuotePrice+'</b></span><a href="#" class="btn btn-warning">View</a></li></ul>';
+					$('.left-container').html("");
+				    $('.left-container').append(reqList);
+					$('#equipmentCategory').val(value.equipmentCategory);
+				    $('#equipmentName').val(value.equipmentName);
+					$('#reqtitle').val(value.title);
+					$('#reqlocation').val(value.workLocation);
+					$('#reqpincode').val(value.pincode);
+					$('#reqduration').val(value.duration);
+					$('#reqPostedBy').val(value.contractorName);
+					$('#quotePriceType').val(value.hiringChargesType);
+				hiringChargesType = value.hiringChargesType;
+               
+		console.log("Type : "+hiringChargesType);
+		if(hiringChargesType === "month"){
+		$("#noofworkinghours").show();
+		$("#perhour").show();
+		if(value.duration >= 30)
+		{
+		$(".advanceCharges").show();
+		}
+		}else if(hiringChargesType === "cu.mt"){
+		$("#percumt").show();
+		}else if(hiringChargesType === "hour"){
+		$("#perhour").show();
+		}else if(hiringChargesType === "work"){
+		$("#perwork").show();
+		if(value.duration >= 30)
+		{
+		$(".advanceCharges").show();
+		}
+		}
+			}
+		});
+		
+
+      $("#rentalcharges,#workinghours").change(function(){
+	  console.log("Entered rental function");
+	  var totPrice="";
+	  var noofhours=0;
+	  var rentalcharges = document.getElementById("rentalcharges").value;
+	
+
+	  if(value.hiringChargesType === "hour"){
+	  totPrice = Math.round(rentalcharges);
+	  $("#totalPrice").html(totPrice);
+	  document.getElementById("totalprice").value=totPrice;
+	  }else if(value.hiringChargesType === "month"){
+	
+	  noofhours = document.getElementById("workinghours").value;
+	  totPrice = value.duration * rentalcharges * noofhours;
+	  totPrice = Math.round(totPrice);
+	  $("#totalPrice").html(totPrice);
+	  //$(".totalPrice").show("slow");
+	  document.getElementById("totalprice").value=totPrice;
+      }else if(value.hiringChargesType === "work"){
+	  totPrice = rentalcharges;
+	  $("#totalPrice").html(totPrice);
+	  //$(".totalPrice").show("slow");
+	  document.getElementById("totalprice").value=totPrice;
+      }
+	   });	
+
     	
        
-/* This action will be called when a contractor will submit the form  */
-    	
-        $("#btn-submit").click(function(){
-		var success = "successfully created";
-		var data = JSON.stringify($("#supplier-quote-form").serializeObject());
-		console.log(data);
-            
-            $.ajax({
-			url:AppData.relativeUrl+"supplier/submitquote",
-		     type:"post",
-		     contentType:"application/json; charset=utf-8",
-		     data: data,
-		     success:function(data){
-		    	 console.log(data);
-		    	 if(data === "SS01"){
-		    		 console.log("inside if");
-		    		 $('#modal-success-dialog').modal('show').delay(50000);
-		    		 $('#modal-success-dialog').on('shown.bs.modal', function() {
-		    			 $(location).attr('href',AppData.relativeUrl+"user/dashboard.html");
-		    			 //history.back();	    
-		    			});
-		    	 }
-		      }
+/* This action will be called when a contractor will logout of the form  */
+	
+	$('.logout').click(function(){
+						       console.log("inside logout function")
+						        
+						        $.ajax({
+				 					url:AppData.relativeUrl+"user/logout",
+				 					type:"post",
+				 					data:{},
+				 					success:function(response){
+				 						var user = localStorage.getItem("user");
+								        if(user !== null){
+								            localStorage.removeItem("user");
+								        }
+								        
+								        console.log("user logged out");
+								        $(location).attr('href',"index.html");
+				 					}
+				 					});
+						        
+						 });
+	
+	$(".uncheck").click(function(){
+		var $label = $(this).parent("label");
+		var $input = $label.prev();
+		console.log($label.html())
+		console.log($input.val());
+		if($input.checked){
+			console.log("inside if ");
+		$input.prop('checked',false);
+		}else{
+			console.log("inside else");
+		}
+		$label.fadeOut('slow');
+	});
+	
+	console.log("Values : "+document.getElementById("advanceCharges").value);
 
-                });
-    });
-
-    });    
+    }); 
     </script>    
 <script type="text/javascript">
 $.fn.serializeObject = function()
@@ -344,9 +438,15 @@ $.fn.serializeObject = function()
 };
 </script>
 
-    
-    
-    
+    <script type="text/javascript">
+	function advancecalc(){
+	console.log(document.getElementById("relation").value);
+	var rel= document.getElementById("relation").value;
+	console.log(document.getElementById("f1-value").value);
+	var advance = document.getElementById("f1-value").value;
+	document.getElementById("advanceCharges").value=advance+":"+rel;
+	}
+	</script>
     
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

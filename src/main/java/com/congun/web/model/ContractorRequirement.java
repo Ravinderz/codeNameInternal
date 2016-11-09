@@ -1,7 +1,6 @@
 package com.congun.web.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,30 +22,32 @@ public class ContractorRequirement {
  public String equipmentName;
  public String specificationCapacity;
  public String[] manufacturer;
- public String specificationModel;
+ public String manufacturedyear;
+ public String startDate;
+ public String endDate;
  public int quantity;
  public int duration;
- public Date startDate;
- public int equipmentManufactureYear;
  public String hiringChargesType;
  public String workLocation;
  public String transportation;
  public String driverNeeded;
- public String helperNeeded;
  public String dieselCharges;
+ public String pincode;
+ public String mobile;
+ public String reqStatus;
+ public String workareaimages;
  public String workDescription;
- public String workAreaImages;
+
  public Timestamp createdTime;
  public Timestamp updatedTime;
  public int activeFlag;
-
  public int noofquotes;
  
-public int getNoofquotes() {
-	return noofquotes;
+public String getWorkareaimages() {
+	return workareaimages;
 }
-public void setNoofquotes(int noofquotes) {
-	this.noofquotes = noofquotes;
+public void setWorkareaimages(String workareaimages) {
+	this.workareaimages = workareaimages;
 }
 public long getRequirementId() {
 	return requirementId;
@@ -59,6 +60,12 @@ public long getContractorId() {
 }
 public void setContractorId(long contractorId) {
 	this.contractorId = contractorId;
+}
+public String getTitle() {
+	return title;
+}
+public void setTitle(String title) {
+	this.title = title;
 }
 public String getContractorName() {
 	return contractorName;
@@ -90,35 +97,18 @@ public String[] getManufacturer() {
 public void setManufacturer(String[] manufacturer) {
 	this.manufacturer = manufacturer;
 }
-public String getSpecificationModel() {
-	return specificationModel;
+public String getManufacturedyear() {
+	return manufacturedyear;
 }
-public void setSpecificationModel(String specificationModel) {
-	this.specificationModel = specificationModel;
+public void setManufacturedyear(String manufacturedyear) {
+	this.manufacturedyear = manufacturedyear;
 }
-public int getQuantity() {
-	return quantity;
-}
-public void setQuantity(int quantity) {
-	this.quantity = quantity;
-}
+
 public int getDuration() {
 	return duration;
 }
 public void setDuration(int duration) {
 	this.duration = duration;
-}
-public Date getStartDate() {
-	return startDate;
-}
-public void setStartDate(Date startDate) {
-	this.startDate = startDate;
-}
-public int getEquipmentManufactureYear() {
-	return equipmentManufactureYear;
-}
-public void setEquipmentManufactureYear(int equipmentManufactureYear) {
-	this.equipmentManufactureYear = equipmentManufactureYear;
 }
 public String getHiringChargesType() {
 	return hiringChargesType;
@@ -144,17 +134,29 @@ public String getDriverNeeded() {
 public void setDriverNeeded(String driverNeeded) {
 	this.driverNeeded = driverNeeded;
 }
-public String getHelperNeeded() {
-	return helperNeeded;
-}
-public void setHelperNeeded(String helperNeeded) {
-	this.helperNeeded = helperNeeded;
-}
 public String getDieselCharges() {
 	return dieselCharges;
 }
 public void setDieselCharges(String dieselCharges) {
 	this.dieselCharges = dieselCharges;
+}
+public String getPincode() {
+	return pincode;
+}
+public void setPincode(String pincode) {
+	this.pincode = pincode;
+}
+public String getMobile() {
+	return mobile;
+}
+public void setMobile(String mobile) {
+	this.mobile = mobile;
+}
+public String getReqStatus() {
+	return reqStatus;
+}
+public void setReqStatus(String reqStatus) {
+	this.reqStatus = reqStatus;
 }
 public String getWorkDescription() {
 	return workDescription;
@@ -162,25 +164,12 @@ public String getWorkDescription() {
 public void setWorkDescription(String workDescription) {
 	this.workDescription = workDescription;
 }
-public String getWorkAreaImages() {
-	return workAreaImages;
-}
-public void setWorkAreaImages(String workAreaImages) {
-	this.workAreaImages = workAreaImages;
-}
+
 public Timestamp getCreatedTime() {
 	return createdTime;
 }
 public void setCreatedTime(Timestamp createdTime) {
 	this.createdTime = createdTime;
-}
-
-
-public String getTitle() {
-	return title;
-}
-public void setTitle(String title) {
-	this.title = title;
 }
 public Timestamp getUpdatedTime() {
 	return updatedTime;
@@ -194,6 +183,29 @@ public int getActiveFlag() {
 public void setActiveFlag(int activeFlag) {
 	this.activeFlag = activeFlag;
 }
-
-
+public int getNoofquotes() {
+	return noofquotes;
+}
+public void setNoofquotes(int noofquotes) {
+	this.noofquotes = noofquotes;
+}
+public String getStartDate() {
+	return startDate;
+}
+public void setStartDate(String startDate) {
+	this.startDate = startDate;
+}
+public String getEndDate() {
+	return endDate;
+}
+public void setEndDate(String endDate) {
+	this.endDate = endDate;
+}
+public int getQuantity() {
+	return quantity;
+}
+public void setQuantity(int quantity) {
+	this.quantity = quantity;
+}
+ 
 }

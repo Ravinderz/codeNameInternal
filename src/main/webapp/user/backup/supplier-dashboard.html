@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+</head>
+<body>
+	
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="..\images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="index.html"><span>About Us</span></a></li>
+								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="supplier-profile.html" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="supplier-profile.html"><span>Profile</span></a></li>
+									<li><a href="supplier-dashboard.html"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+			<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a class="active" href="supplier-dashboard.html">Rental board</a></li>
+						<li><a  href="supplier-profile.html">Profile</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div>
+				</div>
+		   </div>
+		  </div>
+		  <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+		   <div class="panel panel-default my-req">
+			  <div class="panel-heading">My Quotes</div>
+			  <div class="quote-table">
+				
+				</div>
+		</div>
+		<div class="req-pagination">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li>
+					  <a href="#" aria-label="Previous" data-value="prev">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li class="active"><a href="#" id="first"  data-value="1">1</a></li>
+					<li><a href="#" id="middle" data-value="2">2</a></li>
+					<li><a href="#" id="last" data-value="3">3</a></li>
+					<li>
+						<a href="#" aria-label="Next" data-value="next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+				</div>
+			</div>
+				
+	</div>
+	<div class="requirement-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4>Recommendations for you</h4>
+					<div class="requirement-card-wrapper">
+					
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+    <div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+                    
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                            <a class="img-circle fa fa-facebook-f" href="#"></a>
+                            <a class="img-circle fa fa-twitter" href="#"></a>
+                            <a class="img-circle fa fa-google-plus" href="#"></a>
+                            <a class="img-circle fa fa-linkedin" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+ 		<div class="footer">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Copyright Congun</a></li>
+							<li><a href="#">Terms and Conditions</a></li>	
+							<li><a href="#">Privacy Policy</a></li>	
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+		
+		<!-- ********************* This is for the requirement view model *********************************** -->
+					<div class="modal fade" id="view-requirement-modal" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content requirement-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&#10005;</button>
+									<h4 class="modal-title" id="myModalLabel">requirement title</h4>
+								</div>
+								<div class="modal-body">
+									<div class="media"><div class="media-left">
+									<a href="#"><img class="media-object" id="req-img" src="../images/EarthMoving/backhoe.png" height="130px" width="130px" alt="backhoe/"></a>
+									</div><div class="media-body">
+									<table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th style="width:150px;">Manufacturer</th><th>Year of Manufacture</th><th>capacity</th><th>Quantity</th></tr></thead><tbody><tr><td id="e-cat">EarthMoving</td><td id="e-equip">backhoe</td><td id="e-mfg">JCB,Cat,Volvo </td><td id="e-yom">2015</td><td id="e-cap">undefined</td><td id="e-quant"></td></tr></tbody></table>
+									<div class="clear-fix"></div><table class="table table-condensed table-left"><thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Driver Needed</th><th>HiringChargesType</th><th>Work Location</th></tr></thead><tbody><tr><td id="e-start">483600</td><td id="e-end">1</td><td id="e-dur">650</td><td id="e-driver">No</td><td id="e-charge">undefined</td><td id="e-loc"></td></tr></tbody></table></div></div>
+									<div class="media">
+									<div class="media-body">
+									<div class="media-heading"><h4>Quote Details</h4></div>
+									<table class="table table-condensed"><thead><tr><th>Posted Date</th><th style="width:150px;">Manufacturer</th><th>Quantity</th><th>Driver Available</th><th>Machine Rental Charges</th><th>Final Quote Price</th></tr></thead>
+									<tbody><tr><td id="q-date">EarthMoving</td><td id="q-mfg">backhoe</td><td id="q-quant">JCB,Cat,Volvo </td><td id="q-driver">available</td><td id="q-rent">2015</td><td id="q-price">undefined</td></tr></tbody></table>
+									</div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+		
+		
+ 		<script type="text/javascript">
+ 			$(document).ready(function(){
+ 				var requirements = [];
+ 				var quotes = [];
+ 				var user = $.getUser();
+ 				console.log(user);
+ 				var username = user.firstname+" "+user.lastname;
+ 				$('#user').text(username);
+ 				
+ 				$('.logout').click(function(){
+				       console.log("inside logout function")
+				        
+				        $.ajax({
+		 					url:AppData.relativeUrl+"user/logout",
+		 					type:"post",
+		 					data:{},
+		 					success:function(response){
+		 						var user = localStorage.getItem("user");
+						        if(user !== null){
+						            localStorage.removeItem("user");
+						        }
+						        
+						        console.log("user logged out");
+						        $(location).attr('href',"../index.html");
+		 					}
+		 					});
+				        
+				 });
+ 				
+ 				var reqList = "";
+ 				var flag = false;
+ 				var quoteList = "";
+ 				
+ 				
+ 					
+ 					
+ 					
+ 					 $.ajax({
+ 					url:AppData.relativeUrl+"contractor/getmappedrequirements/"+user.userId+"?page=1&pSize=20",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime,1);
+ 							$.ajax({
+ 								url:AppData.relativeUrl+"supplier/checkifquoted?suppid="+user.userId+"&reqId="+value.requirementId,
+ 								type:"get",
+ 								data:{},
+ 								success:function(response){
+ 									console.log(response);
+ 									if(response === "true" ){
+ 										console.log("inside ifff");
+ 									reqList += '<div class="media"><div><h4 class="media-heading">'+value.title+'</h4></div><div class="media-left"><a href="#">'
+ 		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><div class="interactions"><span class="label label-primary">quoted</span></div></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
+ 		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
+ 		 							+'<th>Year of Manufacture</th><th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
+ 		 							+'<td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
+ 									}else{
+ 										console.log("inside elseeeee");
+ 										reqList += '<div class="media"><div><h4 class="media-heading">'+value.title+'</h4></div><div class="media-left"><a href="#">'
+ 	 		 							+'<img  class="media-object" src=../images/'+value.equipmentCategory+'/'+value.equipmentName+'.png height=130px width=140px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 	 		 							+'<div class="client-name"><h4>'+value.contractorName+'</h4></div><div class="give-quote"><button type="button" id="quote-btn" value='+value.requirementId+' class="btn btn-primary">Give Quote</button></div><div class="clear-fix"></div><div class="applied-date"><span>posted on : '+createdTime+'</span></div>'
+ 	 		 							+'<h4 id="equipment-heading">Requirement Details</h4><table class="table table-condensed"><thead><tr><th>Category</th><th>Equipment</th><th>Manufacturer</th>'
+ 	 		 							+'<th>Year of Manufacture</th><th>Requirement Deadline</th><th>Duration</th><th>Location</th></tr></thead><tbody><tr><td>'+value.equipmentCategory+'</td><td>'+value.equipmentName+'</td>'
+ 	 		 							+'<td>'+value.manufacturer+'</td><td>'+value.manufacturedyear+'</td><td>'+$.date(value.startDate,4)+'</td><td>'+value.duration+' Days</td><td>Hyderabad</td></tr></tbody></table></div></div>';
+ 		 							}
+ 									console.log(reqList);
+ 									$('.requirement-card-wrapper').html("");
+ 			 						$('.requirement-card-wrapper').append(reqList);
+ 			 						console.log("finished the first");
+ 		 						
+ 								}
+ 							});
+ 						});
+ 						
+ 						
+ 						//place code here
+ 					}
+ 					
+ 					}); 
+ 				
+ 				
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response.length);
+ 						console.log(response);
+ 						if(response.length === 0){
+ 							$('.quote-table').html("");
+ 							var noData = '<div class="no-data"><p><span class="above">No Quotes posted by you ,..</span><br><span class="below">Quote a mapped requirement to see you quotes in this section</span></p></div>';
+ 							$('.quote-table').append(noData);
+ 						}else{
+ 						
+ 						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quantity</th><th>Company/Individual</th><th>QuotedPrice</th><th>Duration</th><th>Status</th><th>Location</th></tr></thead><tbody>';
+ 						var tableEndTags = '</tbody></table>';
+ 						$.each(response,function(index,value){
+ 							quotes[value.quoteId] = value;
+ 							console.log("req",value.requirementId);
+ 							console.log("req id name",value.reqPostedBy);	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime,1);
+ 							console.log("created time :: ",$.date(createdTime,1));
+ 							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+value.reqPostedBy+'</td><td>'+value.finalQuotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+ 						});
+ 						var tableContent = tableHeader+quoteList+tableEndTags;
+ 						$('.quote-table').html("");
+ 						$('.quote-table').append(tableContent);
+ 						console.log("finished the second");
+ 					}
+ 					}
+ 					
+ 					});
+					
+				$('.quote-table').on('click','.requirement-link',function(e){
+ 						//e.preventDefault();
+ 						var quote = quotes[this.id];
+ 						var req = requirements[quote.requirementId];
+ 						console.log("rq id ::",req);
+						$('#myModalLabel').text(req.title);
+						$('#req-img').attr('src','../images/'+req.equipmentCategory+'/'+req.equipmentName+'.png');
+						$('#req-img').attr('alt',req.equipmentName);
+						$('#e-cat').text(req.equipmentCategory);
+						$('#e-equip').text(req.equipmentName);
+						$('#e-mfg').text(req.manufacturer);
+						$('#e-yom').text(req.manufacturedyear);
+						$('#e-cap').text($.getCapacity(req.specificationCapacity));
+						$('#e-quant').text(req.quantity);
+						$('#e-start').text($.date(req.startDate,3));
+						$('#e-end').text($.date(req.endDate,3));
+						$('#e-dur').text(req.duration+" days");
+						$('#e-driver').text(req.driverNeeded);
+						$('#e-charge').text("per "+req.hiringChargesType);
+						$('#e-loc').text(req.workLocation);
+						
+						//quotes details
+						$('#q-date').text($.date(quote.createdTime,1));
+						$('#q-mfg').text(quote.manufacturer);
+						$('#q-quant').text(quote.quantity);
+						$('#q-rent').text(quote.machineRentalCharges);
+						$('#q-driver').text(quote.driverAvailable);
+						$('#q-price').text(quote.finalQuotePrice);
+						
+						$('#view-requirement-modal').modal("show");
+ 						
+ 					});	
+					
+				
+ 				
+ 				
+ 				$('.requirement-card-wrapper').on('click','#quote-btn',function(e){
+ 					e.preventDefault();
+ 					console.log($(this).val());
+ 					$(location).attr('href',"../quote-form.html?reqId="+$(this).val());
+ 				});
+ 				
+ 				//jquery for pagination
+				var current_page=1;
+				var previous_page = current_page-1;
+				var next_page = current_page+1;
+				var $active_element = $('#first').parent();
+			$('.pagination li a').click(function(e){
+				e.preventDefault();
+				console.log(this);
+				var clicked_page = $(this).data("value");
+				console.log(clicked_page);
+				if(clicked_page === "prev"){
+					if(current_page === 1){
+						$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					}else if(current_page === $('#first').data("value")){
+					next_page = current_page;
+					current_page = previous_page;
+					previous_page = current_page-1;	
+					$('#first').data("value",current_page);
+					$('#first').text(current_page);
+					$('#middle').data("value",next_page);
+					$('#middle').text(next_page);
+					$('#last').data("value",next_page+1);
+					$('#last').text(next_page+1);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					}else{
+					next_page = current_page;
+					current_page = previous_page;
+					previous_page = current_page-1;
+					$active_element.removeClass("active");
+					$active_element.prev().addClass("active");
+					$active_element = $active_element.prev();
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					}
+				}else if(clicked_page === "next"){
+					if(current_page === $('#last').data("value")){
+					previous_page = current_page;
+					current_page = next_page;
+					next_page = current_page+1;	
+					$('#first').data("value",previous_page-1);
+					$('#first').text(previous_page-1);
+					$('#middle').data("value",previous_page);
+					$('#middle').text(previous_page);
+					$('#last').data("value",current_page);
+					$('#last').text(current_page);
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					}else{
+					previous_page = current_page;
+					current_page = next_page;
+					next_page = current_page+1;	
+					$active_element.removeClass("active");
+					$active_element.next().addClass("active");
+					$active_element = $active_element.next();
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					}
+				}else{
+					$active_element = $(this).parent();
+					current_page = clicked_page;
+					previous_page = current_page-1;
+					next_page = current_page+1;
+					$(this).parent().addClass("active").siblings().removeClass("active");
+					$.getAllQuotesByPagination(user.userId,current_page,5,requirements);
+					
+				}
+				
+				console.log("current",current_page);
+				console.log("prev",previous_page);
+				console.log("next",next_page);
+				
+				
+				
+				
+			});
+			
+ 				
+ 				
+ 			});
+ 		</script>
+ 		<script type="text/javascript">
+ 		$.getCapacity = function(Object){
+ 			var arr = Object.split(":");
+ 			var capacity = arr[0]+arr[1]+arr[2];
+ 			return capacity;
+ 		};
+ 		
+ 		function toDate(dateStr) {
+ 		    var parts = dateStr.split("-");
+ 		    return new Date(parts[2], parts[1] - 1, parts[0]);
+ 		}
+ 		
+ 		$.date = function(dateObject,pattern) {
+ 		    var d = new Date(dateObject);
+ 		   //var d = $.format.date(new Date(dateObject), 'yyyy-mm-ddT hh:mm:ssZ'); 
+ 		    var date = d.toDateString();
+ 		    if(pattern === 1){
+ 		    var dateArr = date.split(" ");
+ 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    }
+ 		    else if(pattern === 4){
+ 		    	var dateObj = new Date(toDate(dateObject));
+		    	dateObj.setDate(dateObj.getDate() + 3);
+		    	console.log(dateObj);
+		    	date = dateObj.toDateString();
+ 	 		    var dateArr = date.split(" ");
+ 	 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 	 		    }
+ 		    else if(pattern === 2){
+ 		    	var dateArr = dateObject.split(' ');
+ 		    	var time = dateArr[3].split(':');
+ 		    	var HH = parseInt(time[0])+6;
+ 		    	var mm = parseInt(time[1])+30;
+ 		    	var ss = time[2];
+ 		    	if(dateArr[1].length === 3)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		    	else if(dateArr[1].length === 2)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		    }else if(pattern === 3){
+ 		    var dateArr = dateObject.split("-");
+ 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+			}
+ 		    return date;
+ 		};
+		
+		$.getMonthName = function(monNum){
+ 			var month;
+ 			console.log(monNum)
+ 			if(monNum === "01"){
+ 				month = "Jan";
+ 			}
+ 			else if(monNum === "02"){
+ 				month = "Feb";
+ 			}
+ 			else if(monNum === "03"){
+ 				month = "Mar";
+ 			}
+ 			else if(monNum === "04"){
+ 				month = "Apr";
+ 			}
+ 			else if(monNum === "05"){
+ 				month = "May";
+ 			}
+ 			else if(monNum === "06"){
+ 				month = "Jun";
+ 			}
+ 			else if(monNum === "07"){
+ 				month = "Jul";
+ 			}
+ 			else if(monNum === "08"){
+ 				month = "Aug";
+ 			}
+ 			else if(monNum === "09"){
+ 				month = "Sep";
+ 			}
+ 			else if(monNum === "10"){
+ 				month = "Oct";
+ 			}
+ 			else if(monNum === "11"){
+ 				month = "Nov";
+ 			}
+ 			else if(monNum === "12"){
+ 				month = "Dec";
+ 			}
+ 			return month;
+ 		};
+ 		
+ 		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			console.log(month)
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
+ 		};
+ 		
+ 		$.getAllQuotesByPagination = function(userId,currentPage,pageSize,requirements){
+ 			var quoteList = "";
+ 			$.ajax({
+					url:AppData.relativeUrl+"supplier/getquotesbysupplier/"+userId+"?page="+currentPage+"&pSize=20", //this is hard coded 
+					/*+user.userId,*/
+					type:"get",
+					data:{},
+					success:function(response){
+						response = $.parseJSON(response);
+						console.log(response.length);
+						console.log(response);
+						if(response.length === 0){
+							$('.quote-table').html("");
+							var noData = '<div class="no-data"><p><span class="above">No Quotes posted by you ,..</span><br><span class="below">Quote a mapped requirement to see you quotes in this section</span></p></div>';
+							$('.quote-table').append(noData);
+						}else{
+						var tableHeader = '<table class="table table-striped"><thead><tr><th>Date</th><th>Requirement</th><th>Quantity</th><th>Company/Individual</th><th>QuotedPrice</th><th>Duration</th><th>Status</th><th>Location</th></tr></thead><tbody>';
+						var tableEndTags = '</tbody></table>';
+						$.each(response,function(index,value){
+							var createdTime = value.createdTime;
+							createdTime = $.date(createdTime,1);
+							quoteList += '<tr><td>'+createdTime+'</td><td>'+value.reqtitle+'<a href="#" id='+value.quoteId+' class="requirement-link">(view)</a></td><td>'+value.quantity+'</td><td>'+requirements[value.requirementId].contractorName+'</td><td>'+value.finalQuotePrice+'</td><td>'+value.reqduration+' Days</td><td>'+value.quoteStatus+'</td><td>'+value.reqlocation+'</td></tr>';
+						});
+						var tableContent = tableHeader+quoteList+tableEndTags;
+						$('.quote-table').html("");
+						$('.quote-table').append(tableContent);
+					}
+					}
+					});
+ 			
+ 		};
+ 		</script>		
+ 				
+    </body>
+</html>

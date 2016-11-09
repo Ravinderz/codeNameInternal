@@ -33,9 +33,9 @@ public class SupplierQuoteService {
 		return status;
 	}
 	
-	public String getQuotationsbySupplier(long supplierId){
+	public String getQuotationsbySupplier(long supplierId,int page,int pSize){
 		logger.info("Entered into SupplierQuoteService.getQuotationsbySupplier method SupplierId"+supplierId);
-		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbySupplier(supplierId);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbySupplier(supplierId,page,pSize);
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else
@@ -52,9 +52,9 @@ public class SupplierQuoteService {
 			return ResponseConstants.SUPPLIER_FAILURE_CODE;
 	}
 	
-	public String getQuotationsbyRequirement(long requirementId){
+	public String getQuotationsbyRequirement(long requirementId,int page,int pSize){
 		logger.info("Entered into SupplierQuoteService.getQuotationsbyRequirement method RequirementId:"+requirementId);
-		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbyRequirement(requirementId);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotesbyRequirement(requirementId,page,pSize);
 		if(suppQuotesList != null)
 		return ApplicationUtil.getJsonResponse(suppQuotesList);
 		else
@@ -100,5 +100,35 @@ public class SupplierQuoteService {
 			return ResponseConstants.EQUIPMENT_FAILURE_CODE;
 	}
 
-		
+	public String getQuotationsByStatus(long requirementId, String quoteStatus) {
+		logger.info("Entered into SupplierController.getQuotationsbySupplier method  requirementId:"+requirementId+"  quoteStatus:"+quoteStatus);
+		List<SupplierQuote> suppQuotesList = supplierDao.getQuotationsByStatus(requirementId,quoteStatus);
+		if(suppQuotesList != null)
+		return ApplicationUtil.getJsonResponse(suppQuotesList);
+		else
+			return ResponseConstants.SUPPLIER_FAILURE_CODE;
+	}
+
+	public String getTopFiveRequirementsBysupId(Long id) {
+		logger.info("Entered into SupplierController.getTopFiveRequirementsByContId method ID:"+id);
+		List<SupplierQuote> reqList = supplierDao.getTopFiveRequirementsBysupId(id);
+		if(reqList != null)
+			return ApplicationUtil.getJsonResponse(reqList);
+			else
+				return ResponseConstants.SUPPLIER_FAILURE_CODE;
+		}
+	
+	public String checkIfQuoted(Long suppId,Long reqId) {
+		logger.info("Entered into service to check if Quoted for Requirement :"+reqId);
+		if(supplierDao.checkIfQuoted(suppId,reqId))
+		return "true";
+		else{
+			logger.info("Could not find any quotation from Supplier Id :"+suppId+" for Requirement :"+reqId);
+			return "false";
+		}
+			
+	}
 }
+
+		
+

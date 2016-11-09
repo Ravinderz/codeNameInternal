@@ -8,7 +8,7 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
@@ -16,256 +16,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/appProperties.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		/* to get parameters from a url */
-		var getUrlParameter = function getUrlParameter(sParam) {
-		var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
-
-			for (i = 0; i < sURLVariables.length; i++) {
-			sParameterName = sURLVariables[i].split('=');
-
-			if (sParameterName[0] === sParam) {
-			return sParameterName[1] === undefined ? true : sParameterName[1];
-			}
-			}
-			};					
-
-		var category = getUrlParameter('category');
-					
-						/* var user = sessionStorage.getItem("user");
-						user = $.parseJSON(user);
-						console.log(user);
-						if (user !== null) {
-							console.log("inside if");
-							$(location).attr('href',"user/equipment.html?category="+category);
-						} else {
-							console.log("nothing to do");
-							
-						} */
-					
-						
-						$('#modal-container-login').on('hidden.bs.modal', function(){
-							console.log("clearing the fields");
-						    $(this).find('form')[0].reset();
-						});
-						
-						$('#modal-container-register').on('hidden.bs.modal', function(){
-						    $(this).find('form')[0].reset();
-						});
-						
-						
-						$("#register").click(
-								function() {
-								var success = "successfully created";
-								var successUrl = "#modal-container-login";
-								var data = JSON.stringify($("#register-form").serializeObject());
-								console.log(data);
-
-							
-								$.ajax({
-								url : AppData.relativeUrl+"user/register",
-								type : "post",
-								contentType : "application/json; charset=utf-8",
-								data : data,
-								success : function(data) {
-								if (data.search("UF01") != -1) {
-								} else {
-								console.log("inside if");
-								$('#modal-container-register').modal('hide');
-								console.log("register modal closed");
-								console.log("opening login modal");
-								$('#modal-container-login').modal('show');
-								$(location).attr('href',"user/equipment.html?category="+category);
-								}
-								}
-								});
-								});
-
-								$("#login-btn").click(function() {
-								console.log("inside login function");
-
-								var data = JSON.stringify($("#login-form").serializeObject());
-
-								$.ajax({
-								url : AppData.relativeUrl+"user/login",
-								type : "post",
-								contentType : "application/json; charset=utf-8",
-								data : data,
-																/* datatype : "json",  */
-								success : function(response) {
-								console.log(response);
-								response = $.parseJSON(response);
-								console.log("got user from userAPI",response.username);
-								$('#modal-container-login').modal('hide');
-								if (typeof (Storage) !== "undefined") {
-								sessionStorage.setItem("user",JSON.stringify(response));
-								} else {
-								console.log(" no storage available");
-								}
-								if (response.role === "supplier") {
-								var user = sessionStorage.getItem("user");
-								user = $.parseJSON(user);
-								console.log(user);
-								if (user !== null) {
-								$(location).attr('href',"user/equipment.html?category="+category);
-								}
-								} else if (response.role === "contractor") {
-									var user = sessionStorage.getItem("user");
-									user = $.parseJSON(user);
-									console.log(user);
-									if (user !== null) {
-									$(location).attr('href',"user/equipment.html?category="+category);
-									}																//$(location).attr('href',"index.html");
-								}
-								}
-
-								});
-								});
-			
-								$('.logout').click(function() {
-									console.log("inside logout function")
-									var user = sessionStorage.getItem("user");
-									if (user !== null) {
-										sessionStorage.removeItem("user");
-									}
-									console.log("user logged out");
-									$(location).attr('href', "index.html");
-								});
-		
-
-						
-						var equipment = '';
-						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
-								'miniexcavator', 'loader', 'motorgrader',
-								'skidsteer' ];
-						var Cranes = [ 'crawlercrane', 'mobilecrane',
-								'towercrane' ];
-						var Generators = [ 'mobilegenerator',
-								'portablegenerator' ];
-						var AerialLifts = [ 'articulatingboomlift',
-								'scissorlift', 'straighttelescoping' ];
-						var PowerDrillers = [ 'anglegrinder', 'breakhammer',
-								'metalcutter', 'stonedriller',
-								'surfacegrinder', 'horizontaldriller' ];
-						var CementMixerTrucks = [ 'cementmixer', 'trailerpump',
-								'truckmountedconcretepump' ];
-						var RoadRollers = [ 'doubledrumroller1', 'hotmixer',
-								'sensorpaver1', 'singledrum' ];
-						var MaterialHandling = [ 'industriallift',
-								'reachforklift', 'telehandlerfork' ];
-						var Miscellaneous = [ 'airtools', 'compressor',
-								'tractor', 'waterpump' ];
-						var BoreDrillers = [ 'boredriller', 'piledriving' ];
-
-						/*if(category === 'earthMovingEquipment'){
-							equipment = earthMovingEquipment;
-						}
-						else 
-						if(category === 'cranes'){
-						equipment = cranes;
-						}*/
-						switch (category) {
-						case 'EarthMoving':
-							equipment = EarthMoving;
-							break;
-						case 'Cranes':
-							equipment = Cranes;
-							break;
-						case 'Generators':
-							equipment = Generators;
-							break;
-						case 'AerialLifts':
-							equipment = AerialLifts;
-							break;
-						case 'PowerDrillers':
-							equipment = PowerDrillers;
-							break;
-						case 'CementMixerTrucks':
-							equipment = CementMixerTrucks;
-							break;
-						case 'RoadRollers':
-							equipment = RoadRollers;
-							break;
-						case 'MaterialHandling':
-							equipment = MaterialHandling;
-							break;
-						case 'Miscellaneous':
-							equipment = Miscellaneous;
-							break;
-						case 'BoreDrillers':
-							equipment = BoreDrillers;
-							break;
-
-						}
-						//category = $.parseJSON(earthMovingEquipment);
-						console.log("category", category);
-						console.log("equipment", equipment);
-						var count = 1;
-						var html = "";
-						$
-								.each(
-										equipment,
-										function(index, value) {
-											var imagePath = 'images/'
-													+ category + '/' + value
-													+ '.png';
-											console.log(imagePath);
-											var firstDiv = "<div class='row'>";
-											var firstDivClose = "</div>";
-											if (count === 1) {
-												html += firstDiv;
-											}
-											var col = "<div class='col-md-3 col-sm-12'>"
-													+ "<img src='"+imagePath+"' class='category-img' id='"+value+"' height='170px' width='200px'/><button class='btn img-btn'>"
-													+ value + "</button></div>";
-											html += col;
-											if (equipment.length <= 4) {
-												if (count === equipment.length) {
-													html += firstDivClose;
-													count = 0;
-												}
-											} else {
-												if (count === 4) {
-													html += firstDivClose;
-													count = 0;
-												}
-											}
-											count++;
-										});
-						console.log(html);
-
-						$(".category-row-one").append(html);
-
-						$('.category-img').click(
-								function() {
-									var sub_ctg = this.id;
-									$(location).attr('href',"requirement-display.html?category="
-													+ category
-													+ "&sub-category="
-													+ sub_ctg);
-								});
-
-					});
-</script>
-<script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>
+<script src="js/validation.js"></script>
 </head>
 <body>
 	<div class="nav-wrapper">
@@ -280,30 +31,19 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#"> <img id="nav-logo"
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
 								src="images\logo.png" height="75px" width="200px" />
 							</a>
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li class="active"><a href="#"><span>About Us</span></a></li>
-								<li><a href="#"><span>Contact</span></a></li>
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown"><span>Services<strong
-											class="caret"></strong></span></a>
-									<ul class="dropdown-menu">
-										<li><a href="#"><span>Rentals</span></a></li>
-										<li><a href="#"><span>Sales</span></a></li>
-										<li><a href="#"><span>Machinary Services</span></a></li>
-										<li class="divider"></li>
-										<li><a href="#"><span>Get a Quote</span></a></li>
-										<li class="divider"></li>
-										<li><a href="#"><span>Misc</span></a></li>
-									</ul></li>
+							
+								<li class="active"><a href="used-equipment.html"><span>Used Equipment</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
 								<li><a id="modal-login" href="#modal-container-login"
 									role="button" data-toggle="modal"><span>Login</span></a></li>
 								<li><a id="modal-register" href="#modal-container-register"
-									role="button" data-toggle="modal"><span>Register</span></a></li>
+									role="button" data-toggle="modal"><span>Free SignUp</span></a></li>
 							</ul>
 						</div>
 					</nav>
@@ -337,17 +77,23 @@
 														placeholder="password" id="password" >
 												</div>
 											</div>
-
+											<span class="invalid-error"></span>
+											<div class="forgotpasswordlink">
+												<a href="#" id="forgot-pass-link">Forgot Password</a>
+											</div>
+											<div class="clear-fix"></div>			
 											<div class="col-sm-4">
 												<div class="checkbox">
 													<label> <input type="checkbox"> Remember me
 													</label>
 												</div>
 											</div>
-
-
+											
 											<div class="login-btn">
 												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
 											</div>
 											<div class="clear-fix"></div>
 										</form>
@@ -356,6 +102,42 @@
 							</div>
 						</div>
 					</div>
+					
+											<!-- ********************* This is for the forget Password model *********************************** -->
+					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content forgetPass-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+								</div>
+								<div class="modal-body" id="forgetpass-modal">
+									<div class="form-box">
+										<form class="form-horizontal forgetPass-form" id="forgetPass-form"
+											role="form" name="forgetPass-form">
+											
+											<div class="form-group">
+												<label for="email" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="email" class="form-control" name="email"
+														placeholder="email" id="email" >
+												</div>
+											</div>
+											
+											<div class="login-btn">
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -386,70 +168,55 @@
 								
 									<form class="form-horizontal" role="form" id="register-form">
 										<div class="form-group radio">
-											<label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="supplier">Supplier
-											</label> <label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="contractor">Contractor
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I have equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> 
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I need Equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Client
 											</label>
 										</div>
 										<div class="form-group">
 											<label for="firstname" class="sr-only"> FirstName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="firstname"
-													placeholder="Firstname" id="firstName">
+													placeholder="First Name/Company Name" id="firstName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="lastname" class="sr-only"> LastName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="lastname"
-													placeholder="Lastname" id="lastName">
+													placeholder="Last Name" id="lastName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="username" class="sr-only"> Email </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="register-username"
-													placeholder="email" name="username">
+													placeholder="Personal/Company Mail Id" name="username">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="password" class="sr-only"> Password </label>
 											<div class="col-sm-12">
 												<input type="password" class="form-control" id="register-password"
-													placeholder="password" name="password">
+													placeholder="Enter new password" name="password">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="mobile" class="sr-only"> Mobile </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="mobile"
-													placeholder="mobile" name="mobileNumber">
+													placeholder="Enter 10 digit mobile Number" name="mobileNumber">
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="constitution" class="sr-only">
-												Constitution </label>
+											<label for="location" class="sr-only">
+												Location/City </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control"
-													placeholder="Constitution" id="constitution"
-													name="constitution">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="website" class="sr-only"> Website </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="website"
-													class="form-control" id="website" name="website">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="company_individual_profile" class="sr-only">
-												Company Profile </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="Company profile"
-													class="form-control" id="company_individual_profile"
-													name="company_individual_profile">
+													placeholder="Location/City" id="location"
+													name="location">
 											</div>
 										</div>
 										
@@ -482,7 +249,7 @@
 			<div class="category-row-two"></div>
 		</div>
 	</div>
-	<div class="sub-footer">
+<div class="sub-footer">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
@@ -497,13 +264,9 @@
 					<div class="middle">
 						<h3>Quick Links</h3>
 						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">About
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Contact
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -519,35 +282,363 @@
 								href="mailto:info@congun.com">info@congun.com</a></li>
 						</ul>
 						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="collapse navbar-collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Copyright Congun</a></li>
-						<li><a href="#">Terms and Conditions</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('[data-toggle="tooltip"]').tooltip()
+		
+		var loginform_submit = false;
+		var	registerform_submit = false;
+		loginform_submit = validateOnFocusout($("#login-form"));
+		
+
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
+
+			for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+			}
+			}
+			};					
+
+		var category = getUrlParameter('category');
+					
+						
+						$('#modal-container-login').on('hidden.bs.modal', function(){
+							console.log("clearing the fields");
+						    $(this).find('form')[0].reset();
+						    $('.invalid-error').html("");
+						});
+						
+						$('#modal-container-register').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						});
+						
+						$('#re-link').click(function(e){
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-register').modal('show');
+						});
+						
+						$("#register-form").on("keypress",function(e){
+							if(e.which === 13)
+							$.register($("#register"));
+						});
+						
+						
+						$("#register").click(function() {
+							
+							$.register($(this));
+							
+							});
+						
+						$('#register-username').focusout(function(){
+							$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+							$('#register-username').next('span').remove();
+						});
+						
+						$.register = function($this){
+							var success = "successfully created";
+							var successUrl = "#modal-container-login";
+							var data = JSON.stringify($("#register-form").serializeObject());
+							console.log(data);
+							registerform_submit = $.validateRegisterForm($this);
+							if(registerform_submit){
+							 $.ajax({
+							url : AppData.relativeUrl+"user/register",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+							success : function(data) {
+							if (data.search("UF01") != -1) {
+								console.log(data);
+								$('#register-username').parents('.form-group').addClass('has-error has-feedback');
+								if($('#register-username').next('span').length == 0){
+									$("<span class='error-message' style='color:red'>Username already exists</span>").insertAfter($('#register-username'));
+								}
+							} else {
+							console.log("inside if");
+							$('#modal-container-register').modal('hide');
+							$('#modal-success-dialog').modal('show');
+							$('#modal-success-dialog').on('shown.bs.modal', function() {
+								setTimeout(function(){
+									$('#modal-success-dialog').modal('hide');},2000
+								);
+								$('#modal-success-dialog').on('hidden.bs.modal', function() {
+				    			 $('#modal-container-login').modal('show');
+				    			 //history.back();	    
+								});
+				    		});  
+							console.log("register modal closed");
+							console.log("opening login modal");
+							
+							//$(location).attr('href',"user/index.html");
+							}
+							}
+							});
+							}
+				
+						};
+						
+						
+						$("#login-form").on("keypress",function(e){
+							if(e.which == 13){
+								$.login($("#login-btn"));
+							}
+						});
+						
+						$("#login-btn").click(function(e) {
+						console.log("inside login function");
+							$.login($(this));
+						});
+						
+						
+$(".invalid-error").hide();
+						
+						$.login = function($this){
+							var data = JSON.stringify($("#login-form").serializeObject());
+							console.log(data);
+							loginform_submit = validateOnClick($this);
+							if(loginform_submit){
+							console.log("button submiittteed");
+							$.ajax({
+							url : AppData.relativeUrl+"user/login",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+															// datatype : "json",  
+							success : function(response) {
+							if(response === "UF01"){
+								//this is here where we need to update the modal
+								$(".invalid-error").show();
+								$('.invalid-error').html("Invalid Credentials....!!!. please try again...");
+								$('#username').focusin(function(){
+									$('.invalid-error').html("");
+								});
+								
+								$('#password').focusin(function(){
+									$('.invalid-error').html("");
+								});
+								
+							}else{
+							
+							console.log("got user from userAPI",response.username);
+							$('#modal-container-login').modal('hide');
+							if (typeof (Storage) !== "undefined") {
+							$.setUser(response);
+							} else {
+							console.log(" no storage available");
+							}
+							response = $.parseJSON(response);
+							
+							if (response.role === "supplier") {
+								if (typeof (Storage) !== "undefined") {
+							user = $.getUser();
+								}else{
+									
+								}
+							console.log(user);
+							if (user !== null) {
+							$(location).attr('href',"user/supplier-profile.html");
+							}
+							} else if (response.role === "contractor") {
+								if (typeof (Storage) !== "undefined") {
+								user = $.getUser();
+								}else{
+									
+								}
+								console.log(user);
+								if (user !== null) {
+								$(location).attr('href',"user/contractor-profile.html");
+								}																//$(location).attr('href',"index.html");
+							}
+							}
+							}
+
+							});
+								}
+						};
+						
+						
+						var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+							+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+							+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+							+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+							+'</div><div class="clear-fix"></div></form></div>';
+						
+						
+						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+						    $(this).find('form')[0].reset();
+						    $('#forgetpass-modal').html("");
+						    $('#forgetpass-modal').html(forgetPassForm);
+						});
+						
+						$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
+							$('.error-msg').html("");
+						});
+						
+						$('#forgot-pass-link').click(function(e){
+							e.preventDefault();
+							$('#modal-container-login').modal('hide');
+							$('#modal-container-forgetPass').modal('show');
+						});	
+						
+						$('#forgetpass-modal').on("click","#forgetPass",function(e){
+							e.preventDefault();
+							var data = $("#forgetPass-form").serializeObject();
+							console.log(data);
+								var email = data.email;
+								data = JSON.stringify(data);
+								 $.ajax({
+										url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+										type : "put",
+										contentType : "application/json; charset=utf-8",
+										data : {},
+										success : function(response) {
+											if(response.indexOf("UPEE01") >= 0){
+												$('#forgetpass-modal').html("<p>This is not a registered email! please provide a registered mail id</p>")
+											}else{
+												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+											}
+											console.log(response);
+											}
+										});
+							
+						});
+			
+						var equipment = '';
+						var Earth_Moving = ['Backhoe Loaders','Excavators','Motor Graders','Wheel Loaders','Track Loaders','Chain Dozers','Wheel Dozers','Steer Loaders' ];
+						var Cranes = [ 'Crawler Cranes', 'Mobile Cranes','Tower Cranes' ];
+						var Generator_and_Compressor = [ 'Generator Set','Mobile Generator','Air Compressor'];
+						var Aerial_and_Material_Lifts = ['Telehandlers','Material Lifts','Boom Lifts','Scissor Lifts','Vertical Lifts'];
+						var Batch_and_Crusher_Plant = [ 'Batching Plant','Crusher Plant'];
+						var Cement_Mixer_and_Pumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
+						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Rollers','Single Drum Rollers'];
+						var Dump_Trucks = [ 'Heavy Dumpers','Tippers'];
+						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
+
+						/*if(category === 'earthMovingEquipment'){
+							equipment = earthMovingEquipment;
+						}
+						else 
+						if(category === 'cranes'){
+						equipment = cranes;
+						}*/
+						
+						console.log(category);
+						
+						switch (category) {
+						case 'Earth_Moving':
+							equipment = Earth_Moving;
+							break;
+						case 'Cranes':
+							equipment = Cranes;
+							break;
+						case 'Generator_and_Compressor':
+							equipment = Generator_and_Compressor;
+							break;
+						case 'Aerial_and_Material_Lifts':
+							equipment = Aerial_and_Material_Lifts;
+							break;
+						case 'Batch_and_Crusher_Plant':
+							equipment = Batch_and_Crusher_Plant;
+							break;
+						case 'Cement_Mixer_and_Pumps':
+							equipment = Cement_Mixer_and_Pumps;
+							break;
+						case 'Road_Compactors':
+							equipment = Road_Compactors;
+							break;
+						case 'Dump_Trucks':
+							equipment = Dump_Trucks;
+							break;
+						case 'Drillers':
+							equipment = Drillers;
+							break;
+
+						}
+						//category = $.parseJSON(earthMovingEquipment);
+						console.log("category", category);
+						console.log("equipment", equipment);
+						var count = 1;
+						var html = "";
+						
+				$.each(equipment,function(index, value) {
+											var name = value;
+											var imagePath = 'images/'
+													+ category + '/' + name
+													+ '.png';
+											console.log(imagePath);
+											var firstDiv = "<div class='row'>";
+											var firstDivClose = "</div>";
+											if (count === 1) {
+												html += firstDiv;
+											}
+											var col = "<div class='col-md-3 col-sm-12'>"
+													+ "<img src='"+imagePath+"' class='category-img' id='"+value+"' height='170px' width='200px'/><button class='btn img-btn'>"
+													+ value + "</button></div>";
+											html += col;
+											if (equipment.length <= 4) {
+												if (count === equipment.length) {
+													html += firstDivClose;
+													count = 0;
+												}
+											} else {
+												if (count === 4) {
+													html += firstDivClose;
+													count = 0;
+												}
+											}
+											count++;
+										});
+						console.log(html);
+
+						$(".category-row-one").append(html);
+
+						$('.category-img').click(
+								function() {
+									var sub_ctg = this.id;
+									$(location).attr(
+											'href',
+											"requirement-display.html?category="
+													+ category
+													+ "&sub-category="
+													+ sub_ctg);
+								});
+
+					});
+</script>
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
 </body>
 </html>

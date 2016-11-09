@@ -8,171 +8,14 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-<!-- <link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/congun.css">
 <link rel="stylesheet" href="css/requirement-display.css">
     <link rel="stylesheet" href="css/requirement-view.css">
     <link rel="stylesheet" href="css/custom.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/appProperties.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		/* to get parameters from a url */
-		var getUrlParameter = function getUrlParameter(sParam) {
-		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-		        sURLVariables = sPageURL.split('&'),
-		        sParameterName,
-		        i;
-
-		    for (i = 0; i < sURLVariables.length; i++) {
-		        sParameterName = sURLVariables[i].split('=');
-
-		        if (sParameterName[0] === sParam) {
-		            return sParameterName[1] === undefined ? true : sParameterName[1];
-		        }
-		    }
-		};
-		
-			
-		
-		var category = getUrlParameter("category");
-		var sub_ctg = getUrlParameter("sub-category"); 
-		var reqId = getUrlParameter("aaadd4eejryfjksss48855knkjdsf3akd839k");
-		
-		
-		console.log("reqId ",reqId);
-		
-		$.ajax({
-			url:AppData.relativeUrl+"contractor/contractorRequirement/"+reqId,
-			type:"get",
-			contentType : "application/json; charset=utf-8",
-			data : {},
-			/* datatype : "json",  */
-			success:function(response){
-				console.log(response);
-				var requirement = $.parseJSON(response);
-				console.log(requirement);
-				
-				$('#title').html(requirement.title);
-				$('#category').html(requirement.equipmentCategory);
-				$('#sub-category').html(requirement.equipmentName);
-				$('#model').html(requirement.specificationModel);
-				$('#mfg').html(requirement.manufacturer);
-				$('#mfg-year').html(requirement.equipmentManufactureYear);
-				$('#desc').html(requirement.workDescription);
-				$('#created-by').html(requirement.contractorName);
-				$('#created-on').html(requirement.createdTime);
-				$('#duration').html(requirement.duration+" months");
-				//$('#contact').html(user.mobileNumber);
-				$('#start-date').html(requirement.startDate);
-			}
-			
-		});	
-		 
-		$('#modal-container-login').on('hidden.bs.modal', function(){
-			console.log("clearing the fields");
-		    $(this).find('form')[0].reset();
-		});
-		
-		$('#modal-container-register').on('hidden.bs.modal', function(){
-		    $(this).find('form')[0].reset();
-		});
-			
-		
-			
-	$("#register").click(function() {
-	var success = "successfully created";
-	var successUrl = "#modal-container-login";
-	var data = JSON.stringify($("#register-form").serializeObject());
-	console.log(data);
-
-	$.ajax({												
-	url : AppData.relativeUrl+"user/register",
-	type : "post",
-	contentType : "application/json; charset=utf-8",
-	data : data,
-	success : function(data) {
-	if (data.search("UF01") != -1) {
-	}else{
-		console.log("inside if");
-	$('#modal-container-register').modal('hide');
-	console.log("register modal closed");
-	console.log("opening login modal");
-	$('#modal-container-login').modal('show');
-	$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-	}
-	}
-	});
-	});
-	
-	
-	$("#login-btn").click(function() {
-	console.log("inside login function");
-	
-	var data =JSON.stringify($("#login-form").serializeObject()); 
-	console.log(data);
-	    
-	$.ajax({
-		url:AppData.relativeUrl+"user/login",
-		type:"post",
-		contentType : "application/json; charset=utf-8",
-		data : data,
-		/* datatype : "json",  */
-		success:function(response){
-			console.log(response);
-			response = $.parseJSON(response);
-			console.log("got user from userAPI",response.username)
-			if (typeof (Storage) !== "undefined") {
-				sessionStorage.setItem("user",JSON.stringify(response));
-				} else {
-				console.log(" no storage available");
-				}
-			if(response.role === "supplier"){
-				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-			}else if(response.role === "contractor"){
-				$(location).attr('href',"user/requirement-view.html?category="+category+"&sub-category="+sub_ctg);
-			}
-		}
-		
-	});
-    });
-	
-		
-		
-		$('.logout').click(function(){
-		       console.log("inside logout function")
-		       var user = sessionStorage.getItem("user");
-		        if(user !== null){
-		            sessionStorage.removeItem("user");
-		        }
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
-		 });	
-		
-		});    
-    </script>
-    <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>    
+    
 </head>
 <body>
     <div class="nav-wrapper">
@@ -187,31 +30,19 @@
 										class="icon-bar"></span> <span class="icon-bar"></span> <span
 										class="icon-bar"></span>
 								</button>
-								<a class="navbar-brand" href="#"> <img id="nav-logo"
+								<a class="navbar-brand" href="index.html"> <img id="nav-logo"
 									src="images\logo.png" height="75px" width="200px" />
 								</a>
 							</div>
 							<div class="collapse navbar-collapse" id="navbar-collapse">
 								<ul class="nav navbar-nav navbar-right" id="navigation-right">
-									<li class="active"><a href="#"><span>About Us</span></a></li>
-									<li><a href="#"><span>Contact</span></a></li>
-									<li class="dropdown"><a href="#" class="dropdown-toggle"
-										data-toggle="dropdown"><span>Services<strong
-												class="caret"></strong></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="#"><span>Rentals</span></a></li>
-											<li><a href="#"><span>Sales</span></a></li>
-											<li><a href="#"><span>Machinary Services</span></a></li>
-											<li class="divider"></li>
-											<li><a href="#"><span>Get a Quote</span></a></li>
-											<li class="divider"></li>
-											<li><a href="#"><span>Misc</span></a></li>
-										</ul></li>
+									<li class="active"><a href="used-equipment.html"><span>Used-Equipment</span></a></li>
+									<li><a href="contact.html"><span>Contact</span></a></li>
 									<li><a id="modal-login" href="#modal-container-login"
 										role="button" data-toggle="modal"><span>Login</span></a></li>
 									<li><a id="modal-register"
 										href="#modal-container-register" role="button"
-										data-toggle="modal"><span>Register</span></a></li>
+										data-toggle="modal"><span>Free SignUp</span></a></li>
 								</ul>
 							</div>
 						</nav>
@@ -245,7 +76,11 @@
 														placeholder="password" id="password" >
 												</div>
 											</div>
-
+											<span class="invalid-error"></span>
+											<div class="forgotpasswordlink">
+												<a href="#" id="forgot-pass-link">Forgot Password</a>
+											</div>
+											<div class="clear-fix"></div>
 											<div class="col-sm-4">
 												<div class="checkbox">
 													<label> <input type="checkbox"> Remember me
@@ -253,9 +88,11 @@
 												</div>
 											</div>
 
-
 											<div class="login-btn">
 												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
 											</div>
 											<div class="clear-fix"></div>
 										</form>
@@ -264,6 +101,43 @@
 							</div>
 						</div>
 					</div>
+					
+											<!-- ********************* This is for the forget Password model *********************************** -->
+					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content forgetPass-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+								</div>
+								<div class="modal-body" id="forgetpass-modal">
+									<div class="form-box">
+										<form class="form-horizontal forgetPass-form" id="forgetPass-form"
+											role="form" name="forgetPass-form">
+											
+											<div class="form-group">
+												<label for="email" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="email" class="form-control" name="email"
+														placeholder="email" id="email" >
+												</div>
+											</div>
+											
+											<div class="login-btn">
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
 					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -294,70 +168,55 @@
 								
 									<form class="form-horizontal" role="form" id="register-form">
 										<div class="form-group radio">
-											<label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="supplier">Supplier
-											</label> <label class="radio-inline"> <input type="radio"
-												id="role" name="role" value="contractor">Contractor
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I have equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> 
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I need Equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Client
 											</label>
 										</div>
 										<div class="form-group">
 											<label for="firstname" class="sr-only"> FirstName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="firstname"
-													placeholder="Firstname" id="firstName">
+													placeholder="First Name/Company Name" id="firstName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="lastname" class="sr-only"> LastName </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="lastname"
-													placeholder="Lastname" id="lastName">
+													placeholder="Last Name" id="lastName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="username" class="sr-only"> Email </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="register-username"
-													placeholder="email" name="username">
+													placeholder="Personal/Company Mail Id" name="username">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="password" class="sr-only"> Password </label>
 											<div class="col-sm-12">
 												<input type="password" class="form-control" id="register-password"
-													placeholder="password" name="password">
+													placeholder="Enter new password" name="password">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="mobile" class="sr-only"> Mobile </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" id="mobile"
-													placeholder="mobile" name="mobileNumber">
+													placeholder="Enter 10 digit mobile Number" name="mobileNumber">
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="constitution" class="sr-only">
-												Constitution </label>
+											<label for="location" class="sr-only">
+												Location/City </label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control"
-													placeholder="Constitution" id="constitution"
-													name="constitution">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="website" class="sr-only"> Website </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="website"
-													class="form-control" id="website" name="website">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="company_individual_profile" class="sr-only">
-												Company Profile </label>
-											<div class="col-sm-12">
-												<input type="text" placeholder="Company profile"
-													class="form-control" id="company_individual_profile"
-													name="company_individual_profile">
+													placeholder="Location/City" id="location"
+													name="location">
 											</div>
 										</div>
 										
@@ -380,19 +239,19 @@
     <div class="content-main">
     <div class="container">
         <div class="row">
+         <a href="#" class="btn btn-warning post-req-btn hide">Post
+					Requirement</a>
             <h2>Requirement List</h2>
-            <div class="col-md-2 filter"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 filter"></div>
             <div class="col-md-8 view-item">
                 <div class="item-content">
                     <div class="header">
-                        <h4>Title</h4>
-                        <h5 id="title">This is the place where the title of the requirement will be posted</h5>
-                        <img src="images/EarthMoving/backhoe.png" height="200px" width="200px" class="left"/>
+                        <h4 id="title">This is the place where the title of the requirement will be posted</h4>
+                        <img src="images/Earth_Moving/Backhoe Loaders.png" height="200px" width="200px" class="left"/>
                         <div class="right">
                             <ul>
                                <li><h5>Machine Category</h5><p id="category">Earth Moving</p></li>
                                 <li><h5>Machine Sub-Category</h5><p id="sub-category">Backhoe</p></li>
-                                <li><h5>Model</h5><p id="model">JD-10TON</p></li>
                                 <li><h5>Manufacturer</h5><p id="mfg">JCB</p></li>
                                 <li><h5>Manufacture year</h5><p id="mfg-year">2015</p></li>
                             </ul>
@@ -409,11 +268,14 @@
                                 <div class="col-md-2">
                                     <div class="col-content"><h5>Created by</h5><p id="created-by">some user</p></div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="col-content"><h5>Created on</h5><p id="created-on">10-Dec-2015</p></div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="col-content"><h5>Start date</h5><p id="start-date">15-Dec-2015</p></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-content"><h5>End date</h5><p id="end-date">15-Dec-2015</p></div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
@@ -424,60 +286,371 @@
                             </div>
                         </div>
                     </div>
+                    <div class="quote-section">
+                    <a href="#" class="btn btn-warning quote-btn show">Give Quote</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2 ads"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 ads"></div>
         </div>    
     </div>
     </div>
     <div class="sub-footer">
-    <div class="container-fluid">
- 			<div class="row">
- 				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
-                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
-                    </ul></div></div>
-                <div class="col-md-4">
-                    
-                    <div class="address-content last">
-                        <h3> Address</h3>
-                        <ul class="info">
-                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
-                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
-                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
-                        </ul>
-                        <div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-google-plus" href="#"></a>
-                            <a class="img-circle fa fa-linkedin" href="#"></a>
-                        </div>
-                    </div>
-                </div>
- 			</div>
- 		</div>
-    </div>
- 		<div class="footer">
- 			<div class="row">
- 				<div class="col-md-12">
- 					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Copyright Congun</a></li>
-							<li><a href="#">Terms and Conditions</a></li>	
-							<li><a href="#">Privacy Policy</a></li>	
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+						<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
- 				</div>
- 			</div>
- 		</div>		
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validation.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('[data-toggle="tooltip"]').tooltip()
+		
+		var user;
+		var loginform_submit = false;
+		var	registerform_submit = false;
+		loginform_submit = validateOnFocusout($("#login-form"));
+		
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		var category = getUrlParameter("category");
+		var sub_ctg = getUrlParameter("sub-category"); 
+		var reqId = getUrlParameter("aaadd4eejryfjksss48855knkjdsf3akd839k");
+		console.log("reqId ",reqId);
+		
+		$.ajax({
+			url:AppData.relativeUrl+"contractor/contractorRequirement/"+reqId,
+			type:"get",
+			contentType : "application/json; charset=utf-8",
+			data : {},
+			/* datatype : "json",  */
+			success:function(response){
+				console.log(response);
+				var requirement = $.parseJSON(response);
+				console.log(requirement);
+				
+				$('#title').html(requirement.title);
+				$('#category').html(requirement.equipmentCategory);
+				$('#sub-category').html(requirement.equipmentName);
+				$('#mfg').html(requirement.manufacturer);
+				$('#mfg-year').html(requirement.equipmentManufactureYear);
+				$('#desc').html(requirement.workDescription);
+				$('#created-by').html(requirement.contractorName);
+				$('#created-on').html(requirement.createdTime);
+				$('#duration').html(requirement.duration+" days");
+				//$('#contact').html(user.mobileNumber);
+				$('#start-date').html(requirement.startDate);
+				$('#end-date').html(requirement.endDate);
+			}
+			
+		});	
+		 
+		$('#re-link').click(function(e){
+			$('#modal-container-login').modal('hide');
+			$('#modal-container-register').modal('show');
+		});
+		
+		$('#modal-container-login').on('hidden.bs.modal', function(){
+			console.log("clearing the fields");
+		    $(this).find('form')[0].reset();
+		    $('.invalid-error').html("");
+		});
+		
+		$('#modal-container-register').on('hidden.bs.modal', function(){
+		    $(this).find('form')[0].reset();
+		});
+			
+		
+			
+		$("#register-form").on("keypress",function(e){
+			if(e.which === 13)
+			$.register($("#register"));
+		});
+		
+		
+		$("#register").click(function() {
+			
+			$.register($(this));
+			
+			});
+		
+		$('#register-username').focusout(function(){
+			$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+			$('#register-username').next('span').remove();
+		});
+		
+		$.register = function($this){
+			var success = "successfully created";
+			var successUrl = "#modal-container-login";
+			var data = JSON.stringify($("#register-form").serializeObject());
+			console.log(data);
+			registerform_submit = $.validateRegisterForm($this);
+			if(registerform_submit){
+			 $.ajax({
+			url : AppData.relativeUrl+"user/register",
+			type : "post",
+			contentType : "application/json; charset=utf-8",
+			data : data,
+			success : function(data) {
+			if (data.search("UF01") != -1) {
+				console.log(data);
+				$('#register-username').parents('.form-group').addClass('has-error has-feedback');
+				if($('#register-username').next('span').length == 0){
+					$("<span class='error-message' style='color:red'>Username already exists</span>").insertAfter($('#register-username'));
+				}
+			} else {
+			console.log("inside if");
+			$('#modal-container-register').modal('hide');
+			$('#modal-success-dialog').modal('show');
+			$('#modal-success-dialog').on('shown.bs.modal', function() {
+				setTimeout(function(){
+					$('#modal-success-dialog').modal('hide');},2000
+				);
+				$('#modal-success-dialog').on('hidden.bs.modal', function() {
+    			 $('#modal-container-login').modal('show');
+    			 //history.back();	    
+				});
+    		});  
+			console.log("register modal closed");
+			console.log("opening login modal");
+			
+			//$(location).attr('href',"user/index.html");
+			}
+			}
+			});
+			}
+
+		};
+	
+	$('.post-req-btn').click(function(e){
+		e.preventDefault();
+		if(user !== null && user === "contractor"){
+		console.log("inside click function");
+		console.log("category",category);
+		console.log("sub",sub_ctg);
+		$(location).attr('href',"requirement-form.html?category="+category+"&sub-category="+sub_ctg);
+		}else if(user !== null && user === "supplier"){
+			alert("please contact admin for posting a requirement");
+		}else{
+			$('#modal-container-login').modal('show');
+		}
+	});
+	
+	var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+		+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+		+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+		+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+		+'</div><div class="clear-fix"></div></form></div>';
+	
+	
+	$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+	    $(this).find('form')[0].reset();
+	    $('#forgetpass-modal').html("");
+	    $('#forgetpass-modal').html(forgetPassForm);
+	});
+	
+	$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
+		$('.error-msg').html("");
+	});
+	
+	$('#forgot-pass-link').click(function(e){
+		e.preventDefault();
+		$('#modal-container-login').modal('hide');
+		$('#modal-container-forgetPass').modal('show');
+	});	
+	
+	$('#forgetpass-modal').on("click","#forgetPass",function(e){
+		e.preventDefault();
+		var data = $("#forgetPass-form").serializeObject();
+		console.log(data);
+			var email = data.email;
+			data = JSON.stringify(data);
+			 $.ajax({
+					url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+					type : "put",
+					contentType : "application/json; charset=utf-8",
+					data : {},
+					success : function(response) {
+						if(response.indexOf("UPEE01") >= 0){
+							$('#forgetpass-modal').html("<p>This is not a registered email! please provide a registered mail id</p>")
+						}else{
+							$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+						}
+						console.log(response);
+						}
+					});
+		
+	});
+	
+	$('.quote-btn').click(function(e){
+		e.preventDefault();
+		if(user !== null && user === "supplier"){
+		console.log("inside click function");
+		console.log("category",category);
+		console.log("sub",sub_ctg);
+		$(location).attr('href',"quote-form.html");
+		}else if(user !== null && user === "contractor"){
+			alert("please contact admin to give quotation for a requirement");
+		}else{
+			$('#modal-container-login').modal('show');
+		}
+	});
+	
+	
+	$("#login-form").on("keypress",function(e){
+		if(e.which == 13){
+			$.login($("#login-btn"));
+		}
+	});
+	
+	$("#login-btn").click(function(e) {
+	console.log("inside login function");
+		$.login($(this));
+	});
+	
+	
+	$(".invalid-error").hide();
+	
+	$.login = function($this){
+		var data = JSON.stringify($("#login-form").serializeObject());
+		console.log(data);
+		loginform_submit = validateOnClick($this);
+		if(loginform_submit){
+		console.log("button submiittteed");
+		$.ajax({
+		url : AppData.relativeUrl+"user/login",
+		type : "post",
+		contentType : "application/json; charset=utf-8",
+		data : data,
+										// datatype : "json",  
+		success : function(response) {
+		if(response === "UF01"){
+			//this is here where we need to update the modal
+			$(".invalid-error").show();
+			$('.invalid-error').html("Invalid Credentials....!!!. please try again...");
+			$('#username').focusin(function(){
+				$('.invalid-error').html("");
+			});
+			
+			$('#password').focusin(function(){
+				$('.invalid-error').html("");
+			});
+			
+		}else{
+		
+		console.log("got user from userAPI",response.username);
+		$('#modal-container-login').modal('hide');
+		if (typeof (Storage) !== "undefined") {
+		$.setUser(response);
+		} else {
+		console.log(" no storage available");
+		}
+		response = $.parseJSON(response);
+		
+		if (response.role === "supplier") {
+			if (typeof (Storage) !== "undefined") {
+		user = $.getUser();
+			}else{
+				
+			}
+		console.log(user);
+		if (user !== null) {
+		$(location).attr('href',"user/supplier-profile.html");
+		}
+		} else if (response.role === "contractor") {
+			if (typeof (Storage) !== "undefined") {
+			user = $.getUser();
+			}else{
+				
+			}
+			console.log(user);
+			if (user !== null) {
+			$(location).attr('href',"user/contractor-profile.html");
+			}																//$(location).attr('href',"index.html");
+		}
+		}
+		}
+
+		});
+			}
+	};
+	
+	
+		});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
     </body>
 </html>

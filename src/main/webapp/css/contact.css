@@ -1,0 +1,159 @@
+#nav-logo{
+	margin-top:-5px;
+}
+
+#navigation-right{
+	margin-top:15px;
+}
+
+p {
+    color: #666;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 22px;
+    margin: 0;
+}
+ 
+
+strong, b {
+	font-family: 'Open-sans ',sans-serif; 
+	font-weight: 600;
+}
+
+p strong {
+	font-weight: 600;
+}
+
+.accent-color-bg {
+	color: #fff;
+}
+
+.fittext {
+	font-size: 38px;
+	font-weight: 300;
+	line-height: 1.6em;
+    margin-bottom: 35px;
+	color: rgba(0,0,0, 0.8);
+}
+
+.fittext strong {
+	font-weight: 700;
+}
+
+.page-content p {
+	margin-bottom: 15px;
+}
+
+.wite-text {
+	color: #fff;
+}
+
+
+#content {
+	padding: 60px 0;
+}
+
+#content.full-sections {
+	padding: 0;
+}
+
+#container {
+    background-color: #fff;
+}
+
+
+
+#contact-form input[type="text"],
+#contact-form textarea,
+#respond input[type="text"],
+#respond textarea, .email {
+    color: #666fb5;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid #c9cbcc;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    outline: none;
+    width: 100%;
+    padding: 7px 14px;
+    display: block;
+    margin-bottom: 10px;  
+	transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+
+#contact-form input[type="text"]:focus,
+#contact-form textarea:focus,
+#respond input[type="text"]:focus,
+#respond textarea:focus {
+	border-color: #ddd;
+	box-shadow: 0 0 3px #eee;
+	-o-box-shadow: 0 0 3px #eee;
+	-moz-box-shadow: 0 0 3px #eee;
+  	-webkit-box-shadow: 0 0 3px #eee;
+}
+
+
+/*************** Heading Titles ***************/
+
+.classic-title {
+	margin-bottom: 16px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #eee;
+    font-weight: 300;
+}
+
+
+.classic-title span {
+	padding-bottom: 8px;
+	border-bottom: 1px solid;
+	font-weight: 400;
+}
+
+.big-title {
+	margin-bottom: 20px;
+}
+
+.big-title h1, .big-title h2 {
+	font-size: 26px;
+	line-height: 32px;
+	font-weight: 300;
+}
+
+.big-title h1 strong, .big-title h2 strong {
+	font-weight: 400;
+}
+
+.big-title .title-desc {
+	font-size: 16px;
+	line-height: 22px;
+	color: #666;
+}
+
+.big-title h2 + .title-desc, .big-title h1 + .title-desc {
+	margin-top: 4px;
+}
+
+.navbar-collapse {
+	max-height: 340px;
+}
+
+.contact-btn{
+	border: none;
+    border-radius: 0px;
+    background-color: #ffc13b;
+    color:#fff;
+}
+
+.contact-btn:hover{
+	background-color: #eaae2c;
+    color:#fff;
+}
+
+.icons-list{
+	list-style:none;
+}

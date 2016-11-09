@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.congun.web.dao.MachineDAO;
-import com.congun.web.dao.UserDao;
 import com.congun.web.model.Machines;
-import com.congun.web.model.User;
 import com.congun.web.util.ApplicationUtil;
 import com.congun.web.util.ResponseConstants;
 
@@ -45,6 +43,33 @@ public class MachineService {
 	public String getSearchResults(String value) {
 		logger.info("Entered into MachineService.getSearchResults method Search value:"+value);
 		List<Machines> machine = machineDao.getSearchResults(value);
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
+	public String getAllModels() {
+		logger.info("Entered into MachineService.getAllModels method");
+		List<Machines> machine = machineDao.getDistinctModels();
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
+	public String getAllManufacturers() {
+		logger.info("Entered into MachineService.getAllManufacturers method");
+		List<Machines> machine = machineDao.getAllManufacturers();
+		if(machine != null){
+			return ApplicationUtil.getJsonResponse(machine);	
+		}else
+			return ResponseConstants.MACHINE_FAILURE_CODE;
+	}
+
+	public String getModelsByMake(String make) {
+		logger.info("Entered into MachineService.getModelsByMake method make:"+make);
+		List<Machines> machine = machineDao.getModelsByMake(make);
 		if(machine != null){
 			return ApplicationUtil.getJsonResponse(machine);	
 		}else

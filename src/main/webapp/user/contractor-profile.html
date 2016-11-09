@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/profile.css">
+
+
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="..\images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								   <li><a href="contractor-profile.html"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="contractor-profile.html"><span>Profile</span></a></li>
+									<li><a href="contractor-dashboard.html"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+			<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a class="active" href="contractor-profile.html">Profile</a></li>
+						<li><a href="contractor-dashboard.html">Rental board</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<!-- <div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div> -->
+				</div>
+		   </div>
+		  </div>
+		  <div class="container">
+		  	<div class="row first-row">
+		  		<div class="col-md-7">
+					<div class="first-info">
+						<h5>Get Equipment on Rent: </h5>
+						<p>Click on Rental Board → Post Requirement → Click on Quotes → Shortlist to get details → Finalize deal.</p>
+					</div>
+					<div class="second-info">
+						<h5>To Buy Used Equipment: </h5>
+						<p>Click on used Equipment → select from List → click on interest to get contact details → Finalize deal</p>
+					</div>
+					<div class="third-info">
+						<h5>To Sell Used Equipment:</h5>
+						<p>Click on used Equipment → click on Sell my equipment → click on submit new post → Add equipment details → view interested people → select and sell equipment.</p>
+					</div>
+				</div>
+		  		<div class="col-md-4">
+		  			<div class="profile-card">
+		  			<a href="#edit-profile" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
+		  			<div class="clear-fix"></div>
+		  			<div class="profile-data">
+		  				<i class="fa fa-user"></i>
+		  				<ul>
+		  					<li>Welcome back</li>
+		  					<li><h2 id="user-name">User</h2></li>
+		  				</ul>
+		  				<div class="clear-fix"></div>
+		  				</div>
+		  				<div class="profile-progress-bar">
+		  					<p>Complete your profile</p>
+		  					<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+    								25%
+  								</div>
+							</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div class="row second-row col-dynamic">
+		  	
+		  	</div>
+		  	<div class="row third-row">
+		  		<div class="col-md-7">
+		  				<h3>Popular Feeds</h3>
+		  				<div class="newsfeed">
+		  				<div class="media">
+							<div class="media-left">
+								<a href="#">
+								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
+								</a>
+							</div>
+						 <div class="media-body">
+						  		<h3>Client 1</h3>
+						  		<p class="posted-date">posted on : 1 week ago</p>
+						  		<p>This is the description/title of the requirement to be displayed</p>
+						  </div>
+					</div><!-- end of media -->
+					<div class="media">
+							<div class="media-left">
+								<a href="#">
+								  <img class="media-object" src="http://placehold.it/100x100" alt="...">
+								</a>
+							</div>
+						 <div class="media-body">
+						  		<h3>Client 1</h3>
+						  		<p class="posted-date">posted on : 1 week ago</p>
+						  		<p>This is the description/title of the requirement to be displayed</p>
+						  </div>
+					</div><!-- end of media -->
+		  			</div>
+		  		</div>
+		  		<div class="col-md-4"></div>
+		  	</div>
+		  </div>
+				
+	</div>
+  <div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+						<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<!-- starting the js here -->
+ 		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/appProperties.js"></script>
+
+ 		
+ 		<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="edit-profile" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+								</div>
+								<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="register-form">
+										
+										<div class="form-group">
+											<label for="firstname" class="sr-only"> FirstName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="firstname"
+													placeholder="Firstname" id="firstName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lastname" class="sr-only"> LastName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="lastname"
+													placeholder="Lastname" id="lastName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="username" class="sr-only"> Email </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="username"
+													placeholder="email" name="username" disabled>
+											</div>
+										</div>
+						<input type="hidden" id="password" name="password">
+						<input type="hidden" id="role" name="role">
+						<input type="hidden" id="userId" name="userId">
+						<input type="hidden" id="email" name="username">
+						
+
+						<div class="form-group">
+											<label for="mobile" class="sr-only"> Mobile </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="mobile"
+													placeholder="mobile" name="mobileNumber">
+											</div>
+										</div>
+										<!-- <div class="form-group">
+											<label for="constitution" class="sr-only">
+												Constitution </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control"
+													placeholder="Constitution" id="constitution"
+													name="constitution">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="website" class="sr-only"> Website </label>
+											<div class="col-sm-12">
+												<input type="text" placeholder="website"
+													class="form-control" id="website" name="website">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="company_individual_profile" class="sr-only">
+												Company Profile </label>
+											<div class="col-sm-12">
+												<input type="text" placeholder="Company profile"
+													class="form-control" id="company_individual_profile"
+													name="company_individual_profile">
+											</div>
+										</div> -->
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="update" class="btn btn-next modal-btn">update</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="enquire">
+		<div class="enquire-header">
+		<h4 class="float-left">Leave a msg</h4>
+		<i class="fa fa-minus float-right"></i>
+		<div class="clear-fix"></div>
+		</div>
+		<form role="form" action="" method="post" class="f1" id="enquire-form">
+			<input type="text" class="form-control" name="name" placeholder="Name">
+			<input type="text" class="form-control" name="Email" placeholder="Email">
+			<input type="text" class="form-control" name="mobile" placeholder="Mobile">
+			<textarea id="description" class="form-control" name="description" rows="3" placeholder="please type in your queries here" ></textarea>
+            <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
+		</form>
+	</div> -->
+ 		
+ 		<script type="text/javascript">
+ 			$(document).ready(function(){
+ 				var user = $.getUser();
+ 				var username = user.firstname+" "+user.lastname;
+ 				$('#user').text(username);
+ 				$('#user-name').text(username);
+ 				
+ 				
+ 				$('.logout').click(function(){
+				        $.ajax({
+		 					url:AppData.relativeUrl+"user/logout",
+		 					type:"post",
+		 					data:{},
+		 					success:function(response){
+		 						var user = localStorage.getItem("user");
+						        if(user !== null){
+						            localStorage.removeItem("user");
+						        }
+						        $(location).attr('href',"../index.html");
+		 					}
+		 					});
+				        
+				 });
+ 				
+ 				var total_user_fields = Object.keys(user).length;
+ 				var user_entered_fields = 0;
+ 				$.each(user,function(index,value){
+ 					if(value !== "undefined" || value !== null || value !== "null" || value !== ""){
+ 					user_entered_fields++;
+ 					}
+ 				});
+ 				
+ 				var profile_percent = (user_entered_fields/total_user_fields)*100; 
+ 				$('.progress-bar').attr('aria-valuenow', profile_percent).css('width',profile_percent+"%");
+ 				$('.progress-bar').html(profile_percent+"%");
+ 				
+ 				$('#userId').val(user.userId);
+ 				$('#firstName').val(user.firstname);
+ 				$('#lastName').val(user.lastname);
+ 				$('#username').val(user.username);
+ 				$('#email').val(user.username);
+ 				$('#password').val(user.password);
+ 				$('#mobile').val(user.mobileNumber);
+ 				$('#role').val(user.role);
+ 				
+ 				$('.modal-btn').click(function() {
+ 					var formData = $("#register-form").serializeObject();
+ 					formData.createdtime = $.date(user.createdtime,2);
+ 					var data = JSON.stringify(formData);
+ 					var temp = $.parseJSON(data);
+ 					temp.createdtime = user.createdtime;
+ 					temp["token"] = user.token;
+ 					temp = JSON.stringify(temp);
+					  $.ajax({
+							url : AppData.relativeUrl+"user/updateuser",
+							type : "put",
+							contentType : "application/json; charset=utf-8",
+							data : data,
+							success : function(response) {
+								if(response === "US01"){
+									localStorage.setItem("user",temp);
+									location.reload();
+									
+								}else{
+									console.log("exception while udpating");
+								}
+							}
+							}); 
+ 				});
+ 				
+ 				
+				var requirements = [];
+ 				
+ 				var newsfeed = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements",
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						$.each(response,function(index,value){
+ 							requirements[value.requirementId] = value;	
+ 							var createdTime = value.createdTime;
+ 							createdTime = $.date(createdTime,1);
+ 							
+ 							var catArr = [];
+						     catArr = value.equipmentCategory.split(" ");
+						     var category = "";
+						     $.each(catArr,function(index,value){
+						    	 if(index === catArr.length-1){
+						    		 category += value;
+						    	 }else{
+						    	 category += value+"_";
+						    	 }
+						     });
+						     var name = encodeURI(value.equipmentName);
+ 							
+ 							newsfeed += '<div class="media"><div class="media-left"><a href="#">'
+ 							+'<img class= "media-object" src=../images/'+category+'/'+name+'.png height=100px width=100px alt='+value.equipment+'/></a></div><div class="media-body">'
+ 							+'<h4>'+value.contractorName+'</h4><p class="posted-date">posted on : '+createdTime+'</p><h4>'+value.quantity+' '+value.equipmentName+' needed on '+$.date(value.startDate,3)+' at '+value.workLocation+'</h4></div></div>';
+ 						});
+ 						$('.newsfeed').html("");
+ 						$('.newsfeed').append(newsfeed);
+ 					}
+ 					});
+ 				
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"contractor/getAllRequirements/"+user.userId,
+ 					/*+user.userId,*/
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						var block = "";
+ 						if(response === null || response === "undefined"){
+ 							block = '<div class="col-md-7"><a href="../requirement-form.html"><span class="fa-stack fa-5x"><i class="fa fa-circle-thin fa-stack-2x"></i>'
+ 							+'<i class="fa fa-plus fa-stack-1x"></i></span><p>Post a new Requirement</p></a></div>'
+ 							+'<div class="col-md-4 right-col"><form class="occupation "><div class="form-group"><label for="occupation">Tell us about your occupation</label>'
+ 							+'<input type="text" class="form-control input-sm" id="occupation" placeholder="occupation"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>'
+ 							+'<div class="col-md-4 right-col"><form class="website"><div class="form-group"><label for="website">Have a website ? <br> Update your/company web address</label>'
+ 							+'<input type="url" class="form-control input-sm" id="website" placeholder="enter your/company website"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>';
+ 						}
+ 						else{
+ 							
+ 							block = '<div class="col-md-7"><div class="col-md-6 col-first"><div class="recent-quotes"><h4>Recent Requirements</h4><ul class="recent-quote-list"></ul>'
+ 							+'</div></div><div class="col-md-6 col-second"><a href="../requirement-form.html">'
+ 							+'<span class="fa-stack fa-5x"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span><p>Post a new requirement</p></a></div></div></div>'
+ 							+'<div class="col-md-4 right-col"><form class="occupation "><div class="form-group"><label for="occupation">Tell us about your occupation</label>'
+ 							+'<input type="text" class="form-control input-sm" id="occupation" placeholder="occupation"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>'
+ 							+'<div class="col-md-4 right-col"><form class="website"><div class="form-group"><label for="website">Have a website ? <br> Update your/company web address</label>'
+ 							+'<input type="url" class="form-control input-sm" id="website" placeholder="enter your/company website"><button type="submit" class="btn btn-default btn-sm">Submit</button></div></form></div>';
+ 						}
+ 						
+			 				$.ajax({
+			 					url:AppData.relativeUrl+"contractor/getLatestRequirements/"+user.userId,
+			 					type:"get",
+			 					data:{},
+			 					success:function(response){
+			 						response = $.parseJSON(response);
+			 						var recentReq = "";
+			 						$.each(response,function(index,value){
+			 							recentReq += '<a href="contractor-dashboard.html"><li>'+value.title+'</li></a>';
+			 						});
+			 						$('.recent-quote-list').append(recentReq);
+			 					}
+			 					});
+ 						
+ 						$('.col-dynamic').html("");
+ 						$('.col-dynamic').append(block);
+ 					}
+ 					});
+ 				
+ 				
+ 			});
+ 		
+ 		</script>
+ 		<script type="text/javascript">
+ 		
+ 		$.fn.serializeObject = function() {
+ 			var o = {};
+ 			var a = this.serializeArray();
+ 			$.each(a, function() {
+ 				if (o[this.name] !== undefined) {
+ 					if (!o[this.name].push) {
+ 						o[this.name] = [ o[this.name] ];
+ 					}
+ 					o[this.name].push(this.value || '');
+ 				} else {
+ 					o[this.name] = this.value || '';
+ 				}
+ 			});
+ 			return o;
+ 		};
+ 		
+ 		$.date = function(dateObject,pattern) {
+ 		    var d = new Date(dateObject);
+ 		    var date = d.toDateString();
+ 		    if(pattern === 1){
+ 		    var dateArr = date.split(" ");
+ 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		    }
+ 		    else if(pattern === 2){
+ 		    	var dateArr = dateObject.split(' ');
+ 		    	var time = dateArr[3].split(':');
+ 		    	var HH = parseInt(time[0])+6;
+ 		    	var mm = parseInt(time[1])+30;
+ 		    	var ss = time[2];
+ 		    	if(dateArr[1].length === 3)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		    	else if(dateArr[1].length === 2)
+ 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		    }else if(pattern === 3){
+ 	 		    var dateArr = dateObject.split("-");
+ 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 				}
+ 		    return date;
+ 		};
+ 		
+ 		$.getMonthName = function(monNum){
+ 			var month;
+ 			if(monNum === "01"){
+ 				month = "Jan";
+ 			}
+ 			else if(monNum === "02"){
+ 				month = "Feb";
+ 			}
+ 			else if(monNum === "03"){
+ 				month = "Mar";
+ 			}
+ 			else if(monNum === "04"){
+ 				month = "Apr";
+ 			}
+ 			else if(monNum === "05"){
+ 				month = "May";
+ 			}
+ 			else if(monNum === "06"){
+ 				month = "Jun";
+ 			}
+ 			else if(monNum === "07"){
+ 				month = "Jul";
+ 			}
+ 			else if(monNum === "08"){
+ 				month = "Aug";
+ 			}
+ 			else if(monNum === "09"){
+ 				month = "Sep";
+ 			}
+ 			else if(monNum === "10"){
+ 				month = "Oct";
+ 			}
+ 			else if(monNum === "11"){
+ 				month = "Nov";
+ 			}
+ 			else if(monNum === "12"){
+ 				month = "Dec";
+ 			}
+ 			return month;
+ 		};
+ 		
+ 		$.getMonth = function(month){
+ 			var monNum;
+ 			month = month.toLowerCase();
+ 			if(month === "jan"){
+ 				monNum = '01';
+ 			}
+ 			else if(month === "feb"){
+ 				monNum = '02';
+ 			}
+ 			else if(month === "mar"){
+ 				monNum = '03';
+ 			}
+ 			else if(month === "apr"){
+ 				monNum = '04';
+ 			}
+ 			else if(month === "may"){
+ 				monNum = '05';
+ 			}
+ 			else if(month === "june"){
+ 				monNum = '06';
+ 			}
+ 			else if(month === "july"){
+ 				monNum = '07';
+ 			}
+ 			else if(month === "aug"){
+ 				monNum = '08';
+ 			}
+ 			else if(month === "sep"){
+ 				monNum = '09';
+ 			}
+ 			else if(month === "oct"){
+ 				monNum = '10';
+ 			}
+ 			else if(month === "nov"){
+ 				monNum = '11';
+ 			}
+ 			else if(month === "dec"){
+ 				monNum = '12';
+ 			}
+ 			
+ 			return monNum;
+ 		};
+ 		
+ 		</script>	
+ 				
+    </body>
+</html>

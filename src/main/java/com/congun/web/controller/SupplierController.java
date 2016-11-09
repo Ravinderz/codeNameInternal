@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.congun.web.model.AddEquipment;
@@ -33,9 +34,11 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="/getquotesbysupplier/{supplierId}" , method=RequestMethod.GET)
-	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId){
+	public 	String getQuotationsBySupplier(@PathVariable("supplierId") long suppId,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into SupplierController.getQuotationsBySupplier method  SupplierId:"+suppId);
-		return supplierService.getQuotationsbySupplier(suppId);	
+		return supplierService.getQuotationsbySupplier(suppId,page,pSize);	
 	}
 	
 	@RequestMapping(value="/getquotes/{quoteId}" , method=RequestMethod.GET)
@@ -45,9 +48,11 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="/getquotesbyrequirement/{requirementId}" , method=RequestMethod.GET)
-	public 	String getQuotationsByRequirement(@PathVariable("requirementId") long requirementId){
+	public 	String getQuotationsByRequirement(@PathVariable("requirementId") long requirementId,
+	@RequestParam(value = "page", defaultValue = "1") int page,
+    @RequestParam(value = "pSize", defaultValue = "5") int pSize){
 		logger.info("Entered into SupplierController.getQuotationsByRequirement method  RequirementId:"+requirementId);
-		return supplierService.getQuotationsbyRequirement(requirementId);	
+		return supplierService.getQuotationsbyRequirement(requirementId,page,pSize);	
 	}
 	
 	@RequestMapping(value="/getnoofquotes/{requirementId}" , method=RequestMethod.GET)
@@ -86,7 +91,23 @@ public class SupplierController {
 		return supplierService.deleteEquipmentById(equipmentId);
 	}
 	
+	@RequestMapping(value="/getquotesbystatus/{requirementId}" , method=RequestMethod.GET)
+	public 	String getQuotationsByStatus(@PathVariable("requirementId") long requirementId,@RequestParam String quoteStatus){
+		logger.info("Entered into SupplierController.getQuotationsByStatus method  requirementId:"+requirementId+"  quoteStatus:"+quoteStatus);
+		return supplierService.getQuotationsByStatus(requirementId,quoteStatus);	
+	}
 	
+	@RequestMapping(value = "/getLatestRequirements/{id}" , method = RequestMethod.GET)
+	public String getTopFiveRequirementsBysupId(@PathVariable Long id){
+		logger.info("Entered into ContractorRequirementController.getTopFiveRequirementsById method  ID:"+id);
+		return supplierService.getTopFiveRequirementsBysupId(id);
+	}
+	
+	@RequestMapping(value = "/checkifquoted" , method = RequestMethod.GET)
+	public String checkIfQuotated(@RequestParam Long suppid,@RequestParam Long reqId){
+		logger.info("Entered to check if Quotation has been posted by Supplied Id"+suppid+" for Requirement id"+reqId);
+		return supplierService.checkIfQuoted(suppid,reqId);
+	}
 	
 
 }

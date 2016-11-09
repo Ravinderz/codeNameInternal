@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Add Equipment</title>
+	<meta name="description" content="Contractor Requirement">
+    <meta name="author" content="congun">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/congun.css">
+		<link rel="stylesheet" href="css/form-elements-style.css">
+		 <link rel="stylesheet" href="css/addusedMachine.css">
+		<link rel="stylesheet" href="css/magic-check.css">
+		<link rel="stylesheet" href="css/profile.css">
+     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/requirement-scripts.js"></script>
+    <script src="js/appProperties.js"></script>
+	<script type="text/javascript">
+        
+$(document).ready(function(){
+	
+		var user = $.getUser();
+		console.log(user);
+		var username = user.firstname+" "+user.lastname;
+			$('#user').text(username);
+			$('#user-name').text(username);
+    	$('#userId').val(user.userId);
+    	$('#userName').val(user.firstname+" "+user.lastname);
+		$('#mobileNumber').val(user.mobileNumber);
+		$('#emailId').val(user.emailId);
+		categoryParam="EarthMoving";
+		equipment="backhoe";
+		manufacturerParam="JCB";
+		modelParam="2DX";
+/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = []
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 0;
+    			console.log(response);
+    			$.each(response,function(index,value){
+    				$("#category").append($("<option />").val(value).text(value));
+    					category[i] = value;
+    					i++
+    			});
+    			console.log("cat",categoryParam);
+    			if(categoryParam !== undefined){
+    			$("#category").val(categoryParam);
+    			}
+    			if(equipment !== undefined ){
+    				$.ajax({
+    					
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				console.log(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    				$("#equipment").append($("<option />").val(value).text(value));
+    	    				
+    	    				});
+    	    				if(equipment !== undefined){
+    	    				$("#equipment").val(equipment);
+    	    				}
+    	    			}
+    	    			});
+    			}else{
+    			$.ajax({
+    			url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+category[0],
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log(equipments);
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				
+    				});
+    			}
+    			});
+    			}
+    		}
+    	});
+    	
+    	/* This function will be called when there is change in the category dropdown */
+    	
+    $("#category").on('change',function(){
+    		var selectedOption = $("#category option:selected").text();
+    		console.log("selected option ",selectedOption);
+    		var url = AppData.relativeUrl+"contractor/getEquipmentByCategory/"+selectedOption; 
+    		console.log("url ",url);
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:{},
+    			success:function(equipments){
+    				equipments = $.parseJSON(equipments);
+    				console.log("equipments ",equipments);
+    				$("#equipment").html("");
+    				$.each(equipments,function(index,value){
+    				$("#equipment").append($("<option />").val(value).text(value));
+    				});	
+    			}
+    				
+    		});
+    	});
+    
+ 
+	
+    $('#user').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-profile.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-profile.html");
+		}
+	});
+	
+	$('.profile').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-profile.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-profile.html");
+		}
+	});
+	
+	$('.dashboard').click(function(e){
+		e.preventDefault();
+		if(user.role === "contractor"){
+			$(location).attr('href',"contractor-dashboard.html");
+		}else if(user.role === "supplier"){
+			$(location).attr('href',"supplier-dashboard.html");
+		}
+	});
+	
+	$('.logout').click(function(){
+	       console.log("inside logout function")
+	        
+	        $.ajax({
+				url:AppData.relativeUrl+"user/logout",
+				type:"post",
+				data:{},
+				success:function(response){
+					var user = localStorage.getItem("user");
+			        if(user !== null){
+			            localStorage.removeItem("user");
+			        }
+			        
+			        console.log("user logged out");
+			        $(location).attr('href',"index.html");
+				}
+				});
+	        
+	 });
+
+	
+
+		
+		$(".uncheck").click(function(){
+		var $label = $(this).parent("label");
+		var $input = $label.prev();
+		console.log($label.html())
+		console.log($input.val());
+		if($input.checked){
+			console.log("inside if ");
+		$input.prop('checked',false);
+		}else{
+			console.log("inside else");
+		}
+		$label.fadeOut('slow');
+	});
+});
+</script>
+
+<script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+</script>
+<script type="text/javascript">
+function setprice(){
+console.log("entered setPrice from left form");
+var value = document.getElementById("pricevalue").value;
+var type = document.getElementById("priceType").value;
+document.getElementById("equipmentprice").value=value+":"+type;
+console.log("Price"+document.getElementById("equipmentprice").value);
+}
+
+function setprice1(){
+console.log("entered setPrice from right form");
+var value = document.getElementById("pricevalue-right").value;
+var type = document.getElementById("priceType-right").value;
+document.getElementById("equipmentprice-right").value=value+":"+type;
+console.log("Price"+document.getElementById("equipmentprice-right").value);
+}
+
+</script>
+
+</head>
+<body>
+   <!-- Top content -->
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="images/logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="index.html"><span>About Us</span></a></li>
+								<li><a href="index.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								   <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="#" class="profile"><span>Profile</span></a></li>
+									<li><a href="#" class="dashboard"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+     <div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-12">
+					<ul class="sub-menu">
+						<li><a href="user/supplier-dashboard.html">Rental board</a></li>
+						<li><a href="user/supplier-profile.html">Profile</a></li>
+						<li><a href="user/used-equipment.html">Used equipment</a></li>
+						<li><a href="#">Review</a></li>
+					</ul>
+				</div>
+		   </div>
+		  </div>
+        <div class="container">
+		<h3 class="text-center text-muted">ADD USED MACHINE FORM</h3>
+    	<div class="row">
+		<div class="col-md-12">
+    	<div class="main-content form-box text-center">
+			<form role="form" method="post" id="addUsedMachine-form" class="f1">
+			<fieldset>
+			<br>
+					<div class="form-group">
+				<label for="selectCategory" class="sr-only">
+						Equipment Category
+					</label>
+                 <select id="category" class="form-control" placeholder="Equipment Category" name="category" >	
+				 </select></div>
+				<div class="form-group">
+				<label for="equipment" class="sr-only">
+						Equipment Name
+					</label>
+                 <select id="equipment" class="form-control" name="equipmentName" placeholder="Equipment Name"></select>
+				 </div>
+				 
+				<div class="form-group">
+				<label for="manufacturer" class="sr-only">
+						Equipment Manufacturer
+					</label>
+                 <input type="text" id="manufacturer" class="form-control" name="manufacturer" placeholder="Equipment Manufacturer Ex: JCB or Hitachi etc.,">	
+				 </div>
+				 <div class="form-group">
+				<label for="yearOfManufacturing" class="sr-only">
+						Year Of Manufacturing
+					</label>
+            <input type="text" id="yearOfManufacturing" class="form-control" name="yearOfManufacturer" placeholder="Year of manufacturing Ex: 2010 (YYYY)">	
+				 </div>
+				 
+				 <div class="form-group">
+				<label for="model" class="sr-only">
+						Model Details
+					</label>
+                 <input type="text" id="model" class="form-control" name="model" placeholder="Model">	
+				 </div>
+				 <div class="form-group">
+				<label for="capacity" class="sr-only">
+						Capacity Details
+					</label>
+                 <input type="text" id="capacity-right" class="form-control" name="capacity" placeholder="Capacity in Ton/Feet/cu.mt Ex: 100Ton">	
+				 </div>
+				 <div class="form-group">
+				<label for="meterreading" class="sr-only">
+						Enter Equipment Meter Reading
+					</label>
+                 <input type="text" id="reading" class="form-control" name="meterReading" placeholder="Current Equipment meter reading">	
+				 </div>
+				  <div class="form-group">
+				 <label for="location" class="sr-only">
+						Enter Location
+					</label>
+                 <input type="text" id="location" class="form-control" name="location" placeholder="Enter Location of your Equipment">
+				 </div>
+				 <div>
+				 <label for="sellingprice" class="sr-only">
+						Enter Selling Price
+					</label>
+                 <input type="text" id="price" class="form-control" name="price" placeholder="Enter Selling Price of Machine in Rupees">
+				 </div>
+				 <div class="form-group">
+				 <label for="description" class="sr-only">Enter Description</label>
+				 <textarea id="description" class="form-control" name="description" rows="15" placeholder="Enter Description about your Machine if any" ></textarea>
+				 </div>
+					 <div class="form-image">
+							<label for="uploadimage" style="padding-left:20px">Click to Upload Images of used machine</label>
+							<button type="button" id="upload-direct" class="btn btn-submit">Upload Images</button>
+							<label class="sublabel">Tip: upload images of front view, back view, meter reading,right & left side view</label>
+					</div>
+					<div class="f1-buttons">
+                                <button type="button"  id="addUsedMachine" class="btn btn-submit">Submit</button>
+                    </div>
+					<input type="hidden" id="userId" name="userId">
+				    <input type="hidden" id="userName" name="userName">
+					<input type="hidden" id="emailId" name="emailId">
+					<input type="hidden" id="mobileNumber" name="contactNo">
+					<input type="hidden"  id="uploadtype" value="usedmachine">
+					<input type="hidden" name="imagesuploaded" id="workareaimages" value="">
+					</fieldset>
+			</form>
+		</div>
+		</div> 	
+		    <div class="modal fade" id="modal-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Equipment Added successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					 <div class="modal fade" id="modal-image-upload" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="modal-close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel" >Add Images</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-box">
+									<form role="form"   class="form-horizontal login-form" id="imageuploadform" enctype="multipart/form-data">
+				
+		        <!--  File to upload: <input type="file" name="file">
+ 
+		           Name: <input type="text" name="name">
+				   <input type="submit" value="Upload" class="btn btn-submit"> Press here to upload the file!-->
+				  
+                          <div class="form-upload">
+							<label for="workareaimages" style="color:black">Attach Images of work Area (select max 5 images)</label>
+							<ul><li><input type="file" name="files" id="upload-image" accept="image/*" multiple="multiple"/></li>
+							<li><input type="hidden" id="senderid" name="uploaderid"> <input type="hidden" id="type" name="type" value="requirement"></li>
+							<li><input type="submit" value= "Upload" id="imageuploader" class="btn btn-submit"><!--<input type="submit" value="Upload" id="imageuploader" class="btn btn-submit"> --> Press here to upload the file!</li>
+							</ul>
+							<label>(You can select multple images to upload at a time)</label>
+                            </div>                            
+					<div class="clear-fix"></div>
+	              </form>
+
+									
+								</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modal-upload-success-dialog" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="modal-close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Images Uploaded successfully ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					</div>
+</div>
+		<div class="sub-footer">
+    <div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-4"><p class="first"><img src="images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
+                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul>
+                	<li><span class="fa fa-angle-right"></span><a href="user/FAQ.html">FAQ</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Contact US</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="#">Privacy Policy</a></li>
+                    <li><span class="fa fa-angle-right"></span><a href="user/Terms.html">Terms and conditions</a></li>
+                    </ul></div></div>
+                <div class="col-md-4">
+
+                    <div class="address-content last">
+                        <h3> Address</h3>
+                        <ul class="info">
+                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
+                        </ul>
+                        <div class="social">
+                           <a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+ 			</div>
+ 		</div>
+    </div>
+
+</body>
+</html>

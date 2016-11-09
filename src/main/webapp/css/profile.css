@@ -1,0 +1,294 @@
+.header{
+    margin-top: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.sub-nav-bar{
+	padding: 10px 0px;
+	margin: 0px -15px;
+	background-color: #202e31;
+}
+
+.sub-nav-bar li{
+	list-style:none;
+	display: inline-block;
+}
+
+.sub-nav-bar li a{
+	list-style:none;
+    color:#fff;
+    padding: 8px 8px;
+    text-decoration: none;
+     transition:all 0.5s ease;
+	-webkit-transition:all 0.5s ease;
+	-ms-transition:all 0.5s ease;
+	-o-transition:all 0.5s ease;
+	-moz-transition:all 0.5s ease;
+}
+
+.sub-nav-bar li a.active{
+    color: #ffc13b;
+	text-decoration: none;
+
+}
+
+.sub-nav-bar li a:hover,
+.sub-nav-bar li a:focus:not(.active){
+    color: #ffc13b;
+	text-decoration: none;
+}
+
+.sub-menu{
+	margin: 0px 120px;
+	padding : 10px 10px 10px 0px;
+	
+}
+
+.first-row{
+	margin-bottom : 15px;
+	margin-top : 20px;
+}
+
+.first-row .col-md-7{
+	/* display : flex;
+	align-items:center;
+	justify-content:center; */
+	height:250px;
+	background-color: #E5E5E5;
+	margin-right:15px;
+	margin-bottom : 15px;
+}
+
+.first-row .col-md-7 span{
+	color:#202e31;
+}
+.first-row .col-md-4{
+	height:270px;
+	background-color: #E5E5E5;
+}
+
+ .second-row{
+	margin-bottom : 15px;
+}
+
+.second-row .col-md-7{
+	display : flex;
+	align-items:center;
+	justify-content:center;
+	height : 400px;
+	background-color : #E5E5E5;
+	margin-right : 15px;
+	margin-top: -20px;
+}
+
+.second-row .col-md-7 a {
+	text-decoration:none;
+}
+
+.second-row .col-first{
+	height : 360px;
+	background-color:white;
+}
+
+.second-row .col-second{
+	display : flex;
+	align-items:center;
+	justify-content:center;
+	height : 360px;
+	background-color:white;
+	color:#202e31;
+	margin-left:15px;
+}
+
+
+.second-row .col-second .fa-plus, .second-row .col-second .fa-circle-thin{
+	color:#202e31;
+}
+
+.second-row .col-second > a > p{
+	color:#202e31;
+	font-size : 20px;
+}
+
+.second-row .col-second > a > span{
+	margin-left:20px;
+}
+
+.second-row .col-md-3{
+	height : 400px;
+	background-color : #E5E5E5;
+	margin-right : 15px;
+	margin-top: -20px;
+}
+
+.second-row .col-md-7 span{
+	margin-left:40px;
+}
+
+.second-row .col-md-7 p{
+	color:#202e31;
+	font-size : 20px;
+}
+
+.second-row .right-col{
+	height : 150px;
+	background-color : #E5E5E5;
+	margin-bottom : 15px;
+}
+
+
+.third-row .col-md-7{
+	height: 600px;
+	background-color : #E5E5E5;
+	margin-right : 15px;
+	margin-bottom : 15px;
+}
+
+.third-row .col-md-4{
+	height : 500px;
+	background-color : #E5E5E5;
+	margin-bottom : 15px;
+	margin-top : -65px;
+} 
+
+.profile-card{
+	margin-top: 10px;	
+}
+
+.fa-edit{
+	float:right;
+	margin-top:10px;
+}
+
+.fa-user{
+	font-size:100px;
+	color : #202e31;
+	margin-top:25px;
+	margin-left:20px;
+}
+
+.profile-card ul{
+	margin-top : -90px;
+	margin-left : 90px;
+	list-style:none;
+}
+
+.profile-card ul li h2{
+	margin-top : 10px;
+}
+
+.profile-progress-bar{
+	margin-top: 20px;
+	margin-left : 20px;
+	margin-right:10px;
+}
+
+.profile-data{
+	margin-bottom:30px;
+}
+
+.progress{
+	border-radius:0px;
+}
+
+.fa-circle-thin,.fa-plus{
+	color:#202e31;
+}
+
+.occupation,.website{
+	margin-top:20px;
+	margin-left : 20px;
+	margin-right:10px;
+}
+
+.occupation input,.website input{
+	border-radius : 0px;
+	margin-bottom : 10px;
+}
+
+.occupation button,.website button{
+	float:right;
+}
+
+.third-row .col-md-7{
+	overflow-y: scroll;
+}
+
+.media{
+	background-color:#fff;
+	padding-bottom:5px;
+	margin-bottom:10px;
+}
+
+.media img{
+	margin-left:10px;
+	margin-top:10px;
+}
+
+.media .posted-date{
+	font-size : 12px;
+	color:grey;
+	padding-top:0px;
+	margin-top:0px;
+	margin-bottom:20px;
+}
+
+.media h3{
+	margin-bottom:5px;
+}
+
+.recent-quotes{
+	margin : 10px;
+	padding:5px;
+}
+
+.recent-quotes ul{
+	padding : 0px;
+}
+
+.recent-quotes ul li {
+	list-style:none;
+	padding:5px;
+	margin-top : 3px;
+	margin-bottom : 2px;
+}
+
+.machines{
+	margin-top:10px;
+}
+
+.machines .media{
+	padding-bottom : 10px;
+}
+
+.heading h3{
+	float:left;
+	color:#202e31
+}
+
+.heading a{
+	float:right;
+	margin-top:28px;
+	margin-bottom : 10px;
+	margin-right : 5px;
+}
+
+
+.machines img{
+	margin-top:20px;
+}
+
+.machines h4{
+	margin-top:20px;
+	margin-bottom:5px;
+}
+
+#update{
+	    margin-right: 20px;
+}
+
+/* changes for infographic */
+
+.first-info,.second-info,.third-info{
+	margin-bottom:30px;
+}

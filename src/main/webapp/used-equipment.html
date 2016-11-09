@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+
+<link rel="stylesheet" href="css/congun.css">
+<link rel="stylesheet" href="css/magic-check.css">
+<link rel="stylesheet" href="css/used-equipment.css">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appProperties.js"></script>
+<script src="js/validation.js"></script>
+
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+									<li class="active"><a href="index.html"><span>Home</span></a></li>
+									<li><a href="contact.html"><span>Contact</span></a></li>
+									<li><a id="modal-login" href="#modal-container-login"
+										role="button" data-toggle="modal"><span>Login</span></a></li>
+									<li><a id="modal-register"
+										href="#modal-container-register" role="button"
+										data-toggle="modal"><span>Free SignUp</span></a></li>
+								</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ********************* This is for the login model *********************************** -->
+					<div class="modal fade" id="modal-container-login" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content login-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Login</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-box">
+										<form class="form-horizontal login-form" id="login-form"
+											role="form" name="login-form">
+											<div class="form-group">
+												<label for="username" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="text" name="username" placeholder="username"
+														class="form-control" id="username" >
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-sm-2 control-label sr-only">
+													Password </label>
+												<div class="col-sm-12">
+													<input type="password" class="form-control" name="password"
+														placeholder="password" id="password" >
+												</div>
+											</div>
+											<span class="invalid-error"></span>
+											<div class="forgotpasswordlink">
+												<a href="#" id="forgot-pass-link">Forgot Password</a>
+											</div>
+											<div class="clear-fix"></div>
+											<div class="col-sm-4">
+												<div class="checkbox">
+													<label> <input type="checkbox"> Remember me
+													</label>
+												</div>
+											</div>
+
+											<div class="login-btn">
+												<button type="button" id="login-btn" class="btn btn-next modal-btn">Login</button>
+											</div>
+											<div class="reg-link float-right">
+												<a href="#" id="re-link">Register</a>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+											<!-- ********************* This is for the forget Password model *********************************** -->
+					<div class="modal fade" id="modal-container-forgetPass" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content forgetPass-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+								</div>
+								<div class="modal-body" id="forgetpass-modal">
+									<div class="form-box">
+										<form class="form-horizontal forgetPass-form" id="forgetPass-form"
+											role="form" name="forgetPass-form">
+											
+											<div class="form-group">
+												<label for="email" class="col-sm-2 control-label sr-only">
+													Email </label>
+												<div class="col-sm-12">
+													<input type="email" class="form-control" name="email"
+														placeholder="email" id="email" >
+												</div>
+											</div>
+											
+											<div class="login-btn">
+												<button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>
+											</div>
+											<div class="clear-fix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal fade" id="modal-success-dialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">Success</h4>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-success" role="alert">Registration successful ...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ************************************* This is for the login model *************************************  -->
+				<!-- ********************* This is for the register model *********************************** -->
+				<div class="modal fade" id="modal-container-register" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content register-modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">Register</h4>
+							</div>
+							<div class="modal-body">
+								
+									<form class="form-horizontal" role="form" id="register-form">
+										<div class="form-group radio">
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I have equipment."> <input type="radio"
+												id="role-supp" name="role" value="supplier" >Supplier
+											</label> 
+											<label class="radio-inline" data-toggle="tooltip" data-placement="top" title="I need Equipment."> <input type="radio"
+												id="role-cont" name="role" value="contractor" >Client
+											</label>
+										</div>
+										<div class="form-group">
+											<label for="firstname" class="sr-only"> FirstName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="firstname"
+													placeholder="First Name/Company Name" id="firstName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="lastname" class="sr-only"> LastName </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="lastname"
+													placeholder="Last Name" id="lastName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="username" class="sr-only"> Email </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="register-username"
+													placeholder="Personal/Company Mail Id" name="username">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="sr-only"> Password </label>
+											<div class="col-sm-12">
+												<input type="password" class="form-control" id="register-password"
+													placeholder="Enter new password" name="password">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="mobile" class="sr-only"> Mobile </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" id="mobile"
+													placeholder="Enter 10 digit mobile Number" name="mobileNumber">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="location" class="sr-only">
+												Location/City </label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control"
+													placeholder="Location/City" id="location"
+													name="location">
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="f1-buttons">
+												<button type="button" id="register" class="btn btn-next modal-btn">Register</button>
+											</div>
+										</div>
+										<div class="clear-fix"></div>
+									</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- register modal ends -->
+	
+
+	<div class="content-main">
+		 	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+		   
+		<div class="used-equip-pagination float-right">
+			<nav aria-label="Page navigation">
+				<ul class="pagination ">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+				</div>
+			</div>
+		 	<div class="row">
+				<div class="col-md-3">
+					<div class="filter-wrapper">
+					<div class="filter-header"><p>Equipment Type</p></div>
+					<div class="filter-content">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							<!--content will be inserted here dynamically  -->
+						</div>
+					</div> <!-- end of filter content -->
+					<div class="filter-header"><p>Manufacturer</p></div>
+					<div class="filter-content manufacturer">
+					<div class="input-wrapper">
+					<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Terex" value="Terex" /><label for="Terex">Terex</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Mahindra" value="Mahindra" /><label for="Mahindra">Mahindra</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CAT" value="CAT" /><label for="CAT">Caterpillar </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CASE" value="CASE" /><label for="CASE">CASE </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="HYNDAI" value="HYNDAI" /><label for="HYNDAI">HYNDAI</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Leyland Deere" value="Leyland Deere" /><label for="Leyland Deere">Leyland Deere</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="L&T komutsu" value="L&T komutsu" /><label for="L&T komutsu">L&T komutsu</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Kobelco" value="Kobelco" /><label for="Kobelco">Kobelco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bobcat" value="Bobcat" /><label for="Bobcat">Bobcat</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Sany" value="Sany" /><label for="Sany">Sany</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Atlas Copco" value="Atlas Copco" /><label for="Atlas Copco">Atlas Copco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ajax Fiori" value="Ajax Fiori" /><label for="Ajax Fiori">Ajax Fiori</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Eicher" value="Eicher" /><label for="Eicher">Eicher</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Aquarius" value="Aquarius" /><label for="Aquarius">Aquarius</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ammann Apollo" value="Ammann Apollo" /><label for="Ammann Apollo">Ammann Apollo</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="umatech" value="umatech" /><label for="umatech">umatech</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Veermer" value="Veermer" /><label for="Veermer">Veermer</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Generac" value="Generac" /><label for="Generac">Generac</label>
+					</div> 
+					</div>
+					<div class="filter-header"><p>Location</p></div>
+					<div class="filter-content location">
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="location" id="Hyderabad" value="Hyderabad" /><label for="Hyderabad"> Hyderabad </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Chennai" value="Chennai" /><label for="Chennai">Chennai</label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Kolkatta" value="Kolkatta" /><label for="Kolkatta">Kolkatta </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Mumbai" value="Mumbai" /><label for="Mumbai">Mumbai </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Bengaluru" value="Bengaluru " /><label for="Bengaluru">Bengaluru </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Pune" value="Pune " /><label for="Pune">Pune </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Delhi" value="Delhi " /><label for="Delhi">Delhi </label>
+					</div>
+					</div>
+				</div><!-- filter wrapper ends -->
+			</div>
+		
+				<div class="col-md-9">
+					<div class="posts">
+					
+					
+					
+					
+					<!-- Content will go here  -->
+					
+					
+					
+					
+				</div>
+			</div>
+		</div>
+				
+	</div>
+	
+		
+	</div>
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 		<!-- ********************* This is for the post view model *********************************** -->
+					<div class="modal fade" id="view-post-modal" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content post-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&#10005;</button>
+									<h4 class="modal-title" id="myModalLabel">Post</h4>
+								</div>
+								<div class="modal-body">
+									<div class="post-content">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-7">
+													<img class="post-image" id="img-250" src="http://placehold.it/250x250" width="250px" height="250px" alt="...">
+												</div>
+												<div class="col-md-5 post-text">
+													<h3 id="modal-machine">Excavator</h3>
+													<h4>Price : <span id="modal-price">2000000</span></h4>
+													<h4 >Meter : <span id="modal-meter">100</span> KM</h4>
+													<h4 >Mfg : <span id="modal-mfg">JCB</span></h4>
+													<h4 >Manufactured year : <span id="modal-yom">2014</span></h4>
+													<h4 >location : <span id="modal-location">hyderabad</span></h4>
+													<br>
+													<br>
+													<h4 >posted by : <span id="modal-postedby">Nishant</span></h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-7">
+													<ul class="img-thumb">
+													</ul>
+												</div>
+												<div class="col-md-5">
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			
+ 			$('[data-toggle="tooltip"]').tooltip()
+ 			
+ 			 var posts = [];
+ 			
+ 			var loginform_submit = false;
+ 			var	registerform_submit = false;
+ 			loginform_submit = validateOnFocusout($("#login-form"));
+ 			
+ 			$('#re-link').click(function(e){
+ 				$('#modal-container-login').modal('hide');
+ 				$('#modal-container-register').modal('show');
+ 			});
+ 			
+ 			$('#modal-container-login').on('hidden.bs.modal', function(){
+ 				console.log("clearing the fields");
+ 			    $(this).find('form')[0].reset();
+ 			   $('.invalid-error').html("");
+ 			});
+ 			
+ 			$('#modal-container-register').on('hidden.bs.modal', function(){
+ 			    $(this).find('form')[0].reset();
+ 			});
+ 				
+ 				
+ 			$("#register-form").on("keypress",function(e){
+ 				if(e.which === 13)
+ 				$.register($("#register"));
+ 			});
+ 			
+ 			
+ 			$("#register").click(function() {
+ 				
+ 				$.register($(this));
+ 				
+ 				});
+ 			
+ 			$('#register-username').focusout(function(){
+				$('#register-username').parents('.form-group').addClass('has-success').removeClass('has-error');
+				$('#register-username').next('span').remove();
+			});
+ 			
+ 			$.register = function($this){
+ 				var success = "successfully created";
+ 				var successUrl = "#modal-container-login";
+ 				var data = JSON.stringify($("#register-form").serializeObject());
+ 				console.log(data);
+ 				registerform_submit = $.validateRegisterForm($this);
+ 				if(registerform_submit){
+ 				 $.ajax({
+ 				url : AppData.relativeUrl+"user/register",
+ 				type : "post",
+ 				contentType : "application/json; charset=utf-8",
+ 				data : data,
+ 				success : function(data) {
+ 				if (data.search("UF01") != -1) {
+ 					console.log(data);
+					$('#register-username').parents('.form-group').addClass('has-error has-feedback');
+					if($('#register-username').next('span').length == 0){
+						$("<span class='error-message' style='color:red'>Username already exists</span>").insertAfter($('#register-username'));
+					}
+ 				} else {
+ 				console.log("inside if");
+ 				$('#modal-container-register').modal('hide');
+ 				$('#modal-success-dialog').modal('show');
+ 				$('#modal-success-dialog').on('shown.bs.modal', function() {
+ 					setTimeout(function(){
+ 						$('#modal-success-dialog').modal('hide');},2000
+ 					);
+ 					$('#modal-success-dialog').on('hidden.bs.modal', function() {
+ 	    			 $('#modal-container-login').modal('show');
+ 	    			 //history.back();	    
+ 					});
+ 	    		});  
+ 				console.log("register modal closed");
+ 				console.log("opening login modal");
+ 				
+ 				//$(location).attr('href',"user/index.html");
+ 				}
+ 				}
+ 				});
+ 				}
+
+ 			};
+ 			
+ 			$("#login-form").on("keypress",function(e){
+ 				if(e.which == 13){
+ 					$.login($("#login-btn"));
+ 				}
+ 			});
+ 			
+ 			$("#login-btn").click(function(e) {
+ 			console.log("inside login function");
+ 				$.login($(this));
+ 			});
+ 			
+ 			
+ 			$(".invalid-error").hide();
+			
+			$.login = function($this){
+				var data = JSON.stringify($("#login-form").serializeObject());
+				console.log(data);
+				loginform_submit = validateOnClick($this);
+				if(loginform_submit){
+				console.log("button submiittteed");
+				$.ajax({
+				url : AppData.relativeUrl+"user/login",
+				type : "post",
+				contentType : "application/json; charset=utf-8",
+				data : data,
+												// datatype : "json",  
+				success : function(response) {
+				if(response === "UF01"){
+					//this is here where we need to update the modal
+					$(".invalid-error").show();
+					$('.invalid-error').html("Invalid Credentials....!!!. please try again...");
+					$('#username').focusin(function(){
+						$('.invalid-error').html("");
+					});
+					
+					$('#password').focusin(function(){
+						$('.invalid-error').html("");
+					});
+					
+				}else{
+				
+				console.log("got user from userAPI",response.username);
+				$('#modal-container-login').modal('hide');
+				if (typeof (Storage) !== "undefined") {
+				$.setUser(response);
+				} else {
+				console.log(" no storage available");
+				}
+				response = $.parseJSON(response);
+				
+				if (response.role === "supplier") {
+					if (typeof (Storage) !== "undefined") {
+				user = $.getUser();
+					}else{
+						
+					}
+				console.log(user);
+				if (user !== null) {
+				$(location).attr('href',"user/supplier-profile.html");
+				}
+				} else if (response.role === "contractor") {
+					if (typeof (Storage) !== "undefined") {
+					user = $.getUser();
+					}else{
+						
+					}
+					console.log(user);
+					if (user !== null) {
+					$(location).attr('href',"user/contractor-profile.html");
+					}																//$(location).attr('href',"index.html");
+				}
+				}
+				}
+
+				});
+					}
+			};
+			
+ 			
+ 			/* This ajax call is made to populate the category and equipment machinary dropdowns */
+ 	    	
+ 	    	var category = [];
+ 	    	var equipment = [];
+ 	    	$.ajax({
+ 	    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+ 	    		type:"get",
+ 	    		data:{},
+ 	    		success:function(response){
+ 	    			response = $.parseJSON(response);
+ 	    			var i = 1;
+ 	    			var panelContent = "";
+ 	    			
+ 	    			console.log(response);
+ 	    			$.each(response,function(index,value){
+ 	    				var panelBody = "";	
+ 							$.ajax({
+ 	    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+value,
+ 	    	    			type:"get",
+ 	    	    			data:{},
+ 	    	    			success:function(equipments){
+ 	    	    				equipments = $.parseJSON(equipments);
+ 	    	    				$.each(equipments,function(index,value){
+ 	    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+encodeURI(value)+' value='+encodeURI(value)+' /><label for='+encodeURI(value)+'>'+value+'</label> '
+ 	    	    				});
+ 	    	    				panelContent += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title">'+
+ 	    	    				'<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" aria-expanded="false" aria-controls="collapse'+i+'">'+
+ 	    	    				value+'</a></h4></div><div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'+i+'">'+
+ 	    	    				'<div class="panel-body">'+panelBody+'</div></div></div>';
+ 	    	    				category[i] = value;
+ 	        					i++
+ 	    	    				$("#accordion").html("");
+ 	    	        			$("#accordion").append(panelContent);
+ 	    	    			}
+ 	    	    			});
+ 	    					
+ 	    			});
+ 	    		}
+ 	    	});
+ 			
+ 			$('.filter-content').on("click","input[type='checkbox']",function(e){
+ 				var checked = "";
+ 				var equipmentChecked = "";
+ 				var mfgChecked = "";
+ 				var locationChecked = "";
+ 				var query = "";
+ 				
+ 				console.log(mfgChecked.length);
+ 				$('input[type="checkbox"]:checked').each(function(){
+ 					
+ 					
+ 					if($(this).attr('name') === 'equipment'){
+ 					if(equipmentChecked.length === 0){
+ 					equipmentChecked += $(this).val();
+ 					}
+ 					else{
+ 						equipmentChecked += ":"+$(this).val();
+ 					}
+ 					}
+ 					else if($(this).attr('name') === 'manufacturer'){
+ 						if(mfgChecked.length === 0){
+ 							var mfg = encodeURI($(this).val());
+ 							mfgChecked += mfg;
+ 							}
+ 							else{
+ 								mfgChecked += ":"+mfg;
+ 							}
+ 					}else if($(this).attr('name') === 'location'){
+ 						if(locationChecked.length === 0){
+ 							locationChecked += $(this).val();
+ 							}
+ 							else{
+ 								locationChecked += ":"+$(this).val();
+ 							}
+ 					}
+ 				});
+ 				
+ 				var flag = true;
+ 				
+ 				if(locationChecked.length !== 0 && equipmentChecked.length !== 0 && mfgChecked.length !== 0){
+ 				query = "location="+locationChecked+"&equipment="+equipmentChecked+"&manufacturer="+mfgChecked; 
+ 				}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length === 0){
+ 					console.log("all three filters are zero")
+ 					flag = false;
+ 				}else if(locationChecked.length === 0 && (mfgChecked.length !== 0 && equipmentChecked.length !== 0)){
+ 					query = "equipment="+equipmentChecked+"&manufacturer="+mfgChecked;
+ 				}else if(equipmentChecked.length === 0 && (locationChecked.length !== 0 && mfgChecked.length !== 0)){
+ 					query = "location="+locationChecked+"&manufacturer="+mfgChecked;
+ 				}else if(mfgChecked.length === 0 && (locationChecked.length !== 0 && equipmentChecked.length !== 0)){
+ 					query = "location="+locationChecked+"&equipment="+equipmentChecked;
+ 				}else if(locationChecked.length === 0 && equipmentChecked.length === 0){
+ 					query = "manufacturer="+mfgChecked;
+ 				}else if(mfgChecked.length === 0 && equipmentChecked.length === 0){
+ 					query = "location="+locationChecked;
+ 				}else if(locationChecked.length === 0 && mfgChecked.length === 0){
+ 					query = "equipment="+equipmentChecked;
+ 				}
+ 					
+ 				
+ 				console.log(query+"::::"+flag);
+ 				
+ 				console.log("heheh ",checked);
+ 				
+ 				if(flag){
+ 				var post = "";
+ 				$.ajax({
+ 						url:AppData.relativeUrl+"usedmachine/filterUsedMachines?"+query,
+ 						type:"get",
+ 						data:{},
+ 						success:function(response){
+ 							response = $.parseJSON(response);
+ 							console.log(response);
+ 							$.each(response,function(index,value){
+ 	 							var postedTime = value.postedTime;
+ 	 							postedTime = $.date(postedTime,1);
+ 	 							var imgArr = value.imagesuploaded.split(",");
+ 	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
+ 	 						});
+ 	 						$('.posts').html("");
+ 	 						$('.posts').append(post);
+ 						}
+ 						});
+ 				
+ 				}else{
+ 					var post = "";
+ 	 				$.ajax({
+ 	 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 	 					type:"get",
+ 	 					data:{},
+ 	 					success:function(response){
+ 	 						response = $.parseJSON(response);
+ 	 						console.log(response);
+ 	 						$.each(response,function(index,value){
+ 	 							posts[value.postId] = value;	
+ 	 							var postedTime = value.postedTime;
+ 	 							postedTime = $.date(postedTime,1);
+ 	 							var imgArr = value.imagesuploaded.split(",");
+ 	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
+ 	 						});
+ 	 						$('.posts').html("");
+ 	 						$('.posts').append(post);
+ 	 					}
+ 	 					});
+ 			
+ 				}
+ 			});
+ 			
+ 			
+			var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							var imgArr = value.imagesuploaded.split(",");
+ 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+							'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+							'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+				
+ 				$('.posts').on("click",".interested",function(e){
+ 					e.preventDefault();
+ 					console.log("interseted button clicked");
+ 					$('#modal-container-login').modal('show');
+ 				});
+ 				
+ 				
+ 				var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+					+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+					+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+					+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+					+'</div><div class="clear-fix"></div></form></div>';
+				
+				
+				$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
+				    $(this).find('form')[0].reset();
+				    $('#forgetpass-modal').html("");
+				    $('#forgetpass-modal').html(forgetPassForm);
+				});
+				
+				$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
+					$('.error-msg').html("");
+				});
+ 				
+ 				$('#forgot-pass-link').click(function(e){
+					e.preventDefault();
+					$('#modal-container-login').modal('hide');
+					$('#modal-container-forgetPass').modal('show');
+				});	
+				
+ 				$('#forgetpass-modal').on("click","#forgetPass",function(e){
+					e.preventDefault();
+					var data = $("#forgetPass-form").serializeObject();
+					console.log(data);
+						var email = data.email;
+						data = JSON.stringify(data);
+						 $.ajax({
+								url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+								type : "put",
+								contentType : "application/json; charset=utf-8",
+								data : {},
+								success : function(response) {
+									if(response.indexOf("UPEE01") >= 0){
+										$('#forgetpass-modal').html("<p>This is not a registered email! please provide a registered mail id</p>")
+									}else{
+										$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+									}
+									console.log(response);
+									}
+								});
+					
+				});
+				
+				$('.img-thumb').on("click",".post-img-thumb",function(e){
+					e.preventDefault();
+					$('#img-250').attr("src",$(this).attr("src"));
+				});
+ 				
+				$('.posts').on("click",".media-object",function(e){
+ 					e.preventDefault();
+ 					var post = posts[$(this).attr("data-id")];
+ 					$('#modal-machine').text(post.equipmentName);
+ 					$('#modal-price').text(post.price);
+ 					$('#modal-meter').text(post.meterReading);
+ 					$('#modal-mfg').text(post.manufacturer);
+ 					$('#modal-yom').text(post.yearOfManufacturer);
+ 					$('#modal-location').text(post.location);
+ 					$('#modal-postedby').text(post.userName);
+ 					var imgArr = post.imagesuploaded.split(",");
+ 					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
+ 					var listContent = "";
+ 					$.each(imgArr,function(index,value){
+ 						console.log("index",index);
+ 						var imgid = '#thumb-img'+index;
+ 						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+ 					});
+ 					
+ 					$('.img-thumb').html("");
+ 					$('.img-thumb').html(listContent);
+ 			 		$('#view-post-modal').modal("show");
+ 				});
+			
+ 				$.date = function(dateObject,pattern) {
+ 		 		    var d = new Date(dateObject);
+ 		 		    var date = d.toDateString();
+ 		 		    console.log(d);
+ 		 		    console.log(date);
+ 		 		    if(pattern === 1){
+ 		 		    var dateArr = date.split(" ");
+ 		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		 		    }
+ 		 		    else if(pattern === 2){
+ 		 		    	console.log("date" +dateObject);
+ 		 		    	var dateArr = dateObject.split(' ');
+ 		 		    	var time = dateArr[3].split(':');
+ 		 		    	var HH = parseInt(time[0])+6;
+ 		 		    	var mm = parseInt(time[1])+30;
+ 		 		    	var ss = time[2];
+ 		 		    	if(dateArr[1].length === 3)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		 		    	else if(dateArr[1].length === 2)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		 		    }else if(pattern === 3){
+ 		 	 		    var dateArr = dateObject.split("-");
+ 		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 		 				}
+ 		 		    return date;
+ 		 		};
+ 		 		
+ 		 		$.getMonthName = function(monNum){
+ 		 			var month;
+ 		 			console.log(monNum)
+ 		 			if(monNum === "01"){
+ 		 				month = "Jan";
+ 		 			}
+ 		 			else if(monNum === "02"){
+ 		 				month = "Feb";
+ 		 			}
+ 		 			else if(monNum === "03"){
+ 		 				month = "Mar";
+ 		 			}
+ 		 			else if(monNum === "04"){
+ 		 				month = "Apr";
+ 		 			}
+ 		 			else if(monNum === "05"){
+ 		 				month = "May";
+ 		 			}
+ 		 			else if(monNum === "06"){
+ 		 				month = "Jun";
+ 		 			}
+ 		 			else if(monNum === "07"){
+ 		 				month = "Jul";
+ 		 			}
+ 		 			else if(monNum === "08"){
+ 		 				month = "Aug";
+ 		 			}
+ 		 			else if(monNum === "09"){
+ 		 				month = "Sep";
+ 		 			}
+ 		 			else if(monNum === "10"){
+ 		 				month = "Oct";
+ 		 			}
+ 		 			else if(monNum === "11"){
+ 		 				month = "Nov";
+ 		 			}
+ 		 			else if(monNum === "12"){
+ 		 				month = "Dec";
+ 		 			}
+ 		 			return month;
+ 		 		};
+ 		 		
+ 		 		$.getMonth = function(month){
+ 		 			var monNum;
+ 		 			month = month.toLowerCase();
+ 		 			console.log(month)
+ 		 			if(month === "jan"){
+ 		 				monNum = '01';
+ 		 			}
+ 		 			else if(month === "feb"){
+ 		 				monNum = '02';
+ 		 			}
+ 		 			else if(month === "mar"){
+ 		 				monNum = '03';
+ 		 			}
+ 		 			else if(month === "apr"){
+ 		 				monNum = '04';
+ 		 			}
+ 		 			else if(month === "may"){
+ 		 				monNum = '05';
+ 		 			}
+ 		 			else if(month === "june"){
+ 		 				monNum = '06';
+ 		 			}
+ 		 			else if(month === "july"){
+ 		 				monNum = '07';
+ 		 			}
+ 		 			else if(month === "aug"){
+ 		 				monNum = '08';
+ 		 			}
+ 		 			else if(month === "sep"){
+ 		 				monNum = '09';
+ 		 			}
+ 		 			else if(month === "oct"){
+ 		 				monNum = '10';
+ 		 			}
+ 		 			else if(month === "nov"){
+ 		 				monNum = '11';
+ 		 			}
+ 		 			else if(month === "dec"){
+ 		 				monNum = '12';
+ 		 			}
+ 		 			
+ 		 			return monNum;
+ 		 		};		
+			 
+ 		});
+ 	</script>
+ 	<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
+	</body>
+	</html>
+		

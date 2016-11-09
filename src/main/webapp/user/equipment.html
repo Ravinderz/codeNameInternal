@@ -8,14 +8,143 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/equipment.css">
 <link rel="stylesheet" href="../css/custom.css">
 <script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script src="../js/appProperties.js"></script>
+</head>
+<body>
+	<div class="nav-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="../images/logo.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								   <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="#" class="profile"><span>Profile</span></a></li>
+									<li><a href="#" class="dashboard"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="category">
+	<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" class="profile">Profile</a></li>
+						<li><a href="#" class="dashboard">Rental board</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<!-- <div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div> -->
+				</div>
+		   </div>
+		  </div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						List Of <span class="heading">Equipments</span>
+					</h2>
+				</div>
+			</div>
+			<div class="category-row-one"></div>
+			<div class="category-row-two"></div>
+		</div>
+	</div>
+<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+					<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+						<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -36,9 +165,7 @@
 			}
 		};
 
-		var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
+		var user = $.getUser();
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 
@@ -46,27 +173,17 @@
 
 						var category = getUrlParameter('category');
 						var equipment = '';
-						var EarthMoving = [ 'backhoe', 'dozer', 'excavator',
-								'miniexcavator', 'loader', 'motorgrader',
-								'skidsteer' ];
-						var Cranes = [ 'crawlercrane', 'mobilecrane',
-								'towercrane' ];
-						var Generators = [ 'mobilegenerator',
-								'portablegenerator' ];
-						var AerialLifts = [ 'articulatingboomlift',
-								'scissorlift', 'straighttelescoping' ];
-						var PowerDrillers = [ 'anglegrinder', 'breakhammer',
-								'metalcutter', 'stonedriller',
-								'surfacegrinder', 'horizontaldriller' ];
-						var CementMixerTrucks = [ 'cementmixer', 'trailerpump',
-								'truckmountedconcretepump' ];
-						var RoadRollers = [ 'doubledrumroller1', 'hotmixer',
-								'sensorpaver1', 'singledrum' ];
-						var MaterialHandling = [ 'industriallift',
-								'reachforklift', 'telehandlerfork' ];
-						var Miscellaneous = [ 'airtools', 'compressor',
-								'tractor', 'waterpump' ];
-						var BoreDrillers = [ 'boredriller', 'piledriving' ];
+						var Earth_Moving = ['Backhoe Loaders','Excavators','Motor Graders','Wheel Loaders','Track Loaders','Chain Dozers','Wheel Dozers','Steer Loaders' ];
+						var Cranes = [ 'Crawler Cranes', 'Mobile Cranes','Tower Cranes' ];
+						var Generator_and_Compressor = [ 'Generator Set','Mobile Generator','Air Compressor'];
+						var Aerial_and_Material_Lifts = ['Telehandlers','Material Lifts','Boom Lifts','Scissor Lifts','Vertical Lifts'];
+						var Batch_and_Crusher_Plant = [ 'Batching Plant','Crusher Plant'];
+						var Cement_Mixer_and_Pumps = [ 'Transit Mixers','Boom Pumps','Trailer Pumps'];
+						var Road_Compactors = ['Asphalt Pavers (Chain)','Asphalt Pavers(Wheel)','Tandem Rollers','Single Drum Rollers'];
+						var Dump_Trucks = [ 'Heavy Dumpers','Tippers'];
+						var Drillers = ['Bore Driller','Auger Drillers','Horizontal Drillers' ];
+
+
 
 						/*if(category === 'earthMovingEquipment'){
 							equipment = earthMovingEquipment;
@@ -76,46 +193,41 @@
 						equipment = cranes;
 						}*/
 						switch (category) {
-						case 'EarthMoving':
-							equipment = EarthMoving;
+						case 'Earth_Moving':
+							equipment = Earth_Moving;
 							break;
 						case 'Cranes':
 							equipment = Cranes;
 							break;
-						case 'Generators':
-							equipment = Generators;
+						case 'Generator_and_Compressor':
+							equipment = Generator_and_Compressor;
 							break;
-						case 'AerialLifts':
-							equipment = AerialLifts;
+						case 'Aerial_and_Material_Lifts':
+							equipment = Aerial_and_Material_Lifts;
 							break;
-						case 'PowerDrillers':
-							equipment = PowerDrillers;
+						case 'Batch_and_Crusher_Plant':
+							equipment = Batch_and_Crusher_Plant;
 							break;
-						case 'CementMixerTrucks':
-							equipment = CementMixerTrucks;
+						case 'Cement_Mixer_and_Pumps':
+							equipment = Cement_Mixer_and_Pumps;
 							break;
-						case 'RoadRollers':
-							equipment = RoadRollers;
+						case 'Road_Compactors':
+							equipment = Road_Compactors;
 							break;
-						case 'MaterialHandling':
-							equipment = MaterialHandling;
+						case 'Dump_Trucks':
+							equipment = Dump_Trucks;
 							break;
-						case 'Miscellaneous':
-							equipment = Miscellaneous;
-							break;
-						case 'BoreDrillers':
-							equipment = BoreDrillers;
+						case 'Drillers':
+							equipment = Drillers;
 							break;
 
 						}
 						//category = $.parseJSON(earthMovingEquipment);
-						console.log("category", category);
-						console.log("equipment", equipment);
 						var count = 1;
 						var html = "";
 						$.each(equipment,function(index, value) {
+							
 						var imagePath = '../images/'+ category + '/' + value+ '.png';
-						console.log(imagePath);
 						var firstDiv = "<div class='row'>";
 						var firstDivClose = "</div>";
 						if (count === 1) {
@@ -138,8 +250,6 @@
 						}
 						count++;
 						});
-						console.log(html);
-
 						$(".category-row-one").append(html);
 
 						$('.category-img').click(function() {
@@ -147,128 +257,51 @@
 						$(location).attr('href',"requirement-display.html?category="+ category+ "&sub-category="+ sub_ctg);
 						});
 						
+						$('#user').click(function(e){
+							e.preventDefault();
+							if(user.role === "contractor"){
+								$(location).attr('href',"contractor-profile.html");
+							}else if(user.role === "supplier"){
+								$(location).attr('href',"supplier-profile.html");
+							}
+						});
+						
+						$('.profile').click(function(e){
+							e.preventDefault();
+							if(user.role === "contractor"){
+								$(location).attr('href',"contractor-profile.html");
+							}else if(user.role === "supplier"){
+								$(location).attr('href',"supplier-profile.html");
+							}
+						});
+						
+						$('.dashboard').click(function(e){
+							e.preventDefault();
+							if(user.role === "contractor"){
+								$(location).attr('href',"contractor-dashboard.html");
+							}else if(user.role === "supplier"){
+								$(location).attr('href',"supplier-dashboard.html");
+							}
+						});
+						
 						$('.logout').click(function(){
-						       console.log("inside logout function")
-						       var user = sessionStorage.getItem("user");
-						        if(user !== null){
-						            sessionStorage.removeItem("user");
-						        }
-						        console.log("user logged out");
-						        $(location).attr('href',"../index.html");
-						    });	
+						        $.ajax({
+				 					url:AppData.relativeUrl+"user/logout",
+				 					type:"post",
+				 					data:{},
+				 					success:function(response){
+				 						var user = localStorage.getItem("user");
+								        if(user !== null){
+								            localStorage.removeItem("user");
+								        }
+								        $(location).attr('href',"../index.html");
+				 					}
+				 					});
+						        
+						 });
 						
 						});
 </script>
-</head>
-<body>
-	<div class="nav-wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 navigation">
-					<nav class="navbar navbar-defaut navbar-top" role="navigation">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle"
-								data-toggle="collapse" data-target="#navbar-collapse">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
-								src="../images/logo.png" height="75px" width="200px" />
-							</a>
-						</div>
-						<div class="collapse navbar-collapse" id="navbar-collapse">
-							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
-								<li><a href="#" role="button"><span id="user">User</span></a></li>
-								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="category">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>
-						List Of <span class="heading">Equipments</span>
-					</h2>
-				</div>
-			</div>
-			<div class="category-row-one"></div>
-			<div class="category-row-two"></div>
-		</div>
-	</div>
-	<div class="sub-footer">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4">
-					<p class="first">
-						<img src="../images/logo_new.png" /><br>CONGUN provides one
-						stop online- solution for all construction equipment needs of
-						construction Contractors, at their desired location, in specified
-						time and at a low price.
-					</p>
-				</div>
-				<div class="col-md-4">
-					<div class="middle">
-						<h3>Quick Links</h3>
-						<ul>
-							<li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">About
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Contact
-									Us</a></li>
-							<li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-
-					<div class="address-content last">
-						<h3>Address</h3>
-						<ul class="info">
-							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
-								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
-							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
-							<li><span class="fa fa-envelope"></span> &ensp; <a
-								href="mailto:info@congun.com">info@congun.com</a></li>
-						</ul>
-						<div class="social">
-							<a class="img-circle fa fa-facebook-f" href="#"></a> <a
-								class="img-circle fa fa-twitter" href="#"></a> <a
-								class="img-circle fa fa-google-plus" href="#"></a> <a
-								class="img-circle fa fa-linkedin" href="#"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="collapse navbar-collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Copyright Congun</a></li>
-						<li><a href="#">Terms and Conditions</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+	
 </body>
 </html>

@@ -8,118 +8,14 @@
 <meta name="description" content="Heavy Machinery Rentals">
 <meta name="author" content="Congun">
 
-<!-- <link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet"	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/congun.css">
 <link rel="stylesheet" href="../css/requirement-display.css">
     <link rel="stylesheet" href="../css/requirement-view.css">
     <link rel="stylesheet" href="../css/custom.css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/appProperties.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var user = sessionStorage.getItem("user");
-		user = $.parseJSON(user);
-		console.log(user);
-		var username = user.firstname+" "+user.lastname;
-		$('#user').text(username);
-		
-		var requirement = sessionStorage.getItem("requirement");
-		requirement = $.parseJSON(requirement);
-		console.log(requirement);
-		
-		$('#title').html(requirement.title);
-		$('#category').html(requirement.equipmentCategory);
-		$('#sub-category').html(requirement.equipmentName);
-		$('#model').html(requirement.specificationModel);
-		$('#mfg').html(requirement.manufacturer);
-		$('#mfg-year').html(requirement.equipmentManufactureYear);
-		$('#desc').html(requirement.workDescription);
-		$('#created-by').html(requirement.contractorName);
-		$('#created-on').html(requirement.createdTime);
-		$('#duration').html(requirement.duration+" months");
-		$('#contact').html(user.mobileNumber);
-		$('#start-date').html(requirement.startDate);
-		
-		var quotes = [];
-		var quoteList = "";
-		
-		$.ajax({
-			url:AppData.relativeUrl+"supplier/getquotesbyrequirement/"+requirement.requirementId,
-			/*+user.userId,*/
-			type:"get",
-			data:{},
-			success:function(response){
-				response = $.parseJSON(response);
-				console.log(response);
-				var temp = "<div class='container-fluid'>"
-				$.each(response,function(index,value){
-					quotes[value.quoteId] = value;
-					if(index%2 === 1){
-					quoteList += "<div class='row quote-item striped-row'><div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>Manufacturer</h5><p>"+value.manufacturer+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>Model</h5><p>"+value.model+"</p></div></div>"
-								  +"<div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>manufacturedyear</h5><p>"+value.manufacturedyear+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>capacity</h5><p>"+value.capacity+"</p></div></div>"
-								  +"<div class='col-md-2 col-sm-8'><div class='col-content'><h5>finalQuotePrice</h5><p>"+value.finalQuotePrice+"</p></div></div>"
-								  +"<div class='col-md-12'><div class='col-content'><a href='#' class='btn btn-warning view-btn' id="+value.quoteId+">View</a></div></div></div>"
-					}else{
-						quoteList += "<div class='row quote-item'><div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>Manufacturer</h5><p>"+value.manufacturer+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>Model</h5><p>"+value.model+"</p></div></div>"
-						  +"<div class='col-md-3 col-sm-4 col-xs-6'><div class='col-content'><h5>manufacturedyear</h5><p>"+value.manufacturedyear+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-4 col-xs-6'><div class='col-content'><h5>capacity</h5><p>"+value.capacity+"</p></div></div>"
-						  +"<div class='col-md-2 col-sm-8'><div class='col-content'><h5>finalQuotePrice</h5><p>"+value.finalQuotePrice+"</p></div></div>"
-						  +"<div class='col-md-12'><div class='col-content'><a href='#' class='btn btn-warning view-btn' id="+value.quoteId+">View</a></div></div></div>"	
-					}
-					
-				});	
-				$('.quotes-list').append(temp+quoteList+"</div>");
-			}
-			});
-		
-		$('.logout').click(function(){
-		       console.log("inside logout function")
-		       var user = sessionStorage.getItem("user");
-		        if(user !== null){
-		            sessionStorage.removeItem("user");
-		        }
-		        console.log("user logged out");
-		        $(location).attr('href',"../index.html");
-		 });
-		
-		$('.quotes-list').on('click','.view-btn',function(e){
-			e.preventDefault();
-			console.log("Entered requiremnt  view click function");
-		        var quoteid = this.id;
-		        console.log("quote id :: ",quoteid);
-				console.log("quote :: ",quotes[quoteid]);
-				sessionStorage.setItem("quote",JSON.stringify(quotes[quoteid]));
-				$('#modal-quote-display').modal('show');
-				//$(location).attr('href','requirement-view-dynamic.html');
-		});
-		
-				
-		});    
-    </script>
-    <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-</script>    
+
 </head>
 <body>
     <div class="nav-wrapper">
@@ -140,10 +36,25 @@
 						</div>
 						<div class="collapse navbar-collapse" id="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right" id="navigation-right">
-								<li class="active"><a href="index.html"><span>Home</span></a></li>
-								<li><a href="dashboard.html"><span>Dashboard</span></a></li>
-								<li><a href="#" role="button"><span id="user">User</span></a></li>
-								<li><a href="#" role="button" class="logout"><span>Logout</span></a></li>
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="#" class="profile"><span>Profile</span></a></li>
+									<li><a href="#" class="dashboard"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
 							</ul>
 						</div>
 					</nav>
@@ -153,16 +64,41 @@
 	</div>
 	    
     <div class="content-main">
+    	<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" class="profile">Profile</a></li>
+						<li><a href="#" class="dashboard">Rental board</a></li>
+						<li><a href="used-equipment.html">Used equipment</a></li>
+					</ul>
+					</div>
+				<div class="col-md-6">	
+					<!-- <div class="search-bar-2">
+					<form>
+						 <div class="input-group">
+      						<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+      						<span class="input-group-btn">
+        					<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+      						</span>
+    					</div>
+					</form>
+					</div> -->
+				</div>
+		   </div>
+		  </div>
     <div class="container">
-        <div class="row">
+        <div class="row ">
+        <a href="#" class="btn btn-warning post-req-btn hide">Post
+					Requirement</a>
             <h2>Requirement List</h2>
-            <div class="col-md-2 filter"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 filter"></div>
             <div class="col-md-8 view-item">
                 <div class="item-content">
                     <div class="header">
                         <h4>Title</h4>
                         <h5 id="title">This is the place where the title of the requirement will be posted</h5>
-                        <img src="../images/EarthMoving/backhoe.png" height="200px" width="200px" class="left"/>
+                        <img src="../images/Earth_Moving/Backhoe Loaders.png" height="200px" width="200px" class="left"/>
                         <div class="right">
                             <ul>
                                 <li><h5>Machine Category</h5><p id="category">Earth Moving</p></li>
@@ -194,102 +130,186 @@
                                     <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
                                 </div>
                                 <div class="col-md-2">
-                                   <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div>
+                                   <!-- <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                	<div class="quotes-section">
-                		<h4>Quotes</h4>
-                		<div class="quotes-list">
-                		</div>
-                		<div class="modal fade" id="modal-quote-display" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h4 class="modal-title" id="myModalLabel">Quote details</h4>
-								</div>
-								<div class="modal-body">
-									<div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Created by</h5><p id="created-by">some user</p></div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-content"><h5>Created on</h5><p id="created-on">10-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-content"><h5>Start date</h5><p id="start-date">15-Dec-2015</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-content"><h5>Duration</h5><p id="duration">3 Months</p></div>
-                                </div>
-                                <div class="col-md-2">
-                                   <div class="col-content"><h5>Contact</h5><p id="contact">+91-9988776655</p></div>
-                                </div>
-                            </div>
-                        </div>
-								</div>
-							</div>
-						</div>
-					</div>
-                	</div>
+                    <div class="quote-section">
+                    <a href="#" class="btn btn-warning quote-btn show">Give Quote</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2 ads"><p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p></div>
+            <div class="col-md-2 ads"></div>
         </div>    
     </div>
     </div>
     <div class="sub-footer">
-    <div class="container-fluid">
- 			<div class="row">
- 				<div class="col-md-4"><p class="first"><img src="../images/logo_new.png" /><br>CONGUN provides one stop online- solution for all construction equipment needs of construction Contractors, at their desired location, in specified time and at a low price.</p></div>
-                <div class="col-md-4"><div class="middle"><h3>Quick Links</h3><ul><li><span class="fa fa-angle-right"></span><a href="#">FAQ</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">About Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Services</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Contact Us</a></li>
-                    <li><span class="fa fa-angle-right"></span><a href="#">Support</a></li>
-                    </ul></div></div>
-                <div class="col-md-4">
-                    
-                    <div class="address-content last">
-                        <h3> Address</h3>
-                        <ul class="info">
-                            <li><span class="fa fa-map-marker"></span> &ensp; 3rd floor T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
-                                <li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
-                                <li><span class="fa fa-envelope"></span> &ensp; <a href="mailto:info@congun.com">info@congun.com</a></li>
-                        </ul>
-                        <div class="social">
-                            <a class="img-circle fa fa-facebook-f" href="#"></a>
-                            <a class="img-circle fa fa-twitter" href="#"></a>
-                            <a class="img-circle fa fa-google-plus" href="#"></a>
-                            <a class="img-circle fa fa-linkedin" href="#"></a>
-                        </div>
-                    </div>
-                </div>
- 			</div>
- 		</div>
-    </div>
- 		<div class="footer">
- 			<div class="row">
- 				<div class="col-md-12">
- 					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Copyright Congun</a></li>
-							<li><a href="#">Terms and Conditions</a></li>	
-							<li><a href="#">Privacy Policy</a></li>	
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
 						</ul>
 					</div>
- 				</div>
- 			</div>
- 		</div>		
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+						<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var user = $.getUser();
+		var username = user.firstname+" "+user.lastname;
+		$('#user').text(username);
+		var requirement = sessionStorage.getItem("requirement");
+		requirement = $.parseJSON(requirement);
+		
+		/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		
+		var category = getUrlParameter("category");
+		var sub_ctg = getUrlParameter("sub-category");
+		
+		
+		$('#title').html(requirement.title);
+		$('#category').html(requirement.equipmentCategory);
+		$('#sub-category').html(requirement.equipmentName);
+		$('#model').html(requirement.specificationModel);
+		$('#mfg').html(requirement.manufacturer);
+		$('#mfg-year').html(requirement.equipmentManufactureYear);
+		$('#desc').html(requirement.workDescription);
+		$('#created-by').html(requirement.contractorName);
+		$('#created-on').html(requirement.createdTime);
+		$('#duration').html(requirement.duration+" months");
+		$('#contact').html(user.mobileNumber);
+		$('#start-date').html(requirement.startDate);
+		
+		if(user.role === "contractor"){
+		$('.post-req-btn').removeClass("hide").addClass("show");
+		$('.quote-btn').removeClass("show").addClass("hide");
+		}
+		
+		
+		$('#user').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('.profile').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('.dashboard').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+		});
+		
+		$('.post-req-btn').click(function(e){
+			e.preventDefault();
+			$(location).attr('href',"../requirement-form.html?category="+category+"&sub-category="+sub_ctg);
+		});
+		
+		$('.quote-btn').click(function(e){
+			e.preventDefault();
+			$(location).attr('href',"../quote-form.html?reqId="+requirement.requirementId);
+		});
+		
+		
+		$('.logout').click(function(){
+		        $.ajax({
+					url:AppData.relativeUrl+"user/logout",
+					type:"post",
+					data:{},
+					success:function(response){
+						var user = localStorage.getItem("user");
+				        if(user !== null){
+				            localStorage.removeItem("user");
+				        }
+				        $(location).attr('href',"../index.html");
+					}
+					});
+		 });
+		});    
+    </script>
+    <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>    
     </body>
 </html>

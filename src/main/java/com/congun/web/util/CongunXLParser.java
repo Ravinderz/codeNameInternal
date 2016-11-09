@@ -1,11 +1,17 @@
 package com.congun.web.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,13 +22,6 @@ import com.congun.web.dao.SupplierQuoteDao;
 import com.congun.web.model.AddEquipment;
 import com.congun.web.model.ContractorRequirement;
 import com.congun.web.model.Machines;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 @Repository
 public class CongunXLParser {
@@ -82,26 +81,26 @@ public class CongunXLParser {
 							 //System.out.println(cell.getStringCellValue());
 
 							if (cell.getColumnIndex() == 0) {
-								machine.setCategory(cell.getStringCellValue());
+								machine.setCategory(cell.getStringCellValue().trim());
 							}
 							// Cell with index 2 contains marks in Science
 							else if (cell.getColumnIndex() == 1) {
 
-								machine.setEquipment(cell.getStringCellValue());
+								machine.setEquipment(cell.getStringCellValue().trim());
 							}
 							// Cell with index 3 contains marks in English
 							else if (cell.getColumnIndex() == 2) {
-								if(list.contains(cell.getStringCellValue())){
+								if(list.contains(cell.getStringCellValue().trim())){
 									duplicate = true;
 								}
 								else{
 									duplicate = false;
 								}
-								machine.setModel(cell.getStringCellValue());
+								machine.setModel(cell.getStringCellValue().trim());
 							} else if (cell.getColumnIndex() == 3) {
-								machine.setMake(cell.getStringCellValue());
+								machine.setMake(cell.getStringCellValue().trim());
 							} else if (cell.getColumnIndex() == 4) {
-								machine.setCapacity(cell.getStringCellValue());
+								machine.setCapacity(cell.getStringCellValue().trim());
 							}
 						}
 					}
@@ -109,12 +108,13 @@ public class CongunXLParser {
 					if(duplicate==false){
 						if (machinedao.insertMachineDetails(machine).equals(
 								ResponseConstants.MACHINE_SUCCESS_CODE)) {
+							logger.info("Object has been Inserted Successfully at : "+rowcount);
 							//rowcount = rowcount+1;
 						}
 					}
 
                     }
-					//rowcount++;
+					rowcount++;
 				}
 			}
 
@@ -159,7 +159,7 @@ public class CongunXLParser {
 
 						Cell cell = (Cell) cellIterator.next();
 
-						if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
+					/*	if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
 							
 							if (cell.getColumnIndex() == 2) {
 								requirement.setTitle(cell.getStringCellValue());
@@ -240,7 +240,7 @@ public class CongunXLParser {
 												.getNumericCellValue());
 							}
 
-						}
+						}*/
 					}
 
 					rowcount++;

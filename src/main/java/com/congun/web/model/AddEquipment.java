@@ -1,5 +1,7 @@
 package com.congun.web.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,8 @@ public int yearOfManufacturing;
 public String model;
 public String capacity;
 public int quantity;
+public Timestamp createdTime;
+public Timestamp updatedTime;
 
 public String getEquipment() {
 	return equipment;
@@ -83,8 +87,20 @@ public int getQuantity() {
 public void setQuantity(int quantity) {
 	this.quantity = quantity;
 }
-
+public Timestamp getCreatedTime() {
+	return createdTime;
+}
+public void setCreatedTime(Timestamp createdTime) {
+	this.createdTime = createdTime;
+}
+public Timestamp getUpdatedTime() {
+	return updatedTime;
+}
+public void setUpdatedTime(Timestamp updatedTime) {
+	this.updatedTime = updatedTime;
+}
 	
 	
 
 }
+

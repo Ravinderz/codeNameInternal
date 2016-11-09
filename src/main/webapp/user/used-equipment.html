@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/magic-check.css">
+<link rel="stylesheet" href="../css/used-equipment.css">
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+
+
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="..\images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="#" class="profile"><span>Profile</span></a></li>
+									<li><a href="#" class="dashboard"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" id="sub-nav-profile" class="profile">Profile</a></li>
+						<li><a href="#" id="sub-nav-dashboard" class="dashboard">Rental board</a></li>
+						<li class="active"><a href="used-equipment.html">Used equipment</a></li>
+					</ul>
+				</div>
+				<div class="col-md-6">	
+					<!-- <div class="search-bar-2">
+						<form>
+							 <div class="input-group">
+								<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+								<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</form>
+					</div> -->
+				</div>
+			</div>
+			<div class="row sub-sub-nav-bar">
+			<div class="page-nav">
+				<ul class="nav navbar-nav">
+				  <li role="presentation" class="active"><a href="used-equipment.html">For Sale</a></li>
+				  <li role="divider" class="divider"><a href="#"></a></li>
+				  <li role="presentation"><a href="myused-equipment.html">Sell My Equipment</a></li>
+				</ul>
+			</div>
+			</div>
+		</div>
+		 <div class="container">
+			<div class="row">
+				<div class="col-md-12">
+		   
+		<div class="used-equip-pagination float-right">
+			<nav aria-label="Page navigation">
+				<ul class="pagination ">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
+				</div>
+			</div>
+			<div class="container">
+				<div class="col-md-3">
+					<div class="filter-wrapper">
+					<div class="filter-header"><p>Equipment Type</p></div>
+					<div class="filter-content">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				
+								<!--content will be inserted here dynamically  -->
+
+						</div>
+					</div> <!-- end of filter content -->
+					<div class="filter-header"><p>Manufacturer</p></div>
+					<div class="filter-content manufacturer">
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Terex" value="Terex" /><label for="Terex">Terex</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Mahindra" value="Mahindra" /><label for="Mahindra">Mahindra</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CAT" value="CAT" /><label for="CAT">Caterpillar </label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CASE" value="CASE" /><label for="CASE">CASE </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo </label> 
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="HYNDAI" value="HYNDAI" /><label for="HYNDAI">HYNDAI</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Leyland Deere" value="Leyland Deere" /><label for="Leyland Deere">Leyland Deere</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="L&T komutsu" value="L&T komutsu" /><label for="L&T komutsu">L&T komutsu</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Kobelco" value="Kobelco" /><label for="Kobelco">Kobelco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bobcat" value="Bobcat" /><label for="Bobcat">Bobcat</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Sany" value="Sany" /><label for="Sany">Sany</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Atlas Copco" value="Atlas Copco" /><label for="Atlas Copco">Atlas Copco</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ajax Fiori" value="Ajax Fiori" /><label for="Ajax Fiori">Ajax Fiori</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Eicher" value="Eicher" /><label for="Eicher">Eicher</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Aquarius" value="Aquarius" /><label for="Aquarius">Aquarius</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ammann Apollo" value="Ammann Apollo" /><label for="Ammann Apollo">Ammann Apollo</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="umatech" value="umatech" /><label for="umatech">umatech</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Veermer" value="Veermer" /><label for="Veermer">Veermer</label>
+<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Generac" value="Generac" /><label for="Generac">Generac</label>
+					</div> 
+					</div>
+					<div class="filter-header"><p>Location</p></div>
+					<div class="filter-content location">
+					<div class="input-wrapper">
+						<input type="checkbox" class="magic-checkbox" name="location" id="Hyderabad" value="Hyderabad" /><label for="Hyderabad"> Hyderabad </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Chennai" value="Chennai" /><label for="Chennai">Chennai</label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Kolkatta" value="Kolkatta" /><label for="Kolkatta">Kolkatta </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Mumbai" value="Mumbai" /><label for="Mumbai">Mumbai </label>
+						<input type="checkbox" class="magic-checkbox" name="location" id="Bengaluru" value="Bengaluru " /><label for="Bengaluru">Bengaluru </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Pune" value="Pune " /><label for="Pune">Pune </label> 
+						<input type="checkbox" class="magic-checkbox" name="location" id="Delhi" value="Delhi " /><label for="Delhi">Delhi </label>
+					</div>
+					</div>
+				</div><!-- filter wrapper ends -->
+			</div>
+		
+				<div class="col-md-9">
+				<div class="posts">
+				
+				
+				
+				
+				<!-- Content will go here  -->
+				
+				
+				
+				
+				
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+		
+	</div>
+<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 		<!-- ********************* This is for the post view model *********************************** -->
+					<div class="modal fade" id="view-post-modal" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content post-modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&#10005;</button>
+									<h4 class="modal-title" id="myModalLabel">Post</h4>
+								</div>
+								<div class="modal-body">
+									<div class="post-content">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-7">
+													<img class="post-image" id="img-250" src="http://placehold.it/250x250" width="250px" height="250px" alt="...">
+												</div>
+												<div class="col-md-5 post-text">
+													<h3 id="modal-machine">Excavator</h3>
+													<h4>Price : <span id="modal-price">2000000</span></h4>
+													<h4 >Meter : <span id="modal-meter">100</span> KM</h4>
+													<h4 >Mfg : <span id="modal-mfg">JCB</span></h4>
+													<h4 >Manufactured year : <span id="modal-yom">2014</span></h4>
+													<h4 >location : <span id="modal-location">hyderabad</span></h4>
+													<br>
+													<br>
+													<h4 >posted by : <span id="modal-postedby">Nishant</span></h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-7">
+													<ul class="img-thumb">
+													</ul>
+												</div>
+												<div class="col-md-5">
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			var posts = [];
+ 			var interested = [];
+ 			var user = $.getUser();
+				var username = user.firstname+" "+user.lastname;
+				$('#user').text(username);
+				$('#user-name').text(username);
+				
+				$('.logout').click(function(){
+				        $.ajax({
+		 					url:AppData.relativeUrl+"user/logout",
+		 					type:"post",
+		 					data:{},
+		 					success:function(response){
+		 						var user = localStorage.getItem("user");
+						        if(user !== null){
+						            localStorage.removeItem("user");
+						        }
+						        $(location).attr('href',"../index.html");
+		 					}
+		 					});
+				        
+				 });
+				
+ 			
+ 		$('.profile').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-profile.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-profile.html");
+			}
+		});
+		
+		$('.dashboard').click(function(e){
+			e.preventDefault();
+			if(user.role === "contractor"){
+				$(location).attr('href',"contractor-dashboard.html");
+			}else if(user.role === "supplier"){
+				$(location).attr('href',"supplier-dashboard.html");
+			}
+		});
+		
+		
+		
+/* This ajax call is made to populate the category and equipment machinary dropdowns */
+    	
+    	var category = [];
+    	var equipment = [];
+    	$.ajax({
+    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
+    		type:"get",
+    		data:{},
+    		success:function(response){
+    			response = $.parseJSON(response);
+    			var i = 1;
+    			var panelContent = "";
+    			$.each(response,function(index,value){
+    				var panelBody = "";	
+						$.ajax({
+    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+value,
+    	    			type:"get",
+    	    			data:{},
+    	    			success:function(equipments){
+    	    				equipments = $.parseJSON(equipments);
+    	    				$.each(equipments,function(index,value){
+    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+encodeURI(value)+' value='+encodeURI(value)+' /><label for='+encodeURI(value)+'>'+value+'</label> '
+    	    				});
+    	    				panelContent += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title">'+
+    	    				'<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" aria-expanded="false" aria-controls="collapse'+i+'">'+
+    	    				value+'</a></h4></div><div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'+i+'">'+
+    	    				'<div class="panel-body">'+panelBody+'</div></div></div>';
+    	    				category[i] = value;
+        					i++
+    	    				$("#accordion").html("");
+    	        			$("#accordion").append(panelContent);
+    	    			}
+    	    			});
+    					
+    			});
+    		}
+    	});
+		
+    	
+		$('.filter-content').on("click","input[type='checkbox']",function(e){
+			var checked = "";
+			var equipmentChecked = "";
+			var mfgChecked = "";
+			var locationChecked = "";
+			var query = "";
+			
+			$('input[type="checkbox"]:checked').each(function(){
+				
+				if($(this).attr('name') === 'equipment'){
+				if(equipmentChecked.length === 0){
+				equipmentChecked += $(this).val();
+				}
+				else{
+					equipmentChecked += ":"+$(this).val();
+				}
+				}
+				else if($(this).attr('name') === 'manufacturer'){
+					if(mfgChecked.length === 0){
+						var mfg = encodeURI($(this).val());
+							mfgChecked += mfg;
+						}
+						else{
+							mfgChecked += ":"+mfg;
+						}
+				}else if($(this).attr('name') === 'location'){
+					if(locationChecked.length === 0){
+						locationChecked += $(this).val();
+						}
+						else{
+							locationChecked += ":"+$(this).val();
+						}
+				}
+			});
+			
+			var flag = true;
+			
+			if(locationChecked.length !== 0 && equipmentChecked.length !== 0 && mfgChecked.length !== 0){
+			query = "location="+locationChecked+"&equipment="+equipmentChecked+"&manufacturer="+mfgChecked; 
+			}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length === 0){
+				flag = false;
+			}else if(locationChecked.length === 0 && (mfgChecked.length !== 0 && equipmentChecked.length !== 0)){
+				query = "equipment="+equipmentChecked+"&manufacturer="+mfgChecked;
+			}else if(equipmentChecked.length === 0 && (locationChecked.length !== 0 && mfgChecked.length !== 0)){
+				query = "location="+locationChecked+"&manufacturer="+mfgChecked;
+			}else if(mfgChecked.length === 0 && (locationChecked.length !== 0 && equipmentChecked.length !== 0)){
+				query = "location="+locationChecked+"&equipment="+equipmentChecked;
+			}else if(locationChecked.length === 0 && equipmentChecked.length === 0){
+				query = "manufacturer="+mfgChecked;
+			}else if(mfgChecked.length === 0 && equipmentChecked.length === 0){
+				query = "location="+locationChecked;
+			}else if(locationChecked.length === 0 && mfgChecked.length === 0){
+				query = "equipment="+equipmentChecked;
+			}
+			if(flag){
+			var post = "";
+			$.ajax({
+					url:AppData.relativeUrl+"usedmachine/filterUsedMachines?"+query,
+					type:"get",
+					data:{},
+					success:function(response){
+						response = $.parseJSON(response);
+						$.each(response,function(index,value){
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							var imgArr = value.imagesuploaded.split(",");
+ 							var isInterested = false;
+ 							if(interested[value.postId] == value.postId){
+ 								isInterested = true;
+ 							}
+ 							if(isInterested){
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 							}else{
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 							}
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+					}
+					});
+			
+			}else{
+				var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							var imgArr = value.imagesuploaded.split(",");
+ 							var isInterested = false;
+ 							if(interested[value.postId] == value.postId){
+ 								isInterested = true;
+ 							}
+ 							if(isInterested){
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><span class="name"> Name : '+posts[value.postId].userName+'</span><span class="contact"> Contact : '+posts[value.postId].contactNo+'<span></div></div></div></div></div>';
+ 							}else{
+ 								post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+ 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+ 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+ 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+ 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a> </div></div></div></div></div>';
+ 							}
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+		
+			}
+		});
+		
+		
+		
+
+			var post = "";
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						$.each(response,function(index,value){
+ 							posts[value.postId] = value;	
+ 							var postedTime = value.postedTime;
+ 							postedTime = $.date(postedTime,1);
+ 							var imgArr = value.imagesuploaded.split(",");
+ 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
+							'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
+							'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
+							'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
+							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested" id='+value.postId+'>&nbsp;interest</a></div></div></div></div></div>';
+ 						});
+ 						$('.posts').html("");
+ 						$('.posts').append(post);
+ 					}
+ 					});
+					
+ 				var clickedPosts = [];
+ 				$('.posts').on("click",".interested",function(e){
+ 					var postId = this.id;
+ 					if(clickedPosts[0]){
+ 						console.log("inside if")
+ 						var interaction = clickedPosts[0]
+ 						interaction.html("");
+ 						interaction.html("<a class='fa fa-flash interested' id="+clickedPosts[1]+">&nbsp;interest</a>");
+ 					}
+ 					
+ 					clickedPosts[1] = postId;
+ 					var parent = $(this).parents(".user-interactions");
+ 					clickedPosts[0] = parent;
+ 					interested[postId] = postId;
+					var postUser = $.getUser();
+					delete postUser.password;
+					delete postUser.createdtime;
+					delete postUser.updatedtime;
+					delete postUser.constitution;
+					delete postUser.company_individual_profile;
+					delete postUser.website;
+					delete postUser.role;
+					delete postUser.token;
+					postUser = JSON.stringify(postUser);
+					 $.ajax({
+	 					url:AppData.relativeUrl+"usedmachine/interest/"+postId,
+	 					type:"post",
+	 					contentType:"application/json; charset=utf-8",
+	 					data:postUser,
+	 					success:function(response){
+	 						parent.html("");
+	 						var element = "<span class='name'> Name : "+posts[postId].userName+"</span><span class='contact'> Contact : "+posts[postId].contactNo+"</span>";
+	 						parent.html(element);
+	 					}
+	 					});
+
+ 				});
+ 				
+ 				$('.img-thumb').on("click",".post-img-thumb",function(e){
+ 					e.preventDefault();
+ 					$('#img-250').attr("src",$(this).attr("src"));
+ 				});
+ 				
+ 				$('.posts').on("click",".media-object",function(e){
+ 					e.preventDefault();
+ 					var post = posts[$(this).attr("data-id")];
+ 					$('#modal-machine').text(post.equipmentName);
+ 					$('#modal-price').text(post.price);
+ 					$('#modal-meter').text(post.meterReading);
+ 					$('#modal-mfg').text(post.manufacturer);
+ 					$('#modal-yom').text(post.yearOfManufacturer);
+ 					$('#modal-location').text(post.location);
+ 					$('#modal-postedby').text(post.userName);
+ 					var imgArr = post.imagesuploaded.split(",");
+ 					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
+ 					var listContent = "";
+ 					$.each(imgArr,function(index,value){
+ 						var imgid = '#thumb-img'+index;
+ 						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+ 					});
+ 					
+ 					$('.img-thumb').html("");
+ 					$('.img-thumb').html(listContent);
+ 			 		$('#view-post-modal').modal("show");
+ 				});
+			
+ 				$.date = function(dateObject,pattern) {
+ 		 		    var d = new Date(dateObject);
+ 		 		    var date = d.toDateString();
+ 		 		    if(pattern === 1){
+ 		 		    var dateArr = date.split(" ");
+ 		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		 		    }
+ 		 		    else if(pattern === 2){
+ 		 		    	var dateArr = dateObject.split(' ');
+ 		 		    	var time = dateArr[3].split(':');
+ 		 		    	var HH = parseInt(time[0])+6;
+ 		 		    	var mm = parseInt(time[1])+30;
+ 		 		    	var ss = time[2];
+ 		 		    	if(dateArr[1].length === 3)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		 		    	else if(dateArr[1].length === 2)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		 		    }else if(pattern === 3){
+ 		 	 		    var dateArr = dateObject.split("-");
+ 		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 		 				}
+ 		 		    return date;
+ 		 		};
+ 		 		
+ 		 		$.getMonthName = function(monNum){
+ 		 			var month;
+ 		 			if(monNum === "01"){
+ 		 				month = "Jan";
+ 		 			}
+ 		 			else if(monNum === "02"){
+ 		 				month = "Feb";
+ 		 			}
+ 		 			else if(monNum === "03"){
+ 		 				month = "Mar";
+ 		 			}
+ 		 			else if(monNum === "04"){
+ 		 				month = "Apr";
+ 		 			}
+ 		 			else if(monNum === "05"){
+ 		 				month = "May";
+ 		 			}
+ 		 			else if(monNum === "06"){
+ 		 				month = "Jun";
+ 		 			}
+ 		 			else if(monNum === "07"){
+ 		 				month = "Jul";
+ 		 			}
+ 		 			else if(monNum === "08"){
+ 		 				month = "Aug";
+ 		 			}
+ 		 			else if(monNum === "09"){
+ 		 				month = "Sep";
+ 		 			}
+ 		 			else if(monNum === "10"){
+ 		 				month = "Oct";
+ 		 			}
+ 		 			else if(monNum === "11"){
+ 		 				month = "Nov";
+ 		 			}
+ 		 			else if(monNum === "12"){
+ 		 				month = "Dec";
+ 		 			}
+ 		 			return month;
+ 		 		};
+ 		 		
+ 		 		$.getMonth = function(month){
+ 		 			var monNum;
+ 		 			month = month.toLowerCase();
+ 		 			if(month === "jan"){
+ 		 				monNum = '01';
+ 		 			}
+ 		 			else if(month === "feb"){
+ 		 				monNum = '02';
+ 		 			}
+ 		 			else if(month === "mar"){
+ 		 				monNum = '03';
+ 		 			}
+ 		 			else if(month === "apr"){
+ 		 				monNum = '04';
+ 		 			}
+ 		 			else if(month === "may"){
+ 		 				monNum = '05';
+ 		 			}
+ 		 			else if(month === "june"){
+ 		 				monNum = '06';
+ 		 			}
+ 		 			else if(month === "july"){
+ 		 				monNum = '07';
+ 		 			}
+ 		 			else if(month === "aug"){
+ 		 				monNum = '08';
+ 		 			}
+ 		 			else if(month === "sep"){
+ 		 				monNum = '09';
+ 		 			}
+ 		 			else if(month === "oct"){
+ 		 				monNum = '10';
+ 		 			}
+ 		 			else if(month === "nov"){
+ 		 				monNum = '11';
+ 		 			}
+ 		 			else if(month === "dec"){
+ 		 				monNum = '12';
+ 		 			}
+ 		 			
+ 		 			return monNum;
+ 		 		};		
+ 			
+ 		});
+ 	</script>	
+	</body>
+	</html>
+		
