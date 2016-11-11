@@ -59,7 +59,7 @@ $(document).ready(function(){
     			if(categoryParam !== undefined){
     			$("#category").val(categoryParam);
     			}
-    			if(categoryParam !== undefined ){
+    			if(equipment !== undefined ){
     				$.ajax({
     					
     					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+categoryParam,
@@ -130,7 +130,7 @@ $(document).ready(function(){
     			console.log(response);
     			$.each(response,function(index,value){
     				$("#manufacturer").append($("<option />").val(value).text(value));
-    				manufacturer[i] = value;
+    					category[i] = value;
     					i++
     			});
     			console.log("manufacturer",manufacturerParam);
@@ -148,30 +148,13 @@ $(document).ready(function(){
     	    				console.log(models);
     	    				$.each(models,function(index,value){
     	    				$("#model").append($("<option />").val(value).text(value));
+    	    				
     	    				});
     	    				if(modelParam !== undefined){
     	    				$("#model").val(modelParam);
-    	    				var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+modelParam+"/";
-    	    				console.log("url",url);
-    	    				$.ajax({
-    	    					url:url,
-    	    					type:"get",
-    	    					data:{},
-    	    					success:function(response){
-    	    						machine = $.parseJSON(response);
-    	    						console.log("machine details by model ",machine);
-    	    						$('#equipmentCategory').val(machine.category);
-    	    						$('#equipmentName').val(machine.equipment);
-    	    					}
-    	    						
-    	    				});
-    	    				
     	    				}
     	    			}
     	    			});
-    				
-    				
-    			
     			}else{
     			$.ajax({
     			url : AppData.relativeUrl+"machine/getModelsByMake/"+manufacturer[0],
@@ -181,25 +164,9 @@ $(document).ready(function(){
     				models = $.parseJSON(models);
     				console.log(models);
     				$.each(models,function(index,value){
-    				$("#model").append($("<option />").val(value).text(value));
-    				});
-    				var selectedOption = $("#model option:selected").text();
-    				console.log("Selected Model : "+$("#model option:selected").text());
-    				var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+selectedOption+"/";
-    				console.log("url",url);
-    				$.ajax({
-    					url:url,
-    					type:"get",
-    					data:{},
-    					success:function(response){
-    						machine = $.parseJSON(response);
-    						console.log("machine details by model ",machine);
-    						$('#equipmentCategory').val(machine.category);
-    						$('#equipmentName').val(machine.equipment);
-    					}
-    						
-    				});
+    				$("#models").append($("<option />").val(value).text(value));
     				
+    				});
     			}
     			});
     			}
@@ -223,53 +190,12 @@ $(document).ready(function(){
     				$("#model").html("");
     				$.each(models,function(index,value){
     				$("#model").append($("<option />").val(value).text(value));
-    				});
-    				selectedOption = $("#model option:selected").text();
-    				console.log("Selected Model : "+$("#model option:selected").text());
-    				var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+selectedOption+"/";
-    				console.log("url",url);
-    				$.ajax({
-    					url:url,
-    					type:"get",
-    					data:{},
-    					success:function(response){
-    						machine = $.parseJSON(response);
-    						console.log("machine details by model ",machine);
-    						$('#equipmentCategory').val(machine.category);
-    						$('#equipmentName').val(machine.equipment);
-    					}
-    						
-    				});
-    				
+    				});	
     			}
     				
     		});
     	});
    
-	var machine = "";
-	$("#model").on('change',function() {
-		
-		var selectedOption = $('#model option:selected').text();
-		
-		console.log("selected model ",selectedOption);
-		var url = AppData.relativeUrl+"machine/getMachineDetailsByModel/"+selectedOption+"/";
-		console.log("url",url);
-		$.ajax({
-			url:url,
-			type:"get",
-			data:{},
-			success:function(response){
-				machine = $.parseJSON(response);
-				console.log("machine details by model ",machine);
-				$('#equipmentCategory').val(machine.category);
-				$('#equipmentName').val(machine.equipment);
-			}
-				
-		});
-		
-		
-	});
-	
  
 	
  $('#user').click(function(e){
