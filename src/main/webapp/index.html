@@ -82,7 +82,7 @@
 												<label for="username" class="col-sm-2 control-label sr-only">
 													Email </label>
 												<div class="col-sm-12">
-													<input type="text" name="username" placeholder="username"
+													<input type="text" name="username" placeholder="Your email id"
 														class="form-control" id="username" >
 												</div>
 											</div>
@@ -91,7 +91,7 @@
 													Password </label>
 												<div class="col-sm-12">
 													<input type="password" class="form-control" name="password"
-														placeholder="password" id="password" >
+														placeholder="Your password" id="password" >
 												</div>
 											</div>
 											<span class="invalid-error"></span>
@@ -604,13 +604,16 @@
 						
 						$('#modal-container-register').on('hidden.bs.modal', function(){
 						    $(this).find('form')[0].reset();
+						    $("#register").attr("disabled", false);
 						    validateReset($('#register-form'));
 						});
 						
 						
 						$("#register-form").on("keypress",function(e){
-							if(e.which === 13)
+							if(e.which === 13){
+								$("#register").attr("disabled", false);	
 							$.register($("#register"));
+							}
 						});
 						
 						
@@ -620,7 +623,7 @@
 						});
 						
 						$("#register").click(function() {
-							
+							$("#register").attr("disabled", true);
 							$.register($(this));
 							
 							});
@@ -665,13 +668,23 @@
 							}
 							}
 							});
+							}else{
+								$("#register").attr("disabled", false);
 							}
 				
 						};
+						
+						var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
+							+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
+							+'<input type="email" class="form-control" name="email" placeholder="email" id="forgotpass-email" ></div></div>'
+							+'<div class="error-msg"></div><div class="login-btn"><button type="button" id="forgetPass" class="btn btn-next modal-btn">Send Link</button>'
+							+'</div><div class="clear-fix"></div></form></div>';
 							
 						$('#modal-container-forgetPass').on('hidden.bs.modal', function(){
 						    $(this).find('form')[0].reset();
-						    validateReset($('#register-form'));
+						    $('#forgetpass-modal').html("");
+						    $('#forgetpass-modal').html(forgetPassForm);
+						    $("#forgetPass").attr("disabled", false);
 						});
 							
 						$('#forgot-pass-link').click(function(e){
@@ -684,7 +697,39 @@
 							$('.error-msg').html("");
 						})
 						
+						
+						$("#forgetpass-modal").on("keypress",function(e){
+							if(e.which === 13){
+								$("#forgetPass").attr("disabled", true);
+								e.preventDefault();
+								var data = $("#forgetPass-form").serializeObject();
+								console.log(data);
+									var email = data.email;
+									data = JSON.stringify(data);
+									 $.ajax({
+											url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+											type : "put",
+											contentType : "application/json; charset=utf-8",
+											data : {},
+											success : function(response) {
+												if(response.indexOf("UPEE01") >= 0){
+													$('.error-msg').html("<p>This is not a registered email! please provide a registered mail id</p>")
+													$("#forgetPass").attr("disabled", false);
+												}else{
+													$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+												}
+												console.log(response);
+												}
+											});
+							}
+						});
+						
+						
+						
+						
+						
 						$('#forgetPass').click(function(e){
+							$("#forgetPass").attr("disabled", true);
 							e.preventDefault();
 							var data = $("#forgetPass-form").serializeObject();
 							console.log(data);
@@ -697,8 +742,8 @@
 										data : {},
 										success : function(response) {
 											if(response.indexOf("UPEE01") >= 0){
-												
 												$('.error-msg').html("<p>This is not a registered email! please provide a registered mail id</p>")
+												$("#forgetPass").attr("disabled", false);
 											}else{
 												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
 											}

@@ -62,7 +62,7 @@
 												<label for="username" class="col-sm-2 control-label sr-only">
 													Email </label>
 												<div class="col-sm-12">
-													<input type="text" name="username" placeholder="username"
+													<input type="text" name="username" placeholder="Your email id"
 														class="form-control" id="username" >
 												</div>
 											</div>
@@ -71,7 +71,7 @@
 													Password </label>
 												<div class="col-sm-12">
 													<input type="password" class="form-control" name="password"
-														placeholder="password" id="password" >
+														placeholder="Your password" id="password" >
 												</div>
 											</div>
 											<span class="invalid-error"></span>
@@ -377,6 +377,7 @@
 						
 						$('#modal-container-register').on('hidden.bs.modal', function(){
 						    $(this).find('form')[0].reset();
+						    $("#register").attr("disabled", false);
 						});
 						
 						$('#re-link').click(function(e){
@@ -385,13 +386,15 @@
 						});
 						
 						$("#register-form").on("keypress",function(e){
-							if(e.which === 13)
+							if(e.which === 13){
+								$("#register").attr("disabled", true);
 							$.register($("#register"));
+							}
 						});
 						
 						
 						$("#register").click(function() {
-							
+							$("#register").attr("disabled", true);
 							$.register($(this));
 							
 							});
@@ -440,6 +443,8 @@
 							}
 							}
 							});
+							}else{
+								$("#register").attr("disabled", false);
 							}
 				
 						};
@@ -534,6 +539,7 @@ $(".invalid-error").hide();
 						    $(this).find('form')[0].reset();
 						    $('#forgetpass-modal').html("");
 						    $('#forgetpass-modal').html(forgetPassForm);
+						    $("#forgetPass").attr("disabled", false);
 						});
 						
 						$('#forgetpass-modal').on("focus","#forgotpass-email",function(e){
@@ -547,6 +553,7 @@ $(".invalid-error").hide();
 						});	
 						
 						$('#forgetpass-modal').on("click","#forgetPass",function(e){
+							$("#forgetPass").attr("disabled", true);
 							e.preventDefault();
 							var data = $("#forgetPass-form").serializeObject();
 							console.log(data);
@@ -560,6 +567,7 @@ $(".invalid-error").hide();
 										success : function(response) {
 											if(response.indexOf("UPEE01") >= 0){
 												$('#forgetpass-modal').html("<p>This is not a registered email! please provide a registered mail id</p>")
+												$("#forgetPass").attr("disabled", false);
 											}else{
 												$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
 											}
@@ -567,6 +575,33 @@ $(".invalid-error").hide();
 											}
 										});
 							
+						});
+						
+						
+						$("#forgetpass-modal").on("keypress",function(e){
+							if(e.which === 13){
+								$("#forgetPass").attr("disabled", true);
+								e.preventDefault();
+								var data = $("#forgetPass-form").serializeObject();
+								console.log(data);
+									var email = data.email;
+									data = JSON.stringify(data);
+									 $.ajax({
+											url : AppData.relativeUrl+"user/forgotPassword/sendEmail/"+email+"/",
+											type : "put",
+											contentType : "application/json; charset=utf-8",
+											data : {},
+											success : function(response) {
+												if(response.indexOf("UPEE01") >= 0){
+													$('.error-msg').html("<p>This is not a registered email! please provide a registered mail id</p>")
+													$("#forgetPass").attr("disabled", false);
+												}else{
+													$('#forgetpass-modal').html("<p>A link has been sent to your email. please verify</p>")
+												}
+												console.log(response);
+												}
+											});
+							}
 						});
 					});
 </script>
