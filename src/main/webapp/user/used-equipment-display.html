@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConGun</title>
+<meta name="description" content="Heavy Machinery Rentals">
+<meta name="author" content="Congun">
+
+<!-- <link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"> -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
+
+<link rel="stylesheet" href="../css/congun.css">
+<link rel="stylesheet" href="../css/magic-check.css">
+<link rel="stylesheet" href="../css/used-equipment.css">
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/appProperties.js"></script>
+
+
+<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 navigation">
+					<nav class="navbar navbar-defaut navbar-top" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html"> <img id="nav-logo"
+								src="..\images\logo_new.png" height="75px" width="200px" />
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right" id="navigation-right">
+								<li><a href="index.html"><span>Home</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li class="avatar-dropdown">
+								<div class="dropdown">
+								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<div id="profile-avatar"></div>
+									<!-- <img src="http://placehold.it/50x50" alt="..." class="img-circle"> -->
+									<span class="caret"></span>
+								  </a>
+								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								  <li><a href="#" class="profile"><span id="user">User</span></a></li>
+								  	<li role="separator" class="divider"></li>
+									<li><a href="#" class="profile"><span>Profile</span></a></li>
+									<li><a href="#" class="dashboard"><span>Rental board</span></a></li>
+									<li><a href="used-equipment.html"><span>Used equipment</span></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#" class="logout"><span>logout</a></span></li>
+								  </ul>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-main">
+		<div class="container-fluid">
+		   <div class="row sub-nav-bar">
+				<div class="col-md-6">
+					<ul class="sub-menu">
+						<li><a href="#" id="sub-nav-profile" class="profile">Profile</a></li>
+						<li><a href="#" id="sub-nav-dashboard" class="dashboard">Rental board</a></li>
+						<li class="active"><a href="used-equipment.html">Used equipment</a></li>
+					</ul>
+				</div>
+				<div class="col-md-6">	
+					<!-- <div class="search-bar-2">
+						<form>
+							 <div class="input-group">
+								<input type="text" id="search-input" class="form-control" placeholder="Search for...">
+								<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="search-btn"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</form>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		</div>
+
+	<div class="content-main-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<img class="post-image" id="img-250"
+						src="http://placehold.it/450x350" width="450px" height="350px"
+						alt="...">
+						
+					<ul class="thumb-img">
+						<!-- <li><a href="#"><img class="post-img-thumb" id='img-thumb1' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb2' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb3' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb4' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb5' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li> -->
+					</ul>	
+				</div>
+				<div class="col-md-5 post-text">
+					<h3 id="machine" style="margin-top:0">Blank </h3>
+					<div class="sub-text">
+					<h4 >
+						Price : <span id="price">0000000</span>
+					</h4>
+					<h4 style="padding-left:20px;">
+						<i class="fa fa-map-marker"></i> <span id="loc"> Blank</span>
+					</h4>
+					</div>
+					<div class="clear-fix"></div>
+					<div class="mid-sec">
+					<h4>
+						Make : <span id="mfg">Blank</span>
+					</h4>
+					<h4 style="padding-left:20px; ">
+						Model : <span id="model">Blank</span>
+					</h4>
+					</div>
+					<div class="clear-fix"></div>
+					<h4>
+						Meter : <span id="meter">Blank</span> KM
+					</h4>
+					<h4>
+						Capacity : <span id="capacity">Blank TON</span>
+					</h4>
+					<br>
+					<h3>Description</h3>
+					<p id="desc">This will the description</p>					
+					<br> <br>
+					<h4>
+						Posted by
+					</h4>
+					<h4 id="postedBy">
+						Blank
+					</h4>
+				</div>
+			</div>
+		</div>	
+		</div>
+		
+		
+	<div class="recommended-sec-wrapper">
+		<h2 style="margin-left: 8.5%;">Recommended Used Equipment</h2>	
+		<div class="recommended-equip-wrapper">
+			<div class="container">	
+				<div class="row">
+					<div class="col-md-12">
+						<div class="recommended-used-scroll">
+							<div class='item-thumb'>
+								<img class='used-img-thumb' src='http://placehold.it/200x180' />
+								<h5>EquipmentName</h5>
+								<p class='float-left'><i class="fa fa-map-marker"></i> Hyderabad</p>
+								<p class='float-left'><i class="fa fa-rupee"></i> 1400000</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<div class="sub-footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="first">
+						<img src="../images/logo_new.png" /><br>CONGUN provides one
+						stop online- solution for all construction equipment needs of
+						construction Contractors, at their desired location, in specified
+						time and at a low price.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<div class="middle">
+						<h3>Quick Links</h3>
+						<ul>
+							<li><span class="fa fa-angle-right"></span><a href="faq.html">FAQ</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="contact.html">Contact Us</a></li>
+							<li><span class="fa fa-angle-right"></span><a href="terms.html">Terms and Conditions</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="address-content last">
+						<h3>Address</h3>
+						<ul class="info">
+							<li><span class="fa fa-map-marker"></span> &ensp; 3rd floor
+								T hub Gachibowli,IIIT Campus, Hyderabad, Telangana 500032</li>
+							<li><span class="fa fa-phone"></span> &ensp; +91-9989933636</li>
+							<li><span class="fa fa-envelope"></span> &ensp; <a
+								href="mailto:info@congun.com">info@congun.com</a></li>
+						</ul>
+						<div class="social">
+							<a class="img-circle fa fa-facebook-f" href="https://www.facebook.com/Congun.india/" target="_blank"></a>
+                           <a class="img-circle fa fa-twitter" href="https://twitter.com/Congunltd" target="_blank"></a>
+                           <a class="img-circle fa fa-google-plus" href="https://plus.google.com/u/0/106690083354786500962" target="_blank"></a>
+                           <a class="img-circle fa fa-linkedin" href="https://www.linkedin.com/company/congun-private-limited?trk=top_nav_home" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			
+ 			$('[data-toggle="tooltip"]').tooltip()
+ 			
+ 			/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		var pid = getUrlParameter("pid");
+ 			
+ 			 var usedEquipments = [];
+ 			
+ 	 			var posts = [];
+ 	 			var interested = [];
+ 	 			var user = $.getUser();
+ 					var username = user.firstname+" "+user.lastname;
+ 					$('#user').text(username);
+ 					$('#user-name').text(username);
+ 					
+ 					$.getAvatar(user);
+ 					
+ 					$('.logout').click(function(){
+ 					        $.ajax({
+ 			 					url:AppData.relativeUrl+"user/logout",
+ 			 					type:"post",
+ 			 					data:{},
+ 			 					success:function(response){
+ 			 						var user = localStorage.getItem("user");
+ 							        if(user !== null){
+ 							            localStorage.removeItem("user");
+ 							        }
+ 							        $(location).attr('href',"../index.html");
+ 			 					}
+ 			 					});
+ 					        
+ 					 });
+ 					
+ 	 			
+ 	 		$('.profile').click(function(e){
+ 				e.preventDefault();
+ 				if(user.role === "contractor"){
+ 					$(location).attr('href',"contractor-profile.html");
+ 				}else if(user.role === "supplier"){
+ 					$(location).attr('href',"supplier-profile.html");
+ 				}
+ 			});
+ 			
+ 			$('.dashboard').click(function(e){
+ 				e.preventDefault();
+ 				if(user.role === "contractor"){
+ 					$(location).attr('href',"contractor-dashboard.html");
+ 				}else if(user.role === "supplier"){
+ 					$(location).attr('href',"supplier-dashboard.html");
+ 				}
+ 			});
+ 			
+				
+				$('.thumb-img').on("click",".post-img-thumb",function(e){
+					e.preventDefault();
+					$('#img-250').attr("src",$(this).attr("src"));
+				});
+ 				
+				
+				
+				
+				console.log("pid"+pid);
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getPostById/"+pid,
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						usedEquipments[response.postId] = response;
+ 						$('#machine').text(response.equipmentName+" - ("+response.yearOfManufacturer+")");
+ 	 					$('#price').text(response.price);
+ 	 					$('#meter').text(response.meterReading);
+ 	 					$('#mfg').text(response.manufacturer);
+ 	 					$('#model').text(response.model);
+ 	 					$('#capacity').text(response.capacity);
+ 	 					$('#mfg-year').text(response.yearOfManufacturer);
+ 	 					$('#loc').text(" "+response.location);
+ 	 					$('#postedBy').text(response.userName);
+ 	 					$('#desc').text(response.description);
+ 	 					var imgArr = response.imagesuploaded.split(",");
+ 	 					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
+ 	 					var listContent = "";
+ 	 					$.each(imgArr,function(index,value){
+ 	 						console.log("index",index);
+ 	 						var imgid = '#thumb-img'+index;
+ 	 						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+ 	 					});
+ 	 					
+ 	 					$('.thumb-img').html("");
+ 	 					$('.thumb-img').html(listContent);
+ 	 					
+ 	 					$.ajax({
+ 	 	 					url:AppData.relativeUrl+"usedmachine/getRelatedUsedEquipments?category="+encodeURI(response.category)+"&equipmentName="+encodeURI(response.equipmentName),
+ 	 	 					type:"get",
+ 	 	 					data:{},
+ 	 	 					success:function(response){
+ 	 	 						var items = "";
+ 	 	 						response = $.parseJSON(response);
+ 	 	 						console.log(response);
+ 	 	 						$.each(response,function(index,value){
+ 	 	 							var imgArr = value.imagesuploaded.split(",");
+ 	 	 							var imgPath = AppData.imageUrl+"usedmachine/"+imgArr[0];
+ 	 	 							items += '<div class="item-thumb" id='+value.postId+'><img class="used-img-thumb" src='+imgPath+' width="200px" height="180px"/>'
+ 	 	 									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p>'
+ 	 	 									+'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
+ 	 	 						});
+ 	 	 						$('.recommended-used-scroll').html("");
+ 	 	 						$('.recommended-used-scroll').html(items);
+ 	 	 						}
+ 	 	 					});
+ 	 			
+ 					}
+ 					});
+				
+ 				$('.recommended-used-scroll').on("click",".item-thumb",function(){
+ 					$(location).attr('href',"used-equipment-display.html?pid="+this.id);
+ 				});
+ 				
+ 				
+ 				$.date = function(dateObject,pattern) {
+ 		 		    var d = new Date(dateObject);
+ 		 		    var date = d.toDateString();
+ 		 		    console.log(d);
+ 		 		    console.log(date);
+ 		 		    if(pattern === 1){
+ 		 		    var dateArr = date.split(" ");
+ 		 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+ 		 		    }
+ 		 		    else if(pattern === 2){
+ 		 		    	console.log("date" +dateObject);
+ 		 		    	var dateArr = dateObject.split(' ');
+ 		 		    	var time = dateArr[3].split(':');
+ 		 		    	var HH = parseInt(time[0])+6;
+ 		 		    	var mm = parseInt(time[1])+30;
+ 		 		    	var ss = time[2];
+ 		 		    	if(dateArr[1].length === 3)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+ 		 		    	else if(dateArr[1].length === 2)
+ 		 		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+ 		 		    }else if(pattern === 3){
+ 		 	 		    var dateArr = dateObject.split("-");
+ 		 	 		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+ 		 				}
+ 		 		    return date;
+ 		 		};
+ 		 		
+ 		 		$.getMonthName = function(monNum){
+ 		 			var month;
+ 		 			console.log(monNum)
+ 		 			if(monNum === "01"){
+ 		 				month = "Jan";
+ 		 			}
+ 		 			else if(monNum === "02"){
+ 		 				month = "Feb";
+ 		 			}
+ 		 			else if(monNum === "03"){
+ 		 				month = "Mar";
+ 		 			}
+ 		 			else if(monNum === "04"){
+ 		 				month = "Apr";
+ 		 			}
+ 		 			else if(monNum === "05"){
+ 		 				month = "May";
+ 		 			}
+ 		 			else if(monNum === "06"){
+ 		 				month = "Jun";
+ 		 			}
+ 		 			else if(monNum === "07"){
+ 		 				month = "Jul";
+ 		 			}
+ 		 			else if(monNum === "08"){
+ 		 				month = "Aug";
+ 		 			}
+ 		 			else if(monNum === "09"){
+ 		 				month = "Sep";
+ 		 			}
+ 		 			else if(monNum === "10"){
+ 		 				month = "Oct";
+ 		 			}
+ 		 			else if(monNum === "11"){
+ 		 				month = "Nov";
+ 		 			}
+ 		 			else if(monNum === "12"){
+ 		 				month = "Dec";
+ 		 			}
+ 		 			return month;
+ 		 		};
+ 		 		
+ 		 		$.getMonth = function(month){
+ 		 			var monNum;
+ 		 			month = month.toLowerCase();
+ 		 			console.log(month)
+ 		 			if(month === "jan"){
+ 		 				monNum = '01';
+ 		 			}
+ 		 			else if(month === "feb"){
+ 		 				monNum = '02';
+ 		 			}
+ 		 			else if(month === "mar"){
+ 		 				monNum = '03';
+ 		 			}
+ 		 			else if(month === "apr"){
+ 		 				monNum = '04';
+ 		 			}
+ 		 			else if(month === "may"){
+ 		 				monNum = '05';
+ 		 			}
+ 		 			else if(month === "june"){
+ 		 				monNum = '06';
+ 		 			}
+ 		 			else if(month === "july"){
+ 		 				monNum = '07';
+ 		 			}
+ 		 			else if(month === "aug"){
+ 		 				monNum = '08';
+ 		 			}
+ 		 			else if(month === "sep"){
+ 		 				monNum = '09';
+ 		 			}
+ 		 			else if(month === "oct"){
+ 		 				monNum = '10';
+ 		 			}
+ 		 			else if(month === "nov"){
+ 		 				monNum = '11';
+ 		 			}
+ 		 			else if(month === "dec"){
+ 		 				monNum = '12';
+ 		 			}
+ 		 			
+ 		 			return monNum;
+ 		 		};		
+			 
+ 		});
+ 	</script>
+ 	<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>	
+	</body>
+	</html>
+		

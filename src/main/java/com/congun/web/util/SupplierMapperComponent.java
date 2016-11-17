@@ -188,14 +188,33 @@ private UserDao userDAO;
 		if(mappedSuppliers.size() > 0){
 		
 			List existingIds = quoteDAO.filterSupplierIds(mappedSuppliers,requirementId);
+			
+			logger.info("$$$$ for TESTING start");
+			for(Object Id: existingIds){
+				logger.info("****** ids from mappingobject"+((MappingObject)Id).getSupplierId());
+			}
+			
+			Iterator<Long> setItr = mappedSuppliers.iterator();
+			while(setItr.hasNext()){
+				logger.info("****** ids before removing supplier set"+setItr.next());
+			}
+			
+			logger.info("$$$$ for TESTING end");
 			if(existingIds != null || existingIds.size() > 0){
 			for(Object Id: existingIds){
 				mappedSuppliers.remove(((MappingObject)Id).getSupplierId());
 			}
+			
+			Iterator<Long> aftItr = mappedSuppliers.iterator();
+			while(aftItr.hasNext()){
+				logger.info("****** ids before after supplier set"+aftItr.next());
+			}
+			
+			
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;
 			}else{
-			
+			System.out.println("inside else of set filterMapped");
 			quoteDAO.updateMappingObjects(mappedSuppliers,requirementId);
 			return mappedSuppliers;
 			}

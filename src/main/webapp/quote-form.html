@@ -127,22 +127,22 @@
                                 <label for="workingHoursPerDay">Number Of Working Hours Per Day</label>
                                 <input type="text" name="workinghours" placeholder="Enter value ex: 9 (9 hours/day)" class="f1-workinghours form-control" id="workinghours" value="0"> 
 						    </div>
-                            <div class="totalPrice">
+                            <!-- <div class="totalPrice">
 							<label for="totalPrice">Total Price : <p id="totalPrice">0</p> </label>
-                            </div>		
+                            </div>	 -->	
                                 <div class="machineRentalCharges">
-								<label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label>
+								<!-- <label style="color:grey">Tip:- select below if price mentioned above is fixed or negotiable</label> -->
 								<ul>
                     			<li><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType1" value="fixed" checked /><label for="rentalyChargesType1"> Fixed </label></li>
   								<li style="padding-left:30px"><input type="radio" class="magic-radio" name="rentalChargesType" id="rentalyChargesType2" value="negotiable"><label for="rentalyChargesType2">Negotiable</label></li>
 								</ul>
                 		    </div>							
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <h5> Driver/Operator Available </h5><br>
 								<div class="radio-driver">
 								<ul>
                                 <li><input type="radio" name="driverAvailable" value="Yes" class="magic-radio" id="driverNeeded-yes"><label for="driverNeeded-yes"><span class="radio-span">Yes</span></label></li>
-                                <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div>
+                                <li><input type="radio" name="driverAvailable" value="No" class="magic-radio" id="driverNeeded-no" checked><label for="driverNeeded-no"><span class="radio-span"> No </span></label></li></ul></div></div> -->
                                 
                              <div class="advanceCharges" hidden>
                                 <label for="advance">Advance</label>
@@ -161,7 +161,7 @@
 								</div>
                                 
                              <div class="form-group">
-                                <label for="queries">Queries</label>
+                                <label for="queries">Queries <span style="color:#CC0000">(Optional) </span></label>
                                 <input type="text" name="queries" placeholder="Enter for any further details" class="f1-query form-control" id="f1-queries"> </div>
                                 
                              <div id="hidden-fields">
@@ -299,20 +299,20 @@
 				
 					reqList = "<div class='item-content'><div class='item-content-header'><h3>Requirement Details</h3><br><img src='images/"+category+"/"+encodeURI(value.equipmentName)+".png' height='150px' width='250px' alt='image here'/></div>"
 					+"<div class='item-content-header-meta'><h3>"+value.title+"</h3></div>"
-					+"<div class='item-content-main'><ul><li style='padding:0px'><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
-					+"<li><h5>Start date</h5><p>"+value.startDate+"</p></li>"
-					+"<li><h5>End date</h5><p>"+value.endDate+"</p></li>"
-					+"<li><h5>Quantity</h5><p>"+value.quantity+"</p></li><br><li style='padding:0px'><h5>Duration</h5><p>"+value.duration+" days</p></li>"
+					+"<div class='item-content-main'><ul><li><h5>Machine Type</h5><p>"+value.equipmentCategory+"/"+value.equipmentName+"</p></li>"
+					+"<li><h5>Start date</h5><p>"+$.date(value.startDate,3)+"</p></li>"
+					+"<li><h5>End date</h5><p>"+$.date(value.endDate,3)+"</p></li>"
+					+"<li><h5>Quantity</h5><p>"+value.quantity+"</p></li><br><li><h5>Duration</h5><p>"+value.duration+" days</p></li>"
 					+"<li><h5>Manufactured Year</h5><p>"+value.manufacturedyear+" Onwards</p></li>"
-					+"<li><h5>hiringChargesType</h5><p>per "+value.hiringChargesType+"</p></li>"
-					+"<li><h5>Transportation</h5><p>"+value.transportation+"</p></li>"
+					+"<li><h5>hiringChargesType</h5><p>per "+value.hiringChargesType+"</p></li><br>"
+					/* +"<li><h5>Transportation</h5><p>"+value.transportation+"</p></li>" */
 					+"<li style='padding:0px'><h5>Description</h5><p>"+value.workDescription+"</p></li><br>"
-					+"<li style='padding:0px'><h5>Driver Needed</h5><p>"+value.driverNeeded+"</p></li>"
+					/* +"<li style='padding:0px'><h5>Driver Needed</h5><p>"+value.driverNeeded+"</p></li>" */
 					+"<li><h5>Manufacturers</h5><p>"+value.manufacturer+"</p></li><br>"
-					+"<li style='padding:0px'><h5>Diesel Charges</h5><p>"+value.dieselCharges+"</p></li>"
+					/* +"<li style='padding:0px'><h5>Diesel Charges</h5><p>"+value.dieselCharges+"</p></li>" */
 					+"<li><h5>workLocation</h5><p>"+value.workLocation+"</p></li>"
-					+"<li><h5>Pin Code</h5><p>"+value.pincode+"</p></li><br>"
-					+"<li style='padding:0px'><h5>Posted By</h5><p>"+value.contractorName+"<br></p></li>"
+					/* +"<li><h5>Pin Code</h5><p>"+value.pincode+"</p></li><br>" */
+					+"<li style='float:right;padding-right:100px'><h5>Posted By</h5><p>"+value.contractorName+"<br></p></li>"
 					+"</ul><div class='clear-fix'></div></div></div>";
 					//reqList += '<ul><li class="dynamic-content" id='+value.quoteId+'>Category: '+value.equipmentCategory+'<span style="padding-left:194px;float:centre;">Equipment : '+value.equipmentName+'</span><span style="padding-left:100px;float:right">Quantity: '+value.quantity+'</span><br><br><span>Model: '+value.model+'</span><span style="padding-left:250px">Manufacturer: '+value.manufacturer+'</span><span style="padding-left:100px;float:right">YearOfManufacture: '+value.manufacturedyear+'</span><br><br>Created Date: '+value.createdTime+'<span style="padding-left:70px">Final Price: <b>'+value.finalQuotePrice+'</b></span><a href="#" class="btn btn-warning">View</a></li></ul>';
 					$('.left-container').html("");
@@ -418,6 +418,122 @@
 	console.log("Values : "+document.getElementById("advanceCharges").value);
 
     }); 
+    
+    $.date = function(dateObject,pattern) {
+		    var d = new Date(dateObject);
+		    var date = d.toDateString();
+		    if(pattern === 1){
+		    var dateArr = date.split(" ");
+		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+		    }
+		    else if(pattern === 4){
+		    	var dateObj = new Date(toDate(dateObject));
+	    	dateObj.setDate(dateObj.getDate() + 3);
+	    	date = dateObj.toDateString();
+	 		    var dateArr = date.split(" ");
+	 		    date = dateArr[2]+ "-" + dateArr[1] + "-" + dateArr[3];
+	 		    }
+		    else if(pattern === 2){
+		    	var dateArr = dateObject.split(' ');
+		    	var time = dateArr[3].split(':');
+		    	var HH = parseInt(time[0])+6;
+		    	var mm = parseInt(time[1])+30;
+		    	var ss = time[2];
+		    	if(dateArr[1].length === 3)
+		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-" +dateArr[1].substring(0,2)+"T "+HH+":"+mm+":"+ss+"Z";
+		    	else if(dateArr[1].length === 2)
+		    	date = dateArr[2]+ "-" + $.getMonth(dateArr[0])+ "-0" +dateArr[1].substring(0,1)+"T "+HH+":"+mm+":"+ss+"Z";	
+		    }else if(pattern === 3){
+		    var dateArr = dateObject.split("-");
+		    date = dateArr[0]+ "-" + $.getMonthName(dateArr[1]) + "-" + dateArr[2];
+		}
+		    return date;
+		};
+	
+	$.getMonthName = function(monNum){
+			var month;
+			if(monNum === "01"){
+				month = "Jan";
+			}
+			else if(monNum === "02"){
+				month = "Feb";
+			}
+			else if(monNum === "03"){
+				month = "Mar";
+			}
+			else if(monNum === "04"){
+				month = "Apr";
+			}
+			else if(monNum === "05"){
+				month = "May";
+			}
+			else if(monNum === "06"){
+				month = "Jun";
+			}
+			else if(monNum === "07"){
+				month = "Jul";
+			}
+			else if(monNum === "08"){
+				month = "Aug";
+			}
+			else if(monNum === "09"){
+				month = "Sep";
+			}
+			else if(monNum === "10"){
+				month = "Oct";
+			}
+			else if(monNum === "11"){
+				month = "Nov";
+			}
+			else if(monNum === "12"){
+				month = "Dec";
+			}
+			return month;
+		};
+		
+		$.getMonth = function(month){
+			var monNum;
+			month = month.toLowerCase();
+			if(month === "jan"){
+				monNum = '01';
+			}
+			else if(month === "feb"){
+				monNum = '02';
+			}
+			else if(month === "mar"){
+				monNum = '03';
+			}
+			else if(month === "apr"){
+				monNum = '04';
+			}
+			else if(month === "may"){
+				monNum = '05';
+			}
+			else if(month === "june"){
+				monNum = '06';
+			}
+			else if(month === "july"){
+				monNum = '07';
+			}
+			else if(month === "aug"){
+				monNum = '08';
+			}
+			else if(month === "sep"){
+				monNum = '09';
+			}
+			else if(month === "oct"){
+				monNum = '10';
+			}
+			else if(month === "nov"){
+				monNum = '11';
+			}
+			else if(month === "dec"){
+				monNum = '12';
+			}
+			
+			return monNum;
+		};
+	
     </script>    
 <script type="text/javascript">
 $.fn.serializeObject = function()

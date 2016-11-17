@@ -1,5 +1,7 @@
 package com.congun.web.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,20 @@ public class MappingObject {
 	public long supplierId;
 	public String requeststatus;
 	public int activeFlag;
-	
+	public String createdTime;
+	 
+	public long getId() {
+		return Id;
+	}
+	public void setId(long id) {
+		Id = id;
+	}
+	public String getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(String createdTime) {
+		this.createdTime = createdTime;
+	}
 	public long getRequirementId() {
 		return requirementId;
 	}

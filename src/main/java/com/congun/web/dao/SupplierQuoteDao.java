@@ -1,6 +1,7 @@
 package com.congun.web.dao;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -364,7 +365,7 @@ public class SupplierQuoteDao {
 	@Transactional
 	public void updateMappingObjects(Set<Long> mapperSuppliers,
 			long requirementId) {
-		logger.info("Entered into SupplierQuoteDao.updateMappingObjects method");
+		logger.info("Entered into SupplierQuoteDao.updateMappingObjects method"+requirementId);
 		String suppId = "";
 		try {
 			if (mapperSuppliers.size() > 0) {
@@ -373,9 +374,13 @@ public class SupplierQuoteDao {
 				for (Long Id : mapperSuppliers) {
 					// suppId = suppId+Id.longValue();
 					// suppId = suppId+",";
+					logger.info("### requirement id : "+requirementId+" mapped to supplier : "+Id);
 					MappingObject mappedobject = new MappingObject();
 					mappedobject.setRequirementId(requirementId);
 					mappedobject.setSupplierId(Id);
+					Date date = new Date();
+					String createdDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date);
+					mappedobject.setCreatedTime(createdDate);
 					getSession().save(mappedobject);
 					// send email
 					appUtil.sendReqEmailToSupp(mappedobject.getSupplierId(),

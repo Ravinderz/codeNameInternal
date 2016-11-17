@@ -22,7 +22,6 @@
 <script src="js/appProperties.js"></script>
 <script src="js/validation.js"></script>
 
-<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 </head>
 <body>
 	<div class="header">
@@ -164,7 +163,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- ************************************* This is for the login model *************************************  -->
 				<!-- ********************* This is for the register model *********************************** -->
 				<div class="modal fade" id="modal-container-register" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
@@ -244,102 +242,85 @@
 					</div>
 				</div>
 				<!-- register modal ends -->
-	
 
-	<div class="content-main">
-		 	<div class="container">
+
+	<div class="content-main-wrapper">
+		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-		   
-		<div class="used-equip-pagination float-right">
-			<nav aria-label="Page navigation">
-				<ul class="pagination ">
-					<li>
-					  <a href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
-					</li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
+				<div class="col-md-7">
+					<img class="post-image" id="img-250"
+						src="http://placehold.it/450x350" width="450px" height="350px"
+						alt="...">
+					<ul class="thumb-img">
+						<!-- <li><a href="#"><img class="post-img-thumb" id='img-thumb1' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb2' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb3' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb4' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li>
+						<li><a href="#"><img class="post-img-thumb" id='img-thumb5' src='http://placehold.it/50x50' width="50px" height="50px" alt="..."></a></li> -->
+					</ul>	
+				</div>
+				<div class="col-md-5 post-text">
+					<h3 id="machine" style="margin-top:0">Blank </h3>
+					<div class="sub-text">
+					<h4 >
+						Price : <span id="price">0000000</span>
+					</h4>
+					<h4 style="padding-left:20px;">
+						<i class="fa fa-map-marker"></i> <span id="loc"> Blank</span>
+					</h4>
+					</div>
+					<div class="clear-fix"></div>
+					<div class="mid-sec">
+					<h4>
+						Make : <span id="mfg">Blank</span>
+					</h4>
+					<h4 style="padding-left:20px; ">
+						Model : <span id="model">Blank</span>
+					</h4>
+					</div>
+					<div class="clear-fix"></div>
+					<h4>
+						Meter : <span id="meter">Blank</span> KM
+					</h4>
+					<h4>
+						Capacity : <span id="capacity">Blank TON</span>
+					</h4>
+					<br>
+					<h3>Description</h3>
+					<p id="desc">This will the description</p>					
+					<br> <br>
+					<h4>
+						Posted by
+					</h4>
+					<h4 id="postedBy">
+						Blank
+					</h4>
+				</div>
+			</div>
 		</div>	
-				</div>
-			</div>
-		 	<div class="row">
-				<div class="col-md-3">
-					<div class="filter-wrapper">
-					<div class="filter-header"><p>Equipment Type</p></div>
-					<div class="filter-content">
-						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-							<!--content will be inserted here dynamically  -->
-						</div>
-					</div> <!-- end of filter content -->
-					<div class="filter-header"><p>Manufacturer</p></div>
-					<div class="filter-content manufacturer">
-					<div class="input-wrapper">
-					<input type="checkbox" class="magic-checkbox" name="manufacturer" id="JCB" value="JCB" /><label for="JCB"> JCB </label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Terex" value="Terex" /><label for="Terex">Terex</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Mahindra" value="Mahindra" /><label for="Mahindra">Mahindra</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CAT" value="CAT" /><label for="CAT">Caterpillar </label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="CASE" value="CASE" /><label for="CASE">CASE </label> 
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Volvo" value="Volvo" /><label for="Volvo">Volvo </label> 
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="HYNDAI" value="HYNDAI" /><label for="HYNDAI">HYNDAI</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Leyland Deere" value="Leyland Deere" /><label for="Leyland Deere">Leyland Deere</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="L&T komutsu" value="L&T komutsu" /><label for="L&T komutsu">L&T komutsu</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Kobelco" value="Kobelco" /><label for="Kobelco">Kobelco</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Bobcat" value="Bobcat" /><label for="Bobcat">Bobcat</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Sany" value="Sany" /><label for="Sany">Sany</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Atlas Copco" value="Atlas Copco" /><label for="Atlas Copco">Atlas Copco</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ajax Fiori" value="Ajax Fiori" /><label for="Ajax Fiori">Ajax Fiori</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Eicher" value="Eicher" /><label for="Eicher">Eicher</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Aquarius" value="Aquarius" /><label for="Aquarius">Aquarius</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Ammann Apollo" value="Ammann Apollo" /><label for="Ammann Apollo">Ammann Apollo</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="umatech" value="umatech" /><label for="umatech">umatech</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Veermer" value="Veermer" /><label for="Veermer">Veermer</label>
-<input type="checkbox" class="magic-checkbox" name="manufacturer" id="Generac" value="Generac" /><label for="Generac">Generac</label>
-					</div> 
-					</div>
-					<div class="filter-header"><p>Location</p></div>
-					<div class="filter-content location">
-					<div class="input-wrapper">
-						<input type="checkbox" class="magic-checkbox" name="location" id="Hyderabad" value="Hyderabad" /><label for="Hyderabad"> Hyderabad </label>
-						<input type="checkbox" class="magic-checkbox" name="location" id="Chennai" value="Chennai" /><label for="Chennai">Chennai</label>
-						<input type="checkbox" class="magic-checkbox" name="location" id="Kolkatta" value="Kolkatta" /><label for="Kolkatta">Kolkatta </label>
-						<input type="checkbox" class="magic-checkbox" name="location" id="Mumbai" value="Mumbai" /><label for="Mumbai">Mumbai </label>
-						<input type="checkbox" class="magic-checkbox" name="location" id="Bengaluru" value="Bengaluru " /><label for="Bengaluru">Bengaluru </label> 
-						<input type="checkbox" class="magic-checkbox" name="location" id="Pune" value="Pune " /><label for="Pune">Pune </label> 
-						<input type="checkbox" class="magic-checkbox" name="location" id="Delhi" value="Delhi " /><label for="Delhi">Delhi </label>
-					</div>
-					</div>
-				</div><!-- filter wrapper ends -->
-			</div>
-		
-				<div class="col-md-9">
-					<div class="posts">
-					
-					
-					
-					
-					<!-- Content will go here  -->
-					
-					
-					
-					
-				</div>
-			</div>
 		</div>
-				
-	</div>
-	
 		
+		
+	<div class="recommended-sec-wrapper">
+		<h2 style="margin-left: 8.5%;">Recommended Used Equipment</h2>	
+		<div class="recommended-equip-wrapper">
+			<div class="container">	
+				<div class="row">
+					<div class="col-md-12">
+						<div class="recommended-used-scroll">
+							<div class='item-thumb'>
+								<img class='used-img-thumb' src='http://placehold.it/200x180' />
+								<h5>EquipmentName</h5>
+								<p class='float-left'><i class="fa fa-map-marker"></i> Hyderabad</p>
+								<p class='float-left'><i class="fa fa-rupee"></i> 1400000</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
 	</div>
+
 	<div class="sub-footer">
 		<div class="container-fluid">
 			<div class="row">
@@ -384,56 +365,31 @@
 		</div>
 	</div>
 	
-	 		<!-- ********************* This is for the post view model *********************************** -->
-					<div class="modal fade" id="view-post-modal" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content post-modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&#10005;</button>
-									<h4 class="modal-title" id="myModalLabel">Post</h4>
-								</div>
-								<div class="modal-body">
-									<div class="post-content">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-7">
-													<img class="post-image" id="img-250" src="http://placehold.it/250x250" width="250px" height="250px" alt="...">
-												</div>
-												<div class="col-md-5 post-text">
-													<h3 id="modal-machine">Excavator</h3>
-													<h4>Price : <span id="modal-price">2000000</span></h4>
-													<h4 >Meter : <span id="modal-meter">100</span> KM</h4>
-													<h4 >Mfg : <span id="modal-mfg">JCB</span></h4>
-													<h4 >Manufactured year : <span id="modal-yom">2014</span></h4>
-													<h4 >location : <span id="modal-location">hyderabad</span></h4>
-													<br>
-													<br>
-													<h4 >posted by : <span id="modal-postedby">Nishant</span></h4>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-7">
-													<ul class="img-thumb">
-													</ul>
-												</div>
-												<div class="col-md-5">
-												</div>
-											</div>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
  	<script type="text/javascript">
  		$(document).ready(function(){
  			
  			$('[data-toggle="tooltip"]').tooltip()
  			
- 			 var posts = [];
+ 			/* to get parameters from a url */
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		var pid = getUrlParameter("pid");
+ 			
+ 			 var usedEquipments = [];
  			
  			var loginform_submit = false;
  			var	registerform_submit = false;
@@ -598,193 +554,6 @@
 					}
 			};
 			
- 			
- 			/* This ajax call is made to populate the category and equipment machinary dropdowns */
- 	    	
- 	    	var category = [];
- 	    	var equipment = [];
- 	    	$.ajax({
- 	    		url :AppData.relativeUrl+"contractor/getDistinctCategory",
- 	    		type:"get",
- 	    		data:{},
- 	    		success:function(response){
- 	    			response = $.parseJSON(response);
- 	    			var i = 1;
- 	    			var panelContent = "";
- 	    			
- 	    			console.log(response);
- 	    			$.each(response,function(index,value){
- 	    				var panelBody = "";	
- 							$.ajax({
- 	    					url : AppData.relativeUrl+"contractor/getEquipmentByCategory/"+value,
- 	    	    			type:"get",
- 	    	    			data:{},
- 	    	    			success:function(equipments){
- 	    	    				equipments = $.parseJSON(equipments);
- 	    	    				$.each(equipments,function(index,value){
- 	    	    					panelBody += '<input type="checkbox" class="magic-checkbox" name="equipment" id='+encodeURI(value)+' value='+encodeURI(value)+' /><label for='+encodeURI(value)+'>'+value+'</label> '
- 	    	    				});
- 	    	    				panelContent += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title">'+
- 	    	    				'<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" aria-expanded="false" aria-controls="collapse'+i+'">'+
- 	    	    				value+'</a></h4></div><div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'+i+'">'+
- 	    	    				'<div class="panel-body">'+panelBody+'</div></div></div>';
- 	    	    				category[i] = value;
- 	        					i++
- 	    	    				$("#accordion").html("");
- 	    	        			$("#accordion").append(panelContent);
- 	    	    			}
- 	    	    			});
- 	    					
- 	    			});
- 	    		}
- 	    	});
- 			
- 			$('.filter-content').on("click","input[type='checkbox']",function(e){
- 				var checked = "";
- 				var equipmentChecked = "";
- 				var mfgChecked = "";
- 				var locationChecked = "";
- 				var query = "";
- 				
- 				console.log(mfgChecked.length);
- 				$('input[type="checkbox"]:checked').each(function(){
- 					
- 					
- 					if($(this).attr('name') === 'equipment'){
- 					if(equipmentChecked.length === 0){
- 					equipmentChecked += $(this).val();
- 					}
- 					else{
- 						equipmentChecked += ":"+$(this).val();
- 					}
- 					}
- 					else if($(this).attr('name') === 'manufacturer'){
- 						if(mfgChecked.length === 0){
- 							var mfg = encodeURI($(this).val());
- 							mfgChecked += mfg;
- 							}
- 							else{
- 								mfgChecked += ":"+mfg;
- 							}
- 					}else if($(this).attr('name') === 'location'){
- 						if(locationChecked.length === 0){
- 							locationChecked += $(this).val();
- 							}
- 							else{
- 								locationChecked += ":"+$(this).val();
- 							}
- 					}
- 				});
- 				
- 				var flag = true;
- 				
- 				if(locationChecked.length !== 0 && equipmentChecked.length !== 0 && mfgChecked.length !== 0){
- 				query = "location="+locationChecked+"&equipment="+equipmentChecked+"&manufacturer="+mfgChecked; 
- 				}else if(locationChecked.length === 0 && equipmentChecked.length === 0 && mfgChecked.length === 0){
- 					console.log("all three filters are zero")
- 					flag = false;
- 				}else if(locationChecked.length === 0 && (mfgChecked.length !== 0 && equipmentChecked.length !== 0)){
- 					query = "equipment="+equipmentChecked+"&manufacturer="+mfgChecked;
- 				}else if(equipmentChecked.length === 0 && (locationChecked.length !== 0 && mfgChecked.length !== 0)){
- 					query = "location="+locationChecked+"&manufacturer="+mfgChecked;
- 				}else if(mfgChecked.length === 0 && (locationChecked.length !== 0 && equipmentChecked.length !== 0)){
- 					query = "location="+locationChecked+"&equipment="+equipmentChecked;
- 				}else if(locationChecked.length === 0 && equipmentChecked.length === 0){
- 					query = "manufacturer="+mfgChecked;
- 				}else if(mfgChecked.length === 0 && equipmentChecked.length === 0){
- 					query = "location="+locationChecked;
- 				}else if(locationChecked.length === 0 && mfgChecked.length === 0){
- 					query = "equipment="+equipmentChecked;
- 				}
- 					
- 				
- 				console.log(query+"::::"+flag);
- 				
- 				console.log("heheh ",checked);
- 				
- 				if(flag){
- 				var post = "";
- 				$.ajax({
- 						url:AppData.relativeUrl+"usedmachine/filterUsedMachines?"+query,
- 						type:"get",
- 						data:{},
- 						success:function(response){
- 							response = $.parseJSON(response);
- 							console.log(response);
- 							$.each(response,function(index,value){
- 	 							var postedTime = value.postedTime;
- 	 							postedTime = $.date(postedTime,1);
- 	 							var imgArr = value.imagesuploaded.split(",");
- 	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
- 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
- 	 						});
- 	 						$('.posts').html("");
- 	 						$('.posts').append(post);
- 						}
- 						});
- 				
- 				}else{
- 					var post = "";
- 	 				$.ajax({
- 	 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
- 	 					type:"get",
- 	 					data:{},
- 	 					success:function(response){
- 	 						response = $.parseJSON(response);
- 	 						console.log(response);
- 	 						$.each(response,function(index,value){
- 	 							posts[value.postId] = value;	
- 	 							var postedTime = value.postedTime;
- 	 							postedTime = $.date(postedTime,1);
- 	 							var imgArr = value.imagesuploaded.split(",");
- 	 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
- 								'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
- 								'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
- 								'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
- 								'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
- 	 						});
- 	 						$('.posts').html("");
- 	 						$('.posts').append(post);
- 	 					}
- 	 					});
- 			
- 				}
- 			});
- 			
- 			
-			var post = "";
- 				$.ajax({
- 					url:AppData.relativeUrl+"usedmachine/getAllPosts",
- 					type:"get",
- 					data:{},
- 					success:function(response){
- 						response = $.parseJSON(response);
- 						console.log(response);
- 						$.each(response,function(index,value){
- 							posts[value.postId] = value;	
- 							var postedTime = value.postedTime;
- 							postedTime = $.date(postedTime,1);
- 							var imgArr = value.imagesuploaded.split(",");
- 							post += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" data-id='+value.postId+' src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="100px"	height="100px" alt="..."></a></div>'+
-							'<div class="media-body"><div class="line-one"><p class="float-left" id="equip-name">'+value.equipmentName+' <span>('+value.yearOfManufacturer+')</span></p>'+
-							'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div><div class="clear-fix"></div><div class="line-two">'+
-							'<p class="float-left equip-make">'+value.manufacturer+'</p><p class="float-left equip-model">'+value.model+'</p><p class="float-left equip-meter">'+value.meterReading+' kms</p><p class="posted-date float-right">posted on : '+postedTime+'</p>'+
-							'</div><div class="clear-fix"></div><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><div class="user-interactions float-right"><a class="fa fa-flash interested">&nbsp;interest</a></div></div></div></div></div>';
- 						});
- 						$('.posts').html("");
- 						$('.posts').append(post);
- 					}
- 					});
-				
- 				$('.posts').on("click",".interested",function(e){
- 					e.preventDefault();
- 					console.log("interseted button clicked");
- 					$('#modal-container-login').modal('show');
- 				});
- 				
  				
  				var forgetPassForm = '<div class="form-box"><form class="form-horizontal forgetPass-form" id="forgetPass-form" role="form" name="forgetPass-form">'
 					+'<div class="form-group"><label for="email" class="col-sm-2 control-label sr-only">Email </label><div class="col-sm-12">'
@@ -862,37 +631,69 @@
 					}
 				});
 				
-				$('.img-thumb').on("click",".post-img-thumb",function(e){
+				$('.thumb-img').on("click",".post-img-thumb",function(e){
 					e.preventDefault();
 					$('#img-250').attr("src",$(this).attr("src"));
 				});
  				
-				$('.posts').on("click",".media-object",function(e){
- 					e.preventDefault();
- 					var pid = $(this).attr("data-id");
- 					$(location).attr('href',"used-equipment-display.html?pid="+pid);
- 					/* var post = posts[$(this).attr("data-id")];
- 					$('#modal-machine').text(post.equipmentName);
- 					$('#modal-price').text(post.price);
- 					$('#modal-meter').text(post.meterReading);
- 					$('#modal-mfg').text(post.manufacturer);
- 					$('#modal-yom').text(post.yearOfManufacturer);
- 					$('#modal-location').text(post.location);
- 					$('#modal-postedby').text(post.userName);
- 					var imgArr = post.imagesuploaded.split(",");
- 					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
- 					var listContent = "";
- 					$.each(imgArr,function(index,value){
- 						console.log("index",index);
- 						var imgid = '#thumb-img'+index;
- 						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+				console.log("pid"+pid);
+ 				$.ajax({
+ 					url:AppData.relativeUrl+"usedmachine/getPostById/"+pid,
+ 					type:"get",
+ 					data:{},
+ 					success:function(response){
+ 						response = $.parseJSON(response);
+ 						console.log(response);
+ 						usedEquipments[response.postId] = response;
+ 						$('#machine').text(response.equipmentName+" - ("+response.yearOfManufacturer+")");
+ 	 					$('#price').text(response.price);
+ 	 					$('#meter').text(response.meterReading);
+ 	 					$('#mfg').text(response.manufacturer);
+ 	 					$('#model').text(response.model);
+ 	 					$('#capacity').text(response.capacity);
+ 	 					$('#mfg-year').text(response.yearOfManufacturer);
+ 	 					$('#loc').text(" "+response.location);
+ 	 					$('#postedBy').text(response.userName);
+ 	 					$('#desc').text(response.description);
+ 	 					var imgArr = response.imagesuploaded.split(",");
+ 	 					$('#img-250').attr("src",AppData.imageUrl+"usedmachine/"+imgArr[0]);
+ 	 					var listContent = "";
+ 	 					$.each(imgArr,function(index,value){
+ 	 						console.log("index",index);
+ 	 						var imgid = '#thumb-img'+index;
+ 	 						listContent += '<li><a href="#"><img class="post-img-thumb" id='+imgid+' src='+AppData.imageUrl+"usedmachine/"+imgArr[index]+' width="50px" height="50px" alt="..."></a></li>';
+ 	 					});
+ 	 					
+ 	 					$('.thumb-img').html("");
+ 	 					$('.thumb-img').html(listContent);
+ 	 					
+ 	 					$.ajax({
+ 	 	 					url:AppData.relativeUrl+"usedmachine/getRelatedUsedEquipments?category="+encodeURI(response.category)+"&equipmentName="+encodeURI(response.equipmentName),
+ 	 	 					type:"get",
+ 	 	 					data:{},
+ 	 	 					success:function(response){
+ 	 	 						var items = "";
+ 	 	 						response = $.parseJSON(response);
+ 	 	 						console.log(response);
+ 	 	 						$.each(response,function(index,value){
+ 	 	 							var imgArr = value.imagesuploaded.split(",");
+ 	 	 							var imgPath = AppData.imageUrl+"usedmachine/"+imgArr[0];
+ 	 	 							items += '<div class="item-thumb" id='+value.postId+'><img class="used-img-thumb" src='+imgPath+' width="200px" height="180px" />'
+ 	 	 									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p>'
+ 	 	 									+'<p class="float-right"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
+ 	 	 						});
+ 	 	 						$('.recommended-used-scroll').html("");
+ 	 	 						$('.recommended-used-scroll').html(items);
+ 	 	 						}
+ 	 	 					});
+ 	 			
+ 					}
  					});
- 					
- 					$('.img-thumb').html("");
- 					$('.img-thumb').html(listContent);
- 			 		$('#view-post-modal').modal("show"); */
+				
+ 				$('.recommended-used-scroll').on("click",".item-thumb",function(){
+ 					$(location).attr('href',"used-equipment-display.html?pid="+this.id);
  				});
-			
+ 				
  				$.date = function(dateObject,pattern) {
  		 		    var d = new Date(dateObject);
  		 		    var date = d.toDateString();

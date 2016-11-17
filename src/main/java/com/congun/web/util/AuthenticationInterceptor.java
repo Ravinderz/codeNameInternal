@@ -24,6 +24,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	private final String LOGIN = "/login";
 	private final String REGISTER = "/register";
 	private final String GETALLPOSTS = "/getAllPosts";
+	private final String GETPOSTBYID = "/getPostById";
+	private final String GETRELATEDPOSTS = "/getRelatedUsedEquipments";
 	private final String GETREQUIREMENTBYEQUIPMENT = "/getRequirementsByequipment";
 	private final String CONTRACTORREQUIREMENT = "/contractorRequirement";
 	private final String GETDISTINCTCATEGORY = "/getDistinctCategory";
@@ -79,7 +81,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 				|| (uri.contains(CONTRACTORREQUIREMENT)) || (uri.contains(REGISTER)) 
 				|| (uri.contains(GETDISTINCTCATEGORY)) || (uri.contains(GETEQUIPMENTBYCATEGORY))
 				|| (uri.contains(FILTERUSEDMACHINES)) || (uri.contains(FORGOETPASSWORD))
-				|| (uri.contains(SENDEMAIL) || (uri.contains(USERQUERIES))))
+				|| (uri.contains(SENDEMAIL) || (uri.contains(GETRELATEDPOSTS))
+				|| (uri.contains(GETPOSTBYID)) || (uri.contains(USERQUERIES))))
 
 		{
 			return false;

@@ -40,7 +40,8 @@
 								<li class="avatar-dropdown">
 								<div class="dropdown">
 								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<div id="profile-avatar"></div>
+									<!-- <img src="http://placehold.it/50x50" alt="..." class="img-circle"> -->
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
@@ -155,6 +156,8 @@
 		var user = $.getUser();
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
+		
+		$.getAvatar(user);
 		
 		if(user.role === "contractor")
 			$('.post-req-btn').removeClass("hide").addClass("show");

@@ -278,7 +278,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h2>
-						Rental Equipment <span class="heading">Category List</span>
+						Rental Category & <span class="heading">Requirement Details</span>
 					</h2>
 				</div>
 			</div>
@@ -359,7 +359,7 @@
 			<div class="row">
 				<div class="col-md-12 used-machine-scroll">
 					<h2>
-						Used Equipment<span class="heading"> For Sale</span>
+						Used Equipment &<span class="heading"> Supplier Details</span>
 					</h2>
 					<div class="used-scroll">
 
@@ -849,7 +849,7 @@
 		 								posts[value.postId] = value;	
 		 								var imgArr = value.imagesuploaded.split(",");
 		 								post += '<div class="item-thumb"><img class="used-img-thumb" src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="200px" height="180px" />'
-		 										+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-left"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
+		 										+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-right" style="margin-right:15px"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
 		 							});
 		 							$('.used-scroll').html("");
 		 							$('.used-scroll').append(post);
@@ -864,6 +864,10 @@
 		 					});
 						
 						
+		 				$('.used-scroll').on("click",".item-thumb",function(e){
+		 					$(location).attr('href',"used-equipment.html");
+		 				});
+		 				
 						
 						$('.category-img').click(function() {
 						console.log("inside img click function");

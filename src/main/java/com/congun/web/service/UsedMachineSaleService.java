@@ -22,6 +22,11 @@ public class UsedMachineSaleService {
 		logger.info("Entered into UsedMachineSaleService.postUsedMachines method ");
 		return saleDao.postUsedMachines(machineSale);
 	}
+	
+	public String getPostById(long postId) {
+		logger.info("Entered into UsedMachineSaleService.getPostById method ");
+		return saleDao.getPostById(postId);
+	}
 
 	public String deletePostById(long postId) {
 		logger.info("Entered into UsedMachineSaleService.deletePostById method ");
@@ -52,6 +57,11 @@ public class UsedMachineSaleService {
 			String manufacturer) {
 		logger.info("Entered into UsedMachineSaleService.filterUsedMachines method ");
 		return saleDao.filterUsedMachines(location,equipment,manufacturer);
+	}
+	
+	public String getRelatedUsedEquipments(String category, String equipmentName) {
+		logger.info("Entered into UsedMachineSaleService.getRelatedUsedEquipments method category"+category+" "+"equipmentName"+equipmentName);
+		return saleDao.getRelatedUsedEquipments(category,equipmentName);
 	}
 
 }

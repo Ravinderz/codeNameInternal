@@ -242,6 +242,11 @@
 .post-image{
 	display:block;
 	margin : 0 auto;
+	padding-bottom:25px;
+}
+
+.post-img-thumb{
+	margin-right:4px;
 }
 
 #modal-machine{
@@ -345,4 +350,51 @@ th{
 
 .equip-meter{
 	padding-left:8px;
+}
+
+.content-main-wrapper{
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+.sub-text h4{
+	float:left;
+	margin-top:0;
+	margin-bottom:20px;
+}
+
+.mid-sec h4{
+	float:left;
+	margin-bottom:0;
+}
+
+.thumb-img{
+	padding-left:30px;
+	list-style:none;
+	width: 310px;
+    margin: 0 auto;
+}
+
+.thumb-img li{
+	display:inline-block;
+}
+
+.recommended-equip-wrapper{
+	width:100%;
+	background-color:#cccccc;
+}
+
+.recommended-used-scroll{
+	    background-color: #cccccc;
+    height: 320px;
+    min-height: 320px;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.recommended-sec-wrapper{
+	margin-top:100px;
+	margin-bottom:50px;
 }

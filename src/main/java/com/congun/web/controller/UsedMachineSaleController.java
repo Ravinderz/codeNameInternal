@@ -28,6 +28,13 @@ public class UsedMachineSaleController {
 		return saleService.postUsedMachines(machineSale);
 	}
 	
+	@RequestMapping(value = "/getPostById/{postId}", method = RequestMethod.GET)
+	public String getPostById(@PathVariable long postId) {
+		logger.info("Entered into UsedMachinesSaleController.getPostById method+ postId"
+				+ postId);
+		return saleService.getPostById(postId);
+	}
+	
 	@RequestMapping(value = "/deletePostById/{postId}", method = RequestMethod.DELETE)
 	public String deletePostById(@PathVariable long postId) {
 		logger.info("Entered into UsedMachinesSaleController.deletePostById method+ postId"
@@ -64,6 +71,12 @@ public class UsedMachineSaleController {
 	public String filterUsedMachines(@RequestParam(value = "location",required=false ) String location,@RequestParam(value = "equipment",required=false) String equipment,@RequestParam(value = "manufacturer",required=false) String manufacturer) {
 		logger.info("Entered into UsedMachineSaleController.filterUsedMachines method");
 		return saleService.filterUsedMachines(location,equipment,manufacturer);
+	}
+	
+	@RequestMapping(value = "/getRelatedUsedEquipments", method = RequestMethod.GET)
+	public String getRelatedUsedEquipments(@RequestParam(value = "category") String category,@RequestParam(value = "equipmentName") String equipmentName) {
+		logger.info("Entered into UsedMachineSaleController.getRelatedUsedEquipments method category"+category+" "+"equipmentName"+equipmentName);
+		return saleService.getRelatedUsedEquipments(category,equipmentName);
 	}
 
 }

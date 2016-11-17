@@ -245,7 +245,8 @@ padding-left:20px;
 
 .item-content-main ul li{
 display:inline-block;
-padding-left:30px;
+padding-left:0;
+padding-right:15px;
 }
 
 .form-manufacturer ul{

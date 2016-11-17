@@ -110,6 +110,22 @@ public class UsedMachineSaleDAO {
 
 	}
 	
+	@Transactional
+	public String getPostById(long postId) {
+		logger.info("Entered into UsedMachineSaleDAO.getPostById method");
+		try {
+			Criteria criteria = getSession().createCriteria(
+					UsedMachineSale.class);
+			criteria.add(Restrictions.eq("postId", postId));
+			UsedMachineSale usedMachineSale = (UsedMachineSale) criteria
+					.uniqueResult();
+			return ApplicationUtil.getJsonResponse(usedMachineSale);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseConstants.SUPPLIER_EXCEPTION_CODE;
+		}
+	}
+	
 	
 	@Transactional
 	public String deletePostById(long postId) {
@@ -190,6 +206,26 @@ public class UsedMachineSaleDAO {
 			List<UsedMachineSale> list = criteria.list();
 			return ApplicationUtil.getJsonResponse(list);
 		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Transactional
+	public String getRelatedUsedEquipments(String category, String equipmentName) {
+		logger.info("Entered into UsedMachineSaleDAO.getRelatedUsedEquipments method category"+category+" "+"equipmentName"+equipmentName);
+		try {
+			Criteria criteria = getSession()
+					.createCriteria(UsedMachineSale.class);
+			criteria.addOrder(Order.desc("postedTime"));
+			criteria.add(Restrictions.eq("category", category));
+			criteria.add(Restrictions.eq("equipmentName", equipmentName));
+			criteria.setMaxResults(10);
+			List<UsedMachineSale> list = criteria.list();
+			return ApplicationUtil.getJsonResponse(list);
+			
+		} catch (Exception e) {
+			logger.info("ERRRRR4546576 : "+e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

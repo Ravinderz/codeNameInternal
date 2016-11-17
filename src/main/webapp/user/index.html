@@ -38,7 +38,8 @@
 								<li class="avatar-dropdown">
 								<div class="dropdown">
 								  <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									<img src="http://placehold.it/50x50" alt="..." class="img-circle">
+									<div id="profile-avatar"></div>
+									<!-- <img src="http://placehold.it/50x50" alt="..." class="img-circle"> -->
 									<span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
@@ -98,7 +99,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h2>
-					Rental Equipment <span class="heading">Category List</span>
+					Rental Equipment &<span class="heading"> Requirement Details</span>
 					</h2>
 				</div>
 			</div>
@@ -179,7 +180,7 @@
 			<div class="row">
 				<div class="col-md-12 used-machine-scroll">
 					<h2>
-						Used Equipment<span class="heading"> For Sale</span>
+						Used Equipment &<span class="heading"> Supplier Details</span>
 					</h2>
 					<div class="used-scroll">
 
@@ -375,6 +376,8 @@
 		var username = user.firstname+" "+user.lastname;
 		$('#user').text(username);
 		
+		$.getAvatar(user);
+		
 		$('.category-img').click(function(){
 			var category = this.id;
 			$(location).attr('href',"equipment.html?category="+category);
@@ -410,7 +413,7 @@
 							posts[value.postId] = value;	
 							var imgArr = value.imagesuploaded.split(",");
 							post += '<div class="item-thumb"><img class="used-img-thumb" src='+AppData.imageUrl+"usedmachine/"+imgArr[0]+' width="200px" height="180px" />'
-									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-left"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
+									+'<h5>'+value.equipmentName+'</h5><p class="float-left"><i class="fa fa-map-marker"></i> '+value.location+'</p><p class="float-right" style="margin-right:15px"><i class="fa fa-rupee"></i> '+value.price+'</p></div>';
 						});
 						$('.used-scroll').html("");
 						$('.used-scroll').append(post);
@@ -422,6 +425,10 @@
 						
 						}
 					}
+				});
+			
+			$('.used-scroll').on("click",".item-thumb",function(e){
+					$(location).attr('href',"used-equipment.html");
 				});
 		
 		

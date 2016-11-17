@@ -83,8 +83,18 @@ public class UsedMachineSale {
 	@Column(name="model")
 	public String model;
 	
+	@Column(name="capacity")
+	public String capacity;
 	
 	
+	public String getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
+
 	public String getModel() {
 		return model;
 	}
