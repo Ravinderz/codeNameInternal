@@ -202,8 +202,15 @@ background:none;
     margin-left:130px;
 }
 
+.services .first p{
+       padding-top: 34px;
+    padding-bottom: 43px;
+}
+
+
 .services .middle p{
-	padding-bottom:26px;
+	padding-bottom: 65px;
+    padding-top: 35px;
 }
 
 .services .last{
@@ -241,6 +248,10 @@ background:none;
 .sub-footer{
 	background-color: #202e31;
 	color: #fff;
+}
+
+.sub-footer .col-md-4{
+	height:280px;
 }
 
 .sub-footer p {
